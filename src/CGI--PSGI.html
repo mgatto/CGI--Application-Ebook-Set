@@ -1,0 +1,112 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>CGI::PSGI - Adapt CGI.pm to the PSGI protocol</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="css/modernperl.css" type="text/css" />
+	</head>
+	<body>
+		<h1>CGI::PSGI &mdash; </h1>
+		<p>Adapt CGI.pm to the PSGI protocol</p>
+		<hr />
+
+		<h1>Contents</h1>
+		<ul id="index">
+			<li>Synopsis</li>
+			<li>Description</li>
+			<li>Interfaces Supported</li>
+			<li>Methods</li>
+			<li>Limitations</li>
+			<li>Author</li>
+			<li>License</li>
+			<li>See Also</li>
+		</ul>
+
+		<h1>Synopsis</h1>
+		<pre>
+use CGI::PSGI;
+  
+my $app = sub {
+    my $env = shift;
+    my $q = CGI::PSGI-&gt;new($env);
+    return [ $q-&gt;psgi_header, [ $body ] ];
+};
+</pre>
+
+<h1>Description</h1>
+<p>This module is for web application framework developers who currently uses
+<em>CGI</em> to handle query parameters, and would like for the frameworks to comply
+with the <a href="/./PSGI.html">PSGI</a> protocol.</p>
+<p>Only slight modifications should be required if the framework is already
+collecting the body content to print to STDOUT at one place (rather using
+the print-as-you-go approach).</p>
+<p>On the other hand, if you are an &quot;end user&quot; of CGI.pm and have a CGI script
+that you want to run under PSGI web servers, this module might not be what you
+want.  Take a look at <a href="/CGI/Emulate/PSGI.html">CGI::Emulate::PSGI</a> instead.</p>
+<p>Your application, typically the web application framework adapter
+should update the code to do <code>CGI::PSGI-&gt;new($env)</code> instead of
+<code>CGI-&gt;new</code> to create a new CGI object. (This is similar to how
+<a href="/CGI/Fast.html">CGI::Fast</a> object is initialized in a FastCGI environment.)</p>
+
+<h1>Interfaces Supported</h1>
+<p>Only the object-oriented interface of CGI.pm is supported through CGI::PSGI.
+This means you should always create an object with <code>CGI::PSGI-&gt;new($env)</code>
+and should call methods on the object.</p>
+<p>The function-based interface like <code>use CGI ':standard'</code> does not work with this module.</p>
+
+
+<h1>Methods</h1>
+<p>CGI::PSGI adds the following extra methods to CGI.pm:</p>
+
+<h2>env</h2>
+<pre>
+$env = $cgi-&gt;env;</pre>
+<p>Returns the PSGI environment in a hash reference. This allows CGI.pm-based
+application frameworks such as <a href="/CGI/Application.html">CGI::Application</a> to access PSGI extensions,
+typically set by Plack Middleware components.</p>
+<p>So if you enable <a href="/Plack/Middleware/Session.html">Plack::Middleware::Session</a>, your application and
+plugin developers can access the session via:</p>
+<pre>
+$cgi-&gt;env-&gt;{'plack.session'}-&gt;get(&quot;foo&quot;);</pre>
+<p>Of course this should be coded carefully by checking the existence of
+<code>env</code> method as well as the hash key <code>plack.session</code>.</p>
+
+<h2>psgi_header</h2>
+<pre>
+my ($status_code, $headers_aref) = $cgi-&gt;psgi_header(%args);
+</pre>
+<p>Works like CGI.pm's <em>header()</em>, but the return format is modified. It returns
+an array with the status code and arrayref of header pairs that PSGI
+requires.</p>
+<p>If your application doesn't use <code>$cgi-&gt;header</code>, you can ignore this
+method and generate the status code and headers arrayref another way.</p>
+
+<h2>psgi_redirect</h2>
+<pre>
+my ($status_code, $headers_aref) = $cgi-&gt;psgi_redirect(%args);
+</pre>
+<p>Works like CGI.pm's <em>redirect()</em>, but the return format is modified. It
+returns an array with the status code and arrayref of header pairs that PSGI
+requires.</p>
+<p>If your application doesn't use <code>$cgi-&gt;redirect</code>, you can ignore this
+method and generate the status code and headers arrayref another way.</p>
+
+<h1>Limitations</h1>
+<p>Do not use <a href="/CGI/Pretty.html">CGI::Pretty</a> or something similar in your controller. The
+module messes up <em>CGI</em>'s DIY autoloader and breaks CGI::PSGI (and
+potentially other) inheritance.</p>
+
+<h1>Author</h1>
+<p>Tatsuhiko Miyagawa &lt;<a href="mailto:miyagawa@bulknews.net">miyagawa@bulknews.net</a>&gt;</p>
+<p>Mark Stosberg &lt;<a href="mailto:mark@summersault.com">mark@summersault.com</a>&gt;</p>
+
+<h1>License</h1>
+<p>This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.</p>
+
+<h1>See Also</h1>
+<p><em>CGI</em>, <a href="/CGI/Emulate/PSGI.html">CGI::Emulate::PSGI</a></p>
+
+</body>
+</html>

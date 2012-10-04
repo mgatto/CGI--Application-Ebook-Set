@@ -1,0 +1,2243 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>HTML::Template::Compiled - 0.99 - Template System Compiles HTML::Template files to Perl code</title>		
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="css/modernperl.css" type="text/css" />
+	</head>
+	<body>
+		<h1>HTML::Template::Compiled &mdash; 0.99</h1>
+		<p>Template System Compiles HTML::Template files to Perl code and extra tags!</p>
+		<hr />		
+
+		<h3>Contents</h3>
+		<ul>
+			<li><a href="#name">Name</a></li>
+			<li><a href="#version">Version</a></li>
+			<li><a href="#synopsis">Synopsis</a></li>
+			<li><a href="#description">Description</a></li>
+			<ul>
+				<li><a href="#features_from_html__template">Features from HTML::TEMPLATE</a></li>
+				<li><a href="#additional_features">Additional Features</a></li>
+				<li><a href="#missing_features">Missing Features</a></li>
+				<li><a href="#different_features">Different Features</a></li>
+				<li><a href="#deprecated">Deprecated Features</a></li>
+				<li><a href="#escaping">ESCAPING</a></li>
+				<li><a href="#include">Include</a></li>
+				<li><a href="#rendering_objects">Rendering Objects</a></li>
+				<li><a href="#running_perl_with_tmpl_perl">Running Perl Code with TMPL_PERL</a></li>
+				<li><a href="#inheritance">Inheritance</a></li>
+				<!--<ul>
+					<li><a href="#methods_to_inherit">Methods to Inherit</a></li>
+				</ul>-->
+				<li><a href="#debugging">Debugging</a></li>
+				<li>
+					New Template Tags
+					<ul>
+						<li><a href="#tmpl_with">TMPL_WITH</a></li>
+						<li><a href="#tmpl_loop">TMPL_LOOP</a></li>
+						<li><a href="#tmpl_while">TMPL_WHILE</a></li>
+						<li><a href="#tmpl_each">TMPL_EACH</a></li>
+						<li><a href="#set_var">SET_VAR</a></li>
+						<li><a href="#use_vars">USE_VARS</a></li>
+						<li><a href="#wrapper">WRAPPER</a></li>
+						<li><a href="#tmpl_comment">TMPL_COMMENT</a></li>
+						<li><a href="#tmpl_noparse">TMPL_NOPARSE</a></li>
+						<li><a href="#tmpl_verbatim">TMPL_VERBATIM</a></li>
+						<li><a href="#tmpl_switch">TMPL_SWITCH</a></li>
+					</ul>					
+				</li>
+				<li><a href="#options">Options</a></li>
+				<li><a href="#methods">Methods</a></li>
+			</ul>
+			<li><a href="#export">Export</a></li>
+			<li><a href="#caching">Caching</a></li>
+			<li><a href="#plugins">Plugins</a></li>
+			<li><a href="#lazy_loading">Lazy Loading</a></li>
+			<li><a href="#todo">Todo</a></li>
+			<li><a href="#implementation">Implementation</a></li>
+			<li><a href="#security">Security</a></li>
+			<li><a href="#precompile">Precompile</a></li>
+			<li><a href="#benchmarks">Benchmarks</a></li>
+			<li><a href="#examples">Examples</a></li>
+			<li><a href="#versions">Change History</a></li>			
+			<li><a href="#bugs">Bugs</a></li>
+			<li><a href="#why_another_template_system">Why another Template System?</a></li>
+			<li><a href="#resources">Resources</a></li>
+			<li><a href="#see_also">See Also</a></li>
+			<li><a href="#author">Author</a></li>
+			<li><a href="#credits">Credits</a></li>
+			<li><a href="#copyright_and_license">Copyright and License</a></li>
+		</ul>
+		
+		<h1><a name="synopsis"></a>Synopsis</h1>
+<pre>
+use HTML::Template::Compiled;
+# recommended options:
+# case_sensitive =&gt; 1
+# search_path_on_include =&gt; 1
+# use_query =&gt; 0
+# default_escape =&gt; 'HTML' # &lt;-- HIGHLY RECOMMENDED
+</pre>
+<pre>
+# note that the following
+# use HTML::Template::Compiled speed =&gt; 1
+# is deprecated (can be problematic under persistent environments)
+</pre>
+<pre>
+# or for the biggest compatibility with HTML::Template
+# case_sensitive =&gt; 0
+# search_path_on_include =&gt; 0
+# use_query =&gt; 1
+# note that the following
+# use HTML::Template::Compiled compatible =&gt; 1;
+# is deprecated (can be problematic under persistent environments)
+</pre>
+<pre>
+# or use HTML::Template::Compiled::Classic
+</pre>
+<pre>
+my $htc = HTML::Template::Compiled-&gt;new(
+    filename        =&gt; 'test.tmpl',
+    case_sensitive  =&gt; 1,
+    default_escape  =&gt; 'HTML',
+);
+
+$htc-&gt;param(
+    BAND =&gt; $name,
+    ALBUMS =&gt; [
+        { TITLE =&gt; $t1, YEAR =&gt; $y1 },
+        { TITLE =&gt; $t2, YEAR =&gt; $y2 },
+    ],
+);
+
+print $htc-&gt;output;
+</pre>
+
+<pre>
+# test.tmpl:
+
+Band: &lt;TMPL_VAR BAND&gt;
+
+&lt;TMPL_LOOP ALBUMS&gt;
+    Title: &lt;TMPL_VAR TITLE&gt; (&lt;TMPL_VAR YEAR&gt;)
+&lt;/TMPL_LOOP&gt;
+</pre>
+<p>Or use different tag styles:</p>
+<pre>
+Band: &lt;%= BAND %&gt;
+
+&lt;%loop ALBUMS %&gt;
+    Title: &lt;%= TITLE %&gt; (&lt;%= YEAR %&gt;)
+&lt;%/loop %&gt;
+
+Band: [%= BAND %]
+
+[%loop ALBUMS %]
+    Title: [%= TITLE %] ([%= YEAR %])
+[%/loop %]
+</pre>
+
+		<h1><a name="description"></a>Description</h1>
+		<p>HTML::Template::Compiled is a template system which can be used for <a href="HTML--Template.html"> HTML::Template</a> templates with almost the same API. It offers more flexible template delimiters, additional tags and features, and by compiling the template into perl code it can run significantly faster in persistent environments such as FastCGI or mod_perl.</p>
+		<p>For a quick reference, see <a href="HTML--Template--Compiled--Reference.html"> HTML::Template::Compiled::Reference</a>.</p>
+		<p>As the basic features work like in <a href="HTML--Template.html">HTML::Template</a>, please get familiar with its documentation before.</p>
+		<p>HTML::Template::Compiled (HTC) does not implement all features of <a href="HTML--Template.html"> HTML::Template</a> (see <a href="#compatibility">Compatibility</a>), and it has got some additional features which are explained below: <a href="#additional_features">Additional Features</a></p>
+		<p>See <a href="#benchmarks">Benchmarks</a> for some examples on the performance. Since it depends highly on the options used and on the template size there can be no general statement on its performance.</p>
+		<p>You might want to use <a href="/HTML/Template/Compiled/Lazy.html"> HTML::Template::Compiled::Lazy</a> for CGI environments as it doesn't parse the template before calling output. But note that HTC::Lazy isn't much tested, and I don't use it myself, so there's a lack of experience. If you use it and have problems, please report.</p>
+		<p>HTC will use a lot of memory because it keeps all template objects in memory. If you are on mod_perl, and have a lot of templates, you should preload them at server startup to be sure that it is in shared memory. At the moment HTC is not fully tested for keeping all data in shared memory (e.g. when a copy-on-write occurs), but it seems like it's behaving well. For preloading you can use HTML::Template::Compiled-&gt;<code>preload($dir)</code>.</p>
+		<p>Generating code, writing it on disk and later <code>eval()</code> it can open security holes, for example if you have more users on the same machine that can access the same files (usually an http server running as 'www' or 'nobody'). See <a href="#security">SECURITY</a> for details what you can do to safe yourself.</p>
+		<div class="note">
+			<h4>Note</h4>
+			<p>If you don't need any of the additional features listed below and if you don't need the speed (in many cases it's probably not worth trading speed for memory), then you might be better off with just using HTML::Template.</p>
+		</div>
+		<div class="note">
+			<h4>Note</h4>
+			<p>If you have any questions, bug reports, send them to me and not to Sam Tregar. This module is developed by me at the moment, independently from HTML::Template, although I try to get most of the tests from it passing for HTC. See <a href="#resources">Resources</a> for current information.</p>
+		</div>
+		
+		<h2><a name="features_from_html__template"></a>features from HTML::TEMPLATE</h2>
+		<ul>
+			<li>TMPL_VAR</li>
+			<li>TMPL_LOOP</li>
+			<li>TMPL_IF, TMPL_UNLESS, TMPL_ELSE</li>
+			<li>TMPL_INCLUDE</li>
+			<li>HTML_TEMPLATE_ROOT</li>
+			<li>ESCAPE=(HTML|URL|JS|0)</li>
+			<li>DEFAULT=...</li>
+			<li>Loop variables: __first__, __last__, __inner__, __outer__, __odd__, __counter__, __even__</li>
+			<li>&lt;!-- TMPL_VAR NAME=PARAM1 --&gt;</li>
+			<li>
+				Case insensitive var names
+				<p>Use option <code>case_sensitive =&gt; 0</code> to use this feature (slow)</p>	
+			</li>
+			<li>Filters</li>
+			<li>Vars that are subrefs &ndash; not implemented; only in HTML::Template::Compiled::Classic</li>
+			<li>scalarref, arrayref, filehandle</li>
+			<li>global_vars</li>
+			<li>
+				<p><code>query</code> Has a bug (doesn't return parameters in included files of included files). I'm working on that.</p>
+			</li>
+		</ul>
+
+		<h2><a name="additional_features"></a>Additional Features</h2>
+		<p>What can HTC do for you additionally to HTML::Template?</p>
+		<h3>New Tags</h3>
+		<ul>
+			<li>
+				TMPL_ELSIF &mdash; No need to have cascading &quot;if-else-if-else&quot;s
+			</li>
+			<li>TMPL_EACH &mdash; Iterate over a hash.</li>
+			<li>TMPL_WITH</li>
+			<li>TMPL_WHILE</li>
+			<li>TMPL_SET_VAR</li>
+			<li>TMPL_USE_VARS</li>
+			<li>TMPL_COMMENT</li>
+			<li>TMPL_NOPARSE</li>
+			<li>TMPL_VERBATIM</li>
+			<li>TMPL_WRAPPER</li>
+			<li>TMPL_SWITCH</li>
+			<li>TMPL_CASE</li>
+			<li>TMPL_PERL &ndash; Include perl code in your template. See <a href="#running_perl_with_tmpl_perl">RUNNING PERL WITH TMPL_PERL</a>
+			</li>
+		</ul>
+		
+		<h3>New Loop Variables</h3>	
+		<ul>
+			<li><code>__index__</code> &ndash; Additional loop variable (equals <code>__counter__ -1</code>)</li>
+			<li><code>__break__</code>&ndash; Additional loop variable</li>
+		</ul>
+		
+		<h3>Miscellaneous Additions to HTML::Template</h3>
+		<ul>
+			<li>
+				<code>__filename__</code>, <code>__filenameshort__</code>
+				<p>Insert the template filename for debugging:</p>
+<pre>
+&lt;%= __filename__ %&gt;
+&lt;%= __filenameshort__ %&gt;
+</pre>
+				<p>will turn out as:</p>
+<pre>
+templates/path/file.html
+path/file.html
+</pre>
+				<p>See also option debug_file in <a href="#options">Options</a> for adding the filename globally.</p>
+			</li>		
+			<li>
+				CHOMP &ndash; New in version 0.96_001, please report any bugs and send me suggestions.
+				<p>You can set global chomp options in the constructor. These work like in
+			Template-Toolkit:</p>
+<pre>
+my $htc = HTML::Template::Compiled-&gt;new(
+    pre_chomp  =&gt; 0, # 0, 1, 2, 3, default 0
+    post_chomp =&gt; 1, # 0, 1, 2, 3, default 0
+);
+</pre>
+				<p>Meaning of the values:</p>
+<pre>
+0: Don't chomp
+1: remove only spaces in the line before or after the tag
+2: remove all whitespaces before or after the tag, and replace with one space
+3: remove all whitespaces before or after the tag
+</pre>
+				<p>In the template you can change that feature by using PRE_CHOMP and POST_CHOMP attributes:</p>
+<pre>
+&lt;%= foo PRE_CHOMP=3 POST_CHOMP=1 %&gt;
+</pre>
+			</li>
+			<li>Generating perl code</li>
+			<li>Better variable access &ndash; dot-notation for accessing hash values.</li>
+			<li>Rendering objcets &ndash; >dot-notation for accessing object methods.</li>
+					<li>Output to filehandle</li>
+			<li>Dynamic includes &ndash; <code>INCLUDE_VAR</code>, <code>INCLUDE_STRING</code>. </li>
+			<li>TMPL_IF_DEFINED &ndash; Check for definedness instead of truth:
+<pre>
+&lt;TMPL_IF_DEFINED NAME=&quot;var&quot;&gt;
+</pre>
+			</li>
+			<li>
+				ALIAS &ndash; Set an alias for a loop variable. You can use the alias then with <code>$alias</code>. The syntax without the <code>$</code> is also possible but not recommended any more.
+				<p>For example, these two loops are functionally equivalent:</p>
+<pre>
+&lt;tmpl_loop foo&gt;
+    &lt;tmpl_var _&gt;
+&lt;/tmpl_loop foo&gt;
+
+&lt;tmpl_loop foo alias=current&gt;
+    &lt;tmpl_var $current&gt;
+&lt;/tmpl_loop foo&gt;
+</pre>
+				<p>This works with <a href="#tmpl_loop"><code>TMPL_LOOP</code></a> and <code>TMPL_WHILE</code> at the moment.</p>
+				<p>You can also set aliases with the <code>SET_VAR</code> tag. See <a href="#set_var">SET_VAR</a></p>
+				<p>To use template parameters with a <code>$</code> at the beginning (which is not officially suppported, but some are abviously using it), you can set:</p>
+<pre>
+local $HTML::Template::Compiled::Compiler::DISABLE_NEW_ALIAS = 1;
+</pre>
+				<p>This is only a temporary workaround and will be removed some day!</p>
+				<p>Note that you are also able to access variables with dollar signs like this:</p>
+<pre>
+&lt;tmpl_var _.$foo &gt;
+</pre>
+				<p>since underscore means current position in the parameter stash, and aliases are only recognized at the beginning of a template var. But note that dollar signs are still not officially supported.</p>
+			</li>
+			<li>Chained escaping</li>
+			<li>
+				Tag styles &ndash; For those who like it (i like it because it is shorter than TMPL_), you can use &lt;% %&gt; tags and the &lt;%= tag instead of &lt;%VAR (which will work, too):
+<pre>
+&lt;%IF blah%&gt;  &lt;%= VARIABLE%&gt;  &lt;%/IF%&gt;
+</pre>
+				<p>Define your own tagstyles and/or deactivate predefined ones.</p>
+			</li>
+			<li>pre_chomp &amp; post_chomp</li>
+		</ul>
+
+		<h2><a name="missing_and_different_features"></a>Missing and Different Features</h2>
+		<p>There are some features of HTML::Template that are missing or behaving different.</p>
+
+		<h3><a name="missing_features"></a>Missing Features</h3>
+		
+		
+		
+		
+		
+		
+<dl>
+<dt><strong><a name="die_on_bad_params" class="item">die_on_bad_params</a></strong></dt>
+
+<dd>
+<p>I don't think I'll implement that.</p>
+</dd>
+<dt><strong><a name="force_untaint" class="item">force_untaint</a></strong></dt>
+
+<dd>
+<p>Not planned at the moment</p>
+</dd>
+<dt><strong><a name="vanguard_compatibility_mode" class="item">vanguard_compatibility_mode</a></strong></dt>
+
+<dd>
+<p>Not planned.</p>
+</dd>
+<dt><strong><a name="shared_cache_double_cache" class="item">shared_cache, double_cache</a></strong></dt>
+
+<dd>
+<p>Not planned at the moment</p>
+</dd>
+<dt><strong><a name="blind_cache" class="item">blind_cache</a></strong></dt>
+
+<dd>
+<p>Not sure if I should implement. In HTC you have the possibility to
+set the expire time of the templates (after that time in memory the
+template file is rechecked if it has changed), so setting a very high
+value for expire_time would have the same effect as blind_cache.
+See <a href="#caching">CACHING</a> <a href="#expire_time"><code>expire_time</code></a></p>
+</dd>
+<dt><strong><a name="double_file_cache" class="item">double_file_cache</a></strong></dt>
+
+<dd>
+<p>If I understand correctly, in HT, this enables memory and file cache at
+the same time. In HTC, this is not needed. If you use file_cache and cache,
+both are used.</p>
+</dd>
+<dt><strong><a name="file_cache_dir_mode" class="item">file_cache_dir_mode</a></strong></dt>
+
+<dd>
+<p>Not planned. The cache dir must exist, and subdirectories are
+not created at the moment.</p>
+</dd>
+<dt><strong><a name="cache_lazy_vars_cache_lazy_loops" class="item">cache_lazy_vars, cache_lazy_loops</a></strong></dt>
+
+<dd>
+<p>Not planned at the moment (This would be for HTML::Template::Compiled::Classic,
+since it implements code refs).</p>
+</dd>
+<dt><strong><a name="utf8" class="item">utf8</a></strong></dt>
+
+<dd>
+<p>Might be added in the future, HTC already has <a href="#open_mode"><code>open_mode</code></a></p>
+</dd>
+<dt><strong><a name="various_debug_options" class="item">various debug options</a></strong></dt>
+
+<dd>
+<p>Might be implemented in the future</p>
+</dd>
+<dt><strong><a name="associate" class="item">associate</a></strong></dt>
+
+<dd>
+<p>Not planned.</p>
+</dd>
+<dt><strong><a name="max_includes" class="item">max_includes</a></strong></dt>
+
+<dd>
+<p>Not planned</p>
+</dd>
+<dt><strong><a name="die_on_missing_include" class="item">die_on_missing_include</a></strong></dt>
+
+<dd>
+<p>Maybe</p>
+</dd>
+</dl>
+
+<h3><a name="different_features">DIFFERENT FEATURES</a></h3>
+<dl>
+<dt><strong><a name="case_sensitive" class="item">case_sensitive</a></strong></dt>
+
+<dd>
+<p>default is 1 (on).</p>
+<p>Deactivate by passing option expire_time 0.</p>
+<p>Note (again): this will slow down templating a lot (50%).</p>
+<p>Explanation: This has nothing to do with <code>TMPL_IF</code> or <code>tmpl_if</code>. It's
+about the variable names. With case_sensitive set to 1, the following
+tags are different:</p>
+<pre>
+    &lt;tmpl_var Foo&gt; prints the value of hash key 'Foo'
+    &lt;tmpl_var fOO&gt; prints the value of hash key 'fOO'</pre>
+<p>With case_sensitive set to 0, all your parameters passed to <a href="#param"><code>param()</code></a>
+are converted to lowercase, and the following tags are the same:</p>
+<pre>
+    &lt;tmpl_var Foo&gt; prints the value of hash key 'foo'
+    &lt;tmpl_var fOO&gt; prints the value of hash key 'foo'</pre>
+</dd>
+<dt><strong><a name="subref_variables" class="item">subref variables</a></strong></dt>
+
+<dd>
+<p>As of version 0.69, subref variables are not supported any more with
+HTML::Template::Compiled. Use <a href="/HTML/Template/Compiled/Classic.html"> HTML::Template::Compiled::Classic</a>
+(contained in this distribution) instead. It provides most features
+of HTC.</p>
+</dd>
+<dt><strong><a name="search_path_on_include" class="item">search_path_on_include</a></strong></dt>
+
+<dd>
+<p>Default: 0</p>
+<p>In the HTML::Template documentation it says, if search_path_on_include
+is set to 1, the paths of the path option are searched, while the default
+behaviour is to look &quot;only&quot; in the current template directory.</p>
+<p>It's not clear if it still searches in the current directory if set
+to 1. I found out that it is not, so you cannot have both.</p>
+<p>In HTML::Template::Compiled, search_path_on_include can have three values:
+    0: search current template directory
+    1: search paths specified
+    2: search paths and current template directory.</p>
+</dd>
+<dt><strong><a name="open_mode" class="item">open_mode</a></strong></dt>
+
+<dd>
+<p>In HTC you should leave out the <code>&lt;</code> at the beginning.</p>
+<p>If you want to have your templates read in utf-8, use</p>
+<pre>
+    open_mode =&gt; ':encoding(utf-8)',</pre>
+<p>as an option.</p>
+</dd>
+<dt><strong><a name="use_query" class="item">use_query</a></strong></dt>
+
+<dd>
+<p>default is 0 (off). Set it via the option
+<a href="#use_query"><code>use_query</code></a></p>
+</dd>
+<dt><strong><a name="arrayrefs" class="item">Arrayrefs</a></strong></dt>
+
+<dd>
+<p>At the moment this snippet</p>
+<pre>
+  &lt;tmpl_if arrayref&gt;true&lt;tmpl_else&gt;false&lt;/tmpl_if arrayref&gt;</pre>
+<p>with this code:</p>
+<pre>
+    $htc-&gt;param(arrayref =&gt; []);</pre>
+<p>will print true in HTC and false in HTML::Template. In HTML::Template an
+array is true if it has content, in HTC it's true if it (the reference) is
+defined. I'll try to find a way to change that behaviour, though that might
+be for the cost of speed.</p>
+<p>As of <a href="/HTML/Template/Compiled.html"> HTML::Template::Compiled</a> 0.85 you can use this syntax:</p>
+<pre>
+    &lt;tmpl_if arrayref# &gt;true&lt;tmpl_else&gt;false&lt;/tmpl_if &gt;</pre>
+<p>In <a href="/HTML/Template/Compiled/Classic.html"> HTML::Template::Compiled::Classic</a> 0.04 it works as in HTML::Template.</p>
+</dd>
+<dt><strong><a name="debug_cache" class="item">debug_cache</a></strong></dt>
+
+<dd>
+<p>Additional to 0 or 1 it can take an array ref for debugging only specific
+cache operations.</p>
+</dd>
+</dl>
+<p>Note: the following is deprecated:</p>
+<pre>
+    To be compatible in all of the above options all use:
+ 
+      use HTML::Template::Compiled compatible =&gt; 1;
+ 
+    If you don't care about these options you should use
+ 
+      use HTML::Template::Compiled speed =&gt; 1;</pre>
+<pre>
+ which is the default but depending on user wishes that might change.</pre>
+
+<h2><a name="deprecated">DEPRECATED</a></h2>
+<dl>
+<dt><strong><a name="class_methods_expiretime_enablesub_casesensitive_searchpathoninclude_usequery" class="item">class methods ExpireTime, EnableSub, CaseSensitive, SearchPathOnInclude, UseQuery</a></strong></dt>
+
+<dt><strong><a name="option_formatter_path" class="item">option formatter_path</a></strong></dt>
+
+<dt><strong><a name="tag_use_vars_not_needed_anymore" class="item">tag USE_VARS, not needed anymore</a></strong></dt>
+
+<dt><strong><a name="cache_dir" class="item">option cache_dir (replaced by file_cache_dir)</a></strong></dt>
+
+<dt><strong><a name="options_method_call_deref_default_path_dumper" class="item">options method_call, deref, default_path, dumper</a></strong></dt>
+
+<dt><strong><a name="import_tags_short_compatible_speed" class="item">import tags short, compatible, speed</a></strong></dt>
+
+</dl>
+
+<h2><a name="escaping">ESCAPING</a></h2>
+<p>Like in HTML::Template, you have <code>ESCAPE=HTML</code>, <code>ESCAPE=URL</code> and <code>ESCAPE_JS</code>.
+<code>ESCAPE=HTML</code> will only escape '&quot;&amp;&lt;&gt;. If you want to escape more, use
+<code>ESCAPE=HTML_ALL</code>.
+Additionally you have <code>ESCAPE=DUMP</code>, which by default will generate a Data::Dumper output.</p>
+<p>You can also chain different escapings, like <code>ESCAPE=DUMP|HTML</code>.</p>
+<p>Additionally to ESCAPE=JS you have ESCAPE=IJSON which does not escape the
+single quote.</p>
+
+<h2><a name="include">INCLUDE</a></h2>
+<p>Additionally to</p>
+<pre>
+  &lt;TMPL_INCLUDE NAME=&quot;file.htc&quot;&gt;</pre>
+<p>you can do an include of a template variable:</p>
+<pre>
+  &lt;TMPL_INCLUDE_VAR NAME=&quot;file_include_var&quot;&gt;
+  $htc-&gt;param(file_include_var =&gt; &quot;file.htc&quot;);</pre>
+<p>Using <code>INCLUDE VAR=&quot;...&quot;</code> is deprecated.</p>
+<p>You can also include strings:</p>
+<pre>
+    template:
+    inc: &lt;%include_string foo %&gt;</pre>
+<pre>
+    code:
+    $htc-&gt;param(
+        foo =&gt; 'included=&lt;%= bar%&gt;',
+        bar =&gt; 'real',
+    );</pre>
+<pre>
+    output:
+    inc: included=real</pre>
+<p>Note that included strings are not cached and cannot include files
+or strings themselves.</p>
+<pre>
+  
+=head2 EXTENDED VARIABLE ACCESS</pre>
+<p>With HTC, you have more control over how you access your template
+parameters. An example:</p>
+<pre>
+  my %hash = (
+    SELF =&gt; '/path/to/script.pl',
+    LANGUAGE =&gt; 'de',
+    BAND =&gt; 'Bauhaus',
+    ALBUMS =&gt; [
+    {
+      NAME =&gt; 'Mask',
+      SONGS =&gt; [ { NAME =&gt; 'Hair of the Dog' }, ... ],
+    },
+    ],
+    INFO =&gt; {
+      BIOGRAPHY =&gt; '...',
+      LINK =&gt; '...'
+    },
+    NAME =&gt; &quot;Cool script&quot;,
+  );</pre>
+<p>Now in the TMPL_LOOP <code>ALBUMS</code> you would like to access the path to
+your script, stored in $hash{SELF}. in HTML::Template you have to set
+the option <a href="#global_vars"><code>global_vars</code></a>, so you can access <code>$hash{SELF}</code> from
+everywhere. Unfortunately, now <code>NAME</code> is also global, which might not
+a problem in this simple example, but in a more complicated template
+this is impossible. With HTC, you wouldn't use <a href="#global_vars"><code>global_vars</code></a> here, but
+you can say:</p>
+<pre>
+  &lt;TMPL_VAR .SELF&gt;</pre>
+<p>to access the root element, and you could even say <code>.INFO.BIOGRAPHY</code>
+or <code>ALBUMS[0].SONGS[0].NAME</code> (the latter has changed since version 0.79)</p>
+
+<h2><a name="rendering_objects">RENDERING OBJECTS</a></h2>
+<p>This is still in development, so I might change the API here.</p>
+<p>Additionally to feeding a simple hash to HTC, you can feed it objects.
+To do method calls you can also use '.' in the template.</p>
+<pre>
+  my $htc = HTML::Template::Compiled-&gt;new(
+    ...
+  );</pre>
+<pre>
+  $htc-&gt;param(
+    VAR =&gt; &quot;blah&quot;,
+    OBJECT =&gt; bless({...}, &quot;Your::Class&quot;),
+  );</pre>
+<pre>
+  &lt;TMPL_VAR NAME=&quot;OBJECT.fullname&quot;&gt;
+  &lt;TMPL_WITH OBJECT&gt;
+  Name: &lt;TMPL_VAR fullname&gt;
+  &lt;/TMPL_WITH&gt;</pre>
+<p><code>fullname</code> will call the fullname method of your Your::Class object.</p>
+<p>It's recommended to just use the default . value for methods and dereferencing.</p>
+<p>I might stop supporting that you can set the values for method calls by setting
+an option. Ideally I would like to have that behaviour changed only by inheriting.</p>
+
+<h2><a name="running_perl_with_tmpl_perl">RUNNING PERL WITH TMPL_PERL</a></h2>
+<p>Yes, templating systems are for separating code and templates. But
+as it turned out to be implemented much easier than expressions i
+decided to implement it. But expressions are also available with the option
+<a href="#use_expressions"><code>use_expressions</code></a>.</p>
+<p>Note: If you have templates that can be edited by untrustworthy persons then
+you don't want them to include perl code.</p>
+<p>So, how do you use the perl-tag? First, you have to set the option
+<a href="#use_perl"><code>use_perl</code></a> to <code>1</code> when creating a template object.</p>
+<p>Important note: don't use <code>print</code> in the included code. Usually the
+template code is concatenated and returned to your perl script.
+To 'print' something out use</p>
+<pre>
+    __OUT__ 2**3;</pre>
+<p>This will be turned into something like</p>
+<pre>
+    $OUT .= 2**3;
+    # or
+    print $fh 2**3;</pre>
+<p>Important note 2: HTC does not parse Perl. if you use the
+classic tag-delimiters like this:</p>
+<pre>
+    &lt;tmpl_perl if (__CURRENT__-&gt;count &gt; 42) { &gt;</pre>
+<p>this will not work as it might seem. Use other delimiters
+instead:</p>
+<pre>
+    &lt;%perl if (__CURRENT__-&gt;count &gt; 42) { %&gt;</pre>
+<p>Example:</p>
+<pre>
+    &lt;tmpl_loop list&gt;
+    &lt;tmpl_perl unless (__INDEX__ % 3) { &gt;
+      &lt;/tr&gt;&lt;tr&gt;
+    &lt;tmpl_perl } &gt;
+    &lt;/tmpl_loop list&gt;</pre>
+<pre>
+    # takes the current position of the parameter
+    # hash, key 'foo' and multiplies it with 3
+    &lt;%perl __OUT__ __CURRENT__-&gt;{foo} * 3; %&gt;</pre>
+<p>List of special keywords inside a perl-tag:</p>
+<dl>
+<dt><strong><a name="out" class="item">__OUT__</a></strong></dt>
+
+<dd>
+<p>Is turned into <code>$OUT .=</code> or <code>print $fh</code></p>
+</dd>
+<dt><strong><a name="htc" class="item">__HTC__</a></strong></dt>
+
+<dd>
+<p>Is turned into the variable containing the current template object.</p>
+</dd>
+<dt><strong><a name="current" class="item">__CURRENT__</a></strong></dt>
+
+<dd>
+<p>Turned into the variable containing the current position
+in the parameter hash.</p>
+</dd>
+<dt><strong><a name="root" class="item">__ROOT__</a></strong></dt>
+
+<dd>
+<p>Turned into the variable containig the parameter hash.</p>
+</dd>
+<dt><strong><a name="index" class="item">__INDEX__</a></strong></dt>
+
+<dd>
+<p>Turned into the current index of a loop (starting with 0).</p>
+</dd>
+</dl>
+
+<h2><a name="inheritance">INHERITANCE</a></h2>
+<p>It's possible since version 0.69 to inherit from HTML::Template::Compiled.
+It's just not documented, and internal method names might change in
+the near future. I'll try to fix the API and document which methods
+you can inherit.</p>
+
+<h3><a name="methods_to_inherit">METHODS TO INHERIT</a></h3>
+<dl>
+<dt><strong><a name="method_call" class="item">method_call</a></strong></dt>
+
+<dd>
+<p>Default is <code>sub method_call { '.' }</code></p>
+</dd>
+<dt><strong><a name="deref" class="item">deref</a></strong></dt>
+
+<dd>
+<p>Default is <code>sub deref { '.' }</code></p>
+</dd>
+<dt><strong><a name="formatter_path" class="item">formatter_path</a></strong></dt>
+
+<dd>
+<p>Deprecated, see <a href="/HTML/Template/Compiled/Formatter.html"> HTML::Template::Compiled::Formatter</a> please.</p>
+</dd>
+<dt><strong><a name="compile_early" class="item">compile_early</a></strong></dt>
+
+<dd>
+<p>Define if every included file should be checked and parsed at compile time
+of the including template or later when it is really used.</p>
+<p>Default is <code>sub compile_early { 1 }</code></p>
+</dd>
+<dt><strong><a name="parser_class" class="item">parser_class</a></strong></dt>
+
+<dd>
+<p>Default is <code>sub parser_class { 'HTML::Template::Compiled::Parser' }</code></p>
+<p>You can write your own parser class (which must inherit from
+<a href="/HTML/Template/Compiled/Parser.html"> HTML::Template::Compiled::Parser</a>) and use this.</p>
+<p><a href="/HTML/Template/Compiled/Lazy.html"> HTML::Template::Compiled::Lazy</a> uses this.</p>
+</dd>
+</dl>
+
+<h2><a name="debugging">DEBUGGING</a></h2>
+<p>For printing out the contents of all the parameters you can do:</p>
+<pre>
+  &lt;TMPL_LOOP ALBUMS&gt;
+  Dump: &lt;TMPL_VAR _ ESCAPE=DUMP|HTML&gt;
+  &lt;/TMPL_LOOP&gt;</pre>
+<p>The special name <code>_</code> gives you the current parameter and <code>ESCAPE=DUMP</code>
+will by default generate a Data::Dumper output of the
+current variable, in this case it will dump out the contents of every
+album in a loop. To correctly display that in html <code>|HTML</code> will escape html
+entities.</p>
+
+<h2><a name="tmpl_with">TMPL_WITH</a></h2>
+<p>If you have a deep leveled hash you might not want to always write 
+THE.FULL.PATH.TO.YOUR.VAR. Jump to your desired level once and
+then you need only one level. Compare:</p>
+<pre>
+  &lt;TMPL_WITH DEEP.PATH.TO.HASH&gt;
+  &lt;TMPL_VAR NAME&gt;: &lt;TMPL_VAR AGE&gt;
+  &lt;/TMPL_WITH&gt;</pre>
+<pre>
+  &lt;TMPL_VAR DEEP.PATH.TO.HASH.NAME&gt;: &lt;TMPL_VAR DEEP.PATH.TO.HASH.AGE&gt;</pre>
+<p>Inside TMPL_WITH you can't reference parent nodes unless you're using global_vars.</p>
+
+<h2><a name="tmpl_loop">TMPL_LOOP</a></h2>
+<p>The special name <code>_</code> gives you the current parameter. In loops you can use it like this:</p>
+<pre>
+ &lt;tmpl_loop foo&gt;
+  Current item: &lt;tmpl_var _ &gt;
+ &lt;/tmpl_loop&gt;</pre>
+<p>Also you can give the current item an alias. See <a href="#alias">ALIAS</a>.</p>
+<p>The LOOP tag allows you to define a JOIN attribute:</p>
+<pre>
+ &lt;tmpl_loop favourite_colors join=&quot;, &quot;&gt;
+  &lt;tmpl_var _ &gt;
+ &lt;/tmpl_loop&gt;</pre>
+<p>This will output something like <code>blue, pink, yellow</code>.
+This is easier than doing:</p>
+<pre>
+ &lt;tmpl_loop favourite_colors&gt;
+ &lt;tmpl_unless __first__&gt;, &lt;/tmpl_unless&gt;
+  &lt;tmpl_var _ &gt;
+ &lt;/tmpl_loop&gt;</pre>
+<p>The <code>LOOP</code>, <code>WHILE</code> and <code>EACH</code> tags allow you to define a BREAK attribute:</p>
+<pre>
+ &lt;tmpl_loop bingo break=&quot;3&quot;&gt; &lt;tmpl_var _ &gt;&lt;if __break__&gt;\n&lt;/if&gt;&lt;/tmpl_loop&gt;</pre>
+<pre>
+    $htc-&gt;param(bingo =&gt; [qw(X 0 _ _ X 0 _ _ X)]);</pre>
+<p>outputs</p>
+<pre>
+    X 0 _
+    _ X 0
+    _ _ X</pre>
+<p>So specifying BREAK=3 sets __break__ to 1 every 3rd loop iteration.</p>
+<p>TMPL_LOOP expects an array reference, also if it is a method call. If
+you want to iterate with TMPL_LOOP over a list from a method call, set
+the attribute <code>context=list</code>:</p>
+<pre>
+    &lt;tmpl_loop object.list_method context=list&gt;
+        &lt;tmpl_var _ &gt;
+    &lt;/tmpl_loop&gt;</pre>
+
+<h2><a name="tmpl_while">TMPL_WHILE</a></h2>
+<p>Useful for iterating, for example over database resultsets.
+The directive</p>
+<pre>
+  &lt;tmpl_while resultset.fetchrow&gt;
+    &lt;tmpl_var _.0&gt;
+  &lt;/tmpl_while&gt;</pre>
+<p>will work like:
+  while (my $row = $resultset-&gt;fetchrow) {
+    print $row-&gt;[0];
+  }</p>
+<p>So the special variable name _ is set to the current item returned
+by the iterator.</p>
+<p>You also can use <a href="#alias">ALIAS</a> here.</p>
+
+<h2><a name="tmpl_each">TMPL_EACH</a></h2>
+<p>Iterating over a hash. Internally it is not implemented as an each, so you
+can also sort the output:</p>
+<pre>
+    Sorted alphanumerically by default (since 0.93):
+        &lt;tmpl_each letters &gt;
+            &lt;tmpl_var __key__ &gt;:&lt;tmpl_var __value__&gt;
+        &lt;/tmpl_each letters &gt;
+    Sorted numerically:
+        &lt;tmpl_each numbers sort=num &gt;
+            &lt;tmpl_var __key__ &gt;:&lt;tmpl_var __value__&gt;
+        &lt;/tmpl_each numbers &gt;
+    Not sorted:
+        &lt;tmpl_each numbers sort=0 &gt;
+            &lt;tmpl_var __key__ &gt;:&lt;tmpl_var __value__&gt;
+        &lt;/tmpl_each numbers &gt;
+    Sorted alphanumerically:
+        &lt;tmpl_each letters sort=alpha &gt;
+            &lt;tmpl_var __key__ &gt;:&lt;tmpl_var __value__&gt;
+        &lt;/tmpl_each letters &gt;</pre>
+<p>You have to set the option <a href="#loop_context_vars"><code>loop_context_vars</code></a> to true to use
+the special vars <code>__key__</code> and <code>__value__</code>.</p>
+<p>If you want to iterate over a hash instead of a hashref (some
+methods might return plain hashes instead of references and
+TMPL_EACH expects a ref), then you can set <code>context=list</code>:</p>
+<pre>
+    &lt;tmpl_each object.hash_method context=list&gt;
+    &lt;tmpl_var __key__ &gt;
+    &lt;/tmpl_each&gt;</pre>
+
+<h2><a name="set_var">SET_VAR</a></h2>
+<p>Since 0.96_002</p>
+<p>Sets a local variable to the value given in <code>value</code> or <code>expr</code></p>
+<pre>
+    &lt;tmpl_set foo expr=23&gt;
+    &lt;tmpl_set name=bar expr=23&gt;
+    &lt;tmpl_set boo value=var.boo&gt;
+    &lt;tmpl_set oof expr=&quot;21*2&quot;&gt;
+    &lt;tmpl_var $foo&gt;
+    &lt;tmpl_var $bar&gt;
+    ...</pre>
+<p><code>value=..</code> behaves like a variable name from the parameter stash.
+The variable name to set must match /[0-9a-z_]+/i</p>
+<p>You can refer to an alias via <code>$alias</code> or simply <code>alias</code>. Note that
+the latter syntax is not recommeded any more since it can conflict
+with parameters from the stash.</p>
+<p>If you want to use aliases in includes, you need to use the <code>$alias</code>
+syntax.</p>
+
+<h2><a name="use_vars">USE_VARS</a></h2>
+<p>deprecated. Was added in 0.96_004 to make it possible to use aliases
+set with <code>alias=...</code> or <code>SET_VAR</code> in includes. Now you should rather
+use the &lt;$alias&gt; syntax.</p>
+<p>The following explanation is just there for history and will be removed
+some time in the future. For now it still works.</p>
+<p>Necessary if you want vars like SET_VAR and loop aliases from outside
+in includes.
+Before the first use in the include, add:</p>
+<pre>
+    &lt;tmpl_use_vars foo,bar,boo &gt;</pre>
+<p>so that the compiler recognizes them as user defined vars and not parameters
+from the stash.
+This statement is valid until the end of the template so you cannot
+&quot;overwrite&quot; parameters of the stash locally.</p>
+
+<h2><a name="wrapper">WRAPPER</a></h2>
+<p>Since 0.97_005. Experimental. Please test.</p>
+<p>Needs option <a href="#loop_context_vars"><code>loop_context_vars</code></a>.</p>
+<p>Works similar to WRAPPER in Template-Toolkit.</p>
+<p>Is similar to TMPL_INCLUDE, just that the included wrapper is wrapped
+around the content. It can be used to avoid including head and foot separately.</p>
+<pre>
+    &lt;tmpl_wrapper wrapper.html &gt;
+    content: some var: &lt;tmpl_var foo &gt;
+    &lt;/tmpl_wrapper&gt;</pre>
+<p>In wrapper.html the special loop context var <code>__wrapper__</code> is used for
+the included content:</p>
+<pre>
+    wrapper.html:
+    &lt;some&gt;&lt;layout&gt;
+    &lt;tmpl_var __wrapped__ &gt;
+    &lt;/layout&gt;&lt;/some&gt;</pre>
+<p>Important notes:</p>
+<p>If you are using <a href="#out_fh"><code>out_fh</code></a> to print directly to a filehandle instead of
+returning to a string, this feature might not be useful, since it is
+appending the content inside of the wrapper to a string and prints it
+when it comes to the end of the wrapper tag.
+So if you are using <a href="#out_fh"><code>out_fh</code></a> to avoid generating long strings in
+memory, you should rather use TMPL_INCLUDE instead.</p>
+<p>Also you need perl 5.8 or higher to use it in combination with out_fh.</p>
+
+<h2><a name="tmpl_comment">TMPL_COMMENT</a></h2>
+<p>For debugging purposes you can temporarily comment out regions:</p>
+<pre>
+  Wanted: &lt;tmpl_var wanted&gt;
+    &lt;tmpl_comment outer&gt;
+    this won't be printed
+      &lt;tmpl_comment inner&gt;
+        &lt;tmpl_var unwanted&gt;
+      &lt;/tmpl_comment inner&gt;
+      &lt;tmpl_var unwanted&gt;
+  &lt;/tmpl_comment outer&gt;</pre>
+<pre>
+  $htc-&gt;param(unwanted =&gt; &quot;no thanks&quot;, wanted =&gt; &quot;we want this&quot;);</pre>
+<p>The output is (whitespaces stripped):</p>
+<pre>
+  Wanted: we want this</pre>
+<p>HTC will ignore anything between COMMENT directives.
+This is useful for debugging, and also for documentation inside the
+template which should not be outputted.</p>
+
+<h2><a name="tmpl_noparse">TMPL_NOPARSE</a></h2>
+<p>Anything between</p>
+<pre>
+  &lt;tmpl_noparse&gt;...&lt;/tmpl_noparse&gt;</pre>
+<p>will not be recognized as template directives. Same syntax as TMPL_COMMENT.
+It will output the content, though.</p>
+
+<h2><a name="tmpl_verbatim">TMPL_VERBATIM</a></h2>
+<p>Anything between</p>
+<pre>
+  &lt;tmpl_verbatim&gt;...&lt;/tmpl_verbatim&gt;</pre>
+<p>will not be recognized as template directives. Same syntax as
+<a href="#tmpl_noparse">TMPL_NOPARSE</a>, but it will be HTML-Escaped. This can be
+useful for debugging.</p>
+
+<h2><a name="tmpl_switch">TMPL_SWITCH</a></h2>
+<p>The SWITCH directive has the same syntax as VAR, IF etc.
+The CASE directive takes a simple string or a comma separated list of strings.
+Yes, without quotes. This will probably change! I just don't know yet
+how it should look like. Suggestions?</p>
+<p>With that directive you can do simple string comparisons.</p>
+<pre>
+ &lt;tmpl_switch language&gt;(or &lt;tmpl_switch name=language&gt;)
+  &lt;tmpl_case de&gt;echt cool
+  &lt;tmpl_case en&gt;very cool
+  &lt;tmpl_case es&gt;superculo
+  &lt;tmpl_case fr,se&gt;don't speak french or swedish
+  &lt;tmpl_case default&gt;sorry, no translation for cool in language &lt;%=language%&gt; available
+  &lt;tmpl_case&gt;(same as default)
+ &lt;/tmpl_switch&gt;</pre>
+<p>It's also possible to specify the default with a list of other strings:</p>
+<pre>
+ &lt;tmpl_case fr,default&gt;</pre>
+<p>Note that the default case should always be the last statement before the
+closing switch.</p>
+
+<h2><a name="options">OPTIONS</a></h2>
+<p>As you can cache the generated perl code in files, some of the options are fixed; that means
+for example if you set the option case_sensitive to 0 and the next time you call the same template
+with case_sensitive 1 then this will be ignored. The options below will be marked as (fixed).</p>
+<dl>
+<dt><strong><a name="path" class="item">path</a></strong></dt>
+
+<dd>
+<p>Path to template files</p>
+</dd>
+<dt><strong>search_path_on_include</strong></dt>
+
+<dd>
+<p>Search the list of paths specified with <a href="#path"><code>path</code></a> when including a template.
+Default is 0</p>
+<p>See <a href="#different_features">DIFFERENT FEATURES</a> for the additional possible value 2.</p>
+</dd>
+<dt><strong><a name="file_cache" class="item">file_cache</a></strong></dt>
+
+<dd>
+<p>Set to 1 if you want to use file caching and specify the path
+with file_cache_dir.</p>
+</dd>
+<dt><strong><a name="file_cache_dir" class="item">file_cache_dir</a></strong></dt>
+
+<dd>
+<p>Path to caching directory (you have to create it before)</p>
+</dd>
+<dt><strong>cache_dir</strong></dt>
+
+<dd>
+<p>Replaced by file_cache_dir like in <a href="HTML--Template.html"> HTML::Template</a>. Will be deprecated
+in future versions.</p>
+</dd>
+<dt><strong><a name="cache" class="item">cache</a></strong></dt>
+
+<dd>
+<p>Is 1 by default. If set to 0, no memory cacheing is done. Only recommendable if
+you have a dynamic template content (with scalarref, arrayre for example).</p>
+</dd>
+<dt><strong><a name="expire_time" class="item">expire_time</a></strong></dt>
+
+<dd>
+<p>Recheck template files on disk after <a href="#expire_time"><code>expire_time</code></a> seconds. See <a href="#caching">CACHING</a></p>
+</dd>
+<dt><strong><a name="filename" class="item">filename</a></strong></dt>
+
+<dd>
+<p>Template to parse</p>
+</dd>
+<dt><strong><a name="scalarref" class="item">scalarref</a></strong></dt>
+
+<dd>
+<p>Reference to a scalar with your template content. It's possible to cache
+scalarrefs, too, if you have Digest::MD5 installed. Note that your cache directory
+might get filled with files from earlier versions. Clean the cache regularly.</p>
+<p>Don't cache scalarrefs if you have dynamic strings. Your memory might get filled up fast!
+Use the option</p>
+<pre>
+  cache =&gt; 0</pre>
+<p>to disable memory caching.</p>
+</dd>
+<dt><strong><a name="arrayref" class="item">arrayref</a></strong></dt>
+
+<dd>
+<p>Reference to array containing lines of the template content (newlines have
+to be included)</p>
+</dd>
+<dt><strong><a name="filehandle" class="item">filehandle</a></strong></dt>
+
+<dd>
+<p>Filehandle which contains the template content. Note that HTC will not cache
+templates created like this.</p>
+</dd>
+<dt><strong><a name="loop_context_vars" class="item">loop_context_vars (fixed)</a></strong></dt>
+
+<dd>
+<p>Vars like <code>__first__</code>, <code>__last__</code>, <code>__inner__</code>, <code>__odd__</code>, <code>__counter__</code>,
+<a href="#__index__"><code>__index__</code></a>, <code>__outer__</code>, <code>__even__</code></p>
+<p>The variable <a href="#__index__"><code>__index__</code></a> works just like <code>__counter__</code>, only that it starts
+at 0 instead of 1.</p>
+</dd>
+<dt><strong>global_vars (fixed)</strong></dt>
+
+<dd>
+<p>If set to 1, every outer variable can be accessed from anywhere in the enclosing scope.</p>
+<p>Default is 0.</p>
+<p>Note that I don't recommend using global_vars. For referring to parameters
+up in the stash you can use aliases via <code>alias=...</code> or <code>SET_VAR</code>.
+See <a href="#alias">ALIAS</a> and <a href="#set_var">SET_VAR</a>.</p>
+<p>If yoy still would like to be able to navigate up the parameter stash, you
+have the following option:</p>
+<p>If set to 2, you don't have global vars, but have the possibility to go
+up the stack one level. Example:</p>
+<pre>
+ &lt;tmpl_var ...key&gt;</pre>
+<p>This will get you up 2 levels (remember: one dot means root in HTC) and access the 'key'
+element.</p>
+<p>If set to 3 (<code>3 == 1|2</code>) you have both, global vars and explicitly going up the stack.</p>
+<p>So setting global_vars to 2 can save you from global vars but still allows you to
+browse through the stack.</p>
+</dd>
+<dt><strong><a name="default_escape" class="item">default_escape</a></strong></dt>
+
+<dd>
+<pre>
+  my $htc = HTML::Template::Compiled-&gt;new(
+    ...
+    default_escape =&gt; 'HTML', # or URL
+  );</pre>
+<p>Now everything will be escaped for HTML unless you explicitly specify <code>ESCAPE=0</code> (no escaping)
+or <code>ESCAPE=URL</code>.</p>
+</dd>
+<dt><strong><a name="strict" class="item">strict</a></strong></dt>
+
+<dd>
+<p>Default: 1</p>
+<p>If set to 0 unknown tags will be ignored and output verbatim:</p>
+<pre>
+    &lt;TMPL_FOOBAR anything ... &lt;TMPL_VAR valid&gt;</pre>
+</dd>
+<dt><strong><a name="no_includes" class="item">no_includes (since 0.92)</a></strong></dt>
+
+<dd>
+<p>Default is 0. If set to 1, the tags INCLUDE, INCLUDE_VAR and INCLUDE_STRING
+will cause a template syntax error when creating. This can be useful when opening
+untrusted templates, otherwise any file in the filesystem could be opened.</p>
+</dd>
+<dt><strong><a name="debug_file" class="item">debug_file (fixed) (since 0.91_001)</a></strong></dt>
+
+<dd>
+<p>Additionally to the context_vars __filename__ and __filenameshort__ you
+can enable filename debugging globally.</p>
+<p>If the option is set to 'start', at the start of every template will be added:
+    &lt;!-- start templates/path/filename.html --&gt;</p>
+<p>If set to 'end', at the end will be added:
+    &lt;!-- end templates/path/filename.html --&gt;</p>
+<p>If set to 'start,end', both coments will be added.</p>
+<p>If set to 'start,short', 'end,short' or 'start,end,short' the path
+to the templates will be stripped:
+    &lt;!-- start path/filename.html --&gt;
+    &lt;!-- end path/filename.html --&gt;</p>
+</dd>
+<dt><strong><a name="objects" class="item">objects (fixed) (since 0.91_001)</a></strong></dt>
+
+<dd>
+<p>if set to true, you can use method calls like
+    &lt;%= object.method %&gt;</p>
+<p>Default is 'strict' (true).
+If set to 'strict', the method will be called if we have an object, otherwise
+it's treated as a hash lookup. If the method doesn't exist, it dies.
+If set to 'nostrict', the method will be called only if the object 'can' do the
+method, otherwise it will return undef (this will need Scalar::Util).
+If set to 0, no method calls are allowed.</p>
+</dd>
+<dt><strong>deref (fixed)</strong></dt>
+
+<dd>
+<p>Deprecated. Please inherit and overwrite method 'deref'. See <a href="#inheritance">INHERITANCE</a></p>
+<p>Define the string you want to use for dereferencing, default is <code>.</code> at the
+moment:</p>
+<pre>
+ &lt;TMPL_VAR hash.key&gt;</pre>
+</dd>
+<dt><strong>method_call (fixed)</strong></dt>
+
+<dd>
+<p>Deprecated. Please inherit and overwrite method 'method_call'. See <a href="#inheritance">INHERITANCE</a></p>
+<p>Define the string you want to use for method calls, default is . at
+the moment:</p>
+<pre>
+ &lt;TMPL_VAR object.method&gt;</pre>
+<p>Don't use -&gt;, though, like you could in earlier version. Var names can contain:
+Numbers, letters, '.', '/', '+', '-' and '_', just like HTML::Template. Note that
+if your var names contain dots, though, they will be treated as hash
+dereferences. If you want literal dots, use <a href="/HTML/Template/Compiled/Classic.html"> HTML::Template::Compiled::Classic</a>
+instead.</p>
+<pre>
+
+=item default_path (fixed)</pre>
+<p>Deprecated, see <a href="/HTML/Template/Compiled/Formatter.html"> HTML::Template::Compiled::Formatter</a> please.</p>
+<pre>
+  my $htc = HTML::Template::Compiled-&gt;new(
+    ...
+    default_path
+         # default is PATH_DEREF
+      =&gt; HTML::Template::Compiled::Utils::PATH_FORMATTER,
+  );</pre>
+<p>Is needed if you have an unqualified tmpl_var that should be resolved as
+a call to your formatter, for example. Otherwise you have to call it
+fully qualified. If your formatter_path is '/', you'd say tmpl_var <code>_/method</code>.
+With the option default_path you can make that the default, so you don't need
+the <code>_/</code>: <code>tmpl_var method</code>. If you don't use formatters, don't care about
+this option.</p>
+</dd>
+<dt><strong><a name="line_numbers" class="item">line_numbers</a></strong></dt>
+
+<dd>
+<p>NOTE: This option does not exist any more; line numbers will alway be reported.</p>
+<p>For debugging: prints the line number of the wrong tag, e.g. if you have
+a /TMPL_IF that does not have an opening tag.</p>
+</dd>
+<dt><strong>case_sensitive (fixed)</strong></dt>
+
+<dd>
+<p>default is 1, set it to 0 to use this feature like in HTML::Template. Note that
+this can slow down your program a lot (50%).</p>
+</dd>
+<dt><strong><a name="dumper" class="item">dumper</a></strong></dt>
+
+<dd>
+<p>This option is deprecated as of version 0.76. You must now use a plugin instead, like
+<a href="/HTML/Template/Compiled/Plugin/DHTML.html"> HTML::Template::Compiled::Plugin::DHTML</a>, for examle.</p>
+<pre>
+  my $t = HTML::Template::Compiled-&gt;new(
+    ...
+    dumper = sub { my_cool_dumper($_[0]) },
+  );
+  ---
+  &lt;TMPL_VAR var ESCAPE=DUMP&gt;</pre>
+<p>This will call <code>my_cool_dumper()</code> on <code>var</code>.</p>
+<p>Alternatively you can use the DHTML plugin which is using <code>Data::TreeDumper</code> and
+<code>Data::TreeDumper::Renderer::DHTML</code>. You'll get a  dumper like output which you can
+collapse and expand, for example. See <a href="/Data/TreeDumper.html"> Data::TreeDumper</a> and <a href="/Data/TreeDumper/Renderer/DHTML.html"> Data::TreeDumper::Renderer::DHTML</a> for
+more information.
+Example:</p>
+<pre>
+  my $t = HTML::Template::Compiled-&gt;new(
+    ...
+    dumper = 'DHTML',
+  );
+ 
+For an example see C&lt;examples/dhtml.html&gt;.</pre>
+</dd>
+<dt><strong><a name="out_fh" class="item">out_fh (fixed)</a></strong></dt>
+
+<dd>
+<pre>
+  my $t = HTML::Template::Compiled-&gt;new(
+    ...
+    out_fh =&gt; 1,
+  );
+  ...
+  $t-&gt;output($fh); # or output(\*STDOUT) or even output()</pre>
+<p>This option is fixed, so if you create a template with <a href="#out_fh"><code>out_fh</code></a>, every
+output of this template will print to a specified (or default <code>STDOUT</code>) filehandle.</p>
+</dd>
+<dt><strong><a name="filter" class="item">filter</a></strong></dt>
+
+<dd>
+<p>Filter template code before parsing.</p>
+<pre>
+  my $t = HTML::Template::Compiled-&gt;new(
+    ...
+    filter =&gt; sub { myfilter( ${$_[0]} ) },
+    # or
+    filter =&gt; [ {
+        sub =&gt; sub { myfilter( ${$_[0]} ) },
+        format =&gt; 'scalar', # or array
+      },
+      ...
+    ],
+  );</pre>
+</dd>
+<dt><strong><a name="tagstyle" class="item">tagstyle (fixed)</a></strong></dt>
+
+<dd>
+<p>Specify which styles you want to use. This option takes an arrayref
+with strings of named tagstyles or your own regexes.</p>
+<p>At the moment there are the following named tagstyles builtin:</p>
+<pre>
+    # classic (active by default)
+    &lt;TMPL_IF foo&gt;&lt;tmpl_var bar&gt;&lt;/TMPL_IF&gt;</pre>
+<pre>
+    # comment (active by default)
+    &lt;!-- TMPL_IF foo --&gt;&lt;!-- TMPL_VAR bar --&gt;&lt;!-- /TMPL_IF --&gt;</pre>
+<pre>
+    # asp (active by default)
+    &lt;%if foo%&gt;&lt;%VAR bar%&gt;&lt;%/if%&gt;</pre>
+<pre>
+    # php (not active by default)
+    &lt;?if foo?&gt;&lt;?var bar?&gt;&lt;?/if foo?&gt;</pre>
+<pre>
+    # tt (not active by default)
+    [%if foo%][%var bar%][%/if foo%]</pre>
+<p>You deactive a style by saying -stylename. You activate by saying
++stylename.</p>
+<p>Define your own tagstyle by specifying for regexes. For example
+you want to use {<code>{if foo}}{{var bar}}{{/if foo}}</code>, then your
+definition should be:</p>
+<pre>
+    [
+        qr({{), # start of opening tag
+        qr(}}), # end of opening tag
+        qr({{/), # start of closing tag
+        qr(}}), # end of closing tag
+    ]</pre>
+<p>NOTE: do not specify capturing parentheses in you regexes. If you
+need parentheses, use <code>(?:foo|bar)</code> instead of <code>(foo|bar)</code>.</p>
+<p>Say you want to deactivate asp-style, comment-style, activate php- and
+tt-style and your own <code>{{}} </code> style, then say:</p>
+<pre>
+    my $htc = HTML::Template::Compiled-&gt;new(
+        ...
+        tagstyle =&gt; [
+            qw(-asp -comment +php +tt),
+            [ qr({{), qr(}}), qr({{/), qr(}})],
+        ],
+    );</pre>
+</dd>
+<dt><strong><a name="use_expressions" class="item">use_expressions (since 0.91_003)</a></strong></dt>
+
+<dd>
+<p>Set to 1 if you want to use expressions. The basic expressions work more or
+less like in <a href="/HTML/Template/Expr.html"> HTML::Template::Expr</a> - I took the parsing code from it and
+used it with some minor changes - thanks to Sam Tregar.</p>
+<pre>
+    &lt;%if expr=&quot;some.var &gt; 3&quot; %&gt;It's grater than 3&lt;%/if %&gt;</pre>
+<p>But with expressions you can also use more complex navigation through the
+template stash:</p>
+<p>You can use object methods with parameters. While a
+normal method call can only be called without parameters, like</p>
+<pre>
+    &lt;%= object.name %&gt;</pre>
+<p>with expressions you can give it parameters:</p>
+<pre>
+    &lt;%= expr=&quot;object.create_link('navi')&quot; %&gt;</pre>
+<p>Inside function and method calls, hash keys you also can use template
+vars (array indices and hash keys since 0.96_003).</p>
+<pre>
+    &lt;%= expr=&quot;.path.to.hash{var}&quot; %&gt;
+    &lt;%= expr=&quot;.path.to.hash{.another.var[123]}{'literal key'}&quot; %&gt;</pre>
+<p>It is only minimally tested yet, so use with care and please report any
+bugs you find.</p>
+<p>A useful example: Output a number of items with their prices formatted.</p>
+<pre>
+    my $nf = Number::Format-&gt;new(...);
+    my $htc = HTML::Template::Compiled-&gt;new(
+        filename =&gt; 'items.html',
+        use_expressions =&gt; 1,
+    );
+    $htc-&gt;param(
+        items =&gt; [
+            { size =&gt;  50 * 1024 * 1024 * 1024, price =&gt; 49.95 },
+            { size =&gt; 250 * 1024 * 1024 * 1024, price =&gt; 110.99 },
+        ],
+        nf =&gt; $nf,
+    );</pre>
+<p>items.html:</p>
+<pre>
+    &lt;%loop .items %&gt;
+    Size: &lt;%= expr=&quot;.nf.format_bytes(size)&quot; %&gt;
+    Price: &lt;%= expr=&quot;.nf.format_price(price)&quot; %&gt;
+    &lt;%/loop %&gt;</pre>
+<p>Output:
+    Size: 50G
+    Price: 49,95 EUR</p>
+<pre>
+
+    Size: 250G
+    Price: 110,99 EUR</pre>
+</dd>
+<dt><strong><a name="formatter" class="item">formatter</a></strong></dt>
+
+<dd>
+<p>Deprecated, see <a href="/HTML/Template/Compiled/Formatter.html"> HTML::Template::Compiled::Formatter</a> please.</p>
+<p>With formatter you can specify how an object should be rendered. This is useful
+if you don't want object methods to be called, but only a given subset of
+methods.</p>
+<pre>
+  my $htc = HTML::Template::Compiled-&gt;new(
+  ...
+  formatter =&gt; {
+    'Your::Class' =&gt; {
+      fullname =&gt; sub {
+        $_[0]-&gt;first . ' ' . $_[0]-&gt;last
+      },
+      first =&gt; Your::Class-&gt;can('first'),
+      last =&gt; Your::Class-&gt;can('last'),
+      },
+    },
+  );
+  # $obj is a Your::Class object
+  $htc-&gt;param(obj =&gt; $obj);
+  # Template:
+  # Fullname: &lt;tmpl_var obj/fullname&gt;</pre>
+</dd>
+<dt><strong>formatter_path (fixed)</strong></dt>
+
+<dd>
+<p>Deprecated, see <a href="/HTML/Template/Compiled/Formatter.html"> HTML::Template::Compiled::Formatter</a> please.</p>
+</dd>
+<dt><strong><a name="debug" class="item">debug</a></strong></dt>
+
+<dd>
+<p>If set to 1 you will get the generated perl code on standard error</p>
+</dd>
+<dt><strong>use_query</strong></dt>
+
+<dd>
+<p>Set it to 1 if you plan to use the <a href="#query"><code>query()</code></a> method. Default is 0.</p>
+<p>Explanation: If you want to use <a href="#query"><code>query()</code></a> to collect information
+on the template HTC has to do extra-work while compiling and
+uses extra-memory, so you can choose to save HTC work by
+setting use_query to 0 (default) or letting HTC do the extra
+work by setting it to 1. If you would like 1 to be the default,
+write me. If enough people write me, I'll think abou it =)</p>
+</dd>
+<dt><strong><a name="use_perl" class="item">use_perl</a></strong></dt>
+
+<dd>
+<p>Set to 1 if you want to use the perl-tag. See <a href="#tmpl_perl">TMPL_PERL</a>. Default is 0.</p>
+</dd>
+<dt><strong><a name="cache_debug" class="item">cache_debug</a></strong></dt>
+
+<dd>
+<p>Default: 0</p>
+<p>You can debug hits and misses for file cache and memory cache:</p>
+<pre>
+    # debug all cache
+    my $htc = HTML::Template::Compiled-&gt;new(
+        cache_debug =&gt; 1,
+        ...
+    );
+    # only debug misses
+    my $htc = HTML::Template::Compiled-&gt;new(
+        cache_debug =&gt; [qw/ file_miss mem_miss /],
+        ...
+    );</pre>
+<p>Possible values when passing an array ref: file_miss file_hit mem_miss mem_hit</p>
+<p>Output looks similar to HTML::Template cache_debug and will be output
+to STDERR via <code>warn()</code>.</p>
+</dd>
+</dl>
+
+<h2><a name="methods">METHODS</a></h2>
+<dl>
+<dt><strong><a name="clear_cache" class="item">clear_cache ([DIR])</a></strong></dt>
+
+<dd>
+<p>Class method. It will clear the memory cache either of a specified cache directory:</p>
+<pre>
+  HTML::Template::Compiled-&gt;clear_cache($cache_dir);</pre>
+<p>or all memory caches:</p>
+<pre>
+  HTML::Template::Compiled-&gt;clear_cache();</pre>
+</dd>
+<dt><strong><a name="clear_filecache" class="item">clear_filecache</a></strong></dt>
+
+<dd>
+<p>Class- or object-method. Removes all generated perl files from a given directory.</p>
+<pre>
+  # clear a directory
+  HTML::Template::Compiled-&gt;clear_filecache('cache_directory');
+  # clear this template's cache directory (and not one template file only!)
+  $htc-&gt;clear_filecache();</pre>
+</dd>
+<dt><strong><a name="param" class="item">param</a></strong></dt>
+
+<dd>
+<p>Works like in <a href="HTML--Template.html"> HTML::Template</a>.</p>
+</dd>
+<dt><strong>query</strong></dt>
+
+<dd>
+<p>Works like in <a href="HTML--Template.html"> HTML::Template</a>. But it is not activated by default. If you want
+to use it, specify the use_query option.</p>
+</dd>
+<dt><strong><a name="preload" class="item">preload</a></strong></dt>
+
+<dd>
+<p>Class method. Will preload all template files from a given cachedir into memory. Should
+be done, for example in a mod_perl environment, at server startup, so all templates
+go into &quot;shared memory&quot;</p>
+<pre>
+  HTML::Template::Compiled-&gt;preload($cache_dir);</pre>
+<p>If you don't do preloading in mod_perl, memory usage might go up if you have a lot
+of templates.</p>
+<p>Note: the directory is *not* the template directory. It should be the directory
+which you give as the file_cache_dir option.</p>
+</dd>
+<dt><strong><a name="precompile" class="item">precompile</a></strong></dt>
+
+<dd>
+<p>Class method. It will precompile a list of template files into the specified
+cache directory. See <a href="#precompile">PRECOMPILE</a>.</p>
+</dd>
+<dt><strong><a name="clear_params" class="item">clear_params</a></strong></dt>
+
+<dd>
+<p>Empty all parameters.</p>
+</dd>
+<dt><strong><a name="debug_code" class="item">debug_code (since 0.91_003)</a></strong></dt>
+
+<dd>
+<p>If you get an error from the generated template, you might want to debug
+the executed code. You can now call <a href="#debug_code"><code>debug_code</code></a> to get the compiled code
+and the line the error occurred. Note that the reported line might not be
+the exact line where the error occurred, also look around the line.
+The template filename reported does currently only report the main template,
+not the name of an included template. I'll try to fix that.</p>
+<pre>
+    local $HTML::Template::Compiled::DEBUG = 1;
+    my $htc = HTML::Template::Compiled-&gt;new(
+        filename =&gt; 'some_file_with_runtime_error.html',
+    );
+    eval {
+        print $htc-&gt;output;
+    };
+    if ($@) {
+        # reports as text
+        my $msg = $htc-&gt;debug_code;
+        # reports as a html table
+        my $msg_html = $htc-&gt;debug_code('html');
+    }</pre>
+</dd>
+<dt><strong><a name="get_plugin" class="item">get_plugin</a></strong></dt>
+
+<dd>
+<pre>
+    my $plugin = $htc-&gt;get_plugin('Name::of::plugin');</pre>
+<p>Returns the plugin object of that classname. If the plugin is only a string
+(the classname itself), it returns this string, so this method is only
+useful for plugin objects.</p>
+</dd>
+<dt><strong><a name="var2expression" class="item">var2expression</a></strong></dt>
+
+<dd>
+<p>Useful for plugins. Parses a template var (<code>name=&quot;foo.bar.baz&quot;</code> and returns
+the perl expression for the compiler.</p>
+</dd>
+</dl>
+
+
+<h1><a name="export">EXPORT</a></h1>
+<p>None.</p>
+
+
+<h1><a name="caching">CACHING</a></h1>
+<p>You create a template almost like in HTML::Template:</p>
+<pre>
+  my $t = HTML::Template::Compiled-&gt;new(
+    path                =&gt; 'templates',
+    loop_context_vars   =&gt; 1,
+    filename            =&gt; 'test.html',
+    # for testing without cache comment out
+    file_cache          =&gt; 1,
+    file_cache_dir      =&gt; &quot;cache&quot;,
+  );</pre>
+<p>The next time you start your application and create a new template, HTC will read all generated
+perl files, and a call to the constructor like above won't parse
+the template, but just use the loaded code. If your template
+file has changed, though, then it will be parsed again.</p>
+<p>You can set the expire time of a template by passing the option</p>
+<pre>
+    expire_time =&gt; $seconds</pre>
+<p>Note that</p>
+<pre>
+    HTML::Template::Compiled-&gt;ExpireTime($seconds);
+    C&lt;$HTML::Template::Compiled::NEW_CHECK&gt;</pre>
+<p>are deprecated since they change a global variable which is then
+visible in the whole process, so in persistent environments other apps
+might be affected.</p>
+<p>So an expire time of 600 seconds (default)
+will check after 10 minutes if the tmpl file was modified. Set it to a
+very high value will then ignore any changes, until you delete the
+generated code.
+For development you should set it to 0, for a pre-production server
+you can set it to 60 seconds, for example. It can make quite a difference.</p>
+
+
+<h1><a name="plugins">PLUGINS</a></h1>
+<p>At the moment you can use and write plugins for the <code>ESCAPE</code> attribute. See
+<a href="/HTML/Template/Compiled/Plugin/XMLEscape.html"> HTML::Template::Compiled::Plugin::XMLEscape</a> for an example how to
+use it; and have a look at the source code if you want to know how to
+write a plugin yourself.</p>
+<p>Using Plugins:</p>
+<pre>
+    my $htc = HTML::Template::Compiled-&gt;new(
+        ...
+        plugin =&gt; ['HTML::Template::Compiled::Foo::Bar'],
+        # oor shorter:
+        plugin =&gt; ['::Foo::Bar'],
+    );</pre>
+
+
+<h1><a name="lazy_loading">LAZY LOADING</a></h1>
+<p>Let's say you're in a CGI environment and have a lot of includes in your
+template, but only few of them are actually used. HTML::Template::Compiled
+will (as <a href="HTML--Template.html"> HTML::Template</a> does) parse all of your includes at once.
+Just like the <code>use</code> function does in perl. To get a behaviour like
+require, use <a href="/HTML/Template/Compiled/Lazy.html"> HTML::Template::Compiled::Lazy</a>.</p>
+
+
+<h1><a name="todo">TODO</a></h1>
+<p>associate, methods with simple parameters,
+expressions, pluggable, ...</p>
+
+
+<h1><a name="implementation">IMPLEMENTATION</a></h1>
+<p>HTC generates a perl subroutine out of every template. Each included template
+is a subroutine for itself. You can look at the generated code by activating
+file caching and looking into the cache directory. When you call <code>output()</code>,
+the subroutine is called. The subroutine either creates a string and adds
+each template text or the results of the tags to the string, or it prints
+it directly to a filehandle. Because of the implementation you have to know
+at creation time of the module if you want to get a string back or if you
+want to print to a filehandle.</p>
+
+
+<h1><a name="security">SECURITY</a></h1>
+<p>HTML::Template::Compiled uses basically the same file caching model as, for example, Template-
+Toolkit does: The compiled Perl code is written to disk and later reread via <code>do</code> or
+by reading the file and <code>eval</code> the content.</p>
+<p>If you are sharing a read/write environment with untrusted users (for example on
+a machine with a webserver, like many webhosters offer, and all scripts are running
+as the same httpd user), realize that there is possibility of modifying the Perl code that is
+cached and then executed. The best solution is to not be in such an
+environment!</p>
+<p>In this case it is the safest option to generate your compiled templates on a local machine
+and just put the compiled templates onto the server, with no write access for the http server.
+Set the <a href="#expire_time"><code>expire_time</code></a> option to a high value so that HTC never attempts to check the
+template timestamp to force a regenerating of the code.</p>
+<p>If you are alone on the machine, but you are running under taint mode (see <em>perlsec</em>) then
+you have to explicitly set the <code>$UNTAINT</code> variable to 1. HTC will then untaint the code for you
+and treat it as if it were safe (it hopefully is =).</p>
+
+
+<h1><a name="precompile">PRECOMPILE</a></h1>
+<p>I think there is no way to provide an easy function for precompiling,
+because every template can have different options.
+If you have all your templates with the same options, then you can use the
+precompile class method.
+It works like this:</p>
+<pre>
+  HTML::Template::Compiled-&gt;precompile(
+    # usual options like path, default_escape, global_vars, file_cache_dir, ...
+    filenames =&gt; [ list of template-filenames ],
+  );</pre>
+<p>This will then pre-compile all templates into file_cache_dir. Now you would just put this
+directory onto the server, and it doesn't need any write-permissions, as it
+will be never changed (until you update it because templates have changed).</p>
+
+
+		<h1><a name="benchmarks"></a>Benchmarks</h1>
+		<p>The options <a href="#case_sensitive"><code>case_sensitive</code></a>, <a href="#loop_context_vars"><code>loop_context_vars</code></a> and <a href="#global_vars"><code>global_vars</code></a> can have the biggest influence on speed.</p>
+		<p>Setting case_sensitive to 1, loop_context_vars to 0 and global_vars to 0 saves time.</p>
+		<p>On the other hand, compared to HTML::Template, you have a large speed gain under mod_perl if you use case_sensitive = 1, loop_context_vars = 0, With CGI HTC is slower.</p>
+		<p>See the <code>examples/bench.pl</code> contained in this distribution.</p>
+		<p>Here are some examples from the benchmark script. I'm showing only Template::AutoFilter, Template::HTML, HTML::Template and HTC. These four modules allow to set automatic HTML escaping ('filter') for all variables.</p>
+<pre>
+loop_context_vars 1
+global_vars 0
+case_sensitive 1
+default_escape HTML (respectively Template::AutoFilter and Template::HTML)
+</pre>
+<pre>
+ht: HTML::Template 2.10
+htc: HTML::Template::Compiled 0.95
+ttaf: Template::AutoFilter 0.112350 with Template 2.22
+tth: Template::HTML 0.02 with Template 2.22</pre>
+		<p>First test is with the test.(htc|tt) from the examples directory, about 900 bytes.</p>
+		<p>Test without file cache and without memory cache.</p>
+<pre>
+all_ht:  1 wallclock secs ( 0.40 usr +  0.00 sys =  0.40 CPU) @ 250.00/s (n=100)
+all_htc:  1 wallclock secs ( 1.74 usr +  0.01 sys =  1.75 CPU) @ 57.14/s (n=100)
+all_ttaf_new_object:  1 wallclock secs ( 1.69 usr +  0.01 sys =  1.70 CPU) @ 58.82/s (n=100)
+all_tth_new_object:  1 wallclock secs ( 1.44 usr +  0.00 sys =  1.44 CPU) @ 69.44/s (n=100)</pre>
+		<p>With file cache:</p>
+<pre>
+all_ht:  1 wallclock secs ( 1.03 usr +  0.01 sys =  1.04 CPU) @ 379.81/s (n=395)
+all_htc:  1 wallclock secs ( 1.07 usr +  0.00 sys =  1.07 CPU) @ 260.75/s (n=279)
+all_ttaf_new_object:  1 wallclock secs ( 1.07 usr +  0.04 sys =  1.11 CPU) @ 251.35/s (n=279)
+all_tth_new_object:  1 wallclock secs ( 1.01 usr +  0.04 sys =  1.05 CPU) @ 227.62/s (n=239)</pre>
+		<p>With memory cache:</p>
+<pre>
+all_ht:  1 wallclock secs ( 1.04 usr +  0.00 sys =  1.04 CPU) @ 461.54/s (n=480)
+all_htc:  1 wallclock secs ( 1.05 usr +  0.01 sys =  1.06 CPU) @ 3168.87/s (n=3359)
+process_ttaf:  1 wallclock secs ( 1.04 usr +  0.00 sys =  1.04 CPU) @ 679.81/s (n=707)
+process_tth:  1 wallclock secs ( 1.05 usr +  0.00 sys =  1.05 CPU) @ 609.52/s (n=640)</pre>
+		<p>Now I'm using a template with about 18Kb by multiplying the example template 20 times. You can see that everything is running slower but some run more slower than others.</p>
+		<p>Test without file cache and without memory cache.</p>
+<pre>
+all_ht:  8 wallclock secs ( 7.57 usr +  0.04 sys =  7.61 CPU) @ 13.14/s (n=100)
+all_htc: 32 wallclock secs (32.08 usr +  0.06 sys = 32.14 CPU) @  3.11/s (n=100)
+all_ttaf_new_object: 36 wallclock secs (36.21 usr +  0.04 sys = 36.25 CPU) @  2.76/s (n=100)
+all_tth_new_object: 29 wallclock secs (28.92 usr +  0.05 sys = 28.97 CPU) @  3.45/s (n=100)
+</pre>
+		<p>With file cache:</p>
+<pre>
+all_ht:  8 wallclock secs ( 7.22 usr +  0.00 sys =  7.22 CPU) @ 13.85/s (n=100)
+all_htc:  5 wallclock secs ( 5.32 usr +  0.00 sys =  5.32 CPU) @ 18.80/s (n=100)
+all_ttaf_new_object:  8 wallclock secs ( 7.59 usr +  0.15 sys =  7.74 CPU) @ 12.92/s (n=100)
+all_tth_new_object:  9 wallclock secs ( 8.74 usr +  0.19 sys =  8.93 CPU) @ 11.20/s (n=100)
+</pre>
+		<p>With memory cache:</p>
+<pre>
+all_ht:  1 wallclock secs ( 1.04 usr +  0.01 sys =  1.05 CPU) @ 15.24/s (n=16)
+all_htc:  1 wallclock secs ( 1.12 usr +  0.00 sys =  1.12 CPU) @ 272.32/s (n=305)
+process_ttaf:  1 wallclock secs ( 1.07 usr +  0.00 sys =  1.07 CPU) @ 39.25/s (n=42)
+process_tth:  1 wallclock secs ( 1.05 usr +  0.00 sys =  1.05 CPU) @ 34.29/s (n=36)
+</pre>
+		<p>So the performance difference highly depends on the size of the template and on the various options. You can see that using the 900byte template HTC is slower with file cache than HTML::Template, but with the 18Kb template it's faster.</p>
+
+		<!-- Add some here! -->
+		<h1><a name="examples"></a>Examples</h1>
+		<p>See <a href="#examples">objects.html in the examples</a> (and <code>examples/objects.pl</code>) for an example how to feed objects to HTC.</p>
+
+		<h1><a name="versions"></a>Change History</h1>
+
+
+0.99 Mon Jul  2 21:48:39 CEST 2012
+- fixed tests (deprecation in perl 5.17 and Data::TreeDumper prereq)
+- also see developer version changes
+
+0.98_003 Sun Jun 10 19:25:15 CEST 2012
+- removed test cache directory from distribution
+- added some modules to recommends
+
+0.98_002 Wed Jun  6 20:43:05 CEST 2012
+- Workaround for using var names with dollars:
+  local $HTML::Template::Compiled::Compiler::DISABLE_NEW_ALIAS = 1;
+
+0.98_001 Mon Jun  4 23:53:45 CEST 2012
+- require perl 5.8.1
+- Hotfix for include_var and file caching
+
+0.98 Mon Jun  4 18:18:40 CEST 2012
+- IMPORTANT: Change: use aliases (alias=..., SET_VAR) via $aliasname.
+  USE_VARS will be removed in the future. Old alias syntax still works
+  for now.
+
+0.97_006 Sun Jun  3 19:26:50 CEST 2012
+- new plugin HTML::Template::Compiled::Plugin::NumberFormat
+
+0.97_005 Sat Jun  2 12:47:06 CEST 2012
+- New feature: option cache_debug
+- New feature: TMPL_WRAPPER
+- Another bugfix for search_path_on_include
+
+0.97_004 Sun May 20 18:38:32 CEST 2012
+- Change: Implemented searching the path and search_path_on_include like
+  in HTML::Template (finally) and add an additional value. PLEASE TEST!
+- Improved file cache performance
+- Bugfix: old bug with invalid tags in noparse, verbatim, comment
+- Remove old Storable workaround (0.94_002)
+
+0.97_001 Thu May 17 14:54:30 CEST 2012
+- fix HTML::Template::Compiled::Classic: allow every character in template
+  var names (RT 70676)
+- New option expire_time instead of global HTML::Template::Compiled->ExpireTime
+- Added loop context vars __even__, __outer__
+- Change: removed documentation of class methods ->CaseSensitive,
+  ->SearchPathOnInclude, ->UseQuery - will be deprecated
+- Added strict option
+
+0.97 Tue May  8 19:19:00 CEST 2012
+- regular release, see changes from dev version below
+
+0.96_005 Sun May  6 16:24:54 CEST 2012
+- fix t/25_expr.t number of skip tests
+
+0.96_004 Sat May  5 15:56:27 CEST 2012
+- Minor bugfix USE_VARS, module version numbers
+- Bugfix caching: under certain circumstances some template includes
+  were not added to memory cache and reloaded from file cache very time
+
+0.96_003 Fri May  4 17:09:19 CEST 2012
+- Improved Feature: expressions like .path.to.hash{var}
+
+0.96_002 Sun Apr 22 19:23:33 CEST 2012
+- Changed/New feature: chomp whitespaces globally or in tags
+- New feature: SET_VAR (and USE_VARS)
+
+0.96_001 Sat Apr 21 23:17:59 CEST 2012
+- New feature: allow expressions like .path.to.hash{var}
+- Bugfix: allow more than two binary operands in H::T::C::Expr
+
+0.96 Mon Nov 21 20:37:22 CET 2011
+- fixed 05_filter.t
+- fixed t/01_HTML-Template-Compiled.t (problems when test takes longer then
+  cache expiration)
+
+0.95_003 Sat Nov 12 15:12:02 CET 2011
+- Bugfix: Reload includes of includes (required change of caching mechanism -
+  please report any issues if you have problems with caching)
+- New Escape: 'IJSON'
+- Deprecated the use options 'speed', 'compatible' and 'short'
+
+0.95_002 Mon Oct 31 21:00:51 CET 2011
+- HTML::Template Compatibility: lowercase instead of uppercase
+  parameters when case_sensitive 0
+
+0.95_001 Sun Aug 28 19:02:00 CEST 2011
+- Bugfix: escape=js escapes backslash now (RT 66463)
+- Bugfix: H::T::C::Classic ignored case_sensitive (RT 70412)
+- Added Template::AutoFilter to bench.pl
+
+0.95 Wed Apr 27 20:48:13 CEST 2011
+- Just moving developer release to regular release
+
+0.94_002 Thu Aug 19 23:43:41 CEST 2010
+- Fix for 5.12: ignore Storable fatal error abour regexp items.
+  thanks to Daniel Tašov for the hint. just a workaround for now
+
+0.94_001 Wed Sep 16 19:41:01 CEST 2009
+- Fix memory leak when compiling
+  Thanks to Henrik Tougaard
+
+0.94 Thu Sep 10 19:55:04 CEST 2009
+- Fix test
+
+0.93_003
+- remove HTML::Entities dependency
+
+0.93_002 Fri Aug 21 14:47:09 CEST 2009
+- Bugfix: Expressions were only activated when using default
+  tagstyle; using tagstyle would overwrite use_expression option
+- New feaure: in TMPL_LOOP and TMPL_EACH you can set context="list"
+  This is necessary if you call a method that returns a list
+  instead of array- or hashref
+
+0.93_001 Sun Jul 12 17:03:16 CEST 2009
+- Bugfix: single quoted attributes did not allow double quotes in content
+  http://rt.cpan.org/Public/Bug/Display.html?id=43591
+- Bugfix: global vars weren't fetched correctly if case_sensitive off
+  http://rt.cpan.org/Public/Bug/Display.html?id=43591
+- Bugfix: add missing package line
+  http://rt.cpan.org/Public/Bug/Display.html?id=45081
+- Bugfix: added md5sum of paths to cache key so different templates with 
+  the same name are found
+  http://rt.cpan.org/Public/Bug/Display.html?id=28606
+- Bugfix: expressions didn't work in every tag
+
+0.93 Mon Nov  3 20:03:07 CET 2008
+- New Feature: sort-Attribute for TMPL_EACH
+- Change: Allow TMPL_LOOP over an overloaded @{} object 
+  (and TMPL_EACH over %{})
+- Bugfix: closing IF_DEFINED was not recognized
+  http://rt.cpan.org/Ticket/Display.html?id=40341
+
+0.92_001 Sun Aug 10 18:53:48 CEST 2008
+- Bugfix: ESCAPE didn't work always correctly since 0.92
+
+0.92 Sat Jul 26 13:02:28 CEST 2008
+- Change: code in TMPL_WITH is now only executed if the var is defined
+- New Feature: Option no_includes like in HTML::Template
+- For changes since 0.91 see 0.91_001, 0.91_002, 0.91_003
+
+0.91_003 Mon Jun 16 23:03:46 CEST 2008
+- New feature: Debug compiled code (see method debug_code)
+- Bufix: __last__ and __inner__ in included templates (thanks
+  to Henrik Tougaard for the patch)
+- Bugfix: Ternary operator didn't produce correct syntax always
+  (also thanks to Henrik Tougaard)
+- New feature: Expressions like in HTML::Template::Expr
+
+0.91_002
+- Bugfix: option objects
+- Bugfix: object plugins
+
+0.91_001
+- Bugfix: TMPL_IF_DEFINED without TMPL_ELSE
+  http://rt.cpan.org/Public/Bug/Display.html?id=33383
+- New feature: filename debugging (option debug_file)
+- New feature: option objects (strict, nostrict, 0)
+
+0.91 Thu Jan 24 21:50:20 CET 2008
+- Fixed tests: utf8 problems with perl 5.8.[0-7]
+- Change: open_mode without leading '<'
+
+0.90 Thu Nov 15 00:39:35 CET 2007
+- New Feature: use objects as plugins
+- New Feature: option open_mode (e.g. '&lt;:utf8') (thanks to Moritz
+  Lenz and Chris Hagglund) 
+- Fixed tests: permission problems on Win32
+
+0.89 Mon Oct 29 21:50:40 CET 2007
+- New Feature: BREAK attribute for loops (see docs)
+- Bugfix: utf8 in scalarrefs (thanks to Chris Hagglund)
+- Experimental feature: chomp newlines before/after tags. See docs.
+
+0.88 Mon Sep 10 22:05:44 CEST 2007
+- Bugfix: file-caching and Storable need B::Deparse &gt;= 0.61.
+  Checking for proper version now.
+- Fix: broken test
+- Bugfix: avoid warnings when using html escape
+- Bugfix: using more than one plugin
+  http://rt.cpan.org/Ticket/Display.html?id=28764
+- Bugfix Plugin::XMLEscape: use numeric entities
+
+0.87 Mon Jul 30 22:46:31 CEST 2007
+- Change: file-caching now stores as Storable. If you get problems
+  with file-caching please report and set $HTML::Template::Compiled::Storable to 0
+  as a workaround.
+- Change: escape=HTML now only escapes '"&<>
+  http://rt.cpan.org/Public/Bug/Display.html?id=27446
+- Change: allow every character for TMPL_* NAMEs
+  http://rt.cpan.org/Ticket/Display.html?id=28094
+- Bugfix: ALIAS did only work for simple varnames
+  http://rt.cpan.org/Ticket/Display.html?id=28430
+- Change: in future versions you should use file_cache and
+  file_cache_dir like in HTML::Template
+
+0.86 Mon Jun 11 22:38:04 CEST 2007
+- Experimental Feature: use Storable for filecaching (set
+  $HTML::Template::Compiled::Storable to 1 if you want to test it.
+  It should be 1.5-2 times as fast as normal filecaching)
+- Fix: a test didn't skip if necessary
+- utf8 in templates (you probably need Encode (and thus 5.8) for that)
+- Fix: recursive includes didn't really work because of compile-time
+  instead of runtime check
+
+0.85 Sun Apr 15 16:15:22 CEST 2007
+- New Feature: JOIN attribute for loop-tag
+- Fix: uri_escape_utf8 for parameters in utf8
+- Fix for DBIx::Class objects ('can' method doesn't work here like expected)
+- Fix: Allow <%= array_of_arrays[0][0] %>
+- New Feature: get count of array elements <%= array# %>
+
+0.84 Sun Feb 11 15:43:38 CET 2007
+- Bugfix: includes in var includes didn't expire cache
+- Bugfix: tagstyle and use_perl weren't correctly passed to includes
+  when using filecache
+- Bugfix: plugins weren't safed in file cache
+
+0.83 Tue Nov 28 22:59:06 CET 2006
+- Added Feature: TMPL_EACH
+- Added missing plugin feature
+
+0.82 Mon Nov  6 21:25:23 CET 2006
+- Added: shorter plugins (omit the HTML::Template::Compiled::Plugin)
+- Added Feature: TMPL_INCLUDE_STRING
+- Added Feature: TMPL_PERL for including perl-code
+
+0.81 Fri Nov  3 22:48:05 CET 2006
+- Minor change in plugin code
+
+0.80 Sun Oct 15 16:39:02 CEST 2006
+- Bugfix: characters like '-' in <tmpl_* foo-bar> lead to
+  compilation errors
+- Bugfix: accessing array elements like <tmpl_var [23]> didn't work
+
+0.79 Sat Oct  7 20:36:55 CEST 2006
+- Change: instead of <tmpl_var name="array.42"> you must
+  now use <tmpl_var name="array[42]". sorry
+- Bugfix: path was not set when using template from a filehandle globalvars did work in included templates New feature: allow negative indizes array[-1].foo loop_context_vars weren't stored filecache query() wasn always corect doing
+  $template->query(name => ['FOO', 'BAR'])
+- Bugfix: query() now also reports included vars like H::T does
+
+0.78 Wed Oct  4 21:22:09 CEST 2006
+- Bugfix: endless loop when using file cache
+- Bugfix: correctly use cache attribute with filecache
+
+0.77 Mon Oct  2 18:35:52 CEST 2006
+- fixed META.yaml (was broken by E::MakeMaker)
+
+0.76 Mon Oct  2 18:15:29 CEST 2006
+- Change: HTC::Classic: TMPL_IF arrayref will be true if arrayref contains elements
+- Change: __odd__, __first__, __count__ and __index__ work in TMPL_WHILE
+- Bugfix: path attribute
+- Change: deprecate option dumper (use plugin instead)
+
+0.75 Thu Sep 14 22:42:19 CEST 2006
+- Bugfix of bug in 0.74: search_path_on_include didn't work
+
+0.74 Wed Sep 13 20:51:04 CEST 2006
+- Internal Changes
+- Security fix: Escape dangerous characters in template
+- Change: default for search_path_on_include is now 0 like in H::T
+- added examples/objects.pl
+
+0.73 Sat Aug 26 16:07:57 CEST 2006
+- Bugfix: in 0.72 only __first__ worked, but not __FIRST__
+- Change: query() now also reports INCLUDE_VARs
+- New feature: __index__ loop variable
+- New feature: Plugins for escape-attribute
+
+0.72 Fri Aug 18 22:16:35 CEST 2006
+- Documentation: Debugging and Escaping functions are now documented
+  in HTML::Template::Compiled::Utils (Mark Stosberg)
+- Change: Remove deprecated TMPL_IF DEFINED
+- Change: HTC will die if you use wrong syntax in tags (like H::T)
+- Bugfix: HTML::Template::Compiled::Lazy and query()
+- Bugfix: loop variables should survive different template files
+
+0.71 Thu Jul 13 20:54:44 CEST 2006
+- Change: dropped TMPL_LOOP_CONTEXT (not really useful)
+- Bug Fix: Filters didn't work correctly when used with file caching
+- Change: deprecate options
+  method_call, deref and formatter_path. You must use inheritance
+  now instead
+
+0.70 Wed Jul  5 21:12:05 CEST 2006
+- Bug Fix: php-tag style wasn't parsed
+- New Feature: lazy loading with HTML::Template::Compiled::Lazy
+- various documentation fixes
+- use ALIAS with TMPL_WHILE
+
+0.69 Sun Jul  2 19:45:35 CEST 2006
+- Bug Fix: Includes didn't work always correctly in scalarref
+- Bug Fix: Allow 'absolute' filenames that are relative to attribute path
+- Bug Fix: Empty path didn't work properly
+- Bug Fix: make inheritance possible
+- Change: new class HTML::Template::Compiled::Classic for features that
+  can't be used with HTML::Template::Compiled features at the same time
+
+0.68 Wed Jun 21 20:38:05 CEST 2006
+- New Feature: ESCAPE=JS was still missing
+- Bug Fix: parameters stayed in memory cache
+- Documentation fix
+
+0.67 Wed Jun  7 22:19:05 CEST 2006
+- Bug Fix: stack for global_vars wrong when using if-tag
+    http://rt.cpan.org/Ticket/Display.html?id=19662
+- Bug Fix: preloading did not recompile outdated templates
+- Change: undefined files via TMPL_INCLUDE_VAR don't let script die
+- Change: Deprecated setting global variables directly, they must be changed
+    by class-methods:
+    $ENABLE_SUB => EnableSub(bool)
+    $CASE_SENSITIVE_DEFAULT => CaseSensitive(bool)
+    $SEARCHPATH => SearchPathOnInclude(bool)
+    $DEFAULT_QUERY => UseQuery(bool)
+    $NEW_CHECK => ExpireTime(seconds)
+- Documentation: explain case_sensitive and use_query better
+    http://rt.cpan.org/Public/Bug/Display.html?id=19686
+
+0.66 Sun Jun  4 03:49:58 CEST 2006
+- Bug Fix: global_vars didn't work correctly with file-caching
+- Bug Fix: there was no output when last characters in template are a tag.
+- Bug Fix: calling param(%emptyhash) caused error-message
+
+0.65 Fri Jun  2 10:10:06 CEST 2006
+- Bug Fix: Documentation error broke pod
+
+0.64 Thu Jun  1 23:54:32 CEST 2006
+- Bug Fix: undefined filename and INCLUDE_VAR
+- New Feature: alias
+- Change: TMPL_IF DEFINED deprecated
+- Change: TMPL_INCLUDE VAR from deprecated to forbidden
+- New Feature: Define your own tagstyles
+
+0.63 Sat Apr 29 02:39:30 CEST 2006
+- Bug Fix: info for query() got lost with file caching
+- New Feature: TMPL_WHILE
+- Bug Fix: __vars__ when not using loop_context_vars
+- Bug Fix: TMPL_CASE wasn't rendered correctly since 0.61
+
+0.62 Wed Apr 26 23:36:13 CEST 2006
+- New Feature: added method precompile
+- New Feature: implemented query() (from HTML::Template)
+
+0.61 Sat Apr 22 19:34:32 CEST 2006
+- Bug Fix: global_vars and variables that are never set
+  http://rt.cpan.org/Public/Bug/Display.html?id=17851
+- Change: allow CASE default in a list of other strings
+- Bug Fix: weird endless loop when using wrong tags
+
+0.60 Sun Feb 26 18:46:07 CET 2006
+- Clarified docs for TMPL_WITH to explain interaction with global_vars
+- New Feature: TMPL_VERBATIM
+- Bug Fix: error when double TMPL_ELSE
+- New feature: global_vars => 2
+
+0.59 Tue Jan  3 19:40:46 CET 2006
+- $UNTAINT
+- All the "new_" constructor shortcuts were added from HTML::Template, with
+  tests for each. Also, the type/source option syntax to new() is now
+  supported. Tests were added for all these, which were generally missing from
+  the HTML::Template test suite. 
+
+- Bug Fix: Code and Tests were were added to make sure that calls to param()
+  accumulate data, like HTML::Template works.  
+
+- Bug Fix: embedded newlines
+- New Feature: new 'default_escape' option for compatibility with HTML::Template 2.8
+- Added query() tests from HTML::Template suite. (Currently TODO)
+- Change: use dot notation for mehtod calls and dereference
+- Change: literal dots in var names work now; you can't use -> for method calling
+  any more, just use the dot
+
+0.58 Sun Dec 11 23:20:35 CET 2005
+- fixed test with html entities
+- use H::T::C speed => 1
+- tmpl_include_var
+- TMPL_LOOP_CONTEXT
+
+0.57 Wed Dec  7 15:54:05 CET 2005
+- tmpl_comment doesn't output
+- tmpl_noparse does, though
+- various pod- and test-fixes
+
+0.56 Wed Dec  7 01:46:21 CET 2005
+- some include and scalarref  issues fixed
+- <tmpl_comment>
+- <tmpl_switch>, <tmpl_case>
+
+0.55 Wed Nov 23 22:36:58 CET 2005
+- search_path_on_include
+
+0.54 Wed Nov 23 21:21:49 CET 2005
+- fixed path issues
+- better handling of unbalanced tags
+
+0.53 Thu Oct  6 22:12:53 CEST 2005
+- fixed another issue with filter
+- bugfix preload
+
+0.52 Mon Oct  3 18:34:19 CEST 2005
+- bugfix with nonexistant templates and deep recursion
+- bugfix path and filecache
+- bugfix with filter (subrefs)
+- added tmpl_if defined
+
+0.51 Mon Oct  3 00:43:31 CEST 2005
+- clear_filecache
+- fixed tmpl_elsif, line_numbers
+- preload
+
+0.50 Sat Oct  1 01:16:09 CEST 2005
+- added formatter
+- added global_vars
+
+0.49 Sun Sep 25 23:04:38 CEST 2005
+- fixed 05_out_fh.t
+- dynamic includes
+
+0.48 Tue Sep 20 23:54:56 CEST 2005
+- compatible via use statement
+
+0.47 Tue Sep 20 00:43:37 CEST 2005
+- output($fh)
+- filter
+
+0.46 Sat Sep 17 17:01:01 CEST 2005
+- minor internal issues
+- enable subref vars
+- fixed __odd__
+- recursive include limit, thanks sam
+
+0.45 Fri Sep 16 00:20:07 CEST 2005
+- param("var")
+
+0.44 Thu Sep  8 20:56:53 CEST 2005
+- arrayref
+
+0.43 Wed Sep  7 21:11:28 CEST 2005
+- scalarref
+- filehandle
+
+0.42 Fri Sep  2 01:51:14 CEST 2005
+- add: HTML::Template::Compiled::Plugin::DHTML
+
+0.41 Sat Aug 27 12:07:08 CEST 2005
+- test failed because of missing cache dir
+
+0.40 Sat Aug 27 03:05:00 CEST 2005
+- more internal changes
+
+0.39 Mon Aug 22 22:27:52 CEST 2005
+- bug with caching fixed
+
+0.38 Mon Aug 22 21:02:30 CEST 2005
+- __counter__ now correct
+- more internal changes
+
+0.37 Mon Aug 22 00:31:58 CEST 2005
+- case_insensitive removed, use only case_sensitive
+- internal changes
+
+0.36 Sun Aug 21 03:41:45 CEST 2005
+- newlines in tags
+- ESCAPE=DUMP, chaining ESCAPE
+- DEFAULT=...
+- option dumper
+
+0.34 Fri Aug 19 19:58:56 CEST 2005
+- minor bugs, removed debugging statement
+
+0.32 Thu Aug 18 23:52:33 CEST 2005
+- fixed caching bug
+
+0.31 Thu Aug 18 22:48:22 CEST 2005
+- better object syntax
+
+0.30 Mon Aug 15 01:55:29 CEST 2005
+- some internal optimizations
+- case_insensitive for those who want it
+
+0.29 Sun Aug 14 22:51:30 CEST 2005
+- examples directory with bechmark of 4 template modules
+
+0.28 Fri Aug 12 23:32:44 CEST 2005
+- case insensitive TMPL_*
+
+0.27 Thu Aug  4 00:06:34 CEST 2005
+- added <%tag%> feature
+
+0.26 Thu Jul 28 22:11:48 CEST 2005
+- some docs
+- fixed regex and objects
+ 
+0.25 Wed Jul 27 23:18:06 CEST 2005
+- undefstring userdefined
+- fixed TMPL_IF method
+
+0.24 Wed Jul 20 20:57:00 CEST 2005
+- fixed <TMPL_VAR NAME="_" ESCAPE=HTML>
+
+0.23 Mon Jul 18 00:03:08 CEST 2005
+- first step for rendering objects,
+  documentation will follow. (yes, promised =)
+
+0.22 Sun Jul 17 19:15:22 CEST 2005
+- bugfix TMPL_INCLUDE
+
+0.21 Fri Jul  1 21:48:51 CEST 2005
+- fixed ESCAPE=HTML|URI
+- implemented <!-- TMPL_* -->
+
+0.20 Sun Jun 26 18:04:11 CEST 2005
+- Errors for wrong balanced tags
+
+0.19  Sun Jun 26 15:02:37 CEST 2005
+- bugfix NAME=ONE.TWO
+- TMPL_WITH
+- Dumper
+
+0.18  Sun Jun 26 12:36:15 CEST 2005
+- small bugfixes for older perl versions
+- typos
+- TMPL_ELSIF
+
+0.17  Mon Jun 20 23:30:43 CEST 2005
+- small bugfixes, warnings
+- doc
+
+0.16  Mon May 16 15:42:07 CEST 2005
+- TMPL_WITH
+- bugfix with .root
+
+0.15  Mon May 16 15:18:42 CEST 2005
+- bugfix
+
+0.14  Mon May 16 14:27:31 CEST 2005
+- bug in caching removed
+- TMPL_VAR .root
+- TMPL_VAR key.path.with.numbers.23
+
+0.13  Mon May  2 23:49:08 CEST 2005
+- clear_cache()
+
+0.12  Mon May  2 22:18:35 CEST 2005
+- remove warnings
+
+0.10 Mon Apr 18 22:06:10 CEST 2005
+ - HTML_TEMPLATE_ROOT
+ - caching
+ - loop_context_vars
+
+0.09  Fri Apr 15 00:31:23 CEST 2005
+ - 
+ - caching improved (expire)
+
+0.06  Sat Feb 26 00:45:31 CET 2005
+ - ESCAPE=HTML
+
+0.05  Sat Feb 26 00:31:21 CET 2005
+ - TMPL_INCLUDE
+
+0.04  Fri Feb 25 00:29:44 CET 2005
+ - caching improved
+
+0.03  Thu Feb 24 23:17:10 CET 2005
+ - Quote Handling (NAME="var")
+
+0.02  Tue Feb 22 01:18:23 CET 2005
+ - fixed bugs, caching half implemented
+
+0.01  Sun Feb 20 17:44:07 2005
+	- original version; created by h2xs 1.23 with options
+		-AX -n HTML::Template::Compiled
+
+
+
+		<h1><a name="bugs"></a>Bugs</h1>
+		<p>Probably many bugs I don't know yet =)</p>
+		<p>Use the bugtracking system to report a bug: <a href="http://rt.cpan.org/NoAuth/Bugs.html?Dist=HTML-Template-Compiled">http://rt.cpan.org/NoAuth/Bugs.html?Dist=HTML-Template-Compiled</a></p>
+		
+		<h1><a name="why_another_template_system"></a>Why another Template System?</h1>
+		<p>You might ask why I implement yet another templating system. There are so many to choose from. Well, there are several reasons.</p>
+		<p>I like the syntax of HTML::Template *because* it is very restricted. It's also easy to use (template syntax and API). However, there are some things I miss I try to implement here.</p>
+		<p>I think while HTML::Template is quite good, the implementation can be made more efficient (and still pure Perl). That's what I'm trying to achieve.</p>
+		<p>I use it in my web applications, so I first write it for myself =) If I can efficiently use it, it was worth it.</p>
+		
+		<h1><a name="resources"></a>Resources</h1>
+		<p>See <a href="http://htcompiled.sf.net/">http://htcompiled.sf.net/</a> for SVN access.</p>
+		
+		<h1><a name="see_also"></a>See Also</h1>
+		<ul>
+			<li>
+				<p><a href="HTML--Template.html">HTML::Template</a></p>
+			</li>
+			<li>
+				<p><a href="/HTML/Template/JIT.html">HTML::Template::JIT</a></p>
+			</li>
+			<li>
+				<p><em>Template</em> - Toolkit</p>
+			</li>
+			<li>
+				<p><a href="http://www.tinita.de/projects/perl/">http://www.tinita.de/projects/perl/</a></p>
+			</li>
+		</ul>
+				
+		<h1><a name="author"></a>Author</h1>
+		<p>Tina Mueller</p>
+		
+		<h1><a name="credits"></a>Credits</h1>
+		<p>Sam Tregar big thanks for ideas and letting me use his <a href="HTML--Template.html"> HTML::Template</a> test suite</p>
+		<p>Bjoern Kriews for original idea and contributions</p>
+		<p>Special Thanks to Sascha Kiefer - he finds all the bugs!</p>
+		<p>Ronnie Neumann, Martin Fabiani, Kai Sengpiel, Jan Willamowius, Justin Day, Steffen Winkler, Henrik Tougaard for ideas, beta-testing and patches</p>
+		<p><a href="http://www.perlmonks.org/">http://www.perlmonks.org/</a> and <a href="http://www.perl-community.de/>">http://www.perl-community.de/></a> for everyday learning</p>
+		<p>Corion, Limbic~Region, tye, runrig and others from perlmonks.org</p>
+
+		<h1><a name="copyright_and_license"></a>Copyright and License</h1>
+		<p>Copyright &copy; 2005-2012 by Tina Mueller</p>
+		<p>This library is free software; you can redistribute it and/or modify it under the same terms as Perl itself, either Perl version 5.8.3 or, at your option, any later version of Perl 5 you may have available.</p>
+	</body>
+</html>

@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>CGI::Application::PSGI - PSGI Adapter for CGI::Application</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="css/modernperl.css" type="text/css" />
+	</head>
+	<body>
+		<h1>CGI::Application::PSGI &mdash; </h1>
+		<p>PSGI Adapter for CGI::Application</p>
+		<hr />
+
+		<h1><a name="synopsis"></a>Synopsis</h1>
+<pre>
+### In WebApp.pm
+package WebApp;
+use base qw(CGI::Application);
+
+# Nothing needs to be changed
+
+### app.psgi
+use CGI::Application::PSGI;
+use WebApp;
+
+my $handler = sub {
+    my $env = shift;
+    my $app = WebApp-&gt;new({ QUERY =&gt; CGI::PSGI-&gt;new($env) });
+    CGI::Application::PSGI-&gt;run($app);
+};
+</pre>
+
+		<h1><a name="description"></a>Description</h1>
+		<p>CGI::Application::PSGI is a runner to run CGI::Application application as a PSGI application.</p>
+
+		<h1><a name="author"></a>Author</h1>
+		<p>Tatsuhiko Miyagawa &lt;<a href="mailto:miyagawa@bulknews.net">miyagawa@bulknews.net</a>&gt;</p>
+		
+		<h1><a name="license"></a>License</h1>
+		<p>This library is free software; you can redistribute it and/or modify it under the same terms as Perl itself.</p>
+		
+		<h1><a name="see_also"></a>See Also</h1>
+		<ul>
+			<li>
+				<a href="/./CGI/PSGI.html">the CGI::PSGI manpage</a>
+			</li>
+			<li>
+				<a href="CGI--Application--PSGI.html">the CGI::Application::PSGI manpage</a>
+			</li>
+		</ul>
+	</body>
+</html>

@@ -1,0 +1,60 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>CGI::Application Documentation Set</title>	
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="css/modernperl.css" type="text/css" />
+	</head>
+	<body>
+		<h1>Introduction</h1>
+		<p>This ebook is a collection of documentation for CGI::Application and commonly associated modules, specially formatted for modern ereaders. Chapters are clearly delineated and custom fonts are embedded. The default stylesheet is derived from chromatic's "Modern Perl" website, Metacpan's web stylesheet and the CSS used in perldoc.perl.org.</p>
+		<p>I've also added content from annocpan.org, and attributed any annoations which were included in this compilation.</p>
+		
+		<h3>How We Produced It</h3>
+		<ol>
+			<li>
+				<p>Convert POD to HTML</p>
+<pre>
+pod2html --infile=Application.pm --outfile="CGI--Application.html" --noindex --podpath=.
+</pre>			
+			</li>
+			<li>
+				<p>Convert to Kindle .mobi (KF8) and EPUB .epub (EPUB3 and EPUB2)</p>
+<pre>
+ebook-convert CGI--Application.html CGI--Application.mobi --chapter=//h1 --chapter-mark=pagebreak 
+--insert-blank-line --insert-blank-line-size=1 --smarten-punctuation --mobi-file-type=new --level1-toc=//h:h1
+--level2-toc=//h:h2 --level3-toc=//h:h3 --margin-top=0 --margin-right=0 --margin-left=0 --use-auto-toc 
+--language=En --authors="Mark Stosberg"&"Sam Tregar" --output-profile=kindle_fire 
+--publisher="Michael Gatto - Lisantra Technologies"
+</pre>
+			</li>
+			<li>
+				<p>Rename extension from .mobi to .azw3 so the newer KF8 format works on the Kindle Touch.</p>
+			</li>
+		</ol>
+	
+		<h3>To Do</h3>
+		<ul>
+			<li>Automate, automate, automate!</li>
+			<ul>
+				<li>Use Pod::Tree</li>
+				<li>Write a Perl Regex script to refine the HTML produced by pod2html, instead of using an editor and Zen coding (as cool as Zen coding is.)</li>
+				<li>Include documentation for more CGI::Application Plugins</li>
+			</ul>
+		</ul>
+	
+        <h3>Included Documentation</h3>
+        <p style="text-indent:0pt">
+	        <a href="CGI--Application.html">CGI::Application</a><br/>
+			<a href="CGI.html">CGI.pm</a><br />
+			<a href="CGI--PSGI.html">CGI::PSGI</a><br />
+	        <a href="HTML--Template.html">HTML::Template</a><br/>
+	        <a href="HTML--Template--Compiled.html">HTML::Template--Compiled (Extras)</a><br/>
+			<a href="CGI--FormBuilder.tml">CGI--FormBuilder</a><br />
+        </p>
+		
+		<h3>License</h3>
+		<img src="cc.large.png" alt="Creative Commons" />
+	</body>
+</html>

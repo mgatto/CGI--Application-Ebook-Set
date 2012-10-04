@@ -1,0 +1,129 @@
+
+@font-face {
+    font-family: 'Bitstream Vera Sans Mono Bold';
+    src: url(Fonts/VeraMono-Bold.ttf); /*Fonts/SourceCodePro-Bold.ttf*/
+    font-weight: bold;
+	font-style: normal;
+}
+article,aside,details,figcaption,figure,footer,header,hgroup,nav,section{display:block;}
+html{font-size:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}
+sub,sup{position:relative;font-size:75%;line-height:0;vertical-align:baseline;}
+sup{top:-0.5em;}
+sub{bottom:-0.25em;}
+img{height:auto;border:0;-ms-interpolation-mode:bicubic;vertical-align:middle;}
+body{margin:0;font-family:serif;font-size:1.1em;line-height:1.5em;color:#000000;background-color:#ffffff;}
+a{color:#000;text-decoration:underline;}
+p{font-family:serif;font-size:1em;line-height:120%;margin: 0 0 1em 0;}
+p small{font-size:11px;color:#999999;}
+.lead{margin-bottom:18px;font-size:20px;font-weight:200;line-height:27px;}
+h1,h2,h3,h4,h5,h6{margin:0;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:bold;color:inherit;text-rendering:optimizelegibility;text-align:left;}
+h1{font-size:2em;margin-bottom:1em;}
+h2{font-size:1.6em;margin-bottom:1em;}
+h3{font-size:1.2em;margin-bottom:0.6em;margin-top:1.2em;}
+h4{font-size:1em;}
+h5 {font-size:1em;}
+h6{font-size:0.9em;}
+ul,ol{padding:0;margin:0 0 9px 25px;}
+ul ul,ul ol,ol ol,ol ul{margin-bottom:0;}
+ul li{list-style:square;}
+ol li{list-style:decimal;}
+dl{margin-bottom:1em;}
+dt,dd{line-height:inherit;}
+dt{font-weight:bold;}
+strong{font-weight:bold;}
+em{font-style:italic;}
+.muted{color:#999999;}
+abbr[title]{border-bottom:1px dotted #ddd;cursor:help;}
+abbr.initialism{font-size:90%;text-transform:uppercase;}
+blockquote{padding:0 0 0 15px;margin:0 0 18px;border-left:5px solid #eeeeee;}blockquote p{margin-bottom:0;font-size:16px;font-weight:300;line-height:22.5px;}
+blockquote small{display:block;line-height:18px;color:#999999;}blockquote small:before{content:'\2014 \00A0';}
+q:before,q:after,blockquote:before,blockquote:after{content:"";}
+address{display:block;margin-bottom:18px;line-height:18px;font-style:normal;}
+small{font-size:100%;}
+cite{font-style:normal;}
+code,pre{padding:0 3px 2px;color:#000;}
+code {font: normal normal normal 0.9em/1.2em 'Bitstream Vera Sans Mono Bold', monospace;}
+pre{display:block;padding:8.5px;margin:0 0 9px;font: normal normal normal 0.8em/1.2em 'Bitstream Vera Sans Mono Bold', monospace;background-color:#fdfdfd;border:1px solid rgba(0, 0, 0, 0.15);border-radius:3px;white-space:pre-wrap;word-break:break-all;word-wrap:break-word;}
+table { font-size: inherit;}
+td,th {
+	vertical-align:top;
+	padding: 0.2em;
+}
+th { background: #fdfdfd; text-align: left;}
+td {}
+caption {
+    display: table-caption;
+    text-align: left;
+	font-style:italic;
+}
+div.note
+{
+	padding:9px;
+	margin:1em;
+	border-left:1px solid rgba(0, 0, 0, 0.15);
+	border-right:1px solid rgba(0, 0, 0, 0.15);
+}
+
+div.caution
+{
+	border-width: thin;
+	border-style: solid;
+	background: #ff6666;
+}
+
+div.production
+{
+	background: #000000;
+	color: #ffffff;
+	text-align: center;
+}
+.epigraph
+{
+    margin: 0;
+    font-size: 0.8em;
+}
+
+.literal
+{
+    white-space: pre-wrap;
+    line-height: 1.5em;
+}
+li
+{
+    margin-top: 0.75em;
+}
+img
+{
+    max-width: 100%;
+}
+.sidebar
+{
+    padding: 1em;
+    border: 1px solid;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin: 0;
+}
+.tip
+{
+    padding: 0.5em;
+    border: 1px solid;
+    margin-left: 10%;
+    margin-right: 10%;
+    border-radius: 10px;
+    align: center;
+}
+
+.tip .title
+{
+    background-color: black;
+    color: white;
+    width: 100%;
+    font-variant: small-caps;
+    text-align: center;
+}
+
+.tip .title code
+{
+    color: white;
+}
