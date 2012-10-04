@@ -5,13 +5,13 @@ A set of documentation for CGI::Application and associated distributions: CGI.pm
 
 ## How To Produce It
 
-* Convert POD to HTML
+### Convert POD to HTML
 
 ```
 pod2html --infile=Application.pm --outfile="CGI--Application.html" --noindex --podpath=.
 ```
 
-*  Convert to Kindle .mobi (KF8) and EPUB .epub (EPUB3 and EPUB2)</p>
+### Convert to Kindle .mobi (KF8) and EPUB .epub (EPUB3 and EPUB2)</p>
 
 ```
 ebook-convert CGI--Application.html CGI--Application.mobi 
@@ -34,4 +34,4 @@ ebook-convert CGI--Application.html CGI--Application.mobi
   --publisher="Michael Gatto - Lisantra Technologies"
 ```
 
-* Rename extension from .mobi to .azw3 so the newer KF8 format works on the Kindle Touch.
+### Rename extension from .mobi to .azw3 so the newer KF8 format works on the Kindle Touch.
