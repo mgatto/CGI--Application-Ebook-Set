@@ -9,24 +9,39 @@
 	<body>
 		<h1>Introduction</h1>
 		<p>This ebook is a collection of documentation for CGI::Application and commonly associated modules, specially formatted for modern ereaders. Chapters are clearly delineated and custom fonts are embedded. The default stylesheet is derived from chromatic's "Modern Perl" website, Metacpan's web stylesheet and the CSS used in perldoc.perl.org.</p>
-		<p>I've also added content from annocpan.org, and attributed any annoations which were included in this compilation.</p>
+		<p>I've also added content from annocpan.org, and attributed any annoations which were included into this compilation.</p>
+		<p>The modules chosen may not be the state of the art in Perl application development and may possibly show their age. However, I think this is an approximation of a reasonable toolkit for older, but not too old, Web application development in Perl.</p>
+		<p>For more state of the art in Perl Web development, read up on Mojolicious, Dancer, Squatting, Plack, Template::Toolkit, HTML::FormFu or HTML::FormHandler and DBIx::Class.</p>
 		
 		<h3>How We Produced It</h3>
 		<ol>
 			<li>
 				<p>Convert POD to HTML</p>
 <pre>
-pod2html --infile=Application.pm --outfile="CGI--Application.html" --noindex --podpath=.
+pod2html --infile=Application.pm --outfile="CGI--Application.html" --podpath=.
 </pre>			
 			</li>
 			<li>
-				<p>Convert to Kindle .mobi (KF8) and EPUB .epub (EPUB3 and EPUB2)</p>
+				<p>Convert to Kindle .mobi (KF8)</p>
 <pre>
-ebook-convert CGI--Application.html CGI--Application.mobi --chapter=//h1 --chapter-mark=pagebreak 
---insert-blank-line --insert-blank-line-size=1 --smarten-punctuation --mobi-file-type=new --level1-toc=//h:h1
---level2-toc=//h:h2 --level3-toc=//h:h3 --margin-top=0 --margin-right=0 --margin-left=0 --use-auto-toc 
---language=En --authors="Mark Stosberg"&"Sam Tregar" --output-profile=kindle_fire 
---publisher="Michael Gatto - Lisantra Technologies"
+ebook-convert CGI--Application.html CGI--Application.mobi 
+  --chapter=//h1 
+  --chapter-mark=pagebreak 
+  --insert-blank-line 
+  --insert-blank-line-size=1 
+  --smarten-punctuation 
+  --mobi-file-type=new 
+  --output-profile=kindle_fire 
+  --level1-toc=//h:h1
+  --level2-toc=//h:h2
+  --level3-toc=//h:h3 
+  --margin-top=0 
+  --margin-right=0 
+  --margin-left=0 
+  --use-auto-toc 
+  --language=En 
+  --authors="Mark Stosberg"&"Sam Tregar" 
+  --publisher="Michael Gatto - Lisantra Technologies"
 </pre>
 			</li>
 			<li>
@@ -38,6 +53,7 @@ ebook-convert CGI--Application.html CGI--Application.mobi --chapter=//h1 --chapt
 		<ul>
 			<li>Automate, automate, automate!</li>
 			<ul>
+				<li>Output EPUB (EPUB3 and EPUB2)</li>
 				<li>Use Pod::Tree</li>
 				<li>Write a Perl Regex script to refine the HTML produced by pod2html, instead of using an editor and Zen coding (as cool as Zen coding is.)</li>
 				<li>Include documentation for more CGI::Application Plugins</li>
@@ -49,12 +65,20 @@ ebook-convert CGI--Application.html CGI--Application.mobi --chapter=//h1 --chapt
 	        <a href="CGI--Application.html">CGI::Application</a><br/>
 			<a href="CGI.html">CGI.pm</a><br />
 			<a href="CGI--PSGI.html">CGI::PSGI</a><br />
+			<a href="CGI--Session.html">CGI::Session</a><br />
+				<!-- CGI--Session--Tutorial.html -->
 	        <a href="HTML--Template.html">HTML::Template</a><br/>
 	        <a href="HTML--Template--Compiled.html">HTML::Template--Compiled (Extras)</a><br/>
+				<!-- HTML--Template--Compiled--Reference.html -->
 			<a href="CGI--FormBuilder.tml">CGI--FormBuilder</a><br />
+				<!-- CGI--Session--Tutorial.html -->
+			<a href="Class--DBI.html">Class::DBI</a><br />
+				<!-- Class::DBI::FormBuilder -->
         </p>
 		
 		<h3>License</h3>
-		<img src="cc.large.png" alt="Creative Commons" />
+		<p>All derived contents are licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/us/">Creative Commons Attribution-Share Alike 3.0</a>.</p>
+		
+		<img src="creativeCommonsBig.jpg" width="220" alt="Creative Commons" />
 	</body>
 </html>

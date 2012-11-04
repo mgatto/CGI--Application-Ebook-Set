@@ -10,12 +10,13 @@
 		<h1>CGI::Session &mdash; </h1>
 		<p>Persistent session data in CGI applications</p>
 		<hr />
+		
 		<h1>Contents</h1>
-		<ul id="contents">
-			<li><a href="#name">NAME</a></li>
-			<li><a href="#synopsis">SYNOPSIS</a></li>
-			<li><a href="#description">DESCRIPTION</a></li>
-			<li><a href="#methods">METHODS</a></li>
+		<ul>
+			<li><a href="#name">Name</a></li>
+			<li><a href="#synopsis">Synopsis</a></li>
+			<li><a href="#description">Description</a></li>
+			<li><a href="#methods">Methods</a></li>
 			<!--<ul>
 				<li><a href="#new__"><code>new()</code></a></li>
 				<li><a href="#new___sid__">new( $sid )</a></li>
@@ -60,7 +61,7 @@
 				<li><a href="#find___dsn____code____dsn_args__">find( $dsn, \&amp;code, \%dsn_args )</a></li>
 				<li><a href="#name__new_name_"><code>name($new_name)</code></a></li>
 			</ul>-->
-			<li><a href="#miscellaneous_methods">MISCELLANEOUS METHODS</a></li>
+			<li><a href="#miscellaneous_methods">Miscellaneous Methods</a></li>
 			<!--<ul>
 				<li><a href="#remote_addr__"><code>remote_addr()</code></a></li>
 				<li><a href="#errstr__"><code>errstr()</code></a></li>
@@ -72,91 +73,89 @@
 					<li><a href="#close__"><code>close()</code></a></li>
 				</ul>
 			</ul>-->
-			<li><a href="#distribution">DISTRIBUTION</a></li>
-<!--			<ul>
-		
+			<li><a href="#distribution">Distribution</a></li>
+			<!--			<ul>
+			
 				<li><a href="#drivers">DRIVERS</a></li>
 				<li><a href="#serializers">SERIALIZERS</a></li>
 				<li><a href="#id_generators">ID GENERATORS</a></li>
 			</ul>-->
 			<li><a href="#a_warning_about_auto_flushing">A Warning about Auto-flushing</a></li>
 			<li><a href="#a_warning_about_utf8">A Warning about UTF8</a></li>
-			<li><a href="#translations">TRANSLATIONS</a></li>
-			<li><a href="#credits">CREDITS</a></li>
-			<li><a href="#copyright">COPYRIGHT</a></li>
-			<li><a href="#public_code_repository">PUBLIC CODE REPOSITORY</a></li>
-			<li><a href="#support">SUPPORT</a></li>
-			<li><a href="#author">AUTHOR</a></li>
-			<li><a href="#see_also">SEE ALSO</a></li>
+			<li><a href="#translations">Translations</a></li>
+			<li><a href="#credits">Credits</a></li>
+			<li><a href="#copyright">Copyright</a></li>
+			<li><a href="#public_code_repository">Public Code Repository</a></li>
+			<li><a href="#support">Support</a></li>
+			<li><a href="#author">Author</a></li>
+			<li><a href="#see_also">See Also</a></li>
 		</ul>
-
-<h1><a name="synopsis">Synopsis</a></h1>
+		<h1><a name="synopsis"></a>Synopsis</h1>
 <pre>
-    # Object initialization:
-    use CGI::Session;
-    $session = CGI::Session-&gt;new();
-	</pre>
+# Object initialization:
+use CGI::Session;
+$session = CGI::Session-&gt;new();
+</pre>
 <pre>
-    $CGISESSID = $session-&gt;id();
-	</pre>
+$CGISESSID = $session-&gt;id();
+</pre>
 <pre>
-    # Send proper HTTP header with cookies:
-    print $session-&gt;header();
-	</pre>
+# Send proper HTTP header with cookies:
+print $session-&gt;header();
+</pre>
 <pre>
     # Storing data in the session:
     $session-&gt;param('f_name', 'Sherzod');
     # or
-    $session-&gt;param(-name=&gt;'l_name', -value=&gt;'Ruzmetov');</pre>
+    $session-&gt;param(-name=&gt;'l_name', -value=&gt;'Ruzmetov');
+</pre>
 <pre>
     # Flush the data from memory to the storage driver at least before your
     # program finishes since auto-flushing can be unreliable.
-    $session-&gt;flush();</pre>
+    $session-&gt;flush();
+</pre>
 <pre>
     # Retrieving data:
     my $f_name = $session-&gt;param('f_name');
     # or
-    my $l_name = $session-&gt;param(-name=&gt;'l_name');</pre>
+    my $l_name = $session-&gt;param(-name=&gt;'l_name');
+</pre>
 <pre>
     # Clearing a certain session parameter:
-    $session-&gt;clear([&quot;l_name&quot;, &quot;f_name&quot;]);</pre>
+    $session-&gt;clear([&quot;l_name&quot;, &quot;f_name&quot;]);
+</pre>
 <pre>
     # Expire '_is_logged_in' flag after 10 idle minutes:
-    $session-&gt;expire('is_logged_in', '+10m')</pre>
+    $session-&gt;expire('is_logged_in', '+10m')
+</pre>
 <pre>
     # Expire the session itself after 1 idle hour:
-    $session-&gt;expire('+1h');</pre>
+    $session-&gt;expire('+1h');
+</pre>
 <pre>
     # Delete the session for good:
     $session-&gt;delete();
-    $session-&gt;flush(); # Recommended practice says use flush() after delete().</pre>
-<p>
-</p>
-<hr />
+    $session-&gt;flush(); # Recommended practice says use flush() after delete().
+</pre>
+
+
 <h1><a name="description">DESCRIPTION</a></h1>
 <p>CGI::Session provides an easy, reliable and modular session management system across HTTP requests.</p>
-<p>
-</p>
-<hr />
+
+
 <h1><a name="methods">METHODS</a></h1>
 <p>Following is the overview of all the available methods accessible via CGI::Session object.</p>
-<p>
-</p>
+
 <h2><a name="new__"><code>new()</code></a></h2>
-<p>
-</p>
+
 <h2><a name="new___sid__">new( $sid )</a></h2>
-<p>
-</p>
+
 <h2><a name="new___query__">new( $query )</a></h2>
-<p>
-</p>
+
 <h2><a name="new___dsn___query___sid__">new( $dsn, $query||$sid )</a></h2>
-<p>
-</p>
+
 <h2><a name="new___dsn___query___sid____dsn_args__">new( $dsn, $query||$sid, \%dsn_args )</a></h2>
-<p>
-</p>
+
 <h2><a name="new___dsn___query___sid____dsn_args____session_params__">new( $dsn, $query||$sid, \%dsn_args, \%session_params )</a></h2>
 <p>Constructor. Returns new session object, or undef on failure. Error message is accessible through <a href="/CGI/Session/ErrorHandler.html#errstr__">errstr() - class method</a>. If called on an already initialized session will re-initialize the session based on already configured object. This is only useful after a call to <a href="#load__">load()</a>.</p>
 <p>Can accept up to three arguments, $dsn - Data Source Name, $query||$sid - query object OR a string representing session id, and finally, \%dsn_args, arguments used by $dsn components.</p>
@@ -168,56 +167,52 @@
     $s = CGI::Session-&gt;new(&quot;driver:sqlite&quot;, $sid);
     $s = CGI::Session-&gt;new(&quot;driver:db_file&quot;, $query);
     $s = CGI::Session-&gt;new(&quot;serializer:storable;id:incr&quot;, $sid);
-    # etc...</pre>
+    # etc...
+</pre>
 <p>Briefly, <code>new()</code> will return an initialized session object with a valid id, whereas <code>load()</code> may return
-an empty session object with an undefined id.</p>
-<p>Tests are provided (t/new_with_undef.t and t/load_with_undef.t) to clarify the result of calling <code>new()</code> and <code>load()</code>
-with undef, or with an initialized CGI object with an undefined or fake CGISESSID.</p>
+	an empty session object with an undefined id.</p>
+<p>Tests are provided (t/new_with_undef.t and t/load_with_undef.t) to clarify the result of calling <code>new()</code> and <code>load()</code> with undef, or with an initialized CGI object with an undefined or fake CGISESSID.</p>
 <p>You are strongly advised to run the old-fashioned 'make test TEST_FILES=t/new_with_undef.t TEST_VERBOSE=1'
-or the new-fangled 'prove -v t/new_with_undef.t', for both new*.t and load*.t, and examine the output.</p>
+	or the new-fangled 'prove -v t/new_with_undef.t', for both new*.t and load*.t, and examine the output.</p>
 <p>Following data source components are supported:</p>
 <ul>
-<li>
-<p><strong>driver</strong> - CGI::Session driver. Available drivers are <a href="/CGI/Session/Driver/file.html">file</a>, <a href="/CGI/Session/Driver/db_file.html">db_file</a>, <a href="/CGI/Session/Driver/mysql.html">mysql</a> and <a href="/CGI/Session/Driver/sqlite.html">sqlite</a>. Third party drivers are welcome. For driver specs consider <a href="/CGI/Session/Driver.html">CGI::Session::Driver</a></p>
-</li>
-<li>
-<p><strong>serializer</strong> - serializer to be used to encode the data structure before saving
-in the disk. Available serializers are <a href="/CGI/Session/Serialize/storable.html">storable</a>, <a href="/CGI/Session/Serialize/freezethaw.html">freezethaw</a> and <a href="/CGI/Session/Serialize/default.html">default</a>. Default serializer will use <a href="/Data/Dumper.html">Data::Dumper</a>.</p>
-</li>
-<li>
-<p><strong>id</strong> - ID generator to use when new session is to be created. Available ID generator is <a href="/CGI/Session/ID/md5.html">md5</a></p>
-</li>
+	<li>
+		<p><strong>driver</strong> - CGI::Session driver. Available drivers are <a href="/CGI/Session/Driver/file.html">file</a>, <a href="/CGI/Session/Driver/db_file.html">db_file</a>, <a href="/CGI/Session/Driver/mysql.html">mysql</a> and <a href="/CGI/Session/Driver/sqlite.html">sqlite</a>. Third party drivers are welcome. For driver specs consider <a href="/CGI/Session/Driver.html">CGI::Session::Driver</a></p>
+	</li>
+	<li>
+		<p><strong>serializer</strong> - serializer to be used to encode the data structure before saving
+			in the disk. Available serializers are <a href="/CGI/Session/Serialize/storable.html">storable</a>, <a href="/CGI/Session/Serialize/freezethaw.html">freezethaw</a> and <a href="/CGI/Session/Serialize/default.html">default</a>. Default serializer will use <a href="/Data/Dumper.html">Data::Dumper</a>.</p>
+	</li>
+	<li>
+		<p><strong>id</strong> - ID generator to use when new session is to be created. Available ID generator is <a href="/CGI/Session/ID/md5.html">md5</a></p>
+	</li>
 </ul>
 <p>For example, to get CGI::Session store its data using DB_File and serialize data using FreezeThaw:</p>
 <pre>
-    $s = CGI::Session-&gt;new(&quot;driver:DB_File;serializer:FreezeThaw&quot;, undef);</pre>
+    $s = CGI::Session-&gt;new(&quot;driver:DB_File;serializer:FreezeThaw&quot;, undef);
+</pre>
 <p>If called with three arguments, first two will be treated as in the previous example, and third argument will be <a href="#dsn_args"><code>\%dsn_args</code></a>, which will be passed to <a href="#_dsn"><code>$dsn</code></a> components (namely, driver, serializer and id generators) for initialization purposes. Since all the $dsn components must initialize to some default value, this third argument should not be required for most drivers to operate properly.</p>
 <p>If called with four arguments, the first three match previous examples. The fourth argument must be a hash reference with parameters to be used by the CGI::Session object. (see \%session_params above )</p>
 <p>The following is a list of the current keys:</p>
 <ul>
-<li>
-<p><strong>name</strong> - Name to use for the cookie/query parameter name. This defaults to CGISESSID. This can be altered or accessed by the <code>name</code> accessor.</p>
-</li>
+	<li>
+		<p><strong>name</strong> - Name to use for the cookie/query parameter name. This defaults to CGISESSID. This can be altered or accessed by the <code>name</code> accessor.</p>
+	</li>
 </ul>
 <p>undef is acceptable as a valid placeholder to any of the above arguments, which will force default behavior.</p>
-<p>
-</p>
+
 <h2><a name="load__"><code>load()</code></a></h2>
-<p>
-</p>
+
 <h2><a name="load___query___sid__">load( $query||$sid )</a></h2>
-<p>
-</p>
+
 <h2><a name="load___dsn___query___sid__">load( $dsn, $query||$sid )</a></h2>
-<p>
-</p>
+
 <h2><a name="load___dsn___query____dsn_args__">load( $dsn, $query, \%dsn_args )</a></h2>
-<p>
-</p>
+
 <h2><a name="load___dsn___query____dsn_args____session_params__">load( $dsn, $query, \%dsn_args, \%session_params )</a></h2>
 <p>Accepts the same arguments as <code>new()</code>, and also returns a new session object, or
-undef on failure.  The difference is, <a href="#new__">new()</a> can create a new session if
-it detects expired and non-existing sessions, but <code>load()</code> does not.</p>
+	undef on failure.  The difference is, <a href="#new__">new()</a> can create a new session if
+	it detects expired and non-existing sessions, but <code>load()</code> does not.</p>
 <p><code>load()</code> is useful to detect expired or non-existing sessions without forcing the library to create new sessions. So now you can do something like this:</p>
 <pre>
     $s = CGI::Session-&gt;load() or die CGI::Session-&gt;errstr();
@@ -227,126 +222,103 @@ it detects expired and non-existing sessions, but <code>load()</code> does not.<
             $cgi-&gt;p(&quot;Your session timed out! Refresh the screen to start new session!&quot;)
             $cgi-&gt;end_html();
         exit(0);
-    }</pre>
+    }
+</pre>
 <pre>
     if ( $s-&gt;is_empty ) {
         $s = $s-&gt;new() or die $s-&gt;errstr;
-    }</pre>
+    }
+</pre>
 <p>Notice: All <em>expired</em> sessions are empty, but not all <em>empty</em> sessions are expired!</p>
 <p>Briefly, <code>new()</code> will return an initialized session object with a valid id, whereas <code>load()</code> may return
-an empty session object with an undefined id.</p>
-<p>Tests are provided (t/new_with_undef.t and t/load_with_undef.t) to clarify the result of calling <code>new()</code> and <code>load()</code>
-with undef, or with an initialized CGI object with an undefined or fake CGISESSID.</p>
+	an empty session object with an undefined id.</p>
+<p>Tests are provided (t/new_with_undef.t and t/load_with_undef.t) to clarify the result of calling <code>new()</code> and <code>load()</code> with undef, or with an initialized CGI object with an undefined or fake CGISESSID.</p>
 <p>You are strongly advised to run the old-fashioned 'make test TEST_FILES=t/new_with_undef.t TEST_VERBOSE=1'
-or the new-fangled 'prove -v t/new_with_undef.t', for both new*.t and load*.t, and examine the output.</p>
-<p>
-</p>
+	or the new-fangled 'prove -v t/new_with_undef.t', for both new*.t and load*.t, and examine the output.</p>
+
 <h2><a name="id__"><code>id()</code></a></h2>
 <p>Returns effective ID for a session. Since effective ID and claimed ID can differ, valid session id should always
-be retrieved using this method.</p>
-<p>
-</p>
+	be retrieved using this method.</p>
+
 <h2><a name="param__name_"><code>param($name)</code></a></h2>
-<p>
-</p>
+
 <h2><a name="param__name___name_">param(-name=&gt;$name)</a></h2>
 <p>Used in either of the above syntax returns a session parameter set to $name or undef if it doesn't exist. If it's called on a deleted method <code>param()</code> will issue a warning but return value is not defined.</p>
-<p>
-</p>
+
 <h2><a name="param__name___value_">param($name, $value)</a></h2>
-<p>
-</p>
+
 <h2><a name="param__name___name___value___value_">param(-name=&gt;$name, -value=&gt;$value)</a></h2>
 <p>Used in either of the above syntax assigns a new value to $name parameter,
-which can later be retrieved with previously introduced <code>param()</code> syntax. <code>$value</code>
-may be a scalar, arrayref or hashref.</p>
+	which can later be retrieved with previously introduced <code>param()</code> syntax. <code>$value</code> may be a scalar, arrayref or hashref.</p>
 <p>Attempts to set parameter names that start with <em>_SESSION_</em> will trigger
-a warning and undef will be returned.</p>
-<p>
-</p>
+	a warning and undef will be returned.</p>
+
 <h2><a name="param_hashref__"><code>param_hashref()</code></a></h2>
 <p><strong>Deprecated</strong>. Use <a href="#dataref__">dataref()</a> instead.</p>
-<p>
-</p>
+
 <h2><a name="dataref__"><code>dataref()</code></a></h2>
 <p>Returns reference to session's data table:</p>
 <pre>
     $params = $s-&gt;dataref();
     $sid = $params-&gt;{_SESSION_ID};
     $name= $params-&gt;{name};
-    # etc...</pre>
+    # etc...
+</pre>
 <p>Useful for having all session data in a hashref, but too risky to update.</p>
-<p>
-</p>
+
 <h2><a name="save_param__"><code>save_param()</code></a></h2>
-<p>
-</p>
+
 <h2><a name="save_param__query_"><code>save_param($query)</code></a></h2>
-<p>
-</p>
+
 <h2><a name="save_param__query____list_">save_param($query, \@list)</a></h2>
 <p>Saves query parameters to session object. In other words, it's the same as calling <a href="#param__name_">param($name, $value)</a> for every single query parameter returned by <code>$query-&gt;param()</code>. The first argument, if present, should be either CGI object or any object which can provide <code>param()</code> method. If it's undef, defaults to the return value of <a href="#query__">query()</a>, which returns <code>CGI-&gt;new</code>. If second argument is present and is a reference to an array, only those query parameters found in the array will be stored in the session. undef is a valid placeholder for any argument to force default behavior.</p>
-<p>
-</p>
+
 <h2><a name="load_param__"><code>load_param()</code></a></h2>
-<p>
-</p>
+
 <h2><a name="load_param__query_"><code>load_param($query)</code></a></h2>
-<p>
-</p>
+
 <h2><a name="load_param__query____list_">load_param($query, \@list)</a></h2>
 <p>Loads session parameters into a query object. The first argument, if present, should be query object, or any other object which can provide <code>param()</code> method. If second argument is present and is a reference to an array, only parameters found in that array will be loaded to the query object.</p>
-<p>
-</p>
+
 <h2><a name="clear__"><code>clear()</code></a></h2>
-<p>
-</p>
+
 <h2><a name="clear__field__">clear('field')</a></h2>
-<p>
-</p>
+
 <h2><a name="clear___list_"><code>clear(\@list)</code></a></h2>
 <p>Clears parameters from the session object.</p>
 <p>With no parameters, all fields are cleared. If passed a single parameter or a
-reference to an array, only the named parameters are cleared.</p>
-<p>
-</p>
+	reference to an array, only the named parameters are cleared.</p>
+
 <h2><a name="flush__"><code>flush()</code></a></h2>
-<p>Synchronizes data in memory with the copy serialized by the driver. Call <code>flush()</code>
-if you need to access the session from outside the current session object. You should
-call <code>flush()</code> sometime before your program exits.</p>
+<p>Synchronizes data in memory with the copy serialized by the driver. Call <code>flush()</code> if you need to access the session from outside the current session object. You should
+	call <code>flush()</code> sometime before your program exits.</p>
 <p>As a last resort, CGI::Session will automatically call flush for you just
-before the program terminates or session object goes out of scope. Automatic
-flushing has proven to be unreliable, and in some cases is now required
-in places that worked with CGI::Session 3.x.</p>
+	before the program terminates or session object goes out of scope. Automatic
+	flushing has proven to be unreliable, and in some cases is now required
+	in places that worked with CGI::Session 3.x.</p>
 <p>Always explicitly calling <code>flush()</code> on the session before the
-program exits is recommended. For extra safety, call it immediately after
-every important session update.</p>
+	program exits is recommended. For extra safety, call it immediately after
+	every important session update.</p>
 <p>Also see <a href="#a_warning_about_auto_flushing">A Warning about Auto-flushing</a></p>
-<p>
-</p>
+
 <h2><a name="atime__"><code>atime()</code></a></h2>
 <p>Read-only method. Returns the last access time of the session in seconds from epoch. This time is used internally while
-auto-expiring sessions and/or session parameters.</p>
-<p>
-</p>
+	auto-expiring sessions and/or session parameters.</p>
+
 <h2><a name="ctime__"><code>ctime()</code></a></h2>
 <p>Read-only method. Returns the time when the session was first created in seconds from epoch.</p>
-<p>
-</p>
+
 <h2><a name="expire__"><code>expire()</code></a></h2>
-<p>
-</p>
+
 <h2><a name="expire__time_"><code>expire($time)</code></a></h2>
-<p>
-</p>
+
 <h2><a name="expire__param___time_">expire($param, $time)</a></h2>
 <p>Sets expiration interval relative to <a href="#atime__">atime()</a>.</p>
 <p>If used with no arguments, returns the expiration interval if it was ever set. If no expiration was ever set, returns undef. For backwards compatibility, a method named <code>etime()</code> does the same thing.</p>
 <p>Second form sets an expiration time. This value is checked when previously stored session is asked to be retrieved, and if its expiration interval has passed, it will be expunged from the disk immediately. Passing 0 cancels expiration.</p>
 <p>By using the third syntax you can set the expiration interval for a particular
-session parameter, say <em>~logged-in</em>. This would cause the library call <code>clear()</code>
-on the parameter when its time is up. Note it only makes sense to set this value to 
-something <em>earlier</em> than when the whole session expires.  Passing 0 cancels expiration.</p>
+	session parameter, say <em>~logged-in</em>. This would cause the library call <code>clear()</code> on the parameter when its time is up. Note it only makes sense to set this value to 
+	something <em>earlier</em> than when the whole session expires.  Passing 0 cancels expiration.</p>
 <p>All the time values should be given in the form of seconds. Following keywords are also supported for your convenience:</p>
 <pre>
     +-----------+---------------+
@@ -359,19 +331,19 @@ something <em>earlier</em> than when the whole session expires.  Passing 0 cance
     |     w     |   Week        |
     |     M     |   Month       |
     |     y     |   Year        |
-    +-----------+---------------+</pre>
+    +-----------+---------------+
+</pre>
 <p>Examples:</p>
 <pre>
     $session-&gt;expire(&quot;2h&quot;);                # expires in two hours
     $session-&gt;expire(0);                   # cancel expiration
-    $session-&gt;expire(&quot;~logged-in&quot;, &quot;10m&quot;); # expires '~logged-in' parameter after 10 idle minutes</pre>
+    $session-&gt;expire(&quot;~logged-in&quot;, &quot;10m&quot;); # expires '~logged-in' parameter after 10 idle minutes
+</pre>
 <p>Note: all the expiration times are relative to session's last access time, not to its creation time. To expire a session immediately, call <a href="#delete">delete()</a>. To expire a specific session parameter immediately, call <a href="#clear">clear([$name])</a>.</p>
-<p>
-</p>
+
 <h2><a name="is_new__"><code>is_new()</code></a></h2>
 <p>Returns true only for a brand new session.</p>
-<p>
-</p>
+
 <h2><a name="is_expired__"><code>is_expired()</code></a></h2>
 <p>Tests whether session initialized using <a href="#load">load()</a> is to be expired. This method works only on sessions initialized with load():</p>
 <pre>
@@ -381,50 +353,49 @@ something <em>earlier</em> than when the whole session expires.  Passing 0 cance
     }
     if ( $s-&gt;is_empty ) {
         $s = $s-&gt;new() or die $s-&gt;errstr;
-    }</pre>
-<p>
-</p>
+    }
+</pre>
+
 <h2><a name="is_empty__"><code>is_empty()</code></a></h2>
 <p>Returns true for sessions that are empty. It's preferred way of testing whether requested session was loaded successfully or not:</p>
 <pre>
     $s = CGI::Session-&gt;load($sid);
     if ( $s-&gt;is_empty ) {
         $s = $s-&gt;new();
-    }</pre>
+    }
+</pre>
 <p>Actually, the above code is nothing but waste. The same effect could've been achieved by saying:</p>
 <pre>
-    $s = CGI::Session-&gt;new( $sid );</pre>
+    $s = CGI::Session-&gt;new( $sid );
+</pre>
 <p><a href="#is_empty">is_empty()</a> is useful only if you wanted to catch requests for expired sessions, and create new session afterwards. See <a href="#is_expired">is_expired()</a> for an example.</p>
-<p>
-</p>
+
 <h2><a name="ip_match__"><code>ip_match()</code></a></h2>
 <p>Returns true if $ENV{REMOTE_ADDR} matches the remote address stored in the session.</p>
 <p>If you have an application where you are sure your users' IPs are constant
-during a session, you can consider enabling an option to make this check:</p>
+	during a session, you can consider enabling an option to make this check:</p>
 <pre>
-    use CGI::Session '-ip_match';</pre>
+    use CGI::Session '-ip_match';
+</pre>
 <p>Usually you don't call <code>ip_match()</code> directly, but by using the above method. It is useful
-only if you want to call it inside of coderef passed to the <a href="#find____code__">find()</a> method.</p>
-<p>
-</p>
+	only if you want to call it inside of coderef passed to the <a href="#find____code__">find()</a> method.</p>
+
 <h2><a name="delete__"><code>delete()</code></a></h2>
 <p>Sets the objects status to be &quot;deleted&quot;.  Subsequent read/write requests on the
-same object will fail.  To physically delete it from the data store you need to call <a href="#flush__">flush()</a>.
-CGI::Session attempts to do this automatically when the object is being destroyed (usually as
-the script exits), but see <a href="#a_warning_about_auto_flushing">A Warning about Auto-flushing</a>.</p>
-<p>
-</p>
+	same object will fail.  To physically delete it from the data store you need to call <a href="#flush__">flush()</a>.
+	CGI::Session attempts to do this automatically when the object is being destroyed (usually as
+	the script exits), but see <a href="#a_warning_about_auto_flushing">A Warning about Auto-flushing</a>.</p>
+
 <h2><a name="find____code__">find( \&amp;code )</a></h2>
-<p>
-</p>
+
 <h2><a name="find___dsn____code__">find( $dsn, \&amp;code )</a></h2>
-<p>
-</p>
+
 <h2><a name="find___dsn____code____dsn_args__">find( $dsn, \&amp;code, \%dsn_args )</a></h2>
 <p>Experimental feature. Executes \&amp;code for every session object stored in disk, passing initialized CGI::Session object as the first argument of \&amp;code. Useful for housekeeping purposes, such as for removing expired sessions. Following line, for instance, will remove sessions already expired, but are still in disk:</p>
 <p>The following line, for instance, will remove sessions already expired, but which are still on disk:</p>
 <pre>
-    CGI::Session-&gt;find( sub {} );</pre>
+    CGI::Session-&gt;find( sub {} );
+</pre>
 <p>Notice, above \&amp;code didn't have to do anything, because <code>load()</code>, which is called to initialize sessions inside <a href="#find____code__">find()</a>, will automatically remove expired sessions. Following example will remove all the objects that are 10+ days old:</p>
 <pre>
     CGI::Session-&gt;find( \&amp;purge );
@@ -435,225 +406,206 @@ the script exits), but see <a href="#a_warning_about_auto_flushing">A Warning ab
             $session-&gt;delete();
             $session-&gt;flush(); # Recommended practice says use flush() after delete().
         }
-    }</pre>
+    }
+</pre>
 <p><strong>Note</strong>: find will not change the modification or access times on the sessions it returns.</p>
 <p>Explanation of the 3 parameters to <code>find()</code>:</p>
 <dl>
-<dt><strong><a name="_dsn" class="item">$dsn</a></strong></dt>
-
-<dd>
-<p>This is the DSN (Data Source Name) used by CGI::Session to control what type of
-sessions you previously created and what type of sessions you now wish method
-<code>find()</code> to pass to your callback.</p>
-<p>The default value is defined above, in the docs for method <code>new()</code>, and is
-'driver:file;serializer:default;id:md5'.</p>
-<p>Do not confuse this DSN with the DSN arguments mentioned just below, under \%dsn_args.</p>
-</dd>
-<dt><strong><a name="code" class="item">\&amp;code</a></strong></dt>
-
-<dd>
-<p>This is the callback provided by you (i.e. the caller of method <code>find()</code>)
-which is called by CGI::Session once for each session found by method <code>find()</code>
-which matches the given $dsn.</p>
-<p>There is no default value for this coderef.</p>
-<p>When your callback is actually called, the only parameter is a session. If you
-want to call a subroutine you already have with more parameters, you can
-achieve this by creating an anonymous subroutine that calls your subroutine
-with the parameters you want. For example:</p>
-<pre>
+	<dt><strong><a name="_dsn" class="item">$dsn</a></strong></dt>
+	<dd>
+		<p>This is the DSN (Data Source Name) used by CGI::Session to control what type of
+			sessions you previously created and what type of sessions you now wish method <code>find()</code> to pass to your callback.</p>
+		<p>The default value is defined above, in the docs for method <code>new()</code>, and is
+			'driver:file;serializer:default;id:md5'.</p>
+		<p>Do not confuse this DSN with the DSN arguments mentioned just below, under \%dsn_args.</p>
+	</dd>
+	<dt><strong><a name="code" class="item">\&amp;code</a></strong></dt>
+	<dd>
+		<p>This is the callback provided by you (i.e. the caller of method <code>find()</code>)
+			which is called by CGI::Session once for each session found by method <code>find()</code> which matches the given $dsn.</p>
+		<p>There is no default value for this coderef.</p>
+		<p>When your callback is actually called, the only parameter is a session. If you
+			want to call a subroutine you already have with more parameters, you can
+			achieve this by creating an anonymous subroutine that calls your subroutine
+			with the parameters you want. For example:</p>
+		<pre>
     CGI::Session-&gt;find($dsn, sub { my_subroutine( @_, 'param 1', 'param 2' ) } );
     CGI::Session-&gt;find($dsn, sub { $coderef-&gt;( @_, $extra_arg ) } );
     
-Or if you wish, you can define a sub generator as such:</pre>
-<pre>
+Or if you wish, you can define a sub generator as such:
+</pre>
+		<pre>
     sub coderef_with_args {
         my ( $coderef, @params ) = @_;
         return sub { $coderef-&gt;( @_, @params ) };
     }
     
-    CGI::Session-&gt;find($dsn, coderef_with_args( $coderef, 'param 1', 'param 2' ) );</pre>
-</dd>
-<dt><strong><a name="dsn_args" class="item">\%dsn_args</a></strong></dt>
-
-<dd>
-<p>If your $dsn uses file-based storage, then this hashref might contain keys such as:</p>
-<pre>
+    CGI::Session-&gt;find($dsn, coderef_with_args( $coderef, 'param 1', 'param 2' ) );
+</pre>
+	</dd>
+	<dt><strong><a name="dsn_args" class="item">\%dsn_args</a></strong></dt>
+	<dd>
+		<p>If your $dsn uses file-based storage, then this hashref might contain keys such as:</p>
+		<pre>
     {
         Directory =&gt; Value 1,
         NoFlock   =&gt; Value 2,
         UMask     =&gt; Value 3
-    }</pre>
-<p>If your $dsn uses db-based storage, then this hashref contains (up to) 3 keys, and looks like:</p>
-<pre>
+    }
+</pre>
+		<p>If your $dsn uses db-based storage, then this hashref contains (up to) 3 keys, and looks like:</p>
+		<pre>
     {
         DataSource =&gt; Value 1,
         User       =&gt; Value 2,
         Password   =&gt; Value 3
-    }</pre>
-<p>These 3 form the DSN, username and password used by DBI to control access to your database server,
-and hence are only relevant when using db-based sessions.</p>
-<p>The default value of this hashref is undef.</p>
-</dd>
+    }
+</pre>
+		<p>These 3 form the DSN, username and password used by DBI to control access to your database server,
+			and hence are only relevant when using db-based sessions.</p>
+		<p>The default value of this hashref is undef.</p>
+	</dd>
 </dl>
 <p><strong>Note:</strong> <code>find()</code> is meant to be convenient, not necessarily efficient. It's best suited in cron scripts.</p>
-<p>
-</p>
+
 <h2><a name="name__new_name_"><code>name($new_name)</code></a></h2>
 <p>The $new_name parameter is optional. If supplied it sets the query or cookie parameter name to be used.</p>
 <p>It defaults to <em>$CGI::Session::NAME</em>, which defaults to <em>CGISESSID</em>.</p>
 <p>You are strongly discouraged from using the global variable <em>$CGI::Session::NAME</em>, since it is
-deprecated (as are all global variables) and will be removed in a future version of this module.</p>
+	deprecated (as are all global variables) and will be removed in a future version of this module.</p>
 <p>Return value: The current query or cookie parameter name.</p>
-<p>
-</p>
-<hr />
+
+
 <h1><a name="miscellaneous_methods">MISCELLANEOUS METHODS</a></h1>
-<p>
-</p>
+
 <h2><a name="remote_addr__"><code>remote_addr()</code></a></h2>
 <p>Returns the remote address of the user who created the session for the first time. Returns undef if variable REMOTE_ADDR wasn't present in the environment when the session was created.</p>
-<p>
-</p>
+
 <h2><a name="errstr__"><code>errstr()</code></a></h2>
 <p>Class method. Returns last error message from the library.</p>
-<p>
-</p>
+
 <h2><a name="dump__"><code>dump()</code></a></h2>
 <p>Returns a dump of the session object. Useful for debugging purposes only.</p>
-<p>
-</p>
+
 <h2><a name="header__"><code>header()</code></a></h2>
 <p>A wrapper for <code>CGI</code>'s <code>header()</code> method. Calling this method
-is equivalent to something like this:</p>
+	is equivalent to something like this:</p>
 <pre>
     $cookie = CGI::Cookie-&gt;new(-name=&gt;$session-&gt;name, -value=&gt;$session-&gt;id);
-    print $cgi-&gt;header(-cookie=&gt;$cookie, @_);</pre>
+    print $cgi-&gt;header(-cookie=&gt;$cookie, @_);
+</pre>
 <p>You can minimize the above into:</p>
 <pre>
-    print $session-&gt;header();</pre>
+    print $session-&gt;header();
+</pre>
 <p>It will retrieve the name of the session cookie from <code>$session-</code>name()&gt; which defaults to <code>$CGI::Session::NAME</code>. If you want to use a different name for your session cookie, do something like this before creating session object:</p>
 <pre>
     CGI::Session-&gt;name(&quot;MY_SID&quot;);
-    $session = CGI::Session-&gt;new(undef, $cgi, \%attrs);</pre>
+    $session = CGI::Session-&gt;new(undef, $cgi, \%attrs);
+</pre>
 <p>Now, $session-&gt;<code>header()</code> uses &quot;MY_SID&quot; as the name for the session cookie. For all additional options that can
-be passed, see the <code>header()</code> docs in <code>CGI</code>.</p>
-<p>
-</p>
+	be passed, see the <code>header()</code> docs in <code>CGI</code>.</p>
+
 <h2><a name="query__"><code>query()</code></a></h2>
 <p>Returns query object associated with current session object. Default query object class is <code>CGI</code>.</p>
-<p>
-</p>
+
 <h2><a name="deprecated_methods">DEPRECATED METHODS</a></h2>
 <p>These methods exist solely for for compatibility with CGI::Session 3.x.</p>
-<p>
-</p>
+
 <h3><a name="close__"><code>close()</code></a></h3>
 <p>Closes the session. Using <code>flush()</code> is recommended instead, since that's exactly what a call
-to <code>close()</code> does now.</p>
-<p>
-</p>
-<hr />
+	to <code>close()</code> does now.</p>
+
+
 <h1><a name="distribution">DISTRIBUTION</a></h1>
 <p>CGI::Session consists of several components such as <a href="#drivers">drivers</a>, <a href="#serializers">serializers</a> and <a href="#id_generators">id generators</a>. This section lists what is available.</p>
-<p>
-</p>
+
 <h2><a name="drivers">DRIVERS</a></h2>
 <p>The following drivers are included in the standard distribution:</p>
 <ul>
-<li>
-<p><a href="/CGI/Session/Driver/file.html">file</a> - default driver for storing session data in plain files. Full name: <strong>CGI::Session::Driver::file</strong></p>
-</li>
-<li>
-<p><a href="/CGI/Session/Driver/db_file.html">db_file</a> - for storing session data in BerkelyDB. Requires: <em>DB_File</em>.
-Full name: <strong>CGI::Session::Driver::db_file</strong></p>
-</li>
-<li>
-<p><a href="/CGI/Session/Driver/mysql.html">mysql</a> - for storing session data in MySQL tables. Requires <a href="/./Session/Driver/DBI.html">DBI</a> and <a href="/DBD/mysql.html">DBD::mysql</a>.
-Full name: <strong>CGI::Session::Driver::mysql</strong></p>
-</li>
-<li>
-<p><a href="/CGI/Session/Driver/sqlite.html">sqlite</a> - for storing session data in SQLite. Requires <a href="/./Session/Driver/DBI.html">DBI</a> and <a href="/DBD/SQLite.html">DBD::SQLite</a>.
-Full name: <strong>CGI::Session::Driver::sqlite</strong></p>
-</li>
+	<li>
+		<p><a href="/CGI/Session/Driver/file.html">file</a> - default driver for storing session data in plain files. Full name: <strong>CGI::Session::Driver::file</strong></p>
+	</li>
+	<li>
+		<p><a href="/CGI/Session/Driver/db_file.html">db_file</a> - for storing session data in BerkelyDB. Requires: <em>DB_File</em>.
+			Full name: <strong>CGI::Session::Driver::db_file</strong></p>
+	</li>
+	<li>
+		<p><a href="/CGI/Session/Driver/mysql.html">mysql</a> - for storing session data in MySQL tables. Requires <a href="/./Session/Driver/DBI.html">DBI</a> and <a href="/DBD/mysql.html">DBD::mysql</a>.
+			Full name: <strong>CGI::Session::Driver::mysql</strong></p>
+	</li>
+	<li>
+		<p><a href="/CGI/Session/Driver/sqlite.html">sqlite</a> - for storing session data in SQLite. Requires <a href="/./Session/Driver/DBI.html">DBI</a> and <a href="/DBD/SQLite.html">DBD::SQLite</a>.
+			Full name: <strong>CGI::Session::Driver::sqlite</strong></p>
+	</li>
 </ul>
 <p>Other drivers are available from CPAN.</p>
-<p>
-</p>
+
 <h2><a name="serializers">SERIALIZERS</a></h2>
 <ul>
-<li>
-<p><a href="/CGI/Session/Serialize/default.html">default</a> - default data serializer. Uses standard <a href="/Data/Dumper.html">Data::Dumper</a>.
-Full name: <strong>CGI::Session::Serialize::default</strong>.</p>
-</li>
-<li>
-<p><a href="/CGI/Session/Serialize/storable.html">storable</a> - serializes data using <em>Storable</em>. Requires <em>Storable</em>.
-Full name: <strong>CGI::Session::Serialize::storable</strong>.</p>
-</li>
-<li>
-<p><a href="/CGI/Session/Serialize/freezethaw.html">freezethaw</a> - serializes data using <em>FreezeThaw</em>. Requires <em>FreezeThaw</em>.
-Full name: <strong>CGI::Session::Serialize::freezethaw</strong></p>
-</li>
-<li>
-<p><a href="/CGI/Session/Serialize/yaml.html">yaml</a> - serializes data using YAML. Requires <em>YAML</em> or <a href="/YAML/Syck.html">the YAML::Syck manpage</a>.
-Full name: <strong>CGI::Session::Serialize::yaml</strong></p>
-</li>
+	<li>
+		<p><a href="/CGI/Session/Serialize/default.html">default</a> - default data serializer. Uses standard <a href="/Data/Dumper.html">Data::Dumper</a>.
+			Full name: <strong>CGI::Session::Serialize::default</strong>.</p>
+	</li>
+	<li>
+		<p><a href="/CGI/Session/Serialize/storable.html">storable</a> - serializes data using <em>Storable</em>. Requires <em>Storable</em>.
+			Full name: <strong>CGI::Session::Serialize::storable</strong>.</p>
+	</li>
+	<li>
+		<p><a href="/CGI/Session/Serialize/freezethaw.html">freezethaw</a> - serializes data using <em>FreezeThaw</em>. Requires <em>FreezeThaw</em>.
+			Full name: <strong>CGI::Session::Serialize::freezethaw</strong></p>
+	</li>
+	<li>
+		<p><a href="/CGI/Session/Serialize/yaml.html">yaml</a> - serializes data using YAML. Requires <em>YAML</em> or <a href="/YAML/Syck.html">the YAML::Syck manpage</a>.
+			Full name: <strong>CGI::Session::Serialize::yaml</strong></p>
+	</li>
 </ul>
-<p>
-</p>
+
 <h2><a name="id_generators">ID GENERATORS</a></h2>
 <p>The following ID generators are included in the standard distribution.</p>
 <ul>
-<li>
-<p><a href="/CGI/Session/ID/md5.html">md5</a> - generates 32 character long hexadecimal string. Requires <a href="/Digest/MD5.html">Digest::MD5</a>.
-Full name: <strong>CGI::Session::ID::md5</strong>.</p>
-</li>
-<li>
-<p><a href="/CGI/Session/ID/incr.html">incr</a> - generates incremental session ids.</p>
-</li>
-<li>
-<p><a href="/CGI/Session/ID/static.html">static</a> - generates static session ids. <strong>CGI::Session::ID::static</strong></p>
-</li>
+	<li>
+		<p><a href="/CGI/Session/ID/md5.html">md5</a> - generates 32 character long hexadecimal string. Requires <a href="/Digest/MD5.html">Digest::MD5</a>.
+			Full name: <strong>CGI::Session::ID::md5</strong>.</p>
+	</li>
+	<li>
+		<p><a href="/CGI/Session/ID/incr.html">incr</a> - generates incremental session ids.</p>
+	</li>
+	<li>
+		<p><a href="/CGI/Session/ID/static.html">static</a> - generates static session ids. <strong>CGI::Session::ID::static</strong></p>
+	</li>
 </ul>
-<p>
-</p>
-<hr />
+
+
 <h1><a name="a_warning_about_auto_flushing">A Warning about Auto-flushing</a></h1>
 <p>Auto-flushing can be unreliable for the following reasons. Explicit flushing
-after key session updates is recommended.</p>
+	after key session updates is recommended.</p>
 <dl>
-<dt><strong><a name="if_the_dbi_handle_goes_out_of_scope_before_the_session_variable" class="item">If the <code>DBI</code> handle goes out of scope before the session variable</a></strong></dt>
-
-<dd>
-<p>For database-stored sessions, if the <code>DBI</code> handle has gone out of scope before
-the auto-flushing happens, auto-flushing will fail.</p>
-</dd>
-<dt><strong><a name="circular_references" class="item">Circular references</a></strong></dt>
-
-<dd>
-<p>If the calling code contains a circular reference, it's possible that your
-<code>CGI::Session</code> object will not be destroyed until it is too late for
-auto-flushing to work. You can find circular references with a tool like
-<a href="/Devel/Cycle.html">the Devel::Cycle manpage</a>.</p>
-<p>In particular, these modules are known to contain circular references which
-lead to this problem:</p>
-<dl>
-<dt><strong><a name="cgi_application_plugin_debugscreen_v_0_06" class="item">CGI::Application::Plugin::DebugScreen V 0.06</a></strong></dt>
-
-<dt><strong><a name="cgi_application_plugin_errorpage_before_version_1_20" class="item">CGI::Application::Plugin::ErrorPage before version 1.20</a></strong></dt>
-
+	<dt><strong><a name="if_the_dbi_handle_goes_out_of_scope_before_the_session_variable" class="item">If the <code>DBI</code> handle goes out of scope before the session variable</a></strong></dt>
+	<dd>
+		<p>For database-stored sessions, if the <code>DBI</code> handle has gone out of scope before
+			the auto-flushing happens, auto-flushing will fail.</p>
+	</dd>
+	<dt><strong><a name="circular_references" class="item">Circular references</a></strong></dt>
+	<dd>
+		<p>If the calling code contains a circular reference, it's possible that your <code>CGI::Session</code> object will not be destroyed until it is too late for
+			auto-flushing to work. You can find circular references with a tool like <a href="/Devel/Cycle.html">the Devel::Cycle manpage</a>.</p>
+		<p>In particular, these modules are known to contain circular references which
+			lead to this problem:</p>
+		<dl>
+			<dt><strong><a name="cgi_application_plugin_debugscreen_v_0_06" class="item">CGI::Application::Plugin::DebugScreen V 0.06</a></strong></dt>
+			<dt><strong><a name="cgi_application_plugin_errorpage_before_version_1_20" class="item">CGI::Application::Plugin::ErrorPage before version 1.20</a></strong></dt>
+		</dl>
+	</dd>
+	<dt><strong><a name="signal_handlers" class="item">Signal handlers</a></strong></dt>
+	<dd>
+		<p>If your application may receive signals, there is an increased chance that the
+			signal will arrive after the session was updated but before it is auto-flushed
+			at object destruction time.</p>
+	</dd>
 </dl>
-</dd>
-<dt><strong><a name="signal_handlers" class="item">Signal handlers</a></strong></dt>
 
-<dd>
-<p>If your application may receive signals, there is an increased chance that the
-signal will arrive after the session was updated but before it is auto-flushed
-at object destruction time.</p>
-</dd>
-</dl>
-<p>
-</p>
-<hr />
+
 <h1><a name="a_warning_about_utf8">A Warning about UTF8</a></h1>
 <p>You are strongly encouraged to refer to, at least, the first of these articles, for help with UTF8.</p>
 <p><a href="http://en.wikibooks.org/wiki/Perl_Programming/Unicode_UTF-8">http://en.wikibooks.org/wiki/Perl_Programming/Unicode_UTF-8</a></p>
@@ -663,142 +615,125 @@ at object destruction time.</p>
 <p><a href="http://www.di-mgt.com.au/cryptoInternational2.html">http://www.di-mgt.com.au/cryptoInternational2.html</a></p>
 <p>Briefly, these are the issues:</p>
 <dl>
-<dt><strong><a name="the_file_containing_the_source_code_of_your_program" class="item">The file containing the source code of your program</a></strong></dt>
-
-<dd>
-<p>Consider &quot;use utf8;&quot; or &quot;use encoding 'utf8';&quot;.</p>
-</dd>
-<dt><strong><a name="influencing_the_encoding_of_the_program_s_input" class="item">Influencing the encoding of the program's input</a></strong></dt>
-
-<dd>
-<p>Use:</p>
-<pre>
-    binmode STDIN, &quot;:encoding(utf8)&quot;;.</pre>
-<pre>
-    Of course, the program can get input from other sources, e.g. HTML template files, not just STDIN.</pre>
-</dd>
-<dt><strong><a name="influencing_the_encoding_of_the_program_s_output" class="item">Influencing the encoding of the program's output</a></strong></dt>
-
-<dd>
-<p>Use:</p>
-<pre>
-    binmode STDOUT, &quot;:encoding(utf8)&quot;;</pre>
-<pre>
-    When using CGI.pm, you can use $q-&gt;charset('UTF-8'). This is the same as passing 'UTF-8' to CGI's C&lt;header()&gt; method.</pre>
-<pre>
+	<dt><strong><a name="the_file_containing_the_source_code_of_your_program" class="item">The file containing the source code of your program</a></strong></dt>
+	<dd>
+		<p>Consider &quot;use utf8;&quot; or &quot;use encoding 'utf8';&quot;.</p>
+	</dd>
+	<dt><strong><a name="influencing_the_encoding_of_the_program_s_input" class="item">Influencing the encoding of the program's input</a></strong></dt>
+	<dd>
+		<p>Use:</p>
+		<pre>
+    binmode STDIN, &quot;:encoding(utf8)&quot;;.
+</pre>
+		<pre>
+    Of course, the program can get input from other sources, e.g. HTML template files, not just STDIN.
+</pre>
+	</dd>
+	<dt><strong><a name="influencing_the_encoding_of_the_program_s_output" class="item">Influencing the encoding of the program's output</a></strong></dt>
+	<dd>
+		<p>Use:</p>
+		<pre>
+    binmode STDOUT, &quot;:encoding(utf8)&quot;;
+</pre>
+		<pre>
+    When using CGI.pm, you can use $q-&gt;charset('UTF-8'). This is the same as passing 'UTF-8' to CGI's C&lt;header()&gt; method.
+</pre>
+		<pre>
     Alternately, when using CGI::Session, you can use $session-&gt;header(charset =&gt; 'utf-8'), which will be
     passed to the query object's C&lt;header()&gt; method. Clearly this is preferable when the query object might not be
-    of type CGI.</pre>
-<pre>
-    See L&lt;/header()&gt; for a fuller discussion of the use of the C&lt;header()&gt; method in conjunction with cookies.</pre>
-</dd>
+    of type CGI.
+</pre>
+		<pre>
+    See L&lt;/header()&gt; for a fuller discussion of the use of the C&lt;header()&gt; method in conjunction with cookies.
+</pre>
+	</dd>
 </dl>
-<p>
-</p>
-<hr />
+
+
 <h1><a name="translations">TRANSLATIONS</a></h1>
 <p>This document is also available in Japanese.</p>
 <dl>
-<dt><strong><a name="o" class="item">o</a></strong></dt>
-
-<dd>
-<p>Translation based on 4.14: <a href="http://digit.que.ne.jp/work/index.cgi?Perldoc/ja">http://digit.que.ne.jp/work/index.cgi?Perldoc/ja</a></p>
-</dd>
-<dt><strong>o</strong></dt>
-
-<dd>
-<p>Translation based on 3.11, including Cookbook and Tutorial: <a href="http://perldoc.jp/docs/modules/CGI-Session-3.11/">http://perldoc.jp/docs/modules/CGI-Session-3.11/</a></p>
-</dd>
+	<dt><strong><a name="o" class="item">o</a></strong></dt>
+	<dd>
+		<p>Translation based on 4.14: <a href="http://digit.que.ne.jp/work/index.cgi?Perldoc/ja">http://digit.que.ne.jp/work/index.cgi?Perldoc/ja</a></p>
+	</dd>
+	<dt><strong>o</strong></dt>
+	<dd>
+		<p>Translation based on 3.11, including Cookbook and Tutorial: <a href="http://perldoc.jp/docs/modules/CGI-Session-3.11/">http://perldoc.jp/docs/modules/CGI-Session-3.11/</a></p>
+	</dd>
 </dl>
-<p>
-</p>
-<hr />
+
+
 <h1><a name="credits">CREDITS</a></h1>
 <p>CGI::Session evolved to what it is today with the help of following developers. The list doesn't follow any strict order, but somewhat chronological. Specifics can be found in <em class="file">Changes</em> file</p>
 <dl>
-<dt><strong><a name="andy_lester" class="item">Andy Lester</a></strong></dt>
-
-<dt><strong><a name="brian_king_mrbbking_mac_com" class="item">Brian King &lt;<a href="mailto:mrbbking@mac.com">mrbbking@mac.com</a>&gt;</a></strong></dt>
-
-<dt><strong><a name="olivier_dragon_dragon_shadnet_shad_ca" class="item">Olivier Dragon &lt;<a href="mailto:dragon@shadnet.shad.ca">dragon@shadnet.shad.ca</a>&gt;</a></strong></dt>
-
-<dt><strong><a name="adam_jacob_adam_sysadminsith_org" class="item">Adam Jacob &lt;<a href="mailto:adam@sysadminsith.org">adam@sysadminsith.org</a>&gt;</a></strong></dt>
-
-<dt><strong><a name="igor_plisco_igor_plisco_ru" class="item">Igor Plisco &lt;<a href="mailto:igor@plisco.ru">igor@plisco.ru</a>&gt;</a></strong></dt>
-
-<dt><strong><a name="mark_stosberg" class="item">Mark Stosberg</a></strong></dt>
-
-<dt><strong><a name="matt_leblanc_mleblanc_cpan_org" class="item">Matt LeBlanc &lt;<a href="mailto:mleblanc@cpan.org">mleblanc@cpan.org</a>&gt;</a></strong></dt>
-
-<dt><strong><a name="shawn_sorichetti" class="item">Shawn Sorichetti</a></strong></dt>
-
-<dt><strong><a name="ron_savage" class="item">Ron Savage</a></strong></dt>
-
-<dt><strong><a name="rhesa_rozendaal" class="item">Rhesa Rozendaal</a></strong></dt>
-
-<dd>
-<p>He suggested Devel::Cycle to help debugging.</p>
-</dd>
+	<dt><strong><a name="andy_lester" class="item">Andy Lester</a></strong></dt>
+	<dt><strong><a name="brian_king_mrbbking_mac_com" class="item">Brian King &lt;<a href="mailto:mrbbking@mac.com">mrbbking@mac.com</a>&gt;</a></strong></dt>
+	<dt><strong><a name="olivier_dragon_dragon_shadnet_shad_ca" class="item">Olivier Dragon &lt;<a href="mailto:dragon@shadnet.shad.ca">dragon@shadnet.shad.ca</a>&gt;</a></strong></dt>
+	<dt><strong><a name="adam_jacob_adam_sysadminsith_org" class="item">Adam Jacob &lt;<a href="mailto:adam@sysadminsith.org">adam@sysadminsith.org</a>&gt;</a></strong></dt>
+	<dt><strong><a name="igor_plisco_igor_plisco_ru" class="item">Igor Plisco &lt;<a href="mailto:igor@plisco.ru">igor@plisco.ru</a>&gt;</a></strong></dt>
+	<dt><strong><a name="mark_stosberg" class="item">Mark Stosberg</a></strong></dt>
+	<dt><strong><a name="matt_leblanc_mleblanc_cpan_org" class="item">Matt LeBlanc &lt;<a href="mailto:mleblanc@cpan.org">mleblanc@cpan.org</a>&gt;</a></strong></dt>
+	<dt><strong><a name="shawn_sorichetti" class="item">Shawn Sorichetti</a></strong></dt>
+	<dt><strong><a name="ron_savage" class="item">Ron Savage</a></strong></dt>
+	<dt><strong><a name="rhesa_rozendaal" class="item">Rhesa Rozendaal</a></strong></dt>
+	<dd>
+		<p>He suggested Devel::Cycle to help debugging.</p>
+	</dd>
 </dl>
 <p>Also, many people on the CGI::Application and CGI::Session mailing lists have contributed ideas and
-suggestions, and battled publicly with bugs, all of which has helped.</p>
-<p>
-</p>
-<hr />
+	suggestions, and battled publicly with bugs, all of which has helped.</p>
+
+
 <h1><a name="copyright">COPYRIGHT</a></h1>
 <p>Copyright (C) 2001-2005 Sherzod Ruzmetov &lt;<a href="mailto:sherzodr@cpan.org">sherzodr@cpan.org</a>&gt;. All rights reserved.
-This library is free software. You can modify and or distribute it under the same terms as Perl itself.</p>
-<p>
-</p>
-<hr />
+	This library is free software. You can modify and or distribute it under the same terms as Perl itself.</p>
+
+
 <h1><a name="public_code_repository">PUBLIC CODE REPOSITORY</a></h1>
 <p>You can see what the developers have been up to since the last release by
-checking out the code repository. You can browse the git repository from here:</p>
+	checking out the code repository. You can browse the git repository from here:</p>
 <pre>
- <a href="http://github.com/cromedome/cgi-session/tree/master">http://github.com/cromedome/cgi-session/tree/master</a></pre>
+ <a href="http://github.com/cromedome/cgi-session/tree/master">http://github.com/cromedome/cgi-session/tree/master</a>
+</pre>
 <p>Or check out the code with:</p>
 <pre>
- git clone git://github.com/cromedome/cgi-session.git</pre>
-<p>
-</p>
-<hr />
+ git clone git://github.com/cromedome/cgi-session.git
+</pre>
+
+
 <h1><a name="support">SUPPORT</a></h1>
 <p>If you need help using CGI::Session, ask on the mailing list. You can ask the
-list by sending your questions to <a href="mailto:cgi-session-user@lists.sourceforge.net">cgi-session-user@lists.sourceforge.net</a> .</p>
+	list by sending your questions to <a href="mailto:cgi-session-user@lists.sourceforge.net">cgi-session-user@lists.sourceforge.net</a> .</p>
 <p>You can subscribe to the mailing list at <a href="https://lists.sourceforge.net/lists/listinfo/cgi-session-user">https://lists.sourceforge.net/lists/listinfo/cgi-session-user</a> .</p>
 <p>Bug reports can be submitted at <a href="http://rt.cpan.org/NoAuth/ReportBug.html?Queue=CGI-Session">http://rt.cpan.org/NoAuth/ReportBug.html?Queue=CGI-Session</a></p>
-<p>
-</p>
-<hr />
+
+
 <h1><a name="author">AUTHOR</a></h1>
 <p>Sherzod Ruzmetov <code>sherzodr@cpan.org</code></p>
 <p>Mark Stosberg became a co-maintainer during the development of 4.0. <code>markstos@cpan.org</code>.</p>
 <p>Ron Savage became a co-maintainer during the development of 4.30. <code>rsavage@cpan.org</code>.</p>
 <p>If you would like support, ask on the mailing list as describe above. The
-maintainers and other users are subscribed to it.</p>
-<p>
-</p>
-<hr />
+	maintainers and other users are subscribed to it.</p>
+
+
 <h1><a name="see_also">SEE ALSO</a></h1>
 <p>To learn more both about the philosophy and CGI::Session programming style,
-consider the following:</p>
+	consider the following:</p>
 <ul>
-<li>
-<p><a href="/CGI/Session/Tutorial.html">CGI::Session::Tutorial</a> - extended CGI::Session manual. Also includes library architecture and driver specifications.</p>
-</li>
-<li>
-<p>We also provide mailing lists for CGI::Session users. To subscribe to the list
-or browse the archives visit
-<a href="https://lists.sourceforge.net/lists/listinfo/cgi-session-user">https://lists.sourceforge.net/lists/listinfo/cgi-session-user</a></p>
-</li>
-<li><strong><a name="rfc_2109_the_primary_spec_for_cookie_handing_in_use_defining_the_cookie_and_set_cookie_http_headers_available_at_http_www_ietf_org_rfc_rfc2109_txt_a_newer_spec_rfc_2965_is_meant_to_obsolete_it_with_set_cookie2_and_cookie2_headers_but_even_of_2008_the_newer_spec_is_not_widely_supported_see_http_www_ietf_org_rfc_rfc2965_txt" class="item"><strong>RFC 2109</strong> - The primary spec for cookie handing in use, defining the  &quot;Cookie:&quot; and &quot;Set-Cookie:&quot; HTTP headers.
-Available at <a href="http://www.ietf.org/rfc/rfc2109.txt">http://www.ietf.org/rfc/rfc2109.txt</a>. A newer spec, <a href="http://www.ietf.org/rfc/rfc2965.txt" class="rfc">RFC 2965</a> is meant to obsolete it with &quot;Set-Cookie2&quot; 
-and &quot;Cookie2&quot; headers, but even of 2008, the newer spec is not widely supported. See <a href="http://www.ietf.org/rfc/rfc2965.txt">http://www.ietf.org/rfc/rfc2965.txt</a></a></strong>
-
-</li>
-<li>
-<p><a href="/Apache/Session.html">Apache::Session</a> - an alternative to CGI::Session.</p>
-</li>
+	<li>
+		<p><a href="/CGI/Session/Tutorial.html">CGI::Session::Tutorial</a> - extended CGI::Session manual. Also includes library architecture and driver specifications.</p>
+	</li>
+	<li>
+		<p>We also provide mailing lists for CGI::Session users. To subscribe to the list
+			or browse the archives visit <a href="https://lists.sourceforge.net/lists/listinfo/cgi-session-user">https://lists.sourceforge.net/lists/listinfo/cgi-session-user</a></p>
+	</li>
+	<li><strong><a name="rfc_2109_the_primary_spec_for_cookie_handing_in_use_defining_the_cookie_and_set_cookie_http_headers_available_at_http_www_ietf_org_rfc_rfc2109_txt_a_newer_spec_rfc_2965_is_meant_to_obsolete_it_with_set_cookie2_and_cookie2_headers_but_even_of_2008_the_newer_spec_is_not_widely_supported_see_http_www_ietf_org_rfc_rfc2965_txt" class="item"><strong>RFC 2109</strong> - The primary spec for cookie handing in use, defining the  &quot;Cookie:&quot; and &quot;Set-Cookie:&quot; HTTP headers.
+		Available at <a href="http://www.ietf.org/rfc/rfc2109.txt">http://www.ietf.org/rfc/rfc2109.txt</a>. A newer spec, <a href="http://www.ietf.org/rfc/rfc2965.txt" class="rfc">RFC 2965</a> is meant to obsolete it with &quot;Set-Cookie2&quot; 
+		and &quot;Cookie2&quot; headers, but even of 2008, the newer spec is not widely supported. See <a href="http://www.ietf.org/rfc/rfc2965.txt">http://www.ietf.org/rfc/rfc2965.txt</a></a></strong> </li>
+	<li>
+		<p><a href="/Apache/Session.html">Apache::Session</a> - an alternative to CGI::Session.</p>
+	</li>
 </ul>
 </body>
 </html>
