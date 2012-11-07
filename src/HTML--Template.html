@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>HTML::Template - Perl module to use HTML Templates from CGI scripts</title>
+		<title>HTML::Template &ndash; Perl module to use HTML Templates from CGI scripts</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" href="css/modernperl.css" type="text/css" />
 	</head>
@@ -11,35 +11,35 @@
 		<p>Perl module to use HTML Templates from CGI scripts</p>
 		<hr />
 	
-		<h1>Contents</h1>
-<ul>
-	<li><a href="#synopsis">Synopsis</a></li>
-	<li><a href="#description">Description</a></li>
-	<li><a href="#tags">Tags</a>
+		<!--<h2>Contents</h2>
 		<ul>
-			<li>TMPL_VAR</li>
-		</ul>
-	</li>
-	<li><a href="#methods">Methods</a></li>
-	<li><a href="#configuration_summary">Configuration Summary</a></li>
-	<ul>
-		<li><a href="#template_style_and_parsing_options">Template Style and Parsing Options</a></li>
-		<li><a href="#template_files_and_blocks">Template Files and Blocks</a></li>
-		<li><a href="#template_variables">Template Variables</a></li>
-		<li><a href="#runtime_processing_options">Runtime Processing Options</a></li>
-		<li><a href="#caching_and_compiling_options">Caching and Compiling Options</a></li>
-		<li><a href="#plugins_and_filters">Plugins and Filters</a></li>
-		<li><a href="#customisation_and_extension">Customisation and Extension</a></li>
-	</ul>
-	<li><a href="#directive_summary">Directive Summary</a></li>
-	<li><a href="#source_code_repository">Source Code Repository</a></li>
-	<li><a href="#versions">Change History</a></li>
-	<li><a href="#author">Author</a></li>
-	<li><a href="#version">Version</a></li>
-	<li><a href="#copyright">Copyright</a></li>
-</ul>
+			<li><a href="#synopsis">Synopsis</a></li>
+			<li><a href="#description">Description</a></li>
+			<li><a href="#tags">Tags</a>
+				<ul>
+					<li>TMPL_VAR</li>
+				</ul>
+			</li>
+			<li><a href="#methods">Methods</a></li>
+			<li><a href="#configuration_summary">Configuration Summary</a></li>
+			<ul>
+				<li><a href="#template_style_and_parsing_options">Template Style and Parsing Options</a></li>
+				<li><a href="#template_files_and_blocks">Template Files and Blocks</a></li>
+				<li><a href="#template_variables">Template Variables</a></li>
+				<li><a href="#runtime_processing_options">Runtime Processing Options</a></li>
+				<li><a href="#caching_and_compiling_options">Caching and Compiling Options</a></li>
+				<li><a href="#plugins_and_filters">Plugins and Filters</a></li>
+				<li><a href="#customisation_and_extension">Customisation and Extension</a></li>
+			</ul>
+			<li><a href="#directive_summary">Directive Summary</a></li>
+			<li><a href="#source_code_repository">Source Code Repository</a></li>
+			<li><a href="#versions">Change History</a></li>
+			<li><a href="#author">Author</a></li>
+			<li><a href="#version">Version</a></li>
+			<li><a href="#copyright">Copyright</a></li>
+		</ul>-->
 
-<h1 id="synopsis">Synopsis</h1>
+<h2 id="synopsis">Synopsis</h2>
 <p>First you make a template - this is just a normal HTML file with a few
 extra tags, the simplest being &lt;TMPL_VAR&gt;</p>
 <p>For example, test.tmpl:</p>
@@ -75,7 +75,7 @@ My Home Directory is /home/some/directory
 My Path is set to /bin;/usr/bin
 </pre>
 
-<h1 id="description">Description</h1>
+<h2 id="description">Description</h2>
 <p>This module attempts to make using HTML templates simple and natural.
 It extends standard HTML with a few new HTML-esque tags - &lt;TMPL_VAR&gt;,
 &lt;TMPL_LOOP&gt;, &lt;TMPL_INCLUDE&gt;, &lt;TMPL_IF&gt;, &lt;TMPL_ELSE&gt; and &lt;TMPL_UNLESS&gt;.
@@ -88,11 +88,11 @@ in the Perl script.</p>
 <p>This module is licensed under the GPL.  See the LICENSE section
 below for more details.</p>
 
-<h2>Tutorial</h2>
+<h3>Tutorial</h3>
 <p>If you're new to HTML::Template, I suggest you start with the
 introductory article available on the HTML::Template website: <a href="http://html-template.sourceforge.net">http://html-template.sourceforge.net</a>.</p>
 
-<h2>Motivation</h2>
+<h3>Motivation</h3>
 <p>It is true that there are a number of packages out there to do HTML
 templates.  On the one hand you have things like HTML::Embperl which
 allows you freely mix Perl with HTML.  On the other hand lie
@@ -119,9 +119,9 @@ just one thing and it does it quickly and carefully.  It doesn't try
 to replace Perl and HTML, it just augments them to interact a little
 better.  And it's pretty fast.</p>
 
-<h1 id="tags">The Tags</h1>
+<h2 id="tags">The Tags</h2>
 
-<h2>TMPL_VAR</h2>
+<h3>TMPL_VAR</h3>
 <pre>
 &lt;TMPL_VAR NAME=&quot;PARAMETER_NAME&quot;&gt;
 </pre>
@@ -160,7 +160,7 @@ if the &quot;who&quot; variable is not set.</p>
 <pre>
 The &lt;TMPL_VAR NAME=WHO DEFAULT=devil&gt; gave me a taco.</pre>
 
-<h2>TMPL_LOOP</h2>
+<h3>TMPL_LOOP</h3>
 <pre>
 &lt;TMPL_LOOP NAME=&quot;LOOP_NAME&quot;&gt; ... &lt;/TMPL_LOOP&gt;
 </pre>
@@ -171,14 +171,14 @@ name.  Inside this named loop you place &lt;TMPL_VAR&gt;s.  Now you pass to
 this loop.  The loop iterates over the list and produces output from
 the text block for each pass.  Unset parameters are skipped.  Here's
 an example:</p>
-<em>In the template:</em>
+<p>In the template:</p>
 <pre>
 &lt;TMPL_LOOP NAME=EMPLOYEE_INFO&gt;
     Name: &lt;TMPL_VAR NAME=NAME&gt; &lt;br&gt;
     Job:  &lt;TMPL_VAR NAME=JOB&gt;  &lt;p&gt;
 &lt;/TMPL_LOOP&gt;
 </pre>
-<em>In the script:</em>
+<p>In the script:</p>
 <pre>
 $template-&gt;param(EMPLOYEE_INFO =&gt; [ 
     { name =&gt; 'Sam', job =&gt; 'programmer' },
@@ -186,7 +186,7 @@ $template-&gt;param(EMPLOYEE_INFO =&gt; [
 ]
                          );
 print $template-&gt;output();</pre>
-<em>The output in a browser:</em>
+<p>The output in a browser:</p>
 <pre>
 Name: Sam
 Job: programmer
@@ -260,7 +260,7 @@ you, a &lt;TMPL_LOOP&gt; introduces a new scope much like a perl subroutine
 call.  If you want your variables to be global you can use
 'global_vars' option to <code>new()</code> described below.</p>
 
-<h2>TMPL_INCLUDE</h2>
+<h3>TMPL_INCLUDE</h3>
 <pre>
 &lt;TMPL_INCLUDE NAME=&quot;filename.tmpl&quot;&gt;
 </pre>
@@ -281,7 +281,7 @@ limit of 10 levels deep is imposed.  You can alter this limit with the
 &quot;max_includes&quot; option.  See the entry for the &quot;max_includes&quot; option
 below for more details.</p>
 
-<h2>TMPL_IF</h2>
+<h3>TMPL_IF</h3>
 <pre>
   &lt;TMPL_IF NAME=&quot;PARAMETER_NAME&quot;&gt; ... &lt;/TMPL_IF&gt;</pre>
 <p>The &lt;TMPL_IF&gt; tag allows you to include or not include a block of the
@@ -326,14 +326,14 @@ problem in keeping the two synchronized.  I suggest you adopt the
 practice of only using TMPL_IF if you can do so without requiring a
 matching <code>if()</code> in your Perl code.</p>
 
-<h2>TMPL_ELSE</h2>
+<h3>TMPL_ELSE</h3>
 <pre>
 &lt;TMPL_IF NAME=&quot;PARAMETER_NAME&quot;&gt; ... &lt;TMPL_ELSE&gt; ... &lt;/TMPL_IF&gt;
 </pre>
 <p>You can include an alternate block in your TMPL_IF block by using
 TMPL_ELSE.  NOTE: You still end the block with &lt;/TMPL_IF&gt;, not
 &lt;/TMPL_ELSE&gt;!</p>
-<em>Example:</em><br />
+<p>Example:</p>
 <pre>
 &lt;TMPL_IF BOOL&gt;
     Some text that is included only if BOOL is true
@@ -342,13 +342,13 @@ TMPL_ELSE.  NOTE: You still end the block with &lt;/TMPL_IF&gt;, not
 &lt;/TMPL_IF&gt;
 </pre>
 
-<h2>TMPL_UNLESS</h2>
+<h3>TMPL_UNLESS</h3>
 <pre>
 &lt;TMPL_UNLESS NAME=&quot;PARAMETER_NAME&quot;&gt; ... &lt;/TMPL_UNLESS&gt;</pre>
 <p>This tag is the opposite of &lt;TMPL_IF&gt;.  The block is output if the
 CONTROL_PARAMETER is set false or not defined.  You can use
 &lt;TMPL_ELSE&gt; with &lt;TMPL_UNLESS&gt; just as you can with &lt;TMPL_IF&gt;.</p>
-<em>Example:</em><br />
+<p>Example:</p>
 <pre>
   &lt;TMPL_UNLESS BOOL&gt;
      Some text that is output only if BOOL is FALSE.
@@ -389,8 +389,8 @@ output if the loop has zero rows.</p>
 	(non-comment) tags will be used throughout this documentation.</p>
 </div>
 
-<h1><a name="methods"></a>Methods</h1>
-<h2><code>new()</code></h2>
+<h2><a name="methods"></a>Methods</h2>
+<h3><code>new()</code></h3>
 <p>Call <code>new()</code> to create a new Template object:</p>
 <pre>
 my $template = HTML::Template-&gt;new( 
@@ -462,7 +462,7 @@ template file.  You can also affect the search path for files with the
 <p>You can modify the Template object's behavior with <code>new()</code>.  The options
 are available:</p>
 
-<h3>Error Detection Options</h3>
+<h4>Error Detection Options</h4>
 <dl>
 	<dt>die_on_bad_params</dt>
 	<dd>
@@ -489,7 +489,7 @@ are available:</p>
 	</dd>
 </dl>
 
-<h3>Caching Options</h3>
+<h4>Caching Options</h4>
 <dl>
 	<dt>cache</dt>
 	<dd>
@@ -541,7 +541,7 @@ HTML::Template see <a href="/IPC/SharedCache.html">the IPC::SharedCache manpage<
 </dd>
 </dl>
 
-<h3>Filesystem Options</h3>
+<h4>Filesystem Options</h4>
 <dl>
 	<dt>path</dt>
 	<dd>
@@ -562,7 +562,7 @@ my $template = HTML::Template-&gt;new(
 	</dd>
 </dl>
 
-<h3>Debugging Options</h3>
+<h4>Debugging Options</h4>
 <dl>
 
 	<dt>debug</dt>
@@ -591,7 +591,7 @@ my $template = HTML::Template-&gt;new(
 	</dd>
 </dl>
 
-<h3>Miscellaneous Options</h3>
+<h4>Miscellaneous Options</h4>
 <dl>
 
 	<dt>associate</dt>
@@ -775,7 +775,7 @@ my $template = HTML::Template-&gt;new(
 		<p>Set this parameter to &quot;HTML&quot;, &quot;URL&quot; or &quot;JS&quot; and HTML::Template will apply the specified escaping to all variables unless they declare a different escape in the template.</p>
 	</dd>
 </dl>
-<h2>param()</h2>
+<h3>param()</h3>
 <p><code>param()</code> can be called in a number of ways</p>
 <ol>
 	<li>
@@ -864,10 +864,10 @@ $self-&gt;param({
 	</li>
 </ol>
 
-<h2>clear_params()</h2>
+<h3>clear_params()</h3>
 <p>Sets all the parameters to undef.  Useful internally, if nowhere else!</p>
 
-<h2>output()</h2>
+<h3>output()</h3>
 <p><code>output()</code> returns the final result of the template.  In most situations you'll want to print this, like:</p>
 <pre>
 print $template-&gt;output();
@@ -882,7 +882,7 @@ memory consumption.  Example:</p>
 <pre>
 $template-&gt;output(print_to =&gt; *STDOUT);</pre>
 <p>The return value is undefined when using the <code>print_to</code> option.</p>
-<h2>query()</h2>
+<h3>query()</h3>
 <p>This method allow you to get information about the template structure. It can be called in a number of ways.  The simplest usage of query is simply to check whether a parameter name exists in the template, using the <code>name</code> option:</p>
 <pre>
 if ($template-&gt;query(name =&gt; 'foo')) {
@@ -957,7 +957,7 @@ uppercase.</p>
 <p>Just like <code>param()</code>, <code>query()</code> with no arguments returns all the
 parameter names in the template at the top level.</p>
 
-<h1>FREQUENTLY ASKED QUESTIONS</h1>
+<h2>FREQUENTLY ASKED QUESTIONS</h2>
 <p>In the interest of greater understanding I've started a FAQ section of the perldocs.  Please look in here before you send me email.</p>
 <ol>
 <li>
@@ -1089,7 +1089,7 @@ reported success using to solve this problem.</p>
 </li>
 </ol>
 
-<h1>Bugs</h1>
+<h2>Bugs</h2>
 <p>I am aware of no bugs &ndash; if you find one, join the mailing list and
 tell us about it.  You can join the HTML::Template mailing-list by
 visiting: <a href="http://lists.sourceforge.net/lists/listinfo/html-template-users">http://lists.sourceforge.net/lists/listinfo/html-template-users</a></p>
@@ -1102,9 +1102,9 @@ demonstrating the problem!</p>
 available Subversion server.  See below for more information in the
 PUBLIC SUBVERSION SERVER section.</p>
 
-<h1><a name="versions"></a>Change History</h1>
+<h2><a name="versions"></a>Change History</h2>
 
-<h3>2.91 Fri Mar 30 2012</h3>
+<h4>2.91 Fri Mar 30 2012</h4>
 <ul>
    	<li>Feature: RT #18901 - Added new utf8 option to make it really simple to use UTF-8 encoded templates [Michael Peters]</li>
    	<li>Feature: RT #30586 - Added new open_mode option to allow for Perl IO layers to interact when using open() on the template files [moritz@faui2k3.org and Michael Peters]</li>
@@ -1130,7 +1130,7 @@ PUBLIC SUBVERSION SERVER section.</p>
    	<li>Development: Added Michael Peters as co-maintainer</li>
 </ul>
 
-<h3>2.9 Mon Jan 29 15:54:03 EST 2007</h3>
+<h4>2.9 Mon Jan 29 15:54:03 EST 2007</h4>
 <ul>
 	<li>New Feature: the new force_untaint option makes sure you do not pass tainted values to param(). [Sven Neuhaus]</li>
 	<li>New Feature: Added ESCAPE=NONE as a synonym for ESCAPE=0.  Fixed both to work with default_escape. [cpan@punch.net]</li>
@@ -1140,7 +1140,7 @@ PUBLIC SUBVERSION SERVER section.</p>
 	<li>Test Fix: At long last, the work from the Phalanx project has been merged!  The tests are now more complete and easier to work on.  Thanks Phalanx guys!</li>
 </ul>
 
-<h3>2.8 Wed Dec 21 18:37:39 EST 2005</h3>
+<h4>2.8 Wed Dec 21 18:37:39 EST 2005</h4>
 <ul>
 	<li>New Feature: the new default_escape option allows you to apply escaping to all variables in a template. [Alex Kapranoff]</li>
 	<li>Bug Fix: ESCAPE wasn't working on variables containing code-refs.</li>
@@ -1150,7 +1150,7 @@ PUBLIC SUBVERSION SERVER section.</p>
 </ul>
 
 
-<h3>2.7 Thu Jun 24 12:00:00 2004</h3>
+<h4>2.7 Thu Jun 24 12:00:00 2004</h4>
 <ul>
 	<li>New Feature: Added javascript escaping with ESCAPE=JS. (Craig Manley)</li>
 	<li>Bug Fix: Improved cache keying to be sensitive to options which alter the compilation of templates (path, search_path, loop_context_vars and global_vars).  Calls to new() with different settings for any of these options will no longer pull incorrect cached objects.</li>
@@ -1160,7 +1160,7 @@ PUBLIC SUBVERSION SERVER section.</p>
 	<li>Test Fix: Migrated tests to Test::More.  This will allow the easier introduction of new tests and the use of Devel::Cover. (Gabor Szabo)</li>
 </ul>
 
-<h3>2.6 Thu Aug 29 12:00:00 2002</h3>
+<h4>2.6 Thu Aug 29 12:00:00 2002</h4>
 <ul>
 	<li>New Feature: HTML::Template will combine HTML_TEMPLATE_ROOT environment variable and path option if both are available. (Jesse Erlbaum)</li>
 	<li>New Feature: __counter__ variable now available when loop_context_vars is set (Simran Gambhir)</li>
@@ -1170,7 +1170,7 @@ PUBLIC SUBVERSION SERVER section.</p>
 	<li>Doc Fix: updated mailing-list information to reflect move from vm.com to sourceforge.net</li>
 </ul>
 
-<h3>2.5 Fri Feb 01 12:00:00 2002</h3>
+<h4>2.5 Fri Feb 01 12:00:00 2002</h4>
 <ul>
 	<li>Bug Fix: global_vars fixed for loops within loops</li>
 	<li>Bug Fix: include paths were broken under Windows (David Ferrance)</li>
@@ -1181,13 +1181,13 @@ PUBLIC SUBVERSION SERVER section.</p>
 	<li>Doc Fix: added reference to new HTML::Template website at http://html-template.sourceforge.net/</li>
 </ul>
 
-<h3>2.4 Mon August 27 12:00:00 2001</h3>
+<h4>2.4 Mon August 27 12:00:00 2001</h4>
 <ul>
 	<li>Bug Fix: case_sensitive option broke loops (Peter Leonard)</li>
 	<li>Bug Fix: code-ref params now work with IF and UNLESS</li>
 </ul>
 
-<h3>2.3 Thu June 28 12:00:00 2001</h3>
+<h4>2.3 Thu June 28 12:00:00 2001</h4>
 <ul>
 	<li>New Feature: template tags can now span lines.  (Roland Giersig)</li>
 	<li>New Feature: new() option 'filehandle'. (Roland Giersig)</li>
@@ -1196,14 +1196,14 @@ PUBLIC SUBVERSION SERVER section.</p>
 	<li>Bug Fix: cleaned up more 5.004 warnings. (Jere Julian)</li>
 </ul>
    
-<h3>2.2 Sat December 23 12:00:00 2000</h3>
+<h4>2.2 Sat December 23 12:00:00 2000</h4>
 <ul>
 	<li>Bug Fix: fixed memory leak in global_vars implementation (Ade Olonoh)</li>
 	<li>Bug Fix: fixed file_cache not reloading templates on changes (T.J. Mather)</li>
 	<li>Bug Fix: fixed broken error checking in param() (Mark Stosberg)</li>
 </ul>
 
-<h3>2.1 Sun December 18 12:00:00 2000</h3>
+<h4>2.1 Sun December 18 12:00:00 2000</h4>
 <ul>
 	<li>New Feature: new 'file_cache' and 'double_file_cache' options provide a file based caching method (T.J. Mather)</li>
 	<li>New Feature: new 'print_to' option for output() allows output() to print to a filehandle as it runs. (Chris Nokleberg)</li>
@@ -1214,7 +1214,7 @@ PUBLIC SUBVERSION SERVER section.</p>
 	<li>Doc Fix: broke out FAQ into separate file.</li>
 </ul>
 
-<h3>2.0 Sun September 16 12:00:00 2000 </h3>
+<h4>2.0 Sun September 16 12:00:00 2000 </h4>
 <ul>
 	<li>New Feature: new 'search_path_on_include' option (Jody Biggs)</li>
 	<li>New Feature: much requested variable __ODD__ added to set of loop_context_vars.</li>
@@ -1224,7 +1224,7 @@ PUBLIC SUBVERSION SERVER section.</p>
 	<li>Bug Fix: vanguard_compatibility_mode was broken on first line of included files. (uchum)</li>
 </ul>
 
-<h3>1.8 Sun June 25 12:00:00 2000</h3>
+<h4>1.8 Sun June 25 12:00:00 2000</h4>
 <ul>
 	<li>New Feature: global_vars option makes outer variables visible inside loops.</li>
 	<li>Bug Fix: Use File::Spec to construct pathnames.  This means that HTML::Template should now work on VMS and MacOS. (Larry Moore)</li>
@@ -1233,7 +1233,7 @@ PUBLIC SUBVERSION SERVER section.</p>
 	<li>New License: switched to GPL/Artistic hybrid normally used with Perl modules.</li>
 </ul>
 
-<h3>1.7 Fri March 24 12:00:00 2000</h3>
+<h4>1.7 Fri March 24 12:00:00 2000</h4>
 <ul>
 	<li>New Feature: new method query() enables introspection into loops (Chris Houser)</li>
 	<li>New Feature: Better error handling with Carp</li>
@@ -1241,7 +1241,7 @@ PUBLIC SUBVERSION SERVER section.</p>
 	<li>New FAQ: How can I execute a program from inside my template?</li>
 </ul>
 
-<h3>1.6 Sun March 05 12:00:00 2000</h3>
+<h4>1.6 Sun March 05 12:00:00 2000</h4>
 <ul>
 	<li>New Feature: double_cache combines shared memory and local memory caching for twice the speedup!</li>
 	<li>New feature: ESCAPE=URL (added by Tobias Brox)</li>
@@ -1249,19 +1249,19 @@ PUBLIC SUBVERSION SERVER section.</p>
 	<li>Bug Fix: _mtime was broken in 1.5, fixed a typo.</li>
 </ul>
 
-<h3>1.5.1 Wed February 23 12:00:00 2000</h3>
+<h4>1.5.1 Wed February 23 12:00:00 2000</h4>
 <ul>
 	<li>Bug Fix: 1.5 broke caching in some cases - thanks to Drew Taylor for help solving this one.</li>
 </ul>
 
-<h3>1.5 Mon February 17 12:00:00 2000</h3>
+<h4>1.5 Mon February 17 12:00:00 2000</h4>
 <ul>
 	<li>Shared cache now uses IPC::SharedCache and is much more stable.</li>
 	<li>Fixed problem with mixed case associated CGI.pm parameters</li>
 	<li>param() now accepts subroutine refs for TMPL_VARs.</li>
 </ul>       
 
-<h3>1.4 Sat January 8 12:00:00 2000</h3>
+<h4>1.4 Sat January 8 12:00:00 2000</h4>
 <ul>
 	<li>New feature: new() option 'shared_cache' enables experimental IPC shared memory caching!</li>
 	<li>TMPL_IF now works on TMPL_LOOP variables.</li>
@@ -1269,7 +1269,7 @@ PUBLIC SUBVERSION SERVER section.</p>
 	<li>Bug Fix from Doug Steinwand: loop_context_vars not working on one-item loops.</li>
 </ul>
 
-<h3>1.3 Fri December 17 12:00:00 1999 </h3>
+<h4>1.3 Fri December 17 12:00:00 1999 </h4>
 <ul>
 	<li>Omnibus regex patch from Matthew Wickline: a faster and more robust parse().</li>
 	<li>New tag: TMPL_UNLESS, the opposite of TMPL_IF.</li>
@@ -1277,33 +1277,33 @@ PUBLIC SUBVERSION SERVER section.</p>
 	<li>Optional loop context variables - __FIRST__, __LAST__ and __INNER__.</li>
 </ul>
 
-<h3>1.2.1 Wed November 17 12:00:01 1999</h3>
+<h4>1.2.1 Wed November 17 12:00:01 1999</h4>
 <ul>
 	<li>tiny bug fix</li>
 </ul>
 
-<h3>1.2 Wed November 17 12:00:00 1999</h3>
+<h4>1.2 Wed November 17 12:00:00 1999</h4>
 <ul>
 	<li>Added multi-parameter and hash-ref syntax for param() calls.</li>
 	<li>Added DTD-compliant &lt;!-- TMPL_* --&gt; syntax patch from Matthew Wickline - Thanks!</li>
 	<li>vanguard_compatibility_mode = 1 implies die_on_bad_params = 0</li>
 </ul>
 
-<h3>1.1 Fri November 05 12:00:00 1999</h3>
+<h4>1.1 Fri November 05 12:00:00 1999</h4>
 <ul>
 	<li>Lifted requirement that &lt;TMPL_INCLUDE&gt;s be alone on a line</li>
 	<li>Added "path" option to new() to manipulate search path for templates.</li>
 	<li>bug fixes</li>
 </ul>      
 
-<h3>1.0 Fri October 28 12:00:00 1999</h3>
+<h4>1.0 Fri October 28 12:00:00 1999</h4>
 <ul>
 	<li>An HTML::Template mailing-list!  Send a blank message to htmltmpl-subscribe@lists.vm.com to join.</li>
 	<li>bug fixes</li>
 	<li>improved docs</li>
 </ul>
 
-<h3>0.96  October 14th 1999 15:49</h3>
+<h4>0.96  October 14th 1999 15:49</h4>
 <ul>
 	<li>Added "ESCAPE=1" option to &lt;TMPL_VAR&gt; to HTML-escape variable values.  (Peter Marelas, thanks!)</li>
 	<li>more bug fixes (David Glasses, James William Carlson - thanks)</li>
@@ -1311,7 +1311,7 @@ PUBLIC SUBVERSION SERVER section.</p>
 	<li>new FAQ concerning pre-loading templates and mod_perl.</li>
 </ul>
 
-<h3>0.95  October 8th 1999 12:28 </h3>
+<h4>0.95  October 8th 1999 12:28 </h4>
 <ul>
 	<li>bug fix: some lines were getting chomped (Eric Zylberstejn)</li>
 	<li>*NUMEROUS* bug fixes (David Glasser - Thanks a lot!)</li>
@@ -1319,12 +1319,12 @@ PUBLIC SUBVERSION SERVER section.</p>
 	<li>code cleanup and improved comments</li>
 </ul>
 
-<h3>0.91  September 29th 1999 17:59 </h3>
+<h4>0.91  September 29th 1999 17:59 </h4>
 <ul>
 	<li>bug fix: possible loss of text after a (Thanks to Tom Huskins for alerting me to this one!)</li>
 </ul>
 
-<h3>0.9  September 28th 1999 17:46</h3>
+<h4>0.9  September 28th 1999 17:46</h4>
 <ul>
 	<li>&lt;TMPL_IF&gt; and &lt;TMPL_ELSE&gt;</li>
 	<li>near total rewrite - faster, smaller, more "compiler-esque" code.</li>
@@ -1332,7 +1332,7 @@ PUBLIC SUBVERSION SERVER section.</p>
 	<li>bug fix : param() wasn't returning names of LOOPs</li>
 	<li>This really is version 0.9 so 1.0 is coming up.  Get those bug reports in!</li>
 </ul>
-<h3>0.06  September 19th 1999 23:09</h3>
+<h4>0.06  September 19th 1999 23:09</h4>
 <ul>
 	<li>added associate parameter to new() and obsoleted associate_CGI() (still supported for now)</li>
 	<li>added support for HTML_TEMPLATE_ROOT environment variable</li>
@@ -1340,12 +1340,12 @@ PUBLIC SUBVERSION SERVER section.</p>
 	<li>added a performance testing script: time_trial.pl</li>
 </ul>
      
-<h3>0.051  September 10th 1999 17:30</h3>
+<h4>0.051  September 10th 1999 17:30</h4>
 <ul>
 	<li>small problem with make test fixed.</li>
 </ul>
 
-<h3>0.05  September 10th 1999 17:18</h3>
+<h4>0.05  September 10th 1999 17:18</h4>
 <ul>
 	<li>Added &lt;TMPL_INCLUDE&gt; functionality!</li>
 	<li>Added associate_CGI() method - donated by Richard Dice</li>
@@ -1353,45 +1353,45 @@ PUBLIC SUBVERSION SERVER section.</p>
 	<li>more bug fixes from such notables as Kevin Puetz, and Steve Reppucci.</li>
 </ul>    
 
-<h3>0.04  Fri June 18 12:00:00 1999</h3>
+<h4>0.04  Fri June 18 12:00:00 1999</h4>
 <ul>
 	<li>fixed cacheing - under certain conditions it was totally broken!</li>
 	<li>changed {param} to {param_values} - some older perls complained.</li>
-	<li>die_on_bad_params => 0 now also applied to loop body.</li>
+	<li>die_on_bad_params =&gt; 0 now also applied to loop body.</li>
 	<li>added copious comments about how bad m//i is to avoid future bug reports about [tT][hH][iI][sS]!</li>
 	<li>added numerous bug fixes and optimizations submitted by Mike Blazer, Adriano Nagelschmidt Rodrigues, Andrej Mikus and  Ilya Obshadko.  Thanks!</li>
 </ul>
      
-<h3>0.03  Fri June 11 17:37:00 1999</h3>
+<h4>0.03  Fri June 11 17:37:00 1999</h4>
 <ul>
 	<li>fixed a few irritating "undefined variable" errors in -w</li>
 	<li>big speedup on large TMPL_LOOPs.  They are at least one order of magnitude faster now!</li>
-	<li>die_on_bad_params => 0 never really worked!  It does now.</li>
+	<li>die_on_bad_params =&gt; 0 never really worked!  It does now.</li>
 </ul>
 
-<h3>0.02  Mon May 31 12:47:00 1999</h3>
+<h4>0.02  Mon May 31 12:47:00 1999</h4>
 <ul>
 	<li>die on multiple source parameters in new()</li>
 	<li>tries to preserve newlines in loop body</li>
 	<li>copies in array contents from array refs on param call i.e. allows for reuse of scratch arrays on calling side</li>
 	<li>Added a CREDITS section to the docs, inaugurated it with Richard Chen for his many fixes.</li>
-	<li>Added type => 'sometype', source => 'source' new() syntax.</li>
+	<li>Added type =&gt; 'sometype', source =&gt; 'source' new() syntax.</li>
 	<li>made "NAME=" in tags optional.  Added a test.pl to check for this.</li>
 </ul>
 
-<h3>0.01  Mon May 17 15:17:00 1999</h3>
+<h4>0.01  Mon May 17 15:17:00 1999</h4>
 <ul>
 	<li>added cacheing to module and perldoc</li>
     <li>moved .tmpl files used by 'make test' to /templates</li>
     <li>first release!</li>
 </ul>
 
-<h3>0.00  Fri May 14 14:59:06 1999</h3>
+<h4>0.00  Fri May 14 14:59:06 1999</h4>
 <ul>
 	<li>original version; created by h2xs 1.18</li>
 </ul>
 
-<h1>Credits</h1>
+<h2>Credits</h2>
 <p>This module was the brain child of my boss, Jesse Erlbaum &lt;mailto:jesse@vm.com"&gt;jesse@vm.com&gt; at  <a href="http://vm.com">Vanguard Media</a>.  The most original idea in this module - the &lt;TMPL_LOOP&gt; - was entirely his.</p>
 <p>Fixes, Bug Reports, Optimizations and Ideas have been generously provided by:</p>
 <ul>
@@ -1450,17 +1450,17 @@ PUBLIC SUBVERSION SERVER section.</p>
 </ul>
 <p>Thanks!</p>
 
-<h1>Website</h1>
+<h2>Website</h2>
 <p>You can find information about HTML::Template and other related modules at: <a href="http://html-template.sourceforge.net">http://html-template.sourceforge.net</a>
 </p>
 
-<h1>Author</h1>
-<p>Sam Tregar, &lt;sam@tregar.com">sam@tregar.com&gt;</p>
+<h2>Author</h2>
+<p>Sam Tregar, &lt;sam@tregar.com&gt;</p>
 
-<h1>License</h1>
+<h2>License</h2>
 <p>
   HTML::Template : A module for using HTML Templates with Perl
-  Copyright (C) 2000-2002 Sam Tregar (sam@tregar.com)
+  Copyright (&copy;) 2000-2002 Sam Tregar &lt;sam@tregar.com"&gt;
 </p>
 <p>
   This module is free software; you can redistribute it and/or modify it
