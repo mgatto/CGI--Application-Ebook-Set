@@ -11,7 +11,7 @@
 		<p>Handle Common Gateway Interface requests and responses</p>
 		<hr />
 
-		<h1>Contents</h1>
+		<!--<h2>Contents</h2>
 <ul>
 	<li><a href="#name">Name</a></li>
 	<li><a href="#synopsis">Synopsis</a></li>
@@ -124,38 +124,41 @@
 	<li><a href="#a_complete_example_of_a_simple_form_based_script">A COMPLETE EXAMPLE OF A SIMPLE FORM-BASED SCRIPT</a></li>
 	<li><a href="#bugs">BUGS</a></li>
 	<li><a href="#see_also">SEE ALSO</a></li>
-</ul>
+</ul>-->
 
-<h1><a name="synopsis"></a>Synopsis</h1>
+<h2><a name="synopsis"></a>Synopsis</h2>
 <pre>
-    use CGI;</pre>
+use CGI;
+my $q = CGI-&gt;new;
+# Process an HTTP request
+@values  = $q-&gt;param('form_field');
+</pre>
 <pre>
-    my $q = CGI-&gt;new;</pre>
+$fh = $q-&gt;upload('file_field');
+</pre>
 <pre>
-    # Process an HTTP request
-     @values  = $q-&gt;param('form_field');</pre>
+$riddle  = $query-&gt;cookie('riddle_name');
+%answers = $query-&gt;cookie('answers');
+</pre>
 <pre>
-     $fh      = $q-&gt;upload('file_field');</pre>
+# Prepare various HTTP responses
+print $q-&gt;header();
+print $q-&gt;header('application/json');
+</pre>
 <pre>
-     $riddle  = $query-&gt;cookie('riddle_name');
-     %answers = $query-&gt;cookie('answers');</pre>
+cookie1 = $q-&gt;cookie(-name=&gt;'riddle_name', -value=&gt;&quot;The Sphynx's Question&quot;);
+$cookie2 = $q-&gt;cookie(-name=&gt;'answers', -value=&gt;\%answers);
+print $q-&gt;header(
+    -type    =&gt; 'image/gif',
+    -expires =&gt; '+3d',
+    -cookie  =&gt; [$cookie1,$cookie2]
+);
+</pre>
 <pre>
-    # Prepare various HTTP responses
-    print $q-&gt;header();
-    print $q-&gt;header('application/json');</pre>
-<pre>
-        $cookie1 = $q-&gt;cookie(-name=&gt;'riddle_name', -value=&gt;&quot;The Sphynx's Question&quot;);
-        $cookie2 = $q-&gt;cookie(-name=&gt;'answers', -value=&gt;\%answers);
-    print $q-&gt;header(
-        -type    =&gt; 'image/gif',
-        -expires =&gt; '+3d',
-        -cookie  =&gt; [$cookie1,$cookie2]
-        );</pre>
-<pre>
-   print  $q-&gt;redirect('<a href="http://somewhere.else/in/movie/land">http://somewhere.else/in/movie/land</a>');</pre>
+print $q-&gt;redirect('http://somewhere.else/in/movie/land');
+</pre>
 
-
-<h1><a name="description">DESCRIPTION</a></h1>
+<h2><a name="description"></a>Description</h2>
 <p>CGI.pm is a stable, complete and mature solution for processing and preparing
 HTTP requests and responses.  Major features including processing form
 submissions, file uploads, reading and writing cookies, query string generation
@@ -168,7 +171,7 @@ from dozens of contributors and being deployed on thousands of websites.
 CGI.pm has been included in the Perl distribution since Perl 5.4, and has
 become a de-facto standard.</p>
 
-<h2><a name="programming_style">PROGRAMMING STYLE</a></h2>
+<h2><a name="programming_style"></a>Programming Style</h2>
 <p>There are two styles of programming with CGI.pm, an object-oriented
 style and a function-oriented style.  In the object-oriented style you
 create one or more CGI objects and then use object methods to create
@@ -182,13 +185,14 @@ script and restore it later.</p>
 <p>For example, using the object oriented style, here is how you create
 a simple &quot;Hello World&quot; HTML page:</p>
 <pre>
-   #!/usr/local/bin/perl -w
-   use CGI;                             # load CGI routines
-   $q = CGI-&gt;new;                        # create new CGI object
-   print $q-&gt;header,                    # create the HTTP header
-         $q-&gt;start_html('hello world'), # start the HTML
-         $q-&gt;h1('hello world'),         # level 1 header
-         $q-&gt;end_html;                  # end the HTML</pre>
+#!/usr/local/bin/perl -w
+use CGI;                              # load CGI routines
+$q = CGI-&gt;new;                     # create new CGI object
+print $q-&gt;header,                  # create the HTTP header
+    $q-&gt;start_html('hello world'), # start the HTML
+    $q-&gt;h1('hello world'),         # level 1 header
+    $q-&gt;end_html;                  # end the HTML
+</pre>
 <p>In the function-oriented style, there is one default CGI object that
 you rarely deal with directly.  Instead you just call functions to
 retrieve CGI parameters, create HTML tags, manage cookies, and so
@@ -199,22 +203,24 @@ The main differences are that we now need to import a set of functions
 into our name space (usually the &quot;standard&quot; functions), and we don't
 need to create the CGI object.</p>
 <pre>
-   #!/usr/local/bin/perl
-   use CGI qw/:standard/;           # load standard CGI routines
-   print header,                    # create the HTTP header
-         start_html('hello world'), # start the HTML
-         h1('hello world'),         # level 1 header
-         end_html;                  # end the HTML</pre>
+#!/usr/local/bin/perl
+use CGI qw/:standard/;           # load standard CGI routines
+print header,                    # create the HTTP header
+    start_html('hello world'), # start the HTML
+    h1('hello world'),         # level 1 header
+    end_html;                  # end the HTML
+</pre>
 <p>The examples in this document mainly use the object-oriented style.
 See HOW TO IMPORT FUNCTIONS for important information on
 function-oriented programming in CGI.pm</p>
 
-<h2><a name="calling_cgi_pm_routines">CALLING CGI.PM ROUTINES</a></h2>
+<h2><a name="calling_cgi_pm_routines"></a>Calling CGI.PM Routines</h2>
 <p>Most CGI.pm routines accept several arguments, sometimes as many as 20
 optional ones!  To simplify this interface, all routines use a named
 argument calling style that looks like this:</p>
 <pre>
-   print $q-&gt;header(-type=&gt;'image/gif',-expires=&gt;'+3d');</pre>
+print $q-&gt;header(-type=&gt;'image/gif',-expires=&gt;'+3d');
+</pre>
 <p>Each argument name is preceded by a dash.  Neither case nor order
 matters in the argument list.  -type, -Type, and -TYPE are all
 acceptable.  In fact, only the first argument needs to begin with a
@@ -225,7 +231,8 @@ case of these routines you can provide the single argument without an
 argument name.  <code>header()</code> happens to be one of these routines.  In this
 case, the single argument is the document type.</p>
 <pre>
-   print $q-&gt;header('text/html');</pre>
+print $q-&gt;header('text/html');
+</pre>
 <p>Other such routines are documented below.</p>
 <p>Sometimes named arguments expect a scalar, sometimes a reference to an
 array, and sometimes a reference to a hash.  Often, you can pass any
@@ -233,8 +240,9 @@ type of argument and the routine will do whatever is most appropriate.
 For example, the <code>param()</code> routine is used to set a CGI parameter to a
 single or a multi-valued value.  The two cases are shown below:</p>
 <pre>
-   $q-&gt;param(-name=&gt;'veggie',-value=&gt;'tomato');
-   $q-&gt;param(-name=&gt;'veggie',-value=&gt;['tomato','tomahto','potato','potahto']);</pre>
+$q-&gt;param(-name=&gt;'veggie',-value=&gt;'tomato');
+$q-&gt;param(-name=&gt;'veggie',-value=&gt;['tomato','tomahto','potato','potahto']);
+</pre>
 <p>A large number of routines in CGI.pm actually aren't specifically
 defined in the module, but are generated automatically as needed.
 These are the &quot;HTML shortcuts,&quot; routines that generate HTML tags for
@@ -246,12 +254,13 @@ attributes as a hash reference as the first argument, and the
 contents, if any, as any subsequent arguments.  It works out like
 this:</p>
 <pre>
-   Code                           Generated HTML
-   ----                           --------------
-   h1()                           &lt;h1&gt;
-   h1('some','contents');         &lt;h1&gt;some contents&lt;/h1&gt;
-   h1({-align=&gt;left});            &lt;h1 align=&quot;LEFT&quot;&gt;
-   h1({-align=&gt;left},'contents'); &lt;h1 align=&quot;LEFT&quot;&gt;contents&lt;/h1&gt;</pre>
+Code                              Generated HTML
+----                              --------------
+h1();                             &lt;h1&gt;
+h1('some','contents');            &lt;h1&gt;some contents&lt;/h1&gt;
+h1({-align=&gt;left});            &lt;h1 align=&quot;LEFT&quot;&gt;
+h1({-align=&gt;left},'contents'); &lt;h1 align=&quot;LEFT&quot;&gt;contents&lt;/h1&gt;
+</pre>
 <p>HTML tags are described in more detail later.</p>
 <p>Many newcomers to CGI.pm are puzzled by the difference between the
 calling conventions for the HTML shortcuts, which require curly braces
@@ -262,7 +271,8 @@ optional in all but the HTML shortcuts.  If you like, you can use
 curly braces when calling any routine that takes named arguments.  For
 example:</p>
 <pre>
-   print $q-&gt;header( {-type=&gt;'image/gif',-expires=&gt;'+3d'} );</pre>
+print $q-&gt;header( {-type=&gt;'image/gif',-expires=&gt;'+3d'} );
+</pre>
 <p>If you use the <strong>-w</strong> switch, you will be warned that some CGI.pm argument
 names conflict with built-in Perl functions.  The most frequent of
 these is the -values argument, used to create multi-valued menus,
@@ -284,34 +294,41 @@ For example, -value is an alias for -values.</p>
 doesn't recognize.  For example, you can produce non-standard HTTP
 header fields by providing them as named arguments:</p>
 <pre>
-  print $q-&gt;header(-type  =&gt;  'text/html',
-                   -cost  =&gt;  'Three smackers',
-                   -annoyance_level =&gt; 'high',
-                   -complaints_to   =&gt; 'bit bucket');</pre>
+print $q-&gt;header(
+    -type  =&gt;  'text/html',
+    -cost  =&gt;  'Three smackers',
+    -annoyance_level =&gt; 'high',
+    -complaints_to   =&gt; 'bit bucket'
+);
+</pre>
 <p>This will produce the following nonstandard HTTP header:</p>
 <pre>
-   HTTP/1.0 200 OK
-   Cost: Three smackers
-   Annoyance-level: high
-   Complaints-to: bit bucket
-   Content-type: text/html</pre>
+HTTP/1.0 200 OK
+Cost: Three smackers
+Annoyance-level: high
+Complaints-to: bit bucket
+Content-type: text/html
+</pre>
 <p>Notice the way that underscores are translated automatically into
 hyphens.  HTML-generating routines perform a different type of
 translation.</p>
 <p>This feature allows you to keep up with the rapidly changing HTTP and
 HTML &quot;standards&quot;.</p>
 
-<h2><a name="creating_a_new_query_object__object_oriented_style__">CREATING A NEW QUERY OBJECT (OBJECT-ORIENTED STYLE):</a></h2>
+
+<h2><a name="creating_a_new_query_object__object_oriented_style__"></a>Creating a New Query Object (Object-Oriented Style):</h2>
 <pre>
-     $query = CGI-&gt;new;</pre>
+$query = CGI-&gt;new;
+</pre>
 <p>This will parse the input (from POST, GET and DELETE methods) and store
 it into a perl5 object called $query.</p>
 <p>Any filehandles from file uploads will have their position reset to 
 the beginning of the file.</p>
 
-<h2><a name="creating_a_new_query_object_from_an_input_file">CREATING A NEW QUERY OBJECT FROM AN INPUT FILE</a></h2>
+<h2><a name="creating_a_new_query_object_from_an_input_file"></a>Creating a New Query Object from an Input File</h2>
 <pre>
-     $query = CGI-&gt;new(INPUTFILE);</pre>
+$query = CGI-&gt;new(INPUTFILE);
+</pre>
 <p>If you provide a file handle to the <code>new()</code> method, it will read
 parameters from the file (or STDIN, or whatever).  The file can be in
 any of the forms describing below under debugging (i.e. a series of
@@ -322,7 +339,8 @@ can be saved and restored.</p>
 references to file handles, or even references to filehandle globs,
 which is the &quot;official&quot; way to pass a filehandle:</p>
 <pre>
-    $query = CGI-&gt;new(\*STDIN);</pre>
+$query = CGI-&gt;new(\*STDIN);
+</pre>
 <p>You can also initialize the CGI object with a FileHandle or IO::File
 object.</p>
 <p>If you are using the function-oriented interface and want to
@@ -330,42 +348,48 @@ initialize CGI state from a file handle, the way to do this is with
 <strong>restore_parameters()</strong>.  This will (re)initialize the
 default CGI object from the indicated file handle.</p>
 <pre>
-    open (IN,&quot;test.in&quot;) || die;
-    restore_parameters(IN);
-    close IN;</pre>
+open (IN,&quot;test.in&quot;) || die;
+restore_parameters(IN);
+close IN;
+</pre>
 <p>You can also initialize the query object from a hash
 reference:</p>
 <pre>
-    $query = CGI-&gt;new( {'dinosaur'=&gt;'barney',
-                       'song'=&gt;'I love you',
-                       'friends'=&gt;[qw/Jessica George Nancy/]}
-                    );</pre>
+$query = CGI-&gt;new( {'dinosaur'=&gt;'barney',
+    'song'=&gt;'I love you',
+    'friends'=&gt;[qw/Jessica George Nancy/]}
+);
+</pre>
 <p>or from a properly formatted, URL-escaped query string:</p>
 <pre>
-    $query = CGI-&gt;new('dinosaur=barney&amp;color=purple');</pre>
+$query = CGI-&gt;new('dinosaur=barney&amp;color=purple');
+</pre>
 <p>or from a previously existing CGI object (currently this clones the
 parameter list, but none of the other object-specific fields, such as
 autoescaping):</p>
 <pre>
-    $old_query = CGI-&gt;new;
-    $new_query = CGI-&gt;new($old_query);</pre>
+$old_query = CGI-&gt;new;
+$new_query = CGI-&gt;new($old_query);
+</pre>
 <p>To create an empty query, initialize it from an empty string or hash:</p>
 <pre>
-   $empty_query = CGI-&gt;new(&quot;&quot;);</pre>
+$empty_query = CGI-&gt;new(&quot;&quot;);</pre>
+<p>-or-</p>
 <pre>
-       -or-</pre>
-<pre>
-   $empty_query = CGI-&gt;new({});</pre>
+$empty_query = CGI-&gt;new({});
+</pre>
 
-<h2><a name="fetching_a_list_of_keywords_from_the_query_">FETCHING A LIST OF KEYWORDS FROM THE QUERY:</a></h2>
+<h2><a name="fetching_a_list_of_keywords_from_the_query_"></a>Fetching a List of Keywords from the Query</h2>
 <pre>
-     @keywords = $query-&gt;keywords</pre>
+@keywords = $query-&gt;keywords
+</pre>
 <p>If the script was invoked as the result of an &lt;ISINDEX&gt; search, the
 parsed keywords can be obtained as an array using the <code>keywords()</code> method.</p>
 
-<h2><a name="fetching_the_names_of_all_the_parameters_passed_to_your_script_">FETCHING THE NAMES OF ALL THE PARAMETERS PASSED TO YOUR SCRIPT:</a></h2>
+<h2><a name="fetching_the_names_of_all_the_parameters_passed_to_your_script_"></a>Fetching the Names of all the Parameters Passed to your Script</h2>
 <pre>
-     @names = $query-&gt;param</pre>
+@names = $query-&gt;param
+</pre>
 <p>If the script was invoked with a parameter list
 (e.g. &quot;name1=value1&amp;name2=value2&amp;name3=value3&quot;), the <code>param()</code> method
 will return the parameter names as a list.  If the script was invoked
@@ -919,7 +943,7 @@ the standard ones:</p>
 </ol>
 
 
-<h1><a name="generating_dynamic_documents">GENERATING DYNAMIC DOCUMENTS</a></h1>
+<h2><a name="generating_dynamic_documents">GENERATING DYNAMIC DOCUMENTS</a></h2>
 <p>Most of CGI.pm's functions deal with creating documents on the fly.
 Generally you will produce the HTTP header first, followed by the
 document itself.  CGI.pm provides functions for generating HTTP
@@ -1354,7 +1378,7 @@ try to mix a URL query string with a form submitted with the GET
 method, the results will not be what you expect.</p>
 
 
-<h1><a name="creating_standard_html_elements_">CREATING STANDARD HTML ELEMENTS:</a></h1>
+<h2><a name="creating_standard_html_elements_">CREATING STANDARD HTML ELEMENTS:</a></h2>
 <p>CGI.pm defines general HTML shortcut methods for many HTML tags.  HTML shortcuts are named after a single
 HTML element and return a fragment of HTML text. Example:</p>
 <pre>
@@ -1550,7 +1574,7 @@ pretty-printed output, please use <a href="/CGI/Pretty.html"> CGI::Pretty</a>, a
 contributed by Brian Paulsen.</p>
 
 
-<h1><a name="creating_fill_out_forms_">CREATING FILL-OUT FORMS:</a></h1>
+<h2><a name="creating_fill_out_forms_">CREATING FILL-OUT FORMS:</a></h2>
 <p><em>General note</em>  The various form-creating methods all return strings
 to the caller, containing the tag or tags that will create the requested
 form element.  You are responsible for actually printing out these strings.
@@ -2526,7 +2550,7 @@ pressed the fragment of JavaScript code pointed to by the <strong>-onClick</stro
 will be executed.</p>
 
 
-<h1><a name="http_cookies">HTTP COOKIES</a></h1>
+<h2><a name="http_cookies">HTTP COOKIES</a></h2>
 <p>Browsers support a so-called &quot;cookie&quot; designed to help maintain state
 within a browser session.  CGI.pm has several methods that support
 cookies.</p>
@@ -2671,7 +2695,7 @@ the names of all cookies passed to your script:</p>
 cookies effectively.</p>
 
 
-<h1><a name="working_with_frames">WORKING WITH FRAMES</a></h1>
+<h2><a name="working_with_frames">WORKING WITH FRAMES</a></h2>
 <p>It's possible for CGI.pm scripts to write into several browser panels
 and windows using the HTML 4 frame mechanism.  There are three
 techniques for defining new frames programmatically:</p>
@@ -2712,7 +2736,7 @@ create pages in which the fill-out form and the response live in
 side-by-side frames.</p>
 
 
-<h1><a name="support_for_javascript">SUPPORT FOR JAVASCRIPT</a></h1>
+<h2><a name="support_for_javascript">SUPPORT FOR JAVASCRIPT</a></h2>
 <p>The usual way to use JavaScript is to define a set of functions in a
 &lt;SCRIPT&gt; block inside the HTML header and then to register event
 handlers in the various elements of the page. Events include such
@@ -2850,7 +2874,7 @@ creating it this way:
 works.</p>
 
 
-<h1><a name="limited_support_for_cascading_style_sheets">LIMITED SUPPORT FOR CASCADING STYLE SHEETS</a></h1>
+<h2><a name="limited_support_for_cascading_style_sheets">LIMITED SUPPORT FOR CASCADING STYLE SHEETS</a></h2>
 <p>CGI.pm has limited support for HTML3's cascading style sheets (css).
 To incorporate a stylesheet into your document, pass the
 <code>start_html()</code> method a <strong>-style</strong> parameter.  The value of this
@@ -2952,7 +2976,7 @@ and pass it to <code>start_html()</code> in the -head argument, as in:</p>
                     });</pre>
 
 
-<h1><a name="debugging">DEBUGGING</a></h1>
+<h2><a name="debugging">DEBUGGING</a></h2>
 <p>If you are running the script from the command line or in the perl
 debugger, you can pass the script a list of keywords or
 parameter=value pairs on the command line or from standard input (you
@@ -3010,7 +3034,7 @@ and it will be replaced with the a nice HTML dump shown above:</p>
     print &quot;&lt;h2&gt;Current Values&lt;/h2&gt; $query\n&quot;;</pre>
 
 
-<h1><a name="fetching_environment_variables">FETCHING ENVIRONMENT VARIABLES</a></h1>
+<h2><a name="fetching_environment_variables">FETCHING ENVIRONMENT VARIABLES</a></h2>
 <p>Some of the more useful environment variables can be fetched
 through this interface.  The methods are as follows:</p>
 <dl>
@@ -3178,7 +3202,7 @@ whether SSL is turned on.</p>
 </dl>
 
 
-<h1><a name="using_nph_scripts">USING NPH SCRIPTS</a></h1>
+<h2><a name="using_nph_scripts">USING NPH SCRIPTS</a></h2>
 <p>NPH, or &quot;no-parsed-header&quot;, scripts bypass the server completely by
 sending the complete HTTP header directly to the browser.  This has
 slight performance benefits, but is of most use for taking advantage
@@ -3230,7 +3254,7 @@ your script:</p>
 </dl>
 
 
-<h1><a name="server_push">Server Push</a></h1>
+<h2><a name="server_push">Server Push</a></h2>
 <p>CGI.pm provides four simple functions for producing multipart
 documents of the type needed to implement server push.  These
 functions were graciously provided by Ed Jordan &lt;<a href="mailto:ed@fidalgo.net">ed@fidalgo.net</a>&gt;.  To
@@ -3300,7 +3324,7 @@ document when <a href="#multipart_final"><code>multipart_final()</code></a> shou
 at the CGI::Push module.</p>
 
 
-<h1><a name="avoiding_denial_of_service_attacks">Avoiding Denial of Service Attacks</a></h1>
+<h2><a name="avoiding_denial_of_service_attacks">Avoiding Denial of Service Attacks</a></h2>
 <p>A potential problem with CGI.pm is that, by default, it attempts to
 process form POSTings no matter how large they are.  A wily hacker
 could attack your site by sending a CGI script a huge POST of many
@@ -3380,7 +3404,7 @@ with this status code.  It might be better just to create an
 HTML page that warns the user of the problem.</p>
 
 
-<h1><a name="compatibility_with_cgi_lib_pl">COMPATIBILITY WITH CGI-LIB.PL</a></h1>
+<h2><a name="compatibility_with_cgi_lib_pl">COMPATIBILITY WITH CGI-LIB.PL</a></h2>
 <p>To make it easier to port existing programs that use cgi-lib.pl the
 compatibility routine &quot;ReadParse&quot; is provided.  Porting is simple:</p>
 <p>OLD VERSION</p>
@@ -3455,7 +3479,7 @@ available for your use:</p>
     This function is not available. You'll have to roll your own if you really need it.</pre>
 
 
-<h1><a name="author_information">AUTHOR INFORMATION</a></h1>
+<h2><a name="author_information">AUTHOR INFORMATION</a></h2>
 <p>The CGI.pm distribution is copyright 1995-2007, Lincoln D. Stein. It is
 distributed under GPL and the Artistic License 2.0. It is currently
 maintained by Mark Stosberg with help from many contributors.</p>
@@ -3466,7 +3490,7 @@ operating system you are using.  If the problem is even remotely browser
 dependent, please provide information about the affected browsers as well.</p>
 
 
-<h1><a name="credits">CREDITS</a></h1>
+<h2><a name="credits">CREDITS</a></h2>
 <p>Thanks very much to:</p>
 <dl>
 <dt><strong><a name="heffron" class="item">Matt Heffron (<a href="mailto:heffron@falstaff.css.beckman.com">heffron@falstaff.css.beckman.com</a>)</a></strong></dt>
@@ -3517,7 +3541,7 @@ dependent, please provide information about the affected browsers as well.</p>
 </dl>
 
 
-<h1><a name="a_complete_example_of_a_simple_form_based_script">A COMPLETE EXAMPLE OF A SIMPLE FORM-BASED SCRIPT</a></h1>
+<h2><a name="a_complete_example_of_a_simple_form_based_script">A COMPLETE EXAMPLE OF A SIMPLE FORM-BASED SCRIPT</a></h2>
 <pre>
         #!/usr/local/bin/perl</pre>
 <pre>
@@ -3597,11 +3621,11 @@ dependent, please provide information about the affected browsers as well.</p>
         }</pre>
 
 
-<h1><a name="bugs">BUGS</a></h1>
+<h2><a name="bugs">BUGS</a></h2>
 <p>Please report them: .</p>
 
 
-<h1><a name="see_also">SEE ALSO</a></h1>
+<h2><a name="see_also">SEE ALSO</a></h2>
 <p><a href="/CGI/Carp.html"> CGI::Carp</a> - provides a <em>Carp</em> implementation tailored to the CGI environment.</p>
 <p><a href="/CGI/Fast.html"> CGI::Fast</a> - supports running CGI applications under FastCGI</p>
 <p><a href="/CGI/Pretty.html"> CGI::Pretty</a> - pretty prints HTML generated by CGI.pm (with a performance penalty)</p>
