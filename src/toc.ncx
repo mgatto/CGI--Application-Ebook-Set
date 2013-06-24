@@ -20,7 +20,7 @@ http://www.idpf.org/2007/opf/OPF_2.0_final_spec.html#Section2.4.1
     <navMap>
         <navPoint id="toc" playOrder="1">
             <navLabel>
-                <text>Introduction</text>
+                <text>Table of Contents</text>
             </navLabel>
             <content src="toc.html"/>
         </navPoint>
@@ -29,38 +29,50 @@ http://www.idpf.org/2007/opf/OPF_2.0_final_spec.html#Section2.4.1
                 <text>Introduction</text>
             </navLabel>
             <content src="index.html"/>
+            <navPoint id="cgi-app-syn" playOrder="3">
+                <navLabel>
+                    <text>Synopsis</text>
+                </navLabel>
+                <content src="CGI--Application.html#synopsis" />
+            </navPoint>
+            <navPoint id="cgi-app-intro" playOrder="4">
+                <navLabel>
+                    <text>Introduction</text>
+                </navLabel>
+                <content src="CGI--Application.html#introduction" />
+            </navPoint>
         </navPoint>
-        <navPoint id="cgi-app" playOrder="3">
+        <navPoint id="cgi-app" playOrder="5">
             <navLabel>
                 <text>CGI::Application</text>
             </navLabel>
             <content src="CGI--Application.html" />
         </navPoint>
-        <navPoint id="cgi-app-psgi" playOrder="4">
+        <navPoint id="cgi-app-psgi" playOrder="6">
             <navLabel>
                 <text>Deploying with PSGI</text>
             </navLabel>
             <content src="CGI--Application--PSGI.html" />
         </navPoint>
-        <navPoint id="cgi-psgi" playOrder="5">
+        <navPoint id="cgi-psgi" playOrder="7">
             <navLabel>
                 <text>CGI::PSGI</text>
             </navLabel>
             <content src="CGI--PSGI.html" />
         </navPoint>
-        <navPoint id="cgi-sess" playOrder="6">
+        <navPoint id="cgi-sess" playOrder="8">
             <navLabel>
                 <text>CGI::Session</text>
             </navLabel>
             <content src="CGI--Session.html" />
         </navPoint>
-        <navPoint id="html-temp" playOrder="7">
+        <navPoint id="html-temp" playOrder="9">
             <navLabel>
                 <text>HTML::Template</text>
             </navLabel>
             <content src="HTML--Template.html" />
         </navPoint>
-        <navPoint id="html-temp-comp" playOrder="8">
+        <navPoint id="html-temp-comp" playOrder="10">
             <navLabel>
                 <text>HTML::Template::Compiled</text>
             </navLabel>
