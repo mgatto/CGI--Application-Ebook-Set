@@ -5,47 +5,57 @@
             <dc:title>CGI::Application Documentation Set</dc:title>
             <dc:language>en-us</dc:language>
             <dc:identifier id="BookId" opf:scheme="uuid">urn:uuid:0223a860-4a28-4f37-9582-38c6b44afa27</dc:identifier>
-            <dc:creator opf:role="aut"></dc:creator>
+            <dc:creator opf:role="aut" file-as="Last, First"></dc:creator>
+            <dc:contributor opf:file-as="Last, First" opf:role="edt">Michael Gatto</dc:contributor>
+            <!-- example of an editor -->
             <dc:copyrights></dc:copyrights>
             <dc:publisher>Lisantra Technologies, LLC</dc:publisher>
             <dc:date>2013-06-24</dc:date>
             <x-metadata>
                 <!--<EmbeddedCover>images/cover.jpg</EmbeddedCover>-->
             </x-metadata>
+            <meta name="cover" content="{ID of the cover image I'll specify in the Manifest Section}" />
+            <!--Required for KindleGen, Barnes and Noble, and iBookstore-->
 
             <!--Extra metadata here (recommended)-->
             <!--Backjacket description goes here-->
-            <dc:description></dc:description>
+            <dc:description>This ebook is a collection of documentation for CGI::Application and commonly associated modules, specially formatted for modern ereaders. Chapters are clearly delineated and custom fonts are embedded. The default stylesheet is derived from chromatic's "Modern Perl" website, Metacpan's web stylesheet and the CSS used in perldoc.perl.org.</dc:description>
 
             <!--These function like Keywords. Use as many as you like-->
             <dc:subject>Perl</dc:subject>
             <dc:subject>Programming</dc:subject>
+            <dc:subject>Internet</dc:subject>
             <dc:subject>Web Development</dc:subject>
+            <dc:subject>CGI</dc:subject>
+            <dc:subject>Templating</dc:subject>
 
             <!--This is optional metadata that rarely gets used-->
-            <dc:rights></dc:rights>
+            <dc:rights>Public Domain</dc:rights>
             <dc:type>Text</dc:type>
             <dc:source>Can be a URL or ISBN number</dc:source>
             <!-- A prior resource from which the publication was derived -->
 
-            <dc:relation>Can be a URL or ISBN number</dc:relation>
+            <!--<dc:relation>Can be a URL or ISBN number</dc:relation>-->
             <!-- An identifier of an auxiliary resource and its relationship to the publication -->
-
             <dc:coverage>Worldwide</dc:coverage>
         </dc-metadata>
     </metadata>
     <manifest>
         <item id="content" media-type="text/x-oeb1-document" href="toc.html"></item>
         <item id="ncx" media-type="application/x-dtbncx+xml" href="toc.ncx"/>
-        <item id="text1" media-type="text/x-oeb1-document" href="index.html"></item><!-- application/xhtml+xml -->
-        <item id="text2" media-type="text/x-oeb1-document" href="CGI--Application.html"></item>
-        <item id="text3" media-type="text/x-oeb1-document" href="CGI--Application--PSGI.html"></item>
-        <item id="text4" media-type="text/x-oeb1-document" href="CGI--PSGI.html"></item>
-        <item id="text5" media-type="text/x-oeb1-document" href="CGI--Application--FastCGI.html"></item>
-        <item id="text6" media-type="text/x-oeb1-document" href="CGI--Session.html"></item>
-        <item id="text7" media-type="text/x-oeb1-document" href="HTML--Template.html"></item>
-        <item id="text8" media-type="text/x-oeb1-document" href="HTML--Template--Compiled.html"></item>
+        <item id="text1" media-type="application/xhtml+xml" href="index.html"></item><!-- text/x-oeb1-document -->
+        <item id="text2" media-type="application/xhtml+xml" href="CGI--Application.html"></item>
+        <item id="text3" media-type="application/xhtml+xml" href="CGI--Application--PSGI.html"></item>
+        <item id="text4" media-type="application/xhtml+xml" href="CGI--PSGI.html"></item>
+        <item id="text5" media-type="application/xhtml+xml" href="CGI--Application--FastCGI.html"></item>
+        <item id="text6" media-type="application/xhtml+xml" href="CGI--Session.html"></item>
+        <item id="text7" media-type="application/xhtml+xml" href="HTML--Template.html"></item>
+        <item id="text8" media-type="application/xhtml+xml" href="HTML--Template--Compiled.html"></item>
         <item id="styles1" media-type="text/css" href="css/modernperl.css" />
+        <item id="fonts1" media-type="font/truetype" href="fonts/VeraMono.ttf" />
+        <item id="fonts2" media-type="font/truetype" href="fonts/VeraMono-Bold.ttf" />
+        <item id="fonts3" media-type="font/truetype" href="fonts/VeraMono-Bold-Italic.ttf" />
+        <item id="fonts4" media-type="font/truetype" href="fonts/VeraMono-Italic.ttf" />
     </manifest>
     <spine toc="ncx">
         <itemref idref="content"/>
