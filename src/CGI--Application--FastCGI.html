@@ -1,76 +1,49 @@
 <?xml version="1.0" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title>CGI::Application::FastCGI - for using CGI::Application under FastCGI</title>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<link rev="made" href="mailto:" />
-</head>
+	<head>
+		<title>CGI::Application::FastCGI - for using CGI::Application under FastCGI</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="css/modernperl.css" type="text/css" />
+	</head>
+	<body>
+		<h1>CGI::Application::FastCGI &mdash; for using CGI::Application under FastCGI</h1>
+		<p>PSGI Adapter for CGI::Application</p>
+		<hr />
 
-<body style="background-color: white">
-
-
-<!-- INDEX BEGIN -->
-<div name="index">
-<p><a name="__index__"></a></p>
-
-<ul>
-
-	<li><a href="#name">NAME</a></li>
-	<li><a href="#synopsis">SYNOPSIS</a></li>
-	<li><a href="#description">DESCRIPTION</a></li>
-	<li><a href="#notes">NOTES</a></li>
-	<li><a href="#see_also">SEE ALSO</a></li>
-	<li><a href="#author">AUTHOR</a></li>
-</ul>
-
-<hr name="index" />
-</div>
-<!-- INDEX END -->
-
-<p>
-</p>
-<h1><a name="name">NAME</a></h1>
-<p>CGI::Application::FastCGI - for using CGI::Application under FastCGI</p>
-<p>
-</p>
-<hr />
-<h1><a name="synopsis">SYNOPSIS</a></h1>
+		<h1><a name="synopsis"></a>Synopsis</h1>
 <pre>
-  # In &quot;WebApp.pm&quot;...
-  package WebApp;
-  use base qw(CGI::Application::FastCGI);
-  sub setup {
+# In &quot;WebApp.pm&quot;...
+package WebApp;
+
+use base qw(CGI::Application::FastCGI);
+sub setup {
     ...
-  }
-  1;</pre>
+}
+
+1;
+</pre>
+
 <pre>
-  # In &quot;webapp.fcgi&quot;...
-  use WebApp;
-  my $webapp = WebApp-&gt;new;
-  $webapp-&gt;run;</pre>
-<p>
-</p>
-<hr />
-<h1><a name="description">DESCRIPTION</a></h1>
-<p>Inherit this module instead of CGI::Application if you want to run your cgi programs based on CGI::Application under FastCGI.</p>
-<p>
-</p>
-<hr />
-<h1><a name="notes">NOTES</a></h1>
-<p>Note that <code>cgiapp_init()</code> will be called only once under lifecycle of FastCGI. <code>setup()</code> will also only be called once. (you should not be doing magical things in 'setup'.) So if you want to do something for every REQUESTS, you should write the logic in <code>cgiapp_prerun()</code>.</p>
-<p>
-</p>
-<hr />
-<h1><a name="see_also">SEE ALSO</a></h1>
-<p><a href="/CGI/Application.html">the CGI::Application manpage</a>, <em>FCGI</em></p>
-<p>
-</p>
-<hr />
-<h1><a name="author">AUTHOR</a></h1>
-<p>Naoya Ito &lt;<a href="mailto:naoya@naoya.dyndns.org">naoya@naoya.dyndns.org</a>&gt;</p>
-<p>This library is free software; you can redistribute it and/or modify it under the same terms as Perl itself.</p>
+# In &quot;webapp.fcgi&quot;...
+use WebApp;
 
-</body>
+my $webapp = WebApp-&gt;new;
+$webapp-&gt;run;
+</pre>
+    
+	<h1><a name="description">Description</a></h1>
+	<p>Inherit this module instead of CGI::Application if you want to run your CGI programs based on CGI::Application under FastCGI.</p>
+    
+	<h1><a name="notes">Notes</a></h1>
+	<p>Note that <code>cgiapp_init()</code> will be called only once under lifecycle of FastCGI. <code>setup()</code> will also only be called once. (you should not be doing magical things in 'setup'.) So if you want to do something for every REQUEST, you should write the logic in <code>cgiapp_prerun()</code>.</p>
 
+	<h1><a name="see_also">See Also</a></h1>
+	<p><a href="/CGI/Application.html">the CGI::Application manpage</a>, <em>FCGI</em></p>
+
+	<h1><a name="author">Author</a></h1>
+	<p>Naoya Ito &lt;<a href="mailto:naoya@naoya.dyndns.org">naoya@naoya.dyndns.org</a>&gt;</p>
+	
+    <p>This library is free software; you can redistribute it and/or modify it under the same terms as Perl itself.</p>
+	</body>
 </html>
