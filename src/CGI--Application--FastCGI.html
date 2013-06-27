@@ -2,16 +2,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>CGI::Application::FastCGI - for using CGI::Application under FastCGI</title>
+		<title>CGI::Application::FastCGI &ndash; for using CGI::Application under FastCGI</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" href="css/modernperl.css" type="text/css" />
 	</head>
 	<body>
-		<h1>CGI::Application::FastCGI &mdash; for using CGI::Application under FastCGI</h1>
-		<p>PSGI Adapter for CGI::Application</p>
+		<h1>CGI::Application::FastCGI &mdash; 0.02</h1>
+		<p>For using CGI::Application under FastCGI.</p>
 		<hr />
 
-		<h1><a name="synopsis"></a>Synopsis</h1>
+		<h2><a name="synopsis"></a>Synopsis</h2>
 <pre>
 # In &quot;WebApp.pm&quot;...
 package WebApp;
@@ -32,16 +32,15 @@ my $webapp = WebApp-&gt;new;
 $webapp-&gt;run;
 </pre>
     
-	<h1><a name="description">Description</a></h1>
-	<p>Inherit this module instead of CGI::Application if you want to run your CGI programs based on CGI::Application under FastCGI.</p>
+
     
-	<h1><a name="notes">Notes</a></h1>
+	<h3><a name="notes">Notes</a></h3>
 	<p>Note that <code>cgiapp_init()</code> will be called only once under lifecycle of FastCGI. <code>setup()</code> will also only be called once. (you should not be doing magical things in 'setup'.) So if you want to do something for every REQUEST, you should write the logic in <code>cgiapp_prerun()</code>.</p>
 
-	<h1><a name="see_also">See Also</a></h1>
+	<h3><a name="see_also">See Also</a></h3>
 	<p><a href="/CGI/Application.html">the CGI::Application manpage</a>, <em>FCGI</em></p>
 
-	<h1><a name="author">Author</a></h1>
+	<h3><a name="author">Author</a></h3>
 	<p>Naoya Ito &lt;<a href="mailto:naoya@naoya.dyndns.org">naoya@naoya.dyndns.org</a>&gt;</p>
 	
     <p>This library is free software; you can redistribute it and/or modify it under the same terms as Perl itself.</p>

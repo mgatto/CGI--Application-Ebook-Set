@@ -7,7 +7,7 @@ http://www.idpf.org/2007/opf/OPF_2.0_final_spec.html#Section2.4.1
 <ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="en-US">
     <head>
         <meta name="dtb:uid" content="urn:uuid:0223a860-4a28-4f37-9582-38c6b44afa27"/>
-        <meta name="dtb:depth" content="2"/>
+        <meta name="dtb:depth" content="3"/>
         <meta name="dtb:totalPageCount" content="0"/><!-- do not change -->
         <meta name="dtb:maxPageNumber" content="0"/><!-- do not change -->
     </head>
@@ -18,61 +18,91 @@ http://www.idpf.org/2007/opf/OPF_2.0_final_spec.html#Section2.4.1
         <text>Mark Stosberg</text>
     </docAuthor>
     <navMap>
-        <navPoint id="toc" playOrder="1">
+		<navPoint id="title" playOrder="1">
+            <navLabel>
+                <text>Title Page</text>
+            </navLabel>
+            <content src="Title.html"/>
+        </navPoint>
+        <navPoint id="toc" playOrder="2">
             <navLabel>
                 <text>Table of Contents</text>
             </navLabel>
             <content src="toc.html"/>
         </navPoint>
-        <navPoint id="intro" playOrder="2">
+        <navPoint id="intro" playOrder="3">
             <navLabel>
                 <text>Introduction</text>
             </navLabel>
             <content src="index.html"/>
-            <navPoint id="cgi-app-syn" playOrder="3">
+        </navPoint>
+        <navPoint id="cgi-app" playOrder="4">
+            <navLabel>
+                <text>CGI::Application</text>
+            </navLabel>
+            <content src="CGI--Application.html" />
+            <navPoint id="cgi-app-syn" playOrder="5">
                 <navLabel>
                     <text>Synopsis</text>
                 </navLabel>
                 <content src="CGI--Application.html#synopsis" />
             </navPoint>
-            <navPoint id="cgi-app-intro" playOrder="4">
+            <navPoint id="cgi-app-intro" playOrder="6">
                 <navLabel>
                     <text>Introduction</text>
                 </navLabel>
                 <content src="CGI--Application.html#introduction" />
             </navPoint>
         </navPoint>
-        <navPoint id="cgi-app" playOrder="5">
+        <navPoint id="cgi-app-psgi" playOrder="7">
             <navLabel>
-                <text>CGI::Application</text>
+                <text>Deploying CGI::Application</text>
             </navLabel>
-            <content src="CGI--Application.html" />
+            <content src="Deploying.html" />
+            <navPoint id="cgi-app-plugin-psgi" playOrder="8">
+                <navLabel>
+                    <text>Deploying with PSGI</text>
+                </navLabel>
+                <content src="CGI--Application--PSGI.html" />
+            </navPoint>
+            <navPoint id="cgi-psgi" playOrder="9">
+                <navLabel>
+                    <text>CGI::PSGI</text>
+                </navLabel>
+                <content src="CGI--PSGI.html" />
+            </navPoint>
+            <navPoint id="cgi-fastsgi" playOrder="10">
+                <navLabel>
+                    <text>Deploying with FastCGI</text>
+                </navLabel>
+                <content src="CGI--Application--FastCGI.html" />
+            </navPoint>
+            <navPoint id="cgi-apache" playOrder="11">
+                <navLabel>
+                    <text>Deploying with Mod_Perl</text>
+                </navLabel>
+                <content src="CGI--Application--Apache.html" />
+                <navPoint id="cgi-apache-req" playOrder="12">
+                    <navLabel>
+                        <text>Wrapping Apache2::Request</text>
+                    </navLabel>
+                    <content src="CGI--Application--Apache2--Request.html" />
+                </navPoint>
+            </navPoint>
         </navPoint>
-        <navPoint id="cgi-app-psgi" playOrder="6">
-            <navLabel>
-                <text>Deploying with PSGI</text>
-            </navLabel>
-            <content src="CGI--Application--PSGI.html" />
-        </navPoint>
-        <navPoint id="cgi-psgi" playOrder="7">
-            <navLabel>
-                <text>CGI::PSGI</text>
-            </navLabel>
-            <content src="CGI--PSGI.html" />
-        </navPoint>
-        <navPoint id="cgi-sess" playOrder="8">
+        <navPoint id="cgi-sess" playOrder="13">
             <navLabel>
                 <text>CGI::Session</text>
             </navLabel>
             <content src="CGI--Session.html" />
         </navPoint>
-        <navPoint id="html-temp" playOrder="9">
+        <navPoint id="html-temp" playOrder="14">
             <navLabel>
                 <text>HTML::Template</text>
             </navLabel>
             <content src="HTML--Template.html" />
         </navPoint>
-        <navPoint id="html-temp-comp" playOrder="10">
+        <navPoint id="html-temp-comp" playOrder="15">
             <navLabel>
                 <text>HTML::Template::Compiled</text>
             </navLabel>

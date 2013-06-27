@@ -10,28 +10,42 @@
         <h1>Table of Contents</h1>
 
         <ul>
+        	<li>
+            	<a href="Title.html">Title Page</a>
+            </li>
             <li>
                 <a href="index.html">Introduction</a>
             </li>
             <li>
                 <a href="CGI--Application.html">CGI::Application</a>
-                <ul>
+                <!--<ul>
                     <li>
                        <a href="CGI--Application.html#synopsis">Synopsis</a>
                     </li>
                     <li>
                         <a href="GGI--Application.html#introduction">Introduction</a>
                     </li>
-                </ul>
+                </ul>-->
             </li>
-            <li>
-                <a href="CGI--Application--PSGI.html">CGI::Application::PSGI</a>
-            </li>
-            <li>
-                <a href="CGI--PSGI.html">CGI::PSGI</a>
-            </li>
-            <li>
-                <a href="CGI--Application--FastCGI.html">CGI::Application::FastCGI</a>
+            <li><a href="">Deploying CGI::Application</a>
+            	<ul>
+	                <li>
+		                <a href="CGI--Application--PSGI.html">Deploying with PSGI</a>
+		            	<ul>
+                        	<li>
+		                		<a href="CGI--PSGI.html">CGI::PSGI</a>
+				            </li>
+                        </ul>
+                    </li>
+		            <li>
+		                <a href="CGI--Application--FastCGI.html">Deploying with FastCGI</a>
+		            </li>
+                    <li><a href="CGI--Application--Apache.html">Deploying with Mod_Perl</a>
+	                    <ul>
+		                    <li><a href="CGI--Application--Apache2--Request.html">Wrapping Apache2::Request</a></li>
+	                    </ul>
+                    </li>
+                </ul>    
             </li>
             <!--<a href="CGI--Simple.html">CGI::Simple (CGI.pm Replacement)</a><br />-->
             <li>

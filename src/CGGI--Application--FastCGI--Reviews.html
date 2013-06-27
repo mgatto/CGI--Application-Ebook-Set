@@ -1,0 +1,59 @@
+<div id="reviews">
+
+
+<div data-user="11760" data-review="10096" class="review">
+<a name="10096"></a>
+<h3 class="review_header">
+
+
+
+<a href="http://search.cpan.org/dist/CGI-Application-FastCGI/" target="_blank">
+
+
+CGI-Application-FastCGI</a><img alt="external link" src="/i/external.v1.png" class="extlink">
+
+(0.02)
+
+
+
+
+<img alt="**" src="http://st.pimg.net/perlweb/cpanratings/images/stars-2.0.v8a4cc3b.png">
+
+</h3>
+
+
+
+<blockquote class="review_text">
+The module reuses the same CGI::Application object instance for several requests, which seems like a good idea at first, but as it turns out (cmp. <a rel="nofollow" href="http://www.mail-archive.com/cgiapp@lists.erlbaum.net/msg08997.html" target="_blank">www.mail-archive.com/cgiapp@lists.erl...</a><img alt="external link" src="/i/external.v1.png" class="extlink"> ff.) CGI::Application and especially some plugins are not designed to be used in this manner.  You might even run into severe security issues when using CGI::Application::Plugin::Authentication, like sending an authentication cookie which was intended for person A, who has just logged in, to person B, among similar phenomena.
+<br><br>So my recommendation would be: Do not use CGI::Application::FastCGI, but just build your instance script on CGI::Fast, as described here: <a rel="nofollow" href="http://www.cgi-app.org/index.cgi?FastCGI" target="_blank">www.cgi-app.org/index.cgi?FastCGI</a><img alt="external link" src="/i/external.v1.png" class="extlink">
+</blockquote>
+
+
+<p class="review_attribution">
+<a href="/user/mhs">Martin H. Sluka</a> - 2012-06-17T01:37:09
+
+(<a href="/dist/CGI-Application-FastCGI#10096">permalink</a>)
+</p>
+
+<div class="helpfulq">
+
+1 out of 1 found this review helpful.
+
+Was this review helpful to you?&nbsp;
+
+<!-- we should add non-js links to rate stuff helpful/not helpful too... -->
+
+<span class="helpful helpful_yes">Yes</span>
+<span class="helpful helpful_no">No</span>
+<span class="thanks"></span>
+
+</div>
+
+</div>
+
+
+
+
+
+
+</div>
