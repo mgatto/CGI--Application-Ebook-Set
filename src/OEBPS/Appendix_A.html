@@ -7,26 +7,16 @@
         <link rel="stylesheet" href="css/modernperl.css" type="text/css" />
     </head>
     <body>
-        <h1>Introduction</h1>
-        <p>
-            This ebook is a collection of documentation for CGI::Application and commonly associated modules, specially formatted for modern ereaders. Chapters are clearly delineated and custom fonts are embedded. The default stylesheet is derived from chromatic's "Modern Perl" website, Metacpan's web stylesheet and the CSS used in perldoc.perl.org.
-        </p>
-        <p>
-            I've also added content from annocpan.org, and attributed any annoations which were included into this compilation.
-        </p>
-        <p>
-            I've taken some liberties in editing the original documentation. Among others, I've removed sections about deprecated features. I would hope than anyone using this ebook would be using the latest versions of these modules from CPAN.
-        </p>
-        <!--<p>The modules chosen may not be the state of the art in Perl application development and may possibly show their age. However, I think this is an approximation of a reasonable toolkit for older, but still quite reasonable, Perl stack for web application development.</p>
-        <p>For more state of the art in Perl Web development, read up on Plack/PSGI, Mojolicious, Dancer, Squatting, Template::Toolkit, DBIx::Class, HTML::FormFu or HTML::FormHandler.</p>-->
+        <h1>Appendix A</h1>
+        <hr />
+        <h3>Production of this Ebook</h3>
 
-        <h2>How We Produced It</h2>
         <ol>
             <li>
                 <p>
                     Convert POD to HTML
                 </p>
-                <pre>
+<pre>
 pod2html --infile=Application.pm --outfile="CGI--Application.html" --podpath=.
 </pre>
             </li>
@@ -34,7 +24,7 @@ pod2html --infile=Application.pm --outfile="CGI--Application.html" --podpath=.
                 <p>
                     Convert to Kindle .mobi (KF8) using command line applications provided by the <a href="http://calibre-ebook.com/">Calibre</a> project:
                 </p>
-                <pre>
+<pre>
 ebook-convert CGI--Application.html CGI--Application.mobi
   --chapter=//h1
   --chapter-mark=pagebreak
@@ -66,13 +56,16 @@ ebook-convert CGI--Application.html CGI--Application.mobi
 
         <ol>
             <li>
-                Convert POD to HTML
+                Convert POD to HTML.
             </li>
             <li>
-                Produce Epub2 Book
+                Manually format &amp; prettify HTML
             </li>
             <li>
-                Convert to Kindle Format 8 using KindleGen
+                Produce Epub2 Book.
+            </li>
+            <li>
+                Convert to Mobi7 &amp; Kindle Format 8 using KindleGen.
             </li>
         </ol>
         <p>
@@ -86,20 +79,12 @@ ebook-convert CGI--Application.html CGI--Application.mobi
             </li>
             <ul>
                 <li>
-                    Output EPUB (EPUB3 and EPUB2)
-                </li>
-                <li>
                     Write a Perl Regex script to refine the HTML produced by pod2html, instead of using an editor and Zen coding (as cool as Zen coding is.)
                 </li>
-                <li>
-                    Include documentation for more CGI::Application Plugins
-                </li>
             </ul>
+            <li>
+                Include documentation for more CGI::Application Plugins
+            </li>
         </ul>
-
-        <h3>License</h3>
-        <p>
-            All derived contents are licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/us/">Creative Commons Attribution-Share Alike 3.0</a>.
-        </p>
     </body>
 </html>

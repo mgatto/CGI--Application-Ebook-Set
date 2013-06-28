@@ -34,7 +34,7 @@ http://www.idpf.org/2007/opf/OPF_2.0_final_spec.html#Section2.4.1
             <navLabel>
                 <text>Introduction</text>
             </navLabel>
-            <content src="index.html"/>
+            <content src="Introduction.html"/>
         </navPoint>
         <navPoint id="cgi-app" playOrder="4">
             <navLabel>
@@ -107,6 +107,12 @@ http://www.idpf.org/2007/opf/OPF_2.0_final_spec.html#Section2.4.1
                 <text>HTML::Template::Compiled</text>
             </navLabel>
             <content src="HTML--Template--Compiled.html" />
+        </navPoint>
+        <navPoint id="app-a" playOrder="16">
+            <navLabel>
+                <text>Appendix A: Production of this Ebook</text>
+            </navLabel>
+            <content src="Appendix_A.html" />
         </navPoint>
     </navMap>
 </ncx>
