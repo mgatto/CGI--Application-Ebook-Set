@@ -7,10 +7,37 @@
         <link rel="stylesheet" href="css/modernperl.css" type="text/css" />
     </head>
     <body>
-        <h1>Appendix A</h1>
-        <hr />
-        <h3>Production of this Ebook</h3>
+    	<div class="center">
+	        <h1>Appendix A</h1>
+	        <hr />
+	        <p>Production of this Ebook</p>
+		</div>
+        
+        <h2>Newer, Better Process</h2>
+        <p>This process uses Epub as its base, then converts to Kindle. Epub is more universally supported, even by KindleGen :-). This alternate workflow seems to help articulate metadata and Tables of Contents better than the HTML->Calibre method described below.
+        </p>
 
+        <ol>
+            <li>
+                <p>
+                    Convert POD to HTML
+                </p>
+<pre>
+pod2html --infile=Application.pm --outfile="CGI--Application.html" --podpath=.
+</pre>
+            </li>
+        	<li>Edit the EPub directory structure with your favorite HTML Editor.</li>
+        	<li>Validate and Package the Epub</li>
+        	<li>
+<pre>
+kindlegen content.opf CGI-Application-Booklet.mobi
+</pre>
+			</li>
+        </ol>
+        
+        
+        <h2>First Process</h2>
+        <p>This process only intended to create Kindle eBooks from HTML.</p>
         <ol>
             <li>
                 <p>
@@ -51,26 +78,6 @@ ebook-convert CGI--Application.html CGI--Application.mobi
                 </p>
             </li>
         </ol>
-
-        <h3>Alternate Workflow</h3>
-
-        <ol>
-            <li>
-                Convert POD to HTML.
-            </li>
-            <li>
-                Manually format &amp; prettify HTML
-            </li>
-            <li>
-                Produce Epub2 Book.
-            </li>
-            <li>
-                Convert to Mobi7 &amp; Kindle Format 8 using KindleGen.
-            </li>
-        </ol>
-        <p>
-            This alternate workflow seems to help articulate metadata and Tables of Contents better than the HTML->Calibre method.
-        </p>
 
         <h3>To Do</h3>
         <ul>

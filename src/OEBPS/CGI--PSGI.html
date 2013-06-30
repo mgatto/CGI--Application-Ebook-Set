@@ -7,22 +7,12 @@
 		<link rel="stylesheet" href="css/modernperl.css" type="text/css" />
 	</head>
 	<body>
-		<h1>CGI::PSGI &mdash; </h1>
-		<p>Adapt CGI.pm to the PSGI protocol</p>
-		<hr />
-
-		<!--<h1>Contents</h1>
-		<ul id="index">
-			<li>Synopsis</li>
-			<li>Description</li>
-			<li>Interfaces Supported</li>
-			<li>Methods</li>
-			<li>Limitations</li>
-			<li>Author</li>
-			<li>License</li>
-			<li>See Also</li>
-		</ul>-->
-
+    	<div class="center">
+			<h1>CGI::PSGI &mdash; 0.15</h1>
+			<hr />
+			<h3>Adapt CGI.pm to the PSGI protocol</h3>
+		</div>
+        
 		<h2>Synopsis</h2>
 <pre>
 use CGI::PSGI;
@@ -34,78 +24,162 @@ my $app = sub {
 };
 </pre>
 
-<h2>Description</h2>
-<p>This module is for web application framework developers who currently uses
-<em>CGI</em> to handle query parameters, and would like for the frameworks to comply
-with the <a href="/./PSGI.html">PSGI</a> protocol.</p>
-<p>Only slight modifications should be required if the framework is already
-collecting the body content to print to STDOUT at one place (rather using
-the print-as-you-go approach).</p>
-<p>On the other hand, if you are an &quot;end user&quot; of CGI.pm and have a CGI script
-that you want to run under PSGI web servers, this module might not be what you
-want.  Take a look at <a href="/CGI/Emulate/PSGI.html">CGI::Emulate::PSGI</a> instead.</p>
-<p>Your application, typically the web application framework adapter
-should update the code to do <code>CGI::PSGI-&gt;new($env)</code> instead of
-<code>CGI-&gt;new</code> to create a new CGI object. (This is similar to how
-<a href="/CGI/Fast.html">CGI::Fast</a> object is initialized in a FastCGI environment.)</p>
+		<h2>Description</h2>
+		<p>This module is for web application framework developers who currently uses <em>CGI</em> to handle query parameters, and would like for the frameworks to comply with the <em>PSGI</em> protocol.</p>
+		<p>Only slight modifications should be required if the framework is already collecting the body content to print to STDOUT at one place (rather using the print-as-you-go approach).</p>
+		<p>On the other hand, if you are an &quot;end user&quot; of CGI.pm and have a CGI script that you want to run under PSGI web servers, this module might not be what you want.  Take a look at <a href="CGI--Emulate--PSGI.html">CGI::Emulate::PSGI</a> instead.</p> <p>Your application, typically the web application framework adapter should update the code to do <code>CGI::PSGI-&gt;new($env)</code> instead of <code>CGI-&gt;new</code> to create a new CGI object. (This is similar to how <em>CGI::Fast</em> object is initialized in a FastCGI environment.)</p>
 
-<h2>Interfaces Supported</h2>
-<p>Only the object-oriented interface of CGI.pm is supported through CGI::PSGI.
-This means you should always create an object with <code>CGI::PSGI-&gt;new($env)</code>
-and should call methods on the object.</p>
-<p>The function-based interface like <code>use CGI ':standard'</code> does not work with this module.</p>
+		<h2>Interfaces Supported</h2>
+		<p>Only the object-oriented interface of CGI.pm is supported through CGI::PSGI. This means you should always create an object with <code>CGI::PSGI-&gt;new($env)</code> and should call methods on the object.</p>
+		<p>The function-based interface like <code>use CGI ':standard'</code> does not work with this module.</p>
 
+		<h2>Methods</h2>
+		<p>CGI::PSGI adds the following extra methods to CGI.pm:</p>
 
-<h2>Methods</h2>
-<p>CGI::PSGI adds the following extra methods to CGI.pm:</p>
-
-<h3>env</h3>
+		<h3>env</h3>
 <pre>
-$env = $cgi-&gt;env;</pre>
-<p>Returns the PSGI environment in a hash reference. This allows CGI.pm-based
-application frameworks such as <a href="/CGI/Application.html">CGI::Application</a> to access PSGI extensions,
-typically set by Plack Middleware components.</p>
-<p>So if you enable <a href="/Plack/Middleware/Session.html">Plack::Middleware::Session</a>, your application and
-plugin developers can access the session via:</p>
+$env = $cgi-&gt;env;
+</pre>
+		<p>Returns the PSGI environment in a hash reference. This allows CGI.pm-based application frameworks such as <a href="CGI--Application.html">CGI::Application</a> to access PSGI extensions, typically set by Plack Middleware components.</p>
+		<p>So if you enable <me>Plack::Middleware::Session, your application and plugin developers can access the session via:</p>
+        
 <pre>
-$cgi-&gt;env-&gt;{'plack.session'}-&gt;get(&quot;foo&quot;);</pre>
-<p>Of course this should be coded carefully by checking the existence of
-<code>env</code> method as well as the hash key <code>plack.session</code>.</p>
+$cgi-&gt;env-&gt;{'plack.session'}-&gt;get(&quot;foo&quot;);
+</pre>
+		<p>Of course this should be coded carefully by checking the existence of <code>env</code> method as well as the hash key <code>plack.session</code>.</p>
 
-<h3>psgi_header</h3>
+		<h3>psgi_header</h3>
 <pre>
 my ($status_code, $headers_aref) = $cgi-&gt;psgi_header(%args);
 </pre>
-<p>Works like CGI.pm's <em>header()</em>, but the return format is modified. It returns
-an array with the status code and arrayref of header pairs that PSGI
+		<p>Works like CGI.pm's <em>header()</em>, but the return format is modified. It returns an array with the status code and arrayref of header pairs that PSGI
 requires.</p>
-<p>If your application doesn't use <code>$cgi-&gt;header</code>, you can ignore this
-method and generate the status code and headers arrayref another way.</p>
+		<p>If your application doesn't use <code>$cgi-&gt;header</code>, you can ignore this method and generate the status code and headers arrayref another way.</p>
 
-<h3>psgi_redirect</h3>
+		<h3>psgi_redirect</h3>
 <pre>
 my ($status_code, $headers_aref) = $cgi-&gt;psgi_redirect(%args);
 </pre>
-<p>Works like CGI.pm's <em>redirect()</em>, but the return format is modified. It
-returns an array with the status code and arrayref of header pairs that PSGI
-requires.</p>
-<p>If your application doesn't use <code>$cgi-&gt;redirect</code>, you can ignore this
-method and generate the status code and headers arrayref another way.</p>
+		<p>Works like CGI.pm's <em>redirect()</em>, but the return format is modified. It returns an array with the status code and arrayref of header pairs that PSGI requires.</p>
+		<p>If your application doesn't use <code>$cgi-&gt;redirect</code>, you can ignore this method and generate the status code and headers arrayref another way.</p>
 
-<h2>Limitations</h2>
-<p>Do not use <a href="/CGI/Pretty.html">CGI::Pretty</a> or something similar in your controller. The
-module messes up <em>CGI</em>'s DIY autoloader and breaks CGI::PSGI (and
-potentially other) inheritance.</p>
+		<h2>Limitations</h2>
+		<p>Do not use <em>CGI::Pretty</em> or something similar in your controller. The module messes up <em>CGI</em>'s DIY autoloader and breaks <a href="CGI--PSGI.html">CGI::PSGI</a> (and potentially other) inheritance.</p>
+        
+        <h2>Change Log</h2>
+		<dl>
+			<dt>0.15  (Tue May 17 13:58:50 PDT 2011)</dt>
+	      	<dd>
+	      		<ul>
+		        	<li>Updated the list of overriding methods per CGI.pm update</li>
+		        	<li>Added a note that you can't use CGI::Pretty (reported by Maestro)</li>
+	            </ul>
+	        </dd>
+	
+			<dt>0.14  (Sat Dec 25 11:35:52 PST 2010)</dt>
+	       	<dd>
+	        	<ul>
+	        		<li>Port fixes for header injection from CGI.pm (markstos)</li>
+	        	</ul>
+	        </dd>
 
-<h2>Author</h2>
-<p>Tatsuhiko Miyagawa &lt;<a href="mailto:miyagawa@bulknews.net">miyagawa@bulknews.net</a>&gt;</p>
-<p>Mark Stosberg &lt;<a href="mailto:mark@summersault.com">mark@summersault.com</a>&gt;</p>
+			<dt>0.13  (Sat Oct 30 23:09:06 PDT 2010)</dt>
+	        <dd>
+	        	<ul>
+	        		<li>Specify Test::More dep</li>
+	        	</ul>
+	        </dd>
+	
+			<dt>0.12  (Mon Oct 25 11:06:59 PDT 2010)</dt>
+	        <dd>
+	        	<ul>
+	        		<li>Strip Status: header since to conform PSGI spec (clkao)</li>
+	        	</ul>
+	        </dd>
 
-<h2>License</h2>
-<p>This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.</p>
+			<dt>0.11  (Sat May  1 04:37:07 PDT 2010)</dt>
+			<dd>
+	        	<ul>
+	        		<li>Upped CGI.pm dependency to 3.33 to fix the upload() issue in perl 5.10</li>
+	        	</ul>
+	        </dd>
 
-<h2>See Also</h2>
-<p><em>CGI</em>, <a href="/CGI/Emulate/PSGI.html">CGI::Emulate::PSGI</a></p>
+			<dt>0.10  (Wed Mar 31 01:14:43 PDT 2010)</dt>
+	        <dd>
+	        	<ul>
+	        		<li>Upped CGI.pm dependency to 3.15, released in 2005 and is core in perl 5.8.8</li>
+	        	</ul>
+	        </dd>
+	
+			<dt>0.09  (Thu Feb 11 14:47:26 PST 2010)</dt>
+	        <dd>
+	        	<ul>
+	        		<li>Added <code>psgi_redirect()</code> to make migration from CGI.pm even easier (markstos)</li>
+	        		<li>POD overhaul and improvements (markstos)</li>
+	        	</ul>
+	        </dd>
+	
+			<dt>0.07  (Tue Jan 12 10:21:19 PST 2010)</dt>
+			<dd>
+	        	<ul>
+	        		<li>Unset $CGI::MOD_PERL in case CGI.pm is preloaded by other non-PSGI apps running on Apache (confound, sukria)</li>
+	        	</ul>
+	        </dd>
+	
+			<dt>0.06  (Wed Jan  6 18:12:45 PST 2010)</dt>
+			<dd>
+	        	<ul>
+	        		<li>Added ->env method to access PSGI env from the object.</li>
+	        	</ul>
+	        </dd>
+	
+			<dt>0.05  (Wed Jan  6 00:37:23 PST 2010)</dt>
+			<dd>
+	        	<ul>
+	        		<li>Fixed a bug where uploaded files are not saved in temp files (fujiwara)</li>
+	        	</ul>
+	        </dd>
+	
+			<dt>0.04  (Wed Dec  9 16:37:47 PST 2009)</dt>
+			<dd>
+	        	<ul>
+	        		<li>Added virtual_host to the list because bad CGI.pm uses host() as a function not a method (kazuho)</li>
+	        	</ul>
+	        </dd>
+	
+			<dt>0.03  (Fri Nov 27 17:32:50 JST 2009)</dt>
+			<dd>
+	        	<ul>
+	        		<li>Speicify CGI.pm dependency since older one has different read_from_client params</li>
+	        	</ul>
+	        </dd>
+	
+			<dt>0.02  (Mon Oct 19 20:16:25 PDT 2009)</dt>
+			<dd>
+	        	<ul>
+	        		<li>Fix the test to skip if &lt;= 3.45 not &lt; 3.45</li>
+	        	</ul>
+	        </dd>
+	
+			<dt>0.01  (Fri Sep 25 11:24:24 2009)</dt>
+	        <dd>
+	        	<ul>
+	        		<li>original version</li>
+	        	</ul>
+	        </dd>
+		</dl>
+
+		<h2>Author</h2>
+		<p>Tatsuhiko Miyagawa &lt;<a href="mailto:miyagawa@bulknews.net">miyagawa@bulknews.net</a>&gt;</p>
+		<p>Mark Stosberg &lt;<a href="mailto:mark@summersault.com">mark@summersault.com</a>&gt;</p>
+
+		<h3>License</h3>
+		<p>This library is free software; you can redistribute it and/or modify it under the same terms as Perl itself.</p>
+
+		<h3>See Also</h3>
+		<ul>
+        	<li><em>CGI</em></li>
+            <li><a href="CGI--Emulate--PSGI.html">CGI::Emulate::PSGI</a></li>
+        </ul>
 	</body>
 </html>

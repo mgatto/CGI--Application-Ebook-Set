@@ -1,97 +1,19 @@
 <?xml version="1.0" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-                                          <head>
-                                                                                    <title>CGI::Session - persistent session data in CGI applications</title>
-                                                                                    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-                                                                                    <link rel="stylesheet" href="css/modernperl.css" type="text/css" />
-                                          </head>
-                                          <body>
-                                                                                    <h1>CGI::Session &mdash; </h1>
-                                                                                    <p>Persistent session data in CGI applications</p>
-                                                                                    <hr />
+	<head>
+		<title>CGI::Session - persistent session data in CGI applications</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="css/modernperl.css" type="text/css" />
+    </head>
+    <body>
+    	<div class="center">
+	        <h1>CGI::Session &mdash; 4.48</h1>
+            <hr />
+            <h3>Persistent session data in CGI applications</h3>
+        </div>
 
-                                                                                    <!--<h2>Contents</h2>
-                                                                                    <ul>
-                                                                                                                              <li><a href="#name">Name</a></li>
-                                                                                                                              <li><a href="#synopsis">Synopsis</a></li>
-                                                                                                                              <li><a href="#description">Description</a></li>
-                                                                                                                              <li><a href="#methods">Methods</a></li>
-                                                                                                                              <ul>
-                                                                                                                                                                        <li><a href="#new__"><code>new()</code></li>
-                                                                                                                                                                        <li><a href="#new___sid__">new( $sid )</a></li>
-                                                                                                                                                                        <li><a href="#new___query__">new( $query )</a></li>
-                                                                                                                                                                        <li><a href="#new___dsn___query___sid__">new( $dsn, $query||$sid )</a></li>
-                                                                                                                                                                        <li><a href="#new___dsn___query___sid____dsn_args__">new( $dsn, $query||$sid, \%dsn_args )</a></li>
-                                                                                                                                                                        <li><a href="#new___dsn___query___sid____dsn_args____session_params__">new( $dsn, $query||$sid, \%dsn_args, \%session_params )</a></li>
-                                                                                                                                                                        <li><a href="#load__"><code>load()</code></li>
-                                                                                                                                                                        <li><a href="#load___query___sid__">load( $query||$sid )</a></li>
-                                                                                                                                                                        <li><a href="#load___dsn___query___sid__">load( $dsn, $query||$sid )</a></li>
-                                                                                                                                                                        <li><a href="#load___dsn___query____dsn_args__">load( $dsn, $query, \%dsn_args )</a></li>
-                                                                                                                                                                        <li><a href="#load___dsn___query____dsn_args____session_params__">load( $dsn, $query, \%dsn_args, \%session_params )</a></li>
-                                                                                                                                                                        <li><a href="#id__"><code>id()</code></li>
-                                                                                                                                                                        <li><a href="#param__name_"><code>param($name)</code></li>
-                                                                                                                                                                        <li><a href="#param__name___name_">param(-name=&gt;$name)</a></li>
-                                                                                                                                                                        <li><a href="#param__name___value_">param($name, $value)</a></li>
-                                                                                                                                                                        <li><a href="#param__name___name___value___value_">param(-name=&gt;$name, -value=&gt;$value)</a></li>
-                                                                                                                                                                        <li><a href="#param_hashref__"><code>param_hashref()</code></li>
-                                                                                                                                                                        <li><a href="#dataref__"><code>dataref()</code></li>
-                                                                                                                                                                        <li><a href="#save_param__"><code>save_param()</code></li>
-                                                                                                                                                                        <li><a href="#save_param__query_"><code>save_param($query)</code></li>
-                                                                                                                                                                        <li><a href="#save_param__query____list_">save_param($query, \@list)</a></li>
-                                                                                                                                                                        <li><a href="#load_param__"><code>load_param()</code></li>
-                                                                                                                                                                        <li><a href="#load_param__query_"><code>load_param($query)</code></li>
-                                                                                                                                                                        <li><a href="#load_param__query____list_">load_param($query, \@list)</a></li>
-                                                                                                                                                                        <li><a href="#clear__"><code>clear()</code></li>
-                                                                                                                                                                        <li><a href="#clear__field__">clear('field')</a></li>
-                                                                                                                                                                        <li><a href="#clear___list_"><code>clear(\@list)</code></li>
-                                                                                                                                                                        <li><a href="#flush__"><code>flush()</code></li>
-                                                                                                                                                                        <li><a href="#atime__"><code>atime()</code></li>
-                                                                                                                                                                        <li><a href="#ctime__"><code>ctime()</code></li>
-                                                                                                                                                                        <li><a href="#expire__"><code>expire()</code></li>
-                                                                                                                                                                        <li><a href="#expire__time_"><code>expire($time)</code></li>
-                                                                                                                                                                        <li><a href="#expire__param___time_">expire($param, $time)</a></li>
-                                                                                                                                                                        <li><a href="#is_new__"><code>is_new()</code></li>
-                                                                                                                                                                        <li><a href="#is_expired__"><code>is_expired()</code></li>
-                                                                                                                                                                        <li><a href="#is_empty__"><code>is_empty()</code></li>
-                                                                                                                                                                        <li><a href="#ip_match__"><code>ip_match()</code></li>
-                                                                                                                                                                        <li><a href="#delete__"><code>delete()</code></li>
-                                                                                                                                                                        <li><a href="#find____code__">find( \&amp;code )</a></li>
-                                                                                                                                                                        <li><a href="#find___dsn____code__">find( $dsn, \&amp;code )</a></li>
-                                                                                                                                                                        <li><a href="#find___dsn____code____dsn_args__">find( $dsn, \&amp;code, \%dsn_args )</a></li>
-                                                                                                                                                                        <li><a href="#name__new_name_"><code>name($new_name)</code></li>
-                                                                                                                              </ul>
-                                                                                                                              <li><a href="#miscellaneous_methods">Miscellaneous Methods</a></li>
-                                                                                                                              <ul>
-                                                                                                                                                                        <li><a href="#remote_addr__"><code>remote_addr()</code></li>
-                                                                                                                                                                        <li><a href="#errstr__"><code>errstr()</code></li>
-                                                                                                                                                                        <li><a href="#dump__"><code>dump()</code></li>
-                                                                                                                                                                        <li><a href="#header__"><code>header()</code></li>
-                                                                                                                                                                        <li><a href="#query__"><code>query()</code></li>
-                                                                                                                                                                        <li><a href="#deprecated_methods">DEPRECATED METHODS</a></li>
-                                                                                                                                                                        <ul>
-                                                                                                                                                                                                                  <li><a href="#close__"><code>close()</code></li>
-                                                                                                                                                                        </ul>
-                                                                                                                              </ul>
-                                                                                                                              <li><a href="#distribution">Distribution</a></li>
-                                                                                                                              <ul>
-
-                                                                                                                                                                        <li><a href="#drivers">DRIVERS</a></li>
-                                                                                                                                                                        <li><a href="#serializers">SERIALIZERS</a></li>
-                                                                                                                                                                        <li><a href="#id_generators">ID GENERATORS</a></li>
-                                                                                                                              </ul>
-                                                                                                                              <li><a href="#a_warning_about_auto_flushing">A Warning about Auto-flushing</a></li>
-                                                                                                                              <li><a href="#a_warning_about_utf8">A Warning about UTF8</a></li>
-                                                                                                                              <li><a href="#translations">Translations</a></li>
-                                                                                                                              <li><a href="#credits">Credits</a></li>
-                                                                                                                              <li><a href="#copyright">Copyright</a></li>
-                                                                                                                              <li><a href="#public_code_repository">Public Code Repository</a></li>
-                                                                                                                              <li><a href="#support">Support</a></li>
-                                                                                                                              <li><a href="#author">Author</a></li>
-                                                                                                                              <li><a href="#see_also">See Also</a></li>
-                                                                                    </ul>-->
-
-                                                                                    <h2><a name="synopsis"></a>Synopsis</h2>
+	<h2><a name="synopsis"></a>Synopsis</h2>
 <pre>
 # Object initialization:
 use CGI::Session;
@@ -671,9 +593,9 @@ binmode STDOUT, &quot;:encoding(utf8)&quot;;
                                           </li>
                                           <li><strong>RFC 2109</strong> - The primary spec for cookie handing in use, defining the  &quot;Cookie:&quot; and &quot;Set-Cookie:&quot; HTTP headers.
                                                                                     Available at <a href="http://www.ietf.org/rfc/rfc2109.txt">http://www.ietf.org/rfc/rfc2109.txt</a>. A newer spec, <a href="http://www.ietf.org/rfc/rfc2965.txt" class="rfc">RFC 2965</a> is meant to obsolete it with &quot;Set-Cookie2&quot;
-                                                                                    and &quot;Cookie2&quot; headers, but even of 2008, the newer spec is not widely supported. See <a href="http://www.ietf.org/rfc/rfc2965.txt">http://www.ietf.org/rfc/rfc2965.txt</a></a></strong> </li>
+                                                                                    and &quot;Cookie2&quot; headers, but even of 2008, the newer spec is not widely supported. See <a href="http://www.ietf.org/rfc/rfc2965.txt">http://www.ietf.org/rfc/rfc2965.txt</a> </li>
                                           <li>
-                                                                                    <p><a href="/Apache/Session.html">Apache::Session</a> - an alternative to CGI::Session.</p>
+                                                                                    <p><a href="Apache--Session.html">Apache::Session</a> - an alternative to CGI::Session.</p>
                                           </li>
 </ul>
 </body>

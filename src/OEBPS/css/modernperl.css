@@ -24,13 +24,13 @@ p{font-family:serif;font-size:1em;line-height:120%;margin: 0 0 1em 0;}
 p small{font-size:0.75em;color:#999;}
 .lead{margin-bottom:18px;font-size:20px;font-weight:200;line-height:165%;}
 h1,h2,h3,h4,h5,h6{margin:0;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:bold;text-rendering:optimizelegibility;text-align:left;}
-h1{font-size:2em;margin-bottom:1em;page-break-before:always;}
-h2{font-size:1.5em;margin-bottom:1em;page-break-before:always;}
-h3{font-size:1em;margin-bottom:0.5em;margin-top:1.2em;}
-h4{font-size:1em;}
+h1{font-size:2em;margin-bottom:1em;page-break-before:always;margin-top:3em;line-height:1.5em;}
+h2{font-size:1.6em;margin-bottom:1em;page-break-before:always;}
+h3{font-size:1.2em;margin-bottom:0.75em;margin-top:1.2em;}
+h4{font-size:1em;margin-bottom:0.5em;}
 h5 {font-size:1em;}
 h6{font-size:0.8em;}
-ul,ol{padding:0;margin:0 0 2% 5%;}
+ul,ol{padding:0;margin:0 0 2% 2%;}
 ul ul,ul ol,ol ol,ol ul{margin-bottom:0;}
 ul li{list-style:square;}
 ol li{list-style:decimal;}
@@ -50,9 +50,9 @@ q:before,q:after,blockquote:before,blockquote:after{content:"";}
 address{display:block;margin-bottom:1em;font-style:normal;}
 small{font-size:100%;}
 cite{font-style:normal;}
-code,pre{padding:0 2px;color:#000;}
-code {font: normal normal normal 1.1em/1.2em 'Bitstream Vera Sans Mono Bold', monospace;}
-pre{display:block;padding:8.5px;margin:0 0 9px;font: normal normal normal 0.8em/1.2em 'Bitstream Vera Sans Mono Bold', monospace;background-color:#fdfdfd;border:1px solid rgba(0, 0, 0, 0.15);border-radius:3px;white-space:pre-wrap;word-break:break-all;word-wrap:break-word;}
+/*code,pre{padding:0px;color:#000;}*/
+code {font: normal normal normal 1.0em/1.2em 'Bitstream Vera Sans Mono Bold', monospace;}
+pre{display:block;padding:2px;margin:0 0 9px;font: normal normal normal 0.8em/1.2em 'Bitstream Vera Sans Mono Bold', monospace;background-color:#fdfdfd;border:1px solid rgba(0, 0, 0, 0.25);border-radius:3px;white-space:pre-wrap;}/*word-break:break-all;word-wrap:break-word;*/
 table { font-size: inherit;}
 td,th {vertical-align:top;padding: 0.2em;}
 th { background: #fdfdfd; text-align: left;}
@@ -70,4 +70,4 @@ img{}
 .tip{padding: 0.5em;border: 1px solid;margin-left: 10%;margin-right: 10%;border-radius: 10px;align: center;}
 .tip .title {background-color: black;color: white;width: 100%;font-variant: small-caps;text-align: center;}
 .tip .title code {color: white;}
-.center {text-align:center;}
+.center, .center h1, .center h2, .center h3 {text-align:center;}

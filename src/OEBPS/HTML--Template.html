@@ -7,39 +7,13 @@
 		<link rel="stylesheet" href="css/modernperl.css" type="text/css" />
 	</head>
 	<body>
-		<h1>HTML::Template &mdash; 2.91</h1>
-		<p>Perl module to use HTML Templates from CGI scripts</p>
-		<hr />
-	
-		<!--<h2>Contents</h2>
-		<ul>
-			<li><a href="#synopsis">Synopsis</a></li>
-			<li><a href="#description">Description</a></li>
-			<li><a href="#tags">Tags</a>
-				<ul>
-					<li>TMPL_VAR</li>
-				</ul>
-			</li>
-			<li><a href="#methods">Methods</a></li>
-			<li><a href="#configuration_summary">Configuration Summary</a></li>
-			<ul>
-				<li><a href="#template_style_and_parsing_options">Template Style and Parsing Options</a></li>
-				<li><a href="#template_files_and_blocks">Template Files and Blocks</a></li>
-				<li><a href="#template_variables">Template Variables</a></li>
-				<li><a href="#runtime_processing_options">Runtime Processing Options</a></li>
-				<li><a href="#caching_and_compiling_options">Caching and Compiling Options</a></li>
-				<li><a href="#plugins_and_filters">Plugins and Filters</a></li>
-				<li><a href="#customisation_and_extension">Customisation and Extension</a></li>
-			</ul>
-			<li><a href="#directive_summary">Directive Summary</a></li>
-			<li><a href="#source_code_repository">Source Code Repository</a></li>
-			<li><a href="#versions">Change History</a></li>
-			<li><a href="#author">Author</a></li>
-			<li><a href="#version">Version</a></li>
-			<li><a href="#copyright">Copyright</a></li>
-		</ul>-->
+    	<div class="center">
+			<h1>HTML::Template &mdash; 2.91</h1>
+            <hr />
+			<h3>Perl module to use HTML Templates from CGI scripts</h3>
+		</div>
 
-<h2 id="synopsis">Synopsis</h2>
+		<h2 id="synopsis">Synopsis</h2>
 <p>First you make a template - this is just a normal HTML file with a few
 extra tags, the simplest being &lt;TMPL_VAR&gt;</p>
 <p>For example, test.tmpl:</p>
@@ -1102,6 +1076,67 @@ demonstrating the problem!</p>
 available Subversion server.  See below for more information in the
 PUBLIC SUBVERSION SERVER section.</p>
 
+
+<a name="author"></a><h2>Credits</h2>
+<p>This module was the brain child of my boss, Jesse Erlbaum &lt;mailto:jesse@vm.com"&gt;jesse@vm.com&gt; at  <a href="http://vm.com">Vanguard Media</a>.  The most original idea in this module - the &lt;TMPL_LOOP&gt; - was entirely his.</p>
+<p>Fixes, Bug Reports, Optimizations and Ideas have been generously provided by:</p>
+<ul>
+    <li>Richard Chen</li>
+    <li>Mike Blazer</li>
+    <li>Adriano Nagelschmidt Rodrigues</li>
+    <li>Andrej Mikus</li>
+    <li>Ilya Obshadko</li>
+    <li>Kevin Puetz</li>
+    <li>Steve Reppucci</li>
+    <li>Richard Dice</li>
+    <li>Tom Hukins</li>
+    <li>Eric Zylberstejn</li>
+    <li>David Glasser</li>
+    <li>Peter Marelas</li>
+    <li>James William Carlson</li>
+    <li>Frank D. Cringle</li>
+    <li>Winfried Koenig</li>
+    <li>Matthew Wickline</li>
+    <li>Doug Steinwand</li>
+    <li>Drew Taylor</li>
+    <li>Tobias Brox</li>
+    <li>Michael Lloyd</li>
+    <li>Simran Gambhir</li>
+    <li>Chris Houser &lt;chouser@bluweb.com&gt;</li>
+    <li>Larry Moore</li>
+    <li>Todd Larason</li>
+    <li>Jody Biggs</li>
+    <li>T.J. Mather</li>
+    <li>Martin Schroth</li>
+    <li>Dave Wolfe</li>
+    <li>uchum</li>
+    <li>Kawai Takanori</li>
+    <li>Peter Guelich</li>
+    <li>Chris Nokleberg</li>
+    <li>Ralph Corderoy</li>
+    <li>William Ward</li>
+    <li>Ade Olonoh</li>
+    <li>Mark Stosberg</li>
+    <li>Lance Thomas</li>
+    <li>Roland Giersig</li>
+    <li>Jere Julian</li>
+    <li>Peter Leonard</li>
+    <li>Kenny Smith</li>
+    <li>Sean P. Scanlon</li>
+    <li>Martin Pfeffer</li>
+    <li>David Ferrance</li>
+    <li>Gyepi Sam</li>
+    <li>Darren Chamberlain</li>
+    <li>Paul Baker</li>
+    <li>Gabor Szabo</li>
+    <li>Craig Manley</li>
+    <li>Richard Fein</li>
+    <li>The Phalanx Project</li>
+    <li>Sven Neuhaus</li>
+</ul>
+<p>Thanks!</p>
+
+
 <h2><a name="versions"></a>Change History</h2>
 
 <h4>2.91 Fri Mar 30 2012</h4>
@@ -1391,64 +1426,6 @@ PUBLIC SUBVERSION SERVER section.</p>
 	<li>original version; created by h2xs 1.18</li>
 </ul>
 
-<h2>Credits</h2>
-<p>This module was the brain child of my boss, Jesse Erlbaum &lt;mailto:jesse@vm.com"&gt;jesse@vm.com&gt; at  <a href="http://vm.com">Vanguard Media</a>.  The most original idea in this module - the &lt;TMPL_LOOP&gt; - was entirely his.</p>
-<p>Fixes, Bug Reports, Optimizations and Ideas have been generously provided by:</p>
-<ul>
-    <li>Richard Chen</li>
-    <li>Mike Blazer</li>
-    <li>Adriano Nagelschmidt Rodrigues</li>
-    <li>Andrej Mikus</li>
-    <li>Ilya Obshadko</li>
-    <li>Kevin Puetz</li>
-    <li>Steve Reppucci</li>
-    <li>Richard Dice</li>
-    <li>Tom Hukins</li>
-    <li>Eric Zylberstejn</li>
-    <li>David Glasser</li>
-    <li>Peter Marelas</li>
-    <li>James William Carlson</li>
-    <li>Frank D. Cringle</li>
-    <li>Winfried Koenig</li>
-    <li>Matthew Wickline</li>
-    <li>Doug Steinwand</li>
-    <li>Drew Taylor</li>
-    <li>Tobias Brox</li>
-    <li>Michael Lloyd</li>
-    <li>Simran Gambhir</li>
-    <li>Chris Houser &lt;chouser@bluweb.com&gt;</li>
-    <li>Larry Moore</li>
-    <li>Todd Larason</li>
-    <li>Jody Biggs</li>
-    <li>T.J. Mather</li>
-    <li>Martin Schroth</li>
-    <li>Dave Wolfe</li>
-    <li>uchum</li>
-    <li>Kawai Takanori</li>
-    <li>Peter Guelich</li>
-    <li>Chris Nokleberg</li>
-    <li>Ralph Corderoy</li>
-    <li>William Ward</li>
-    <li>Ade Olonoh</li>
-    <li>Mark Stosberg</li>
-    <li>Lance Thomas</li>
-    <li>Roland Giersig</li>
-    <li>Jere Julian</li>
-    <li>Peter Leonard</li>
-    <li>Kenny Smith</li>
-    <li>Sean P. Scanlon</li>
-    <li>Martin Pfeffer</li>
-    <li>David Ferrance</li>
-    <li>Gyepi Sam</li>
-    <li>Darren Chamberlain</li>
-    <li>Paul Baker</li>
-    <li>Gabor Szabo</li>
-    <li>Craig Manley</li>
-    <li>Richard Fein</li>
-    <li>The Phalanx Project</li>
-    <li>Sven Neuhaus</li>
-</ul>
-<p>Thanks!</p>
 
 <h2>Website</h2>
 <p>You can find information about HTML::Template and other related modules at: <a href="http://html-template.sourceforge.net">http://html-template.sourceforge.net</a>

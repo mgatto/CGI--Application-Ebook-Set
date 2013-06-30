@@ -1,39 +1,42 @@
 <?xml version="1.0" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<title>CGI::Application::Plugin::Apache - Allow CGI::Application to use Apache::* modules without interference</title>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<!--<link type="text/css" href="mobi.css" media="amzn-mobi" rel="Stylesheet"/>
-		<link type="text/css" href="kf8.css" media="amzn-kf8" rel="Stylesheet"/>-->
-		<link rel="stylesheet" href="css/modernperl.css" type="text/css" />
-	</head>
-	<body>
-		<h1>CGI::Application::Plugin::Apache &mdash; 1.02</h1>
-		<p>Allow CGI::Application to use Apache::* modules without interference.</p>
-		<hr />
+    <head>
+        <title>CGI::Application::Plugin::Apache - Allow CGI::Application to use Apache::* modules without interference</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <!--<link type="text/css" href="mobi.css" media="amzn-mobi" rel="Stylesheet"/>
+        <link type="text/css" href="kf8.css" media="amzn-kf8" rel="Stylesheet"/>-->
+        <link rel="stylesheet" href="css/modernperl.css" type="text/css" />
+    </head>
+    <body>
+		<div class="center">
+	        <h1>CGI::Application::Plugin::Apache &mdash; 1.02</h1>
+	        <hr />
+	        <h3>Allow CGI::Application to use Apache::* modules without interference.</h3>
+		</div>
 
-		<h2><a name="synopsis"></a>Synopsis</h2>
+        <a name="synopsis"></a><h2>Synopsis</h2>
 <pre>
 use base 'CGI::Application';
 use CGI::Application::Plugin::Apache qw(:all);
+</pre>
 
+<pre>
 # then later we join our hero in a run mode...
 sub mode1 {
     my $self = shift;
     my $q = $self-&gt;query(); # $q is an Apache::Request obj not a CGI.pm obj
 
-	# do some stuff
-	
-	# now we can bake a cookie using Apache::Cookie without interference  
-	$cookie = Apache::Cookie-&gt;new(
+    # do some stuff
+    # now we can bake a cookie using Apache::Cookie without interference
+    $cookie = Apache::Cookie-&gt;new(
         $q,
         -name       =&gt; 'foo',
         -value      =&gt; 'bar',
         -expires    =&gt; '+2h',
-	);
+    );
 
-	$cookie-&gt;bake;
+    $cookie-&gt;bake;
 
     # now let's play with the content_type and other headers
     $q-&gt;content_type('text/plain');
@@ -46,24 +49,39 @@ sub mode1 {
 1;
 </pre>
 
-		<h2><a name="description"></a>Description</h2>
-		<p>This plugin helps to try and fix some of the annoyances of using <a href="/CGI/Application.html">the CGI::Application manpage</a> in a pure mod_perl (1.0 or 2.0) environment (see <em>INSTALLATION</em> for specific issues regarding installation under mod_perl 2.x). <a href="/CGI/Application.html">the CGI::Application manpage</a> assumes that you use <em>CGI.pm</em>, but I wanted to avoid it's bloat and have access to the performance of the Apache::* modules so along came this plugin. At the current moment it only does two things:</p>
-        
-		<ul>
-    		<li>Use Apache::Request as the <code>$self-&gt;query</code> object thus avoiding the creation of the CGI.pm object.</li>
-    		<li>Override the way <a href="/CGI/Application.html">the CGI::Application manpage</a> creates and prints it's HTTP headers. Since it was using <em>CGI.pm</em>'s <code>header()</code> and <code>redirect()</code> method's we needed an alternative. So now we use the <code>Apache-&gt;send_http_header()</code> method. This has a few additional benefits other than just not using <em>CGI.pm</em>. It means that we can use other Apache::* modules that might also create outgoing headers (e.g. <a href="/Apache/Cookie.html">the Apache::Cookie manpage</a>) without <a href="/CGI/Application.html">the CGI::Application manpage</a> clobbering them.</li>
-		</ul>
+        <h2><a name="description"></a>Description</h2>
+        <p>
+            This plugin helps to try and fix some of the annoyances of using <a href="CGI--Application.html"> CGI::Application</a> in a pure mod_perl (1.0 or 2.0) environment (see <em>INSTALLATION</em> for specific issues regarding installation under mod_perl 2.x). <a href="CGI--Application.html">CGI::Application</a> assumes that you use <em>CGI.pm</em>, but I wanted to avoid it's bloat and have access to the performance of the Apache::* modules so along came this plugin. At the current moment it only does two things:
+        </p>
 
-		<h2><a name="exported_methods"></a>Exported Methods</h2>
-		<p>This module uses <em>Exporter</em> to provide methods to your application module. Most of the time you will never actually use these methods since they are used by <a href="/CGI/Application.html">the CGI::Application manpage</a> itself, but I figured you'd like to know what's going on.</p>
-		<p>No methods are exported by default. It is up to you to pick and choose, but please choose wisely. You can import all of the methods by using:</p>
+        <ul>
+            <li>
+                Use Apache::Request as the <code>$self-&gt;query</code> object thus avoiding the creation of the CGI.pm object.
+            </li>
+            <li>
+                Override the way <a href="CGI--Application.html">the CGI::Application manpage</a> creates and prints it's HTTP headers. Since it was using <em>CGI.pm</em>'s <code>header()</code> and <code>redirect()</code> method's we needed an alternative. So now we use the <code>Apache-&gt;send_http_header()</code> method. This has a few additional benefits other than just not using <em>CGI.pm</em>. It means that we can use other Apache::* modules that might also create outgoing headers (e.g. Apache::Cookie manpage) without <a href="CGI--Application.html">CGI::Application</a> clobbering them.
+            </li>
+        </ul>
+
+        <h2><a name="exported_methods"></a>Exported Methods</h2>
+        <p>
+            This module uses <em>Exporter</em> to provide methods to your application module. Most of the time you will never actually use these methods since they are used by <a href="CGI--Application.html">CGI::Application</a> itself, but I figured you'd like to know what's going on.
+        </p>
+        <p>
+            No methods are exported by default. It is up to you to pick and choose, but please choose wisely. You can import all of the methods by using:
+        </p>
 <pre>
 use CGI::Application::Plugin::Apache qw(:all);
 </pre>
-		<p>It is recommended that you import all of them since some methods will require others. but the choice is yours. For instance, if you want to override any method then you may not want to import it from here.</p>
-        
-		<h3><code>handler()</code></h3>
-		<p>This method gives your application the ability to run as a straight mod_perl handler. It simply creates an instance of you application and then runs it (using <code>$app-&gt;new()</code> and <code>$app-&gt;run()</code>). It does not pass any arguments into either method. It then returns an <code>Apache::Constants::OK</code> value. If you need anything more than this, please feel free to not import this method and write your own. You could do it like this:</p>
+        <p>
+            It is recommended that you import all of them since some methods will require others. but the choice is yours. For instance, if you want to override any method then you may not want to import it from here.
+        </p>
+
+        <h3><code>handler()</code></h3>
+        <p>
+            This method gives your application the ability to run as a straight mod_perl handler. It simply creates an instance of you application and then runs it (using <code>$app-&gt;new()</code> and <code>$app-&gt;run()</code>).
+            It does not pass any arguments into either method. It then returns an <code>Apache::Constants::OK</code> value. If you need anything more than this, please feel free to not import this method and write your own. You could do it like this:
+        </p>
 <pre>
 package MyApp;
 use base 'CGI::Application';
@@ -74,18 +92,28 @@ sub handler {
 }
 </pre>
 
-		<h3><code>cgiapp_get_query()</code></h3>
-		<p>This overrides CGI:App's method for retrieving the query object. This is the standard way of using something other than CGI.pm so it's no surprise that we use it here. It simply creates and returns a new <a href="/Apache/Request.html">the Apache::Request manpage</a> object from <code>Apache-&gt;request</code>.</p>
-		
-		<h3><code>_send_headers()</code></h3>
-		<p>I didn't like the idea of exporting this private method (I'd rather think it was a 'protected' not 'private) but right now it's the only way to have any say in how the HTTP headers are created. Please see <a href="#http_headers">HTTP Headers</a> for more details.</p>
+        <h3><code>cgiapp_get_query()</code></h3>
+        <p>
+            This overrides CGI:App's method for retrieving the query object. This is the standard way of using something other than CGI.pm so it's no surprise that we use it here. It simply creates and returns a new Apache::Request object from <code>Apache-&gt;request</code>.
+        </p>
 
-		<h2><a name="http_headers"></a>HTTP Headers</h2>
-		<p>We encourage you to learn the mod_perl way of manipulating headers and cookies. It's really not that hard we promise. But incase you're easing your way into it, we try and provide as much backward compatibility as possible.</p>
+        <h3><code>_send_headers()</code></h3>
+        <p>
+            I didn't like the idea of exporting this private method (I'd rather think it was a 'protected' not 'private) but right now it's the only way to have any say in how the HTTP headers are created. Please see <a href="#http_headers">HTTP Headers</a> for more details.
+        </p>
 
-		<h3>Cookies</h3>
-		<p>HTTP cookies should now be created using <a href="/Apache/Cookie.html">the Apache::Cookie manpage</a> and it's <code>bake()</code> method not with <code>header_add()</code> or <code>header_props()</code>.</p>
-		<p>You can still do the following to create a cookie:</p>
+        <h2><a name="http_headers"></a>HTTP Headers</h2>
+        <p>
+            We encourage you to learn the mod_perl way of manipulating headers and cookies. It's really not that hard we promise. But incase you're easing your way into it, we try and provide as much backward compatibility as possible.
+        </p>
+
+        <h3>Cookies</h3>
+        <p>
+            HTTP cookies should now be created using <em>Apache::Cookie</em> and it's <code>bake()</code> method not with <code>header_add()</code> or <code>header_props()</code>.
+        </p>
+        <p>
+            You can still do the following to create a cookie:
+        </p>
 <pre>
 my $cookie = CGI::Cookie-&gt;new(
     -name  =&gt; 'foo',
@@ -94,7 +122,9 @@ my $cookie = CGI::Cookie-&gt;new(
 
 $self-&gt;header_add(-cookie =&gt; $cookie);
 </pre>
-		<p>But now we encourage you to do the following:</p>
+        <p>
+            But now we encourage you to do the following:
+        </p>
 <pre>
 my $cookie = Apache::Cookie-&gt;new(
     $self-&gt;query,
@@ -105,25 +135,39 @@ my $cookie = Apache::Cookie-&gt;new(
 $cookie-&gt;bake();
 </pre>
 
-		<h3>Redirects</h3>
-		<p>You can still do the following to perform an HTTP redirect:</p>
+        <h3>Redirects</h3>
+        <p>
+            You can still do the following to perform an HTTP redirect:
+        </p>
 <pre>
-        $self-&gt;header_props( uri =&gt; $some_url);
-        $self-&gt;header_type('redirect');
-        return '';
+$self-&gt;header_props( uri =&gt; $some_url);
+$self-&gt;header_type('redirect');
+
+return '';
 </pre>
-		<p>But now we encourage you to do the following:</p>
+        <p>
+            But now we encourage you to do the following:
+        </p>
 <pre>
 $self-&gt;query-&gt;header_out(Location =&gt; $some_url);
 $self-&gt;query-&gt;status(REDIRECT);
+
 return '';
 </pre>
-		<p>But it's really up to you.</p>
+        <p>
+            But it's really up to you.
+        </p>
 
-		<h2><a name="compatibility"></a>Compatibility</h2>
-		<p>Upon using this module you completely leave behind the world of <em>CGI.pm</em>. Don't look back or you might turn into a pillar of salt. You will have to look at and read the docs of the Apache::* modules. But don't worry, they are really easy to use and were designed to mimic the interface of <em>CGI.pm</em> and family.</p>
-		<p>If you are trying to use this module but don't want to have to change your previous code that uses <code>header_props()</code> or <code>header_add()</code> then we try to help you out by being as CGI compatible as we can, but it is always better to use the mod_perl api. If you still want to use <code>header_props()</code> or <code>header_add()</code> remember that it will cause a performance hit because it will use helper routines that try and emulate <em>CGI.pm</em>.</p>
-		<p>If you wish to write code that performs well in both environments, you can check the $ENV{MOD_PERL} environment setting and branch accordingly. For example, to set a cookie:</p>
+        <h2><a name="compatibility"></a>Compatibility</h2>
+        <p>
+            Upon using this module you completely leave behind the world of <em>CGI.pm</em>. Don't look back or you might turn into a pillar of salt. You will have to look at and read the docs of the Apache::* modules. But don't worry, they are really easy to use and were designed to mimic the interface of <em>CGI.pm</em> and family.
+        </p>
+        <p>
+            If you are trying to use this module but don't want to have to change your previous code that uses <code>header_props()</code> or <code>header_add()</code> then we try to help you out by being as CGI compatible as we can, but it is always better to use the mod_perl api. If you still want to use <code>header_props()</code> or <code>header_add()</code> remember that it will cause a performance hit because it will use helper routines that try and emulate <em>CGI.pm</em>.
+        </p>
+        <p>
+            If you wish to write code that performs well in both environments, you can check the <code>$ENV{MOD_PERL}</code> environment setting and branch accordingly. For example, to set a cookie:
+        </p>
 <pre>
 if ($ENV{MOD_PERL}) {
     require Apache::Cookie;
@@ -133,7 +177,7 @@ if ($ENV{MOD_PERL}) {
         -value      =&gt; 'chocolate chip',
         -expires    =&gt; '+2h',
     );
-    
+
     $cookie-&gt;bake;
 }
 else {
@@ -142,50 +186,78 @@ else {
         -value   =&gt; 'chocolate chip',
         -expires =&gt; '+2h',
     );
- 
-    $webapp-&gt;header_add(-cookie =&gt; [$cookie]);
-} 
-</pre>
-		<p>If for some reason you are using this plugin in a non-mod_perl environment, it will try to do the right thing by simply doing nothing :)</p>
 
-		<h3>CGI::Application::Plugin::Apache::Request</h3>
-		<p>Sometimes the default compatability is not enough. For instance, if you are using plugins that use the cookies or upload features of <em>CGI.pm</em> then you might need some extra help.</p>
-		<p>This is what <a href="CGI--Application--Plugin--Apache--Request.html"> CGI::Application::Plugin::Apache::Request</a> is for. You can make this your <a href="#query"><code>query</code></a> object by setting the <code>CAPA_CGI_Compat</code> var to <code>On</code> in your Apache config file:</p>
+    $webapp-&gt;header_add(-cookie =&gt; [$cookie]);
+}
+</pre>
+        <p>
+            If for some reason you are using this plugin in a non-mod_perl environment, it will try to do the right thing by simply doing nothing :)
+        </p>
+
+        <h3>CGI::Application::Plugin::Apache::Request</h3>
+        <p>
+            Sometimes the default compatability is not enough. For instance, if you are using plugins that use the cookies or upload features of <em>CGI.pm</em> then you might need some extra help.
+        </p>
+        <p>
+            This is what <a href="CGI--Application--Plugin--Apache--Request.html">CGI::Application::Plugin::Apache::Request</a> is for. You can make this your <a href="#query"><code>query</code></a> object by setting the <code>CAPA_CGI_Compat</code> var to <code>On</code> in your Apache config file:
+        </p>
 <pre>
 PerlSetVar CAPA_CGI_Compat On
 </pre>
 
-		<h2><a name="installation"></a>Installation</h2>
-		<p>This module is designed to function equally under mod_perl 1.x and mod_perl 2.x. The only real issue comes during the installation and testing phase. In order to track dependencies, etc we need to know which version you are trying to install this for. By default we assume mod_perl 1.x unless we find mod_perl 2 installed on your system.</p>
-		<p>If you want to change this, you simple pass a <code>MP2</code> option to the <code>Build.PL</code> script.</p>
+        <h2><a name="installation"></a>Installation</h2>
+        <p>
+            This module is designed to function equally under mod_perl 1.x and mod_perl 2.x. The only real issue comes during the installation and testing phase. In order to track dependencies, etc we need to know which version you are trying to install this for. By default we assume mod_perl 1.x unless we find mod_perl 2 installed on your system.
+        </p>
+        <p>
+            If you want to change this, you simple pass a <code>MP2</code> option to the <code>Build.PL</code> script.
+        </p>
 <pre>
 perl ./Build.PL MP2=1
 </pre>
-		<p>That's pretty easy, right?</p>
+        <p>
+            That's pretty easy, right?
+        </p>
 
-		<h2><a name="author"></a>Author</h2>
-		<p>Michael Peters &lt;mpeters@plusthree.com&gt;</p>
-		<p>Thanks to Plus Three, LP (http://www.plusthree.com) for sponsoring my work on this module.</p>
-		
-		<h3><a name="contributors"></a>Contributors</h3>
-		<p>The following people have contributed to this module either through docs, code, or ideas:</p>
-		<ul>
-		    <li>William McKee &lt;<a href="mailto:william@knowmad.com">william@knowmad.com</a>&gt;</li>
-		    <li>Cees Hek &lt;<a href="mailto:ceeshek@gmail.com">ceeshek@gmail.com</a>&gt;</li>
-		    <li>Drew Taylor &lt;<a href="mailto:drew@drewtaylor.com">drew@drewtaylor.com</a>&gt;</li>
-		    <li>Ron Savage &lt;<a href="mailto:ron@savage.net.au">ron@savage.net.au</a>&gt;</li>
-		</ul>
+        <h2><a name="author"></a>Author</h2>
+        <p>
+            Michael Peters &lt;mpeters@plusthree.com&gt;
+        </p>
+        <p>
+            Thanks to Plus Three, LP (http://www.plusthree.com) for sponsoring my work on this module.
+        </p>
 
-		<h2><a name="see_also"></a>See Also</h2>
-		<ul>
-		    <li><a href="/Apache/Request.html">Apache::Request</a></li>
-            <li><a href="/Apache2/Request.html">Apache2::Request</a></li>
-		    <li><a href="/Apache/Cookie.html">Apache::Cookie</a></li>
-            <li><a href="/Apache2/Cookie.html">Apache2::Cookie</a></li>
-		</ul>
-        
+        <h3><a name="contributors"></a>Contributors</h3>
+        <p>
+            The following people have contributed to this module either through docs, code, or ideas:
+        </p>
+        <ul>
+            <li>
+                William McKee &lt;<a href="mailto:william@knowmad.com">william@knowmad.com</a>&gt;
+            </li>
+            <li>
+                Cees Hek &lt;<a href="mailto:ceeshek@gmail.com">ceeshek@gmail.com</a>&gt;
+            </li>
+            <li>
+                Drew Taylor &lt;<a href="mailto:drew@drewtaylor.com">drew@drewtaylor.com</a>&gt;
+            </li>
+            <li>
+                Ron Savage &lt;<a href="mailto:ron@savage.net.au">ron@savage.net.au</a>&gt;
+            </li>
+        </ul>
+
+        <h2><a name="see_also"></a>See Also</h2>
+        <ul>
+            <li>Apache::Request</li>
+            <li>Apache2::Request</li>
+            <li>Apache::Cookie</li>
+            <li>Apache2::Cookie</li>
+        </ul>
+
         <h3><a name="license"></a>License</h3>
-        <p>This library is free software; you can redistribute it and/or modify
-        it under the same terms as Perl itself.</p>
-	</body>
+        <p>
+            This library is free software; you can redistribute it and/or modify
+            it under the same terms as Perl itself.
+        </p>
+    </body>
 </html>
