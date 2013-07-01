@@ -41,16 +41,15 @@
         <item id="text1" media-type="application/xhtml+xml" href="Introduction.html"></item><!-- text/x-oeb1-document -->
         <item id="text2" media-type="application/xhtml+xml" href="CGI--Application.html"></item>
         <item id="text7" media-type="application/xhtml+xml" href="HTML--Template.html"></item>
+        <item id="text14" media-type="application/xhtml+xml" href="Sessions.html"></item>
+        <item id="text13" media-type="application/xhtml+xml" href="CGI--Application--Plugin--Session.html"></item>
+        <item id="text6" media-type="application/xhtml+xml" href="CGI--Session.html"></item>
         <item id="text11" media-type="application/xhtml+xml" href="Deploying.html"></item>
         <item id="text3" media-type="application/xhtml+xml" href="CGI--Application--PSGI.html"></item>
         <item id="text4" media-type="application/xhtml+xml" href="CGI--PSGI.html"></item>
         <item id="text5" media-type="application/xhtml+xml" href="CGI--Application--FastCGI.html"></item>
         <item id="text9" media-type="application/xhtml+xml" href="CGI--Application--Plugin--Apache.html"></item>
         <item id="text10" media-type="application/xhtml+xml" href="CGI--Application--Apache2--Request.html"></item>
-		
-        <item id="text14" media-type="application/xhtml+xml" href="Sessions.html"></item>
-        <item id="text13" media-type="application/xhtml+xml" href="CGI--Application--Plugin--Session.html"></item>
-        <item id="text6" media-type="application/xhtml+xml" href="CGI--Session.html"></item>
         <item id="text12" media-type="application/xhtml+xml" href="Appendix_A.html"></item>
         <item id="styles1" media-type="text/css" href="css/modernperl.css" />
         <item id="fonts1" media-type="font/truetype" href="fonts/VeraMono.ttf" />
@@ -66,14 +65,14 @@
         <itemref idref="text1"/>
         <itemref idref="text2"/>
         <itemref idref="text7"/>
+        <itemref idref="text14"/>
+		<itemref idref="text13"/>
         <itemref idref="text11"/>
         <itemref idref="text3"/>
         <itemref idref="text4"/>
         <itemref idref="text5"/>
         <itemref idref="text9"/>
         <itemref idref="text10"/>
-        <itemref idref="text14"/>
-		<itemref idref="text13"/>
         <itemref idref="text6"/>
         <itemref idref="text12"/>
     </spine>

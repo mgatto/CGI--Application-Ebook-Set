@@ -60,35 +60,53 @@ http://www.idpf.org/2007/opf/OPF_2.0_final_spec.html#Section2.4.1
             </navLabel>
             <content src="HTML--Template.html" />
         </navPoint>
-        <navPoint id="cgi-app-psgi" playOrder="8">
+        <navPoint id="cgi-app-sess" playOrder="8">
+            <navLabel>
+                <text>Sessions</text>
+            </navLabel>
+            <content src="Sessions.html" />
+			<navPoint id="cgi-app-plugin-sess" playOrder="9">
+                <navLabel>
+                	<text>Sessions</text>
+	            </navLabel>
+    	        <content src="CGI--Application--Plugin--Session.html" />
+			</navPoint>	
+	        <navPoint id="cgi-sess" playOrder="10">
+	            <navLabel>
+	                <text>CGI::Session</text>
+	            </navLabel>
+	            <content src="CGI--Session.html" />
+	        </navPoint>
+	    </navPoint>
+		<navPoint id="cgi-app-psgi" playOrder="11">
             <navLabel>
                 <text>Deploying CGI::Application</text>
             </navLabel>
             <content src="Deploying.html" />
-            <navPoint id="cgi-app-plugin-psgi" playOrder="9">
+            <navPoint id="cgi-app-plugin-psgi" playOrder="12">
                 <navLabel>
                     <text>Deploying with PSGI</text>
                 </navLabel>
                 <content src="CGI--Application--PSGI.html" />
             </navPoint>
-            <navPoint id="cgi-psgi" playOrder="10">
+            <navPoint id="cgi-psgi" playOrder="13">
                 <navLabel>
                     <text>CGI::PSGI</text>
                 </navLabel>
                 <content src="CGI--PSGI.html" />
             </navPoint>
-            <navPoint id="cgi-fastsgi" playOrder="11">
+            <navPoint id="cgi-fastsgi" playOrder="14">
                 <navLabel>
                     <text>Deploying with FastCGI</text>
                 </navLabel>
                 <content src="CGI--Application--FastCGI.html" />
             </navPoint>
-            <navPoint id="cgi-apache" playOrder="12">
+            <navPoint id="cgi-apache" playOrder="15">
                 <navLabel>
                     <text>Deploying with Mod_Perl</text>
                 </navLabel>
                 <content src="CGI--Application--Plugin--Apache.html" />
-                <navPoint id="cgi-apache-req" playOrder="13">
+                <navPoint id="cgi-apache-req" playOrder="16">
                     <navLabel>
                         <text>Wrapping Apache2::Request</text>
                     </navLabel>
@@ -96,24 +114,6 @@ http://www.idpf.org/2007/opf/OPF_2.0_final_spec.html#Section2.4.1
                 </navPoint>
             </navPoint>
         </navPoint>
-        <navPoint id="cgi-app-sess" playOrder="14">
-            <navLabel>
-                <text>Sessions</text>
-            </navLabel>
-            <content src="Sessions.html" />
-			<navPoint id="cgi-app-plugin-sess" playOrder="15">
-                <navLabel>
-                	<text>Sessions</text>
-	            </navLabel>
-    	        <content src="CGI--Application--Plugin--Session.html" />
-			</navPoint>	
-	        <navPoint id="cgi-sess" playOrder="16">
-	            <navLabel>
-	                <text>CGI::Session</text>
-	            </navLabel>
-	            <content src="CGI--Session.html" />
-	        </navPoint>
-	    </navPoint>
         <navPoint id="app-a" playOrder="17">
             <navLabel>
                 <text>Appendix A: Production of this Ebook</text>
