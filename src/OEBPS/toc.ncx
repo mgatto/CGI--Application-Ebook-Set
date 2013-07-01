@@ -106,15 +106,21 @@ http://www.idpf.org/2007/opf/OPF_2.0_final_spec.html#Section2.4.1
             <navLabel>
                 <text>Sessions</text>
             </navLabel>
-            <content src="CGI--Application--Plugin--Session.html" />
-	        <navPoint id="cgi-sess" playOrder="16">
+            <content src="Sessions.html" />
+			<navPoint id="cgi-app-plugin-sess" playOrder="16">
+                <navLabel>
+                	<text>Sessions</text>
+	            </navLabel>
+    	        <content src="CGI--Application--Plugin--Session.html" />
+			</navPoint>	
+	        <navPoint id="cgi-sess" playOrder="17">
 	            <navLabel>
 	                <text>CGI::Session</text>
 	            </navLabel>
 	            <content src="CGI--Session.html" />
 	        </navPoint>
 	    </navPoint>
-        <navPoint id="app-a" playOrder="17">
+        <navPoint id="app-a" playOrder="18">
             <navLabel>
                 <text>Appendix A: Production of this Ebook</text>
             </navLabel>

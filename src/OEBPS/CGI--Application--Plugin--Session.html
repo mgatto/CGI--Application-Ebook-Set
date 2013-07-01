@@ -8,7 +8,7 @@
 	</head>
 	<body>
 		<div class="center">
-		    <h1>Sessions with With CGI::Application::Plugin::Session &ndash; 1.03</h1>
+		    <h1>CGI::Application::Plugin::Session &ndash; 1.03</h1>
 		    <hr />
 		    <h3>Add CGI::Session support to CGI::Application</h3>
 		</div>
@@ -21,7 +21,7 @@ my $language = $self-&gt;session-&gt;param('language');
 </pre>
 		
         <h2><a name="description"></a>Description</h2>
-		<p>CGI::Application::Plugin::Session seamlessly adds session support to your <a href="CGI--Application.html">CGI::Application</a> modules by providing a <a href="CGI--Session.html">CGI::Session</a> object that is accessible from anywhere in the application.</p>
+		<p><em>CGI::Application::Plugin::Session</em> seamlessly adds session support to your <a href="CGI--Application.html">CGI::Application</a> modules by providing a <a href="CGI--Session.html">CGI::Session</a> object that is accessible from anywhere in the application.</p>
 
 		<p>Lazy loading is used to prevent expensive file system or database calls from being made if the session is not needed during this request.  In other words, the Session object is not created until it is actually needed.  Also, the Session object will act as a singleton by always returning the same Session object for the duration of the request.</p>
 

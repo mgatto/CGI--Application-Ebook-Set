@@ -19,7 +19,7 @@
            
             <!--Extra metadata here (recommended)-->
             <!--Backjacket description goes here-->
-            <dc:description>This ebook is a collection of documentation for CGI::Application and commonly associated modules, specially formatted for modern ereaders. Chapters are clearly delineated and custom fonts are embedded. The default stylesheet is derived from chromatic's "Modern Perl" website, Metacpan's web stylesheet and the CSS used in perldoc.perl.org.</dc:description>
+            <dc:description>This ebook is a collection of documentation for CGI::Application and commonly associated modules for Templating, Sessions, Forms and Databases. This ebook is specially formatted for modern eReaders: Highly readable CSS formats the entire text consistently, chapters are clearly delineated and custom fonts are embedded. The default stylesheet is derived from chromatic's "Modern Perl" website, Metacpan's web stylesheet and the CSS used in perldoc.perl.org.</dc:description>
             <!--These function like Keywords. Use as many as you like-->
             <dc:subject>Perl</dc:subject>
             <dc:subject>Programming</dc:subject>
@@ -31,9 +31,6 @@
             <dc:rights>Creative Commons</dc:rights>
             <dc:type>Text</dc:type>
             <dc:source>Can be a URL or ISBN number</dc:source>
-            <!-- A prior resource from which the publication was derived -->
-            <!--<dc:relation>Can be a URL or ISBN number</dc:relation>-->
-            <!-- An identifier of an auxiliary resource and its relationship to the publication -->
             <dc:coverage>Worldwide</dc:coverage>
         </dc-metadata>
     </metadata>
@@ -51,6 +48,8 @@
         <item id="text5" media-type="application/xhtml+xml" href="CGI--Application--FastCGI.html"></item>
         <item id="text9" media-type="application/xhtml+xml" href="CGI--Application--Plugin--Apache.html"></item>
         <item id="text10" media-type="application/xhtml+xml" href="CGI--Application--Apache2--Request.html"></item>
+		
+        <item id="text14" media-type="application/xhtml+xml" href="Sessions.html"></item>
         <item id="text13" media-type="application/xhtml+xml" href="CGI--Application--Plugin--Session.html"></item>
         <item id="text6" media-type="application/xhtml+xml" href="CGI--Session.html"></item>
         <item id="text12" media-type="application/xhtml+xml" href="Appendix_A.html"></item>
@@ -75,6 +74,7 @@
         <itemref idref="text5"/>
         <itemref idref="text9"/>
         <itemref idref="text10"/>
+        <itemref idref="text14"/>
 		<itemref idref="text13"/>
         <itemref idref="text6"/>
         <itemref idref="text12"/>
