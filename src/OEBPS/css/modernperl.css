@@ -71,3 +71,11 @@ img{}
 .tip .title {background-color: black;color: white;width: 100%;font-variant: small-caps;text-align: center;}
 .tip .title code {color: white;}
 .center, .center h1, .center h2, .center h3 {text-align:center;}
+ul.toc li {
+	margin-left:2em;
+	list-style-type:none;
+	list-style-position:outside;
+	font-size:1em;
+	line-height:1em;
+}
+ul.toc li strong {line-height:1.4em;font-size:1.2em;}
