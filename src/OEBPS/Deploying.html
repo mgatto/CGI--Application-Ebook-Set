@@ -18,13 +18,21 @@
 			<dd>CGI works on any webserver. CGI::Application can be deployed as described in its documentationwith no changes. Note, one may replace CGI.pm with CGI::Simple if one does not intend to use its HTML construction methods.</dd>
 
 			<dt>PSGI</dt>
-			<dd>PSGI is the new standard for web applications written in Perl. CGI::Application uses either <a href="CGI--Application--PSGI.html#synopsis">CGI::Application::PSGI</a> or CGI::Application::Emulate::PSGI to deploy in PSGI/Plack environments. Using CGI::Application::Emulate::PSGI enables the developer to continue using CGI.pm or CGI::Simple in a PSGI environment.</dd>
+			<dd>
+                <p>PSGI is the new standard for web applications written in Perl. CGI::Application preferably uses a <em>CGI.pm</em>-replacement <a href="CGI--Application--PSGI.html#synopsis">CGI::Application::PSGI</a> to deploy in PSGI/Plack environments.</p>
+                <p>One may also use <a href="CGI--Application--Emulate--PSGI.html">CGI::Application::Emulate::PSGI</a> to quickly port <em>CGI.pm</em>-based applications without ripping out <em>CGI.pm</em>. Using CGI::Application::Emulate::PSGI enables the developer to continue using CGI.pm or CGI::Simple in a PSGI environment.</p>
+            </dd>
 
 			<dt>FastCGI</dt>
 			<dd>Deploy with FastCGI as described in the <a href="CGI--Application--FastCGI.html#synopsis">CGI::Application::FastCGI</a> documentation.</dd>
             
             <dt>Mod_Perl</dt>
-            <dd>Deploying with Mod_Perl is a substantial change in CGI::Application's environment, since it avoids using CGI.pm and instead must use Apache::Request.</dd>
+            <dd>
+                <p>Deploying with Mod_Perl is a substantial change in CGI::Application's environment, since it avoids using CGI.pm and instead must use Apache::Request.</p>
+                <p>You must use <a href="CGI--Application--Plugin--Apache.html">CGI::Application::Plugin::Apache</a>, since <em>Apache::Request</em> will not work with CGI::Application on its own.</p>
+                <p>Read first about <a href="CGI--Application--Plugin--Apache.html">CGI::Application::Plugin::Apache</a> and then move on to <a href="CGI--Application--Apache2--Request.html">CGI::Application::Apache2::Request</a> to learn a little more about how it works.</p>
+                <p><em>CGI::Application::Apache::Request</em> does exist, but since almost no one uses Apache 1.3 anymore given that its mostly unmaintained (excpt for OpenBSD!), it is not included in this Documentation Bundle. </p>
+            </dd>
 		</dl>
 	</body>
 	</html>

@@ -1,0 +1,60 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>CGI::Application::Emulate::PSGI - a legacy-code-friendly PSGI adapter for CGI::Application</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="css/modernperl.css" type="text/css" />
+	</head>
+	<body>
+    	<div class="center">
+			<h1>CGI::Application::Emulate::PSGI &mdash; 0.02</h1>
+			<hr />
+	        <h3>A legacy-code-friendly PSGI adapter for CGI::Application</h3>
+        </div>
+        
+		<h2>Synopsis</h2>
+		<p>Create a PSGI application from a <a href="CGI--Application.html">CGI::Application</a> project:</p>
+<pre>
+# if using CGI::Application
+my $psgi_app = CGI::Application::Emulate::PSGI-&gt;handler(sub {
+    my $webapp = WebApp-&gt;new();
+    $webapp-&gt;run();
+});
+</pre>
+<pre>
+# if using CGI::Application::Dispatch
+my $psgi_app = CGI::Application::Emulate::PSGI-&gt;handler(sub {
+    WebApp::Dispatch-&gt;dispatch();
+});
+</pre>
+		<p>See <code>plackup</code> for options for running a PSGI application.</p>
+	
+    	<h2>Description</h2>
+		<p>CGI::Application::Emulate::PSGI allows a project based on <a href="CGI--Application.html"> CGI::Application</a> to run as a PSGI application.  Differences from <a href="CGI--Application--PSGI.html">CGI::Application::PSGI</a> are:</p>
+		<dl>
+		    <dt>Uses <code>CGI.pm</code> directly instead of <a href="CGI--PSGI.html">CGI::PSGI</a>.</dt>
+		    <dd>
+		        <p><a href="CGI--Application--PSGI.html">CGI::Application::PSGI</a> (that uses <a href="CGI--PSGI.html">CGI::PSGI</a>) does not support programs calling <code>CGI.pm</code> in func-style (like CGI::virtual_host()). CGI::Application::Emulate::PSGI sets up environment variables so that code using <code>CGI.pm</code> will work. Both approaches explictly use CGI.pm as the query object.</p>
+		    </dd>
+		    <dt>Compatible with <em>CGI::Application::Dispatch</em>.</dt>
+		    <dd>
+		        <p>The interface of CGI::Application::Emulate::PSGI is different from <a href="CGI--Application--PSGI.html">the CGI::Application::PSGI manpage</a>, and is compatible with <em>CGI::Application::Dispatch</em>.</p>
+		    </dd>
+		    <dt>Headers are parsed and re-generated.</dt>
+		    <dd>
+		        <p>This difference is in favor of <a href="CGI--Application--PSGI.html">CGI::Application::PSGI</a>, which more directly generates the HTTP headers in PSGI format. This module requires additional processing: First CGI::Application builds the full response including the headers and body, then we parse the final result back into the header and body format called for by the PSGI spec.</p>
+		    </dd>
+		</dl>
+        
+		<h2>Author</h2>
+		<p>Kazuho Oku &lt;<a href="mailto:kazuhooku@gmail.com">kazuhooku@gmail.com</a>&gt;</p>
+		
+        <h3>License</h3>
+		<p>This library is free software; you can redistribute it and/or modify
+		    it under the same terms as Perl itself.</p>
+            
+		<h3>See Also</h3>
+		<p><a href="CGI--Application--PSGI.html">CGI::Application::PSGI</a>.</p>
+	</body>
+</html>
