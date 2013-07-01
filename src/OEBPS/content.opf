@@ -41,7 +41,6 @@
         <item id="text1" media-type="application/xhtml+xml" href="Introduction.html"></item><!-- text/x-oeb1-document -->
         <item id="text2" media-type="application/xhtml+xml" href="CGI--Application.html"></item>
         <item id="text7" media-type="application/xhtml+xml" href="HTML--Template.html"></item>
-        <item id="text8" media-type="application/xhtml+xml" href="HTML--Template--Compiled.html"></item>
         <item id="text11" media-type="application/xhtml+xml" href="Deploying.html"></item>
         <item id="text3" media-type="application/xhtml+xml" href="CGI--Application--PSGI.html"></item>
         <item id="text4" media-type="application/xhtml+xml" href="CGI--PSGI.html"></item>
@@ -67,7 +66,6 @@
         <itemref idref="text1"/>
         <itemref idref="text2"/>
         <itemref idref="text7"/>
-        <itemref idref="text8"/>
         <itemref idref="text11"/>
         <itemref idref="text3"/>
         <itemref idref="text4"/>
