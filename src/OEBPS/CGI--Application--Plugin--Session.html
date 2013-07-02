@@ -80,25 +80,28 @@ my $language = $self-&gt;session-&gt;param('language');
         
 <pre>
 $self-&gt;session_config(
-	CGI_SESSION_OPTIONS =&gt; 
-    	[ &quot;driver:File&quot;, $self-&gt;query, {Directory=&gt;'/tmp'} ],
-    COOKIE_PARAMS       =&gt; {
-    	-path  =&gt; '/',
+    CGI_SESSION_OPTIONS =&gt; [ 
+        &quot;driver:File&quot;, $self-&gt;query, {Directory=&gt;'/tmp'} 
+    ],
+    COOKIE_PARAMS =&gt; {
+        -path =&gt; '/',
     },
-    SEND_COOKIE         =&gt; 1,
+    SEND_COOKIE =&gt; 1,
 );
 </pre>
 		<p>Here is a more customized example that uses the PostgreSQL driver and sets an expiry and domain on the cookie.</p>
         
 <pre>
 $self-&gt;session_config(
-	CGI_SESSION_OPTIONS =&gt; [ &quot;driver:PostgreSQL;serializer:Storable&quot;, $self-&gt;query, {Handle=&gt;$dbh} ],
-    COOKIE_PARAMS       =&gt; {
-	    -domain  =&gt; 'mydomain.com',
-	    -expires =&gt; '+24h',
-	    -path    =&gt; '/',
-	    -secure  =&gt; 1,
-	},
+    CGI_SESSION_OPTIONS =&gt; [
+        &quot;driver:PostgreSQL;serializer:Storable&quot;, $self-&gt;query, {Handle=&gt;$dbh}
+    ],
+    COOKIE_PARAMS =&gt; {
+        -domain  =&gt; 'mydomain.com',
+        -expires =&gt; '+24h',
+        -path    =&gt; '/',
+        -secure  =&gt; 1,
+    },
 );
 </pre>
 
@@ -161,13 +164,15 @@ sub cgiapp_init {
  
     # Configure the session
     $self-&gt;session_config(
-       CGI_SESSION_OPTIONS =&gt; [ &quot;driver:PostgreSQL;serializer:Storable&quot;, $self-&gt;query, {Handle=&gt;$self-&gt;dbh} ],
-       DEFAULT_EXPIRY      =&gt; '+1w',
-       COOKIE_PARAMS       =&gt; {
-                                -expires =&gt; '+24h',
-                                -path    =&gt; '/',
-                              },
-       SEND_COOKIE         =&gt; 1,
+        CGI_SESSION_OPTIONS =&gt; [
+            &quot;driver:PostgreSQL;serializer:Storable&quot;, $self-&gt;query, {Handle=&gt;$self-&gt;dbh} 
+        ],
+        DEFAULT_EXPIRY      =&gt; '+1w',
+        COOKIE_PARAMS       =&gt; {
+            -expires =&gt; '+24h',
+            -path    =&gt; '/',
+        },
+        SEND_COOKIE         =&gt; 1,
     );
 }
  
