@@ -545,7 +545,8 @@ font =&gt; {face =&gt; 'verdana', size =&gt; '-1', color =&gt; 'gray'}
 </pre>
 <p>The above becomes:</p>
 <pre>
-    &lt;font face=&quot;verdana&quot; size=&quot;-1&quot; color=&quot;gray&quot;&gt;</pre>
+&lt;font face=&quot;verdana&quot; size=&quot;-1&quot; color=&quot;gray&quot;&gt;
+</pre>
 <p>I used to use this all the time, but the <code>stylesheet</code> option
 is <strong>SO MUCH BETTER</strong>. Trust me, take a day and learn the basics
 of CSS, it's totally worth it.</p>
@@ -606,9 +607,10 @@ EOJS
 JavaScript function. It is useful for adding your own validation
 code, while still getting all the automatic hooks. If something fails,
 you should do two things:</p>
-<pre>
-    1. append to the JavaScript string &quot;alertstr&quot;
-    2. increment the JavaScript number &quot;invalid&quot;</pre>
+<ol>
+	<li>append to the JavaScript string &quot;alertstr&quot;</li>
+    <li>increment the JavaScript number &quot;invalid&quot;</li>
+</ol>
 <p>For example:</p>
 <pre>
 my $jsfunc = &lt;&lt;'EOJS';   # note single quote (see Hint)
@@ -2188,7 +2190,7 @@ print $form-&gt;render;
 
 <p>Yes, it's pretty much that easy. See <em>CGI::FormBuilder::Multi</em> for how to tie this into a multi-page form.</p>
 
-<h2><a name="frequently_asked_questions__faq_">Frequently Asked Questions (FAQ)</a></h2>
+<h2><a name="frequently_asked_questions__faq_"></a>Frequently Asked Questions (FAQ)</h2>
 <p>There are a couple questions and subtle traps that seem to poke people on a regular basis. Here are some hints.</p>
 
 <h3>I'm confused. Why doesn't this work like CGI.pm?</h3>
@@ -2888,17 +2890,15 @@ VERSION 3.00
     Documentation has been updated and somewhat reorganized, which was long
     overdue.
 -->
-<h2><a href="" name="author">Author</a></h2>
-    <p>Copyright (c) Nate Wiger. All Rights Reserved.</p>
-
-    <p>This module is free software; you may copy this under the terms of the GNU General Public License, or the Artistic License, copies of which should have accompanied your Perl kit.</p>
-
 <h2><a name="notes"></a>Notes</h2>
 <p>Parameters beginning with a leading underscore are reserved for future use by this module. Use at your own peril.</p>
 <p>The <code>field()</code> method has the alias <code>param()</code> for compatibility with other modules, allowing you to pass a <code>$form</code> around just like a <code>$cgi</code> object.</p>
 <p>The output of the HTML generated natively may change slightly from release to release. If you need precise control, use a template.</p>
 <p>Every attempt has been made to make this module taint-safe (-T). However, due to the way tainting works, you may run into the message &quot;Insecure dependency&quot; or &quot;Insecure $ENV{PATH}&quot;. If so, make sure you are setting <code>$ENV{PATH}</code> at the top of your script.</p>
 
+		<h2><a name="author"></a>Author</h2>
+		<p>Copyright (c) <em>Nate Wiger</em>. All Rights Reserved.</p>
+        
 <h2><a name="acknowledgements"></a>Acknowledgements</h2>
 <p>This module has really taken off, thanks to very useful input, bug reports, and encouraging feedback from a number of people, including:</p>
 <ul>
@@ -2941,9 +2941,8 @@ VERSION 3.00
     <li>Emanuele Zeppieri</li>
     </ul>
 		<p>Thanks!</p>
-
-		<h2><a name="author"></a>Author</h2>
-		<p>Copyright (c) <em>Nate Wiger</em>. All Rights Reserved.</p>
+        
+        <h2><a href="" name="license">License</a></h2>
 		<p>This module is free software; you may copy this under the terms ofthe GNU General Public License, or the Artistic License, copies ofwhich should have accompanied your Perl kit.</p>	
 	</body>
 </html>

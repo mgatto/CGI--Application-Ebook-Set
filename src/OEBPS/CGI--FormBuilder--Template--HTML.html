@@ -71,7 +71,7 @@ my $form = CGI::FormBuilder-&gt;new(
                 <td>The &lt;title&gt; of the HTML form</td>
 			</tr>
             <tr>
-				<td><code>&lt;tmpl_var form-start&gt;</code></td>
+				<td><code>&lt;tmpl_vav form-start&gt;</code></td>
                 <td>Opening &lt;form&gt; tag and internal fields</td>
 			</tr>
             <tr>
@@ -192,14 +192,15 @@ myapp.cgi?color=gray&amp;color=red&amp;color=blue
 <pre>
 &lt;select name=&quot;color&quot; multiple&gt;
 &lt;tmpl_loop loop-color&gt;
-    &lt;option value=&quot;&lt;tmpl_var value&gt;&quot; &lt;tmpl_var selected&gt;&gt;&lt;tmpl_var label&gt;
+    &lt;option value=&quot;&lt;tmpl_var value&gt;&quot; &lt;tmpl_var selected&gt;&gt;
+    &lt;tmpl_var label&gt;
 &lt;/tmpl_loop&gt;
 &lt;/select&gt;
 </pre>
 		<p>Then, your Perl code would fiddle the field as follows:</p>
 <pre>
 $form-&gt;field( 
-	name =&gt; 'color', nameopts =&gt; 1,
+    name =&gt; 'color', nameopts =&gt; 1,
     options =&gt; [qw(red green blue yellow black white gray)]
 );
 </pre>
