@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
 <!--
-For a detailed description of NCX usage please refer to:
-http://www.idpf.org/2007/opf/OPF_2.0_final_spec.html#Section2.4.1
+    For a detailed description of NCX usage please refer to:
+    http://www.idpf.org/2007/opf/OPF_2.0_final_spec.html#Section2.4.1
 -->
 <ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="en-US">
     <head>
         <meta name="dtb:uid" content="urn:uuid:0223a860-4a28-4f37-9582-38c6b44afa27"/>
-        <meta name="dtb:depth" content="3"/>
+        <meta name="dtb:depth" content="4"/>
         <meta name="dtb:totalPageCount" content="0"/><!-- do not change -->
         <meta name="dtb:maxPageNumber" content="0"/><!-- do not change -->
     </head>
@@ -18,7 +18,7 @@ http://www.idpf.org/2007/opf/OPF_2.0_final_spec.html#Section2.4.1
         <text>Mark Stosberg</text>
     </docAuthor>
     <navMap>
-		<navPoint id="title" playOrder="1">
+        <navPoint id="title" playOrder="1">
             <navLabel>
                 <text>Title Page</text>
             </navLabel>
@@ -54,59 +54,83 @@ http://www.idpf.org/2007/opf/OPF_2.0_final_spec.html#Section2.4.1
                 <content src="CGI--Application.html#introduction" />
             </navPoint>
         </navPoint>
-		<navPoint id="html-temp" playOrder="7">
+        <navPoint id="html-temp" playOrder="7">
             <navLabel>
                 <text>HTML::Template</text>
             </navLabel>
             <content src="HTML--Template.html" />
         </navPoint>
-        <navPoint id="cgi-app-sess" playOrder="8">
+        <navPoint id="cgi-app-forms" playOrder="8">
+            <navLabel>
+                <text>Forms</text>
+            </navLabel>
+            <content src="Forms.html" />
+            <navPoint id="cgi-app-plugin-forms" playOrder="9">
+                <navLabel>
+                    <text>CGI::FormBuilder::Template::HTML</text>
+                </navLabel>
+                <content src="CGI--FormBuilder--Template--HTML.html" />
+            </navPoint>
+            <navPoint id="cgi-formbuilder" playOrder="10">
+                <navLabel>
+                    <text>CGI::FormBuilder</text>
+                </navLabel>
+                <content src="CGI--FormBuilder.html" />
+            </navPoint>
+        </navPoint>
+        <navPoint id="cgi-app-sess" playOrder="11">
             <navLabel>
                 <text>Sessions</text>
             </navLabel>
             <content src="Sessions.html" />
-			<navPoint id="cgi-app-plugin-sess" playOrder="9">
+            <navPoint id="cgi-app-plugin-sess" playOrder="12">
                 <navLabel>
-                	<text>Sessions</text>
-	            </navLabel>
-    	        <content src="CGI--Application--Plugin--Session.html" />
-			</navPoint>	
-	        <navPoint id="cgi-sess" playOrder="10">
-	            <navLabel>
-	                <text>CGI::Session</text>
-	            </navLabel>
-	            <content src="CGI--Session.html" />
-	        </navPoint>
-	    </navPoint>
-		<navPoint id="cgi-app-psgi" playOrder="11">
+                    <text>CGI::Application::Plugin::Session</text>
+                </navLabel>
+                <content src="CGI--Application--Plugin--Session.html" />
+            </navPoint>
+            <navPoint id="cgi-sesssion" playOrder="13">
+                <navLabel>
+                    <text>CGI::Session</text>
+                </navLabel>
+                <content src="CGI--Session.html" />
+            </navPoint>
+        </navPoint>
+        <navPoint id="cgi-app-psgi" playOrder="14">
             <navLabel>
                 <text>Deploying CGI::Application</text>
             </navLabel>
             <content src="Deploying.html" />
-            <navPoint id="cgi-app-plugin-psgi" playOrder="12">
+            <navPoint id="cgi-app-plugin-psgi" playOrder="15">
                 <navLabel>
                     <text>Deploying with PSGI</text>
                 </navLabel>
                 <content src="CGI--Application--PSGI.html" />
+                <navPoint id="cgi-psgi" playOrder="16">
+                    <navLabel>
+                        <text>CGI::PSGI</text>
+                    </navLabel>
+                    <content src="CGI--PSGI.html" />
+                </navPoint>
+                <navPoint id="cgi-psgi-emul" playOrder="17">
+                    <navLabel>
+                        <text>CGI::Application::Emulate::PSGI</text>
+                    </navLabel>
+                    <content src="CGI--Application--Emulate--PSGI.html" />
+                </navPoint>
             </navPoint>
-            <navPoint id="cgi-psgi" playOrder="13">
-                <navLabel>
-                    <text>CGI::PSGI</text>
-                </navLabel>
-                <content src="CGI--PSGI.html" />
-            </navPoint>
-            <navPoint id="cgi-fastsgi" playOrder="14">
+            <navPoint id="cgi-fastsgi" playOrder="18">
                 <navLabel>
                     <text>Deploying with FastCGI</text>
                 </navLabel>
                 <content src="CGI--Application--FastCGI.html" />
             </navPoint>
-            <navPoint id="cgi-apache" playOrder="15">
+            <navPoint id="cgi-apache" playOrder="19">
                 <navLabel>
                     <text>Deploying with Mod_Perl</text>
                 </navLabel>
                 <content src="CGI--Application--Plugin--Apache.html" />
-                <navPoint id="cgi-apache-req" playOrder="16">
+                <navPoint id="cgi-apache-req" playOrder="20">
                     <navLabel>
                         <text>Wrapping Apache2::Request</text>
                     </navLabel>
@@ -114,7 +138,7 @@ http://www.idpf.org/2007/opf/OPF_2.0_final_spec.html#Section2.4.1
                 </navPoint>
             </navPoint>
         </navPoint>
-        <navPoint id="app-a" playOrder="17">
+        <navPoint id="app-a" playOrder="20">
             <navLabel>
                 <text>Appendix A: Production of this Ebook</text>
             </navLabel>

@@ -1,38 +1,36 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <package unique-identifier="uid" xmlns:opf="http://www.idpf.org/2007/opf" version="2.0"><!-- xmlns:asd="http://www.idpf.org/asdfaf"  -->
-    <metadata>
-    <!-- <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf"> -->
-        <x-metadata>
+    <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+        <title>CGI::Application Documentation Booklet</title>
+		<language>en-us</language>
+		<x-metadata>
             <EmbeddedCover>images/cover.jpg</EmbeddedCover>
         </x-metadata>
         <!--Required for KindleGen, Barnes and Noble, and iBookstore-->
         <meta name="cover" content="cimage" />
-        <dc-metadata xmlns:dc="http://purl.org/metadata/dublin_core" xmlns:oebpackage="http://openebook.org/namespaces/oeb-package/1.0/">
-            <dc:title>CGI::Application Documentation Set</dc:title>
-            <dc:language>en-us</dc:language>
-            <dc:identifier id="BookId" opf:scheme="uuid">urn:uuid:0223a860-4a28-4f37-9582-38c6b44afa27</dc:identifier>
-            <dc:creator opf:role="aut" file-as="Last, First"></dc:creator>
-            <dc:contributor opf:file-as="Last, First" opf:role="edt">Michael Gatto</dc:contributor>
-            <dc:copyrights></dc:copyrights>
-            <dc:publisher>Lisantra Technologies, LLC</dc:publisher>
-            <dc:date>2013-06-24</dc:date>
-           
-            <!--Extra metadata here (recommended)-->
-            <!--Backjacket description goes here-->
-            <dc:description>This ebook is a collection of documentation for CGI::Application and commonly associated modules for Templating, Sessions, Forms and Databases. This ebook is specially formatted for modern eReaders: Highly readable CSS formats the entire text consistently, chapters are clearly delineated and custom fonts are embedded. The default stylesheet is derived from chromatic's "Modern Perl" website, Metacpan's web stylesheet and the CSS used in perldoc.perl.org.</dc:description>
-            <!--These function like Keywords. Use as many as you like-->
-            <dc:subject>Perl</dc:subject>
-            <dc:subject>Programming</dc:subject>
-            <dc:subject>Internet</dc:subject>
-            <dc:subject>Web Development</dc:subject>
-            <dc:subject>CGI</dc:subject>
-            <dc:subject>Templating</dc:subject>
-            <!--This is optional metadata that rarely gets used-->
-            <dc:rights>Creative Commons</dc:rights>
-            <dc:type>Text</dc:type>
-            <dc:source>Can be a URL or ISBN number</dc:source>
-            <dc:coverage>Worldwide</dc:coverage>
-        </dc-metadata>
+		<dc:title>CGI::Application Documentation Booklet</dc:title>
+		<dc:language>en-us</dc:language>
+		<dc:identifier id="BookId" opf:scheme="uuid">urn:uuid:0223a860-4a28-4f37-9582-38c6b44afa27</dc:identifier>
+		<dc:creator opf:role="aut" file-as="Last, First"></dc:creator>
+		<dc:contributor opf:file-as="Last, First" opf:role="edt">Michael Gatto</dc:contributor>
+		<dc:copyrights></dc:copyrights>
+		<dc:publisher>Lisantra Technologies, LLC</dc:publisher>
+		<dc:date>2013-06-24</dc:date>
+		<!--Extra metadata here (recommended)-->
+		<!--Backjacket description goes here-->
+		<dc:description>This ebook is a collection of documentation for CGI::Application and commonly associated modules for Templating, Sessions, Forms and Databases. This ebook is specially formatted for modern eReaders: Highly readable CSS formats the entire text consistently, chapters are clearly delineated and custom fonts are embedded. The default stylesheet is derived from chromatic's "Modern Perl" website, Metacpan's web stylesheet and the CSS used in perldoc.perl.org.</dc:description>
+		<!--These function like Keywords. Use as many as you like-->
+		<dc:subject>Perl</dc:subject>
+		<dc:subject>Programming</dc:subject>
+		<dc:subject>Internet</dc:subject>
+		<dc:subject>Web Development</dc:subject>
+		<dc:subject>CGI</dc:subject>
+		<dc:subject>Templating</dc:subject>
+		<!--This is optional metadata that rarely gets used-->
+		<dc:rights>Creative Commons</dc:rights>
+		<dc:type>Text</dc:type>
+		<!--<dc:source>Can be a URL or ISBN number</dc:source>-->
+		<dc:coverage>Worldwide</dc:coverage>
     </metadata>
     <manifest>
         <item id="content" media-type="text/x-oeb1-document" href="toc.html"></item>
@@ -41,21 +39,25 @@
         <item id="text1" media-type="application/xhtml+xml" href="Introduction.html"></item><!-- text/x-oeb1-document -->
         <item id="text2" media-type="application/xhtml+xml" href="CGI--Application.html"></item>
         <item id="text7" media-type="application/xhtml+xml" href="HTML--Template.html"></item>
+		<item id="text15" media-type="application/xhtml+xml" href="Forms.html"></item>
+		<item id="text16" media-type="application/xhtml+xml" href="CGI--FormBuilder--Template--HTML.html"></item>
+		<item id="text17" media-type="application/xhtml+xml" href="CGI--FormBuilder.html"></item>
         <item id="text14" media-type="application/xhtml+xml" href="Sessions.html"></item>
         <item id="text13" media-type="application/xhtml+xml" href="CGI--Application--Plugin--Session.html"></item>
         <item id="text6" media-type="application/xhtml+xml" href="CGI--Session.html"></item>
         <item id="text11" media-type="application/xhtml+xml" href="Deploying.html"></item>
         <item id="text3" media-type="application/xhtml+xml" href="CGI--Application--PSGI.html"></item>
         <item id="text4" media-type="application/xhtml+xml" href="CGI--PSGI.html"></item>
+        <item id="text18" media-type="application/xhtml+xml" href="CGI--Application--Emulate--PSGI.html"></item>
         <item id="text5" media-type="application/xhtml+xml" href="CGI--Application--FastCGI.html"></item>
         <item id="text9" media-type="application/xhtml+xml" href="CGI--Application--Plugin--Apache.html"></item>
         <item id="text10" media-type="application/xhtml+xml" href="CGI--Application--Apache2--Request.html"></item>
         <item id="text12" media-type="application/xhtml+xml" href="Appendix_A.html"></item>
         <item id="styles1" media-type="text/css" href="css/modernperl.css" />
-        <item id="fonts1" media-type="font/truetype" href="fonts/VeraMono.ttf" />
+        <!--<item id="fonts1" media-type="font/truetype" href="fonts/VeraMono.ttf" />-->
         <item id="fonts2" media-type="font/truetype" href="fonts/VeraMono-Bold.ttf" />
-        <item id="fonts3" media-type="font/truetype" href="fonts/VeraMono-Bold-Italic.ttf" />
-        <item id="fonts4" media-type="font/truetype" href="fonts/VeraMono-Italic.ttf" />
+		<!--<item id="fonts3" media-type="font/truetype" href="fonts/VeraMono-Bold-Italic.ttf" />-->
+    	<!--<item id="fonts4" media-type="font/truetype" href="fonts/VeraMono-Italic.ttf" />-->
         <item id="cimage" media-type="image/jpeg" href="images/cover.jpg" />
         <item id="images1" media-type="font/truetype" href="images/cc.jpg" />
     </manifest>
@@ -65,15 +67,19 @@
         <itemref idref="text1"/>
         <itemref idref="text2"/>
         <itemref idref="text7"/>
+        <itemref idref="text15"/>
+        <itemref idref="text16"/>
+        <itemref idref="text17"/>
         <itemref idref="text14"/>
 		<itemref idref="text13"/>
+        <itemref idref="text6"/>
         <itemref idref="text11"/>
         <itemref idref="text3"/>
         <itemref idref="text4"/>
+        <itemref idref="text18"/>
         <itemref idref="text5"/>
         <itemref idref="text9"/>
         <itemref idref="text10"/>
-        <itemref idref="text6"/>
         <itemref idref="text12"/>
     </spine>
     <guide>
