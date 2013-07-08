@@ -344,9 +344,9 @@ output if the loop has zero rows.</p>
 <div class="note">
 	<p>HTML::Template's tags are meant to mimic normal HTML tags.  However,
 	they are allowed to &quot;break the rules&quot;.  Something like:</p>
-	<pre>
-	&lt;img src=&quot;&lt;TMPL_VAR IMAGE_SRC&gt;&quot;&gt;
-	</pre>
+<pre>
+&lt;img src=&quot;&lt;TMPL_VAR IMAGE_SRC&gt;&quot;&gt;
+</pre>
 	<p>is not really valid HTML, but it is a perfectly valid use and will
 	work as planned.</p>
 	<p>The &quot;NAME=&quot; in the tag is optional, although for extensibility's sake I
@@ -356,9 +356,9 @@ output if the loop has zero rows.</p>
 	in the form of HTML comments. This may be of use to HTML authors who
 	would like to validate their templates' HTML syntax prior to
 	HTML::Template processing, or who use DTD-savvy editing tools.</p>
-	<pre>
-	&lt;!-- TMPL_VAR NAME=PARAM1 --&gt;
-	</pre>
+<pre>
+&lt;!-- TMPL_VAR NAME=PARAM1 --&gt;
+</pre>
 	<p>In order to realize a dramatic savings in bandwidth, the standard
 	(non-comment) tags will be used throughout this documentation.</p>
 </div>
@@ -429,12 +429,14 @@ my $t = HTML::Template-&gt;new(
 filename doesn't begin with /, then the path will be relative to the
 value of $HTML_TEMPLATE_ROOT.  Example - if the environment variable
 HTML_TEMPLATE_ROOT is set to &quot;/home/sam&quot; and I call
-HTML::Template-&gt;<code>new()</code> with filename set to &quot;sam.tmpl&quot;, the
+HTML::Template-&gt;<code>new()</code> with filename set to &quot;sam.tmpl&quot;, 
 HTML::Template will try to open &quot;/home/sam/sam.tmpl&quot; to access the
 template file.  You can also affect the search path for files with the
 &quot;path&quot; option to <code>new()</code> - see below for more information.</p>
-<p>You can modify the Template object's behavior with <code>new()</code>.  The options
-are available:</p>
+
+    <h3>Options</h3>
+    <p>You can modify the Template object's behavior with <code>new()</code>.  These options
+    are available:</p>
 
 <h4>Error Detection Options</h4>
 <dl>

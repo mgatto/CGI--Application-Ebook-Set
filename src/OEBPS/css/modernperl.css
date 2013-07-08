@@ -34,7 +34,7 @@ ul,ol{padding:0;margin:0 0 2% 2%;}
 ul ul,ul ol,ol ol,ol ul{margin-bottom:0;}
 ul li{list-style:square;}
 ol li{list-style:decimal;}
-dl{margin-bottom:1em;}
+dl{margin-bottom:1em;margin-left:1em;}
 dt,dd{}
 dt{font-weight:bold;}
 strong{font-weight:bold;}
@@ -53,7 +53,7 @@ cite{font-style:normal;}
 /*code,pre{padding:0px;color:#000;}*/
 code {font: normal normal normal 1.0em/1.2em 'Bitstream Vera Sans Mono Bold', monospace;}
 pre{display:block;padding:2px;margin:0 0 9px;font: normal normal normal 0.8em/1.2em 'Bitstream Vera Sans Mono Bold', monospace;background-color:#fdfdfd;border:1px solid rgba(0, 0, 0, 0.25);border-radius:3px;white-space:pre-wrap;}/*word-break:break-all;word-wrap:break-word;*/
-table { font-size: inherit;}
+table { font-size: inherit;margin-bottom:1em;}
 td,th {vertical-align:top;padding: 0.2em;}
 th { background: #fdfdfd; text-align: left;}
 td {}
@@ -74,7 +74,7 @@ img{}
 ul.toc li {
 	margin-left:2em;
 	list-style-type:none;
-	list-style-position:outside;
+	list-style-position:inside;
 	font-size:1em;
 	line-height:1em;
 }

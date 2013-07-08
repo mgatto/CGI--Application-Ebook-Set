@@ -41,7 +41,7 @@ my $app = sub {
 $env = $cgi-&gt;env;
 </pre>
 		<p>Returns the PSGI environment in a hash reference. This allows CGI.pm-based application frameworks such as <a href="CGI--Application.html">CGI::Application</a> to access PSGI extensions, typically set by Plack Middleware components.</p>
-		<p>So if you enable <me>Plack::Middleware::Session, your application and plugin developers can access the session via:</p>
+		<p>So if you enable <em>Plack::Middleware::Session</em>, your application and plugin developers can access the session via:</p>
         
 <pre>
 $cgi-&gt;env-&gt;{'plack.session'}-&gt;get(&quot;foo&quot;);
