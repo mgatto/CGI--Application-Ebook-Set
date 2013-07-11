@@ -11,7 +11,15 @@
 		<dc:title>CGI::Application Documentation Booklet</dc:title>
 		<dc:language>en-us</dc:language>
 		<dc:identifier id="BookId" opf:scheme="uuid">urn:uuid:0223a860-4a28-4f37-9582-38c6b44afa27</dc:identifier>
+		<dc:creator opf:role="aut" file-as="Last, First">Stosberg, Mark</dc:creator>
+		<dc:creator opf:role="aut" file-as="Last, First">Tregar, Sam</dc:creator>
+		
 		<dc:creator opf:role="aut" file-as="Last, First"></dc:creator>
+		<dc:creator opf:role="aut" file-as="Last, First"></dc:creator>
+		<dc:creator opf:role="aut" file-as="Last, First"></dc:creator>
+		<dc:creator opf:role="aut" file-as="Last, First"></dc:creator>
+		<dc:creator opf:role="aut" file-as="Last, First"></dc:creator>
+		
 		<dc:contributor opf:file-as="Last, First" opf:role="edt">Michael Gatto</dc:contributor>
 		<dc:copyrights></dc:copyrights>
 		<dc:publisher>Lisantra Technologies, LLC</dc:publisher>
