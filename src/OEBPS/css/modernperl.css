@@ -51,14 +51,23 @@ address{display:block;margin-bottom:1em;font-style:normal;}
 small{font-size:100%;}
 cite{font-style:normal;}
 /*code,pre{padding:0px;color:#000;}*/
-code {font: normal normal normal 1.0em/1.2em 'Bitstream Vera Sans Mono Bold', monospace;}
-pre{display:block;padding:2px;margin:0 0 9px;font: normal normal normal 0.8em/1.2em 'Bitstream Vera Sans Mono Bold', monospace;background-color:#fdfdfd;border:1px solid rgba(0, 0, 0, 0.25);border-radius:3px;white-space:pre-wrap;}/*word-break:break-all;word-wrap:break-word;*/
+code {
+	font: normal normal normal 0.9em/1.2em 'Bitstream Vera Sans Mono Bold', monospace;
+    background: none repeat scroll 0 0 #fdfdfd /*#EEEEDD*/;
+    border-color: #CCCCCC;
+    border-style: solid;
+    border-width: 1px;
+}
+h2 code {font-weight: bold;font-size:1.7em;}
+h3 code {font-weight: bold;font-size:1.2em;} 
+h4 code {font-weight: bold;font-size:1.1em;}
+pre{display:block;padding:2px;margin:0 0 9px;font: normal normal normal 0.9em/1.2em 'Bitstream Vera Sans Mono Bold', monospace;background-color:#fdfdfd;border:1px solid rgba(0, 0, 0, 0.25);border-radius:3px;white-space:pre-wrap;}/*word-break:break-all;word-wrap:break-word;*/
 table { font-size: inherit;margin-bottom:1em;}
 td,th {vertical-align:top;padding: 0.2em;}
 th { background: #fdfdfd; text-align: left;}
 td {}
 caption {display: table-caption;text-align: left;font-style:italic;}
-div.note{padding:0.3em;margin:1em;border-left:1px solid rgba(0, 0, 0, 0.15);border-right:1px solid rgba(0, 0, 0, 0.15);}
+div.note{padding:0.3em;margin:1em;border:1px solid rgba(0, 0, 0, 0.15);/*border-right:1px solid rgba(0, 0, 0, 0.15);*/}
 div.note h4 {text-align: center;text-transform:uppercase;}
 div.caution {border-width: thin;border-style: solid;background: #ff6666;}
 div.production {background: #000;color: #fff;text-align: center;}
