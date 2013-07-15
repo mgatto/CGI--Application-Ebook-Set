@@ -36,7 +36,7 @@ ul li{list-style:square;}
 ol li{list-style:decimal;}
 dl{margin-bottom:1em;margin-left:1em;}
 dt,dd{}
-dt{font-weight:bold;}
+dt, dt code{font-weight:bold;}
 strong{font-weight:bold;}
 em{font-style:italic;}
 .muted{color:#999;}
@@ -58,7 +58,7 @@ code {
     border-style: solid;
     border-width: 1px;
 }
-h2 code {font-weight: bold;font-size:1.7em;}
+h2 code {font-weight: bold;font-size:1.2em;}
 h3 code {font-weight: bold;font-size:1.2em;} 
 h4 code {font-weight: bold;font-size:1.1em;}
 pre{display:block;padding:2px;margin:0 0 9px;font: normal normal normal 0.9em/1.2em 'Bitstream Vera Sans Mono Bold', monospace;background-color:#fdfdfd;border:1px solid rgba(0, 0, 0, 0.25);border-radius:3px;white-space:pre-wrap;}/*word-break:break-all;word-wrap:break-word;*/
