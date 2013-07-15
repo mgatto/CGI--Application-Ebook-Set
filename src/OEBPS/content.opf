@@ -23,7 +23,7 @@
 		<dc:contributor opf:file-as="Last, First" opf:role="edt">Michael Gatto</dc:contributor>
 		<dc:copyrights></dc:copyrights>
 		<dc:publisher>Lisantra Technologies, LLC</dc:publisher>
-		<dc:date>2013-06-24</dc:date>
+		<dc:date>2013-07-10</dc:date>
 		<!--Extra metadata here (recommended)-->
 		<!--Backjacket description goes here-->
 		<dc:description>This ebook is a collection of documentation for CGI::Application and commonly associated modules for Templating, Sessions, Forms and Databases. This ebook is specially formatted for modern eReaders: Highly readable CSS formats the entire text consistently, chapters are clearly delineated and custom fonts are embedded. The default stylesheet is derived from chromatic's "Modern Perl" website, Metacpan's web stylesheet and the CSS used in perldoc.perl.org.</dc:description>
@@ -46,6 +46,8 @@
         <item id="text0" media-type="application/xhtml+xml" href="Title.html"></item>
         <item id="text1" media-type="application/xhtml+xml" href="Introduction.html"></item><!-- text/x-oeb1-document -->
         <item id="text2" media-type="application/xhtml+xml" href="CGI--Application.html"></item>
+        <item id="text19" media-type="application/xhtml+xml" href="CGI.html"></item>
+        <item id="text20" media-type="application/xhtml+xml" href="CGI--Simple.html"></item>
         <item id="text7" media-type="application/xhtml+xml" href="HTML--Template.html"></item>
 		<item id="text15" media-type="application/xhtml+xml" href="Forms.html"></item>
 		<item id="text16" media-type="application/xhtml+xml" href="CGI--FormBuilder--Template--HTML.html"></item>
@@ -74,6 +76,8 @@
         <itemref idref="content"/>
         <itemref idref="text1"/>
         <itemref idref="text2"/>
+        <itemref idref="text19"/>
+        <itemref idref="text20"/>
         <itemref idref="text7"/>
         <itemref idref="text15"/>
         <itemref idref="text16"/>

@@ -54,83 +54,95 @@
                 <content src="CGI--Application.html#introduction" />
             </navPoint>
         </navPoint>
-        <navPoint id="html-temp" playOrder="7">
+		<navPoint id="cgi" playOrder="7">
+            <navLabel>
+                <text>CGI.pm</text>
+            </navLabel>
+            <content src="CGI.html" />
+        </navPoint>
+		<navPoint id="cgi-simp" playOrder="8">
+            <navLabel>
+                <text>CGI::Simple</text>
+            </navLabel>
+            <content src="CGI--Simple.html" />
+        </navPoint>
+        <navPoint id="html-temp" playOrder="9">
             <navLabel>
                 <text>HTML::Template</text>
             </navLabel>
             <content src="HTML--Template.html" />
         </navPoint>
-        <navPoint id="cgi-app-forms" playOrder="8">
+        <navPoint id="cgi-app-forms" playOrder="10">
             <navLabel>
                 <text>Forms</text>
             </navLabel>
             <content src="Forms.html" />
-            <navPoint id="cgi-app-plugin-forms" playOrder="9">
+            <navPoint id="cgi-app-plugin-forms" playOrder="11">
                 <navLabel>
                     <text>CGI::FormBuilder::Template::HTML</text>
                 </navLabel>
                 <content src="CGI--FormBuilder--Template--HTML.html" />
             </navPoint>
-            <navPoint id="cgi-formbuilder" playOrder="10">
+            <navPoint id="cgi-formbuilder" playOrder="12">
                 <navLabel>
                     <text>CGI::FormBuilder</text>
                 </navLabel>
                 <content src="CGI--FormBuilder.html" />
             </navPoint>
         </navPoint>
-        <navPoint id="cgi-app-sess" playOrder="11">
+        <navPoint id="cgi-app-sess" playOrder="13">
             <navLabel>
                 <text>Sessions</text>
             </navLabel>
             <content src="Sessions.html" />
-            <navPoint id="cgi-app-plugin-sess" playOrder="12">
+            <navPoint id="cgi-app-plugin-sess" playOrder="14">
                 <navLabel>
                     <text>CGI::Application::Plugin::Session</text>
                 </navLabel>
                 <content src="CGI--Application--Plugin--Session.html" />
             </navPoint>
-            <navPoint id="cgi-sesssion" playOrder="13">
+            <navPoint id="cgi-sesssion" playOrder="15">
                 <navLabel>
                     <text>CGI::Session</text>
                 </navLabel>
                 <content src="CGI--Session.html" />
             </navPoint>
         </navPoint>
-        <navPoint id="cgi-app-psgi" playOrder="14">
+        <navPoint id="cgi-app-psgi" playOrder="16">
             <navLabel>
                 <text>Deploying CGI::Application</text>
             </navLabel>
             <content src="Deploying.html" />
-            <navPoint id="cgi-app-plugin-psgi" playOrder="15">
+            <navPoint id="cgi-app-plugin-psgi" playOrder="17">
                 <navLabel>
                     <text>Deploying with PSGI</text>
                 </navLabel>
                 <content src="CGI--Application--PSGI.html" />
-                <navPoint id="cgi-psgi" playOrder="16">
+                <navPoint id="cgi-psgi" playOrder="18">
                     <navLabel>
                         <text>CGI::PSGI</text>
                     </navLabel>
                     <content src="CGI--PSGI.html" />
                 </navPoint>
-                <navPoint id="cgi-psgi-emul" playOrder="17">
+                <navPoint id="cgi-psgi-emul" playOrder="19">
                     <navLabel>
                         <text>CGI::Application::Emulate::PSGI</text>
                     </navLabel>
                     <content src="CGI--Application--Emulate--PSGI.html" />
                 </navPoint>
             </navPoint>
-            <navPoint id="cgi-fastsgi" playOrder="18">
+            <navPoint id="cgi-fastsgi" playOrder="20">
                 <navLabel>
                     <text>Deploying with FastCGI</text>
                 </navLabel>
                 <content src="CGI--Application--FastCGI.html" />
             </navPoint>
-            <navPoint id="cgi-apache" playOrder="19">
+            <navPoint id="cgi-apache" playOrder="21">
                 <navLabel>
                     <text>Deploying with Mod_Perl</text>
                 </navLabel>
                 <content src="CGI--Application--Plugin--Apache.html" />
-                <navPoint id="cgi-apache-req" playOrder="20">
+                <navPoint id="cgi-apache-req" playOrder="22">
                     <navLabel>
                         <text>Wrapping Apache2::Request</text>
                     </navLabel>
@@ -138,7 +150,7 @@
                 </navPoint>
             </navPoint>
         </navPoint>
-        <navPoint id="app-a" playOrder="20">
+        <navPoint id="app-a" playOrder="23">
             <navLabel>
                 <text>Appendix A: Production of this Ebook</text>
             </navLabel>
