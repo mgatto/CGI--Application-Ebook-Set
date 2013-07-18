@@ -96,7 +96,7 @@ else {
 <pre>
 my $results = Data::FormValidator-&gt;check(\%input_hash, \%dfv_profile);
 </pre>
-<p><code>check</code> is the recommended method to use to validate forms. It returns its results as a <a href="https://metacpan.org/module/Data::FormValidator::Results">Data::FormValidator::Results</a> object. A deprecated method <code>validate</code> is also available, returning its results as an array described below.</p>
+<p><code>check</code> is the recommended method to use to validate forms. It returns its results as a Data::FormValidator::Results object. A deprecated method <code>validate</code> is also available, returning its results as an array described below.</p>
 <pre>
 use Data::FormValidator;
 my $results = Data::FormValidator-&gt;check(\%input_hash, \%dfv_profile);
@@ -137,9 +137,8 @@ Data::FormValidator-&gt;validate( \%input_hash, \%dfv_profile);
 
 <h3 id="new"><code>new()</code></h3>
 <p>Using <code>new()</code> is only needed for advanced usage, including these cases:</p>
-<dl>
-<dt id="o">o</dt>
-<dd>
+<ul>
+<li>
 <p>Loading more than one profile at a time. Then you can select the profile you want by name later with <code>check()</code>. Here&#39;s an example:</p>
 <pre>
 my $dfv = Data::FormValidator-&gt;new({
@@ -157,10 +156,9 @@ my $dfv = Data::FormValidator-&gt;new(&#39;/path/to/profiles.pl&#39;);
 <pre>
 my $results = $dfv-&gt;check(\%input_hash,&#39;profile_1&#39;);
 </pre>
-</dd>
+</li>
 
-<dt id="o1">o</dt>
-<dd>
+<li>
 <p>Applying defaults to more than one input profile. There are some parts of the validation profile that you might like to re-use for many form validations.</p>
 <p>To facilitate this, <code>new()</code> takes a second argument, a hash reference. Here the usual input profile definitions can be made. These will act as defaults for any subsequent calls to <code>check()</code> on this object.</p>
 <p>Currently the logic for this is very simple. Any definition of a key in your validation profile will completely overwrite your default value.</p>
@@ -184,8 +182,8 @@ sub check_form {
 return $dfv-&gt;check($self-&gt;query,$profile);
 }
 </pre>
-</dd>
-</dl>
+</li>
+</ul>
 
 <h2 id="INPUT-PROFILE-SPECIFICATION">Input Profile Specification</h2>
 <p>An input profile is a hash reference containing one or more of the following keys.</p>
@@ -334,31 +332,28 @@ constraint_methods =&gt; {
 </div>
 <p>The keys in this hash are field names. The values can be any of the following:</p>
 
-<dl>
-<dt id="o2">o</dt>
-<dd>
+<ul>
+<li>
 <p>A named constraint.</p>
 <p><b>Example</b>:</p>
 <pre>
 my_zipcode_field     =&gt; zip(),
 </pre>
 <p>See Data::FormValidator::Constraints for the details of which built-in constraints that are available.</p>
-</dd>
+</li>
 
-<dt id="o3">o</dt>
-<dd>
+<li>
 <p>A perl regular expression</p>
 <p><b>Example</b>:</p>
 <pre>
 my_zipcode_field   =&gt; qr/^\d{5}$/, # match exactly 5 digits
 </pre>
 <p>If this field is named in <code>untaint_constraint_fields</code> or <code>untaint_regexp_map</code>, or <code>untaint_all_constraints</code> is effective, be aware of the following: If you write your own regular expressions and only match part of the string then you&#39;ll only get part of the string in the valid hash. It is a good idea to write you own constraints like /^regex$/. That way you match the whole string.</p>
-</dd>
+</li>
 
-<dt id="o4">o</dt>
-<dd>
+<li>
 <p>a subroutine reference, to supply custom code</p>
-<p>This will check the input and return true or false depending on the input&#39;s validity. By default, the constraint function receives a Data::FormValidator::Results object as its first argument, and the value to be validated as the second. To validate a field based on more inputs than just the field itself, see <a href="#VALIDATING-INPUT-BASED-ON-MULTIPLE-FIELDS">&quot;VALIDATING INPUT BASED ON MULTIPLE FIELDS&quot;</a>.</p>
+<p>This will check the input and return true or false depending on the input&#39;s validity. By default, the constraint function receives a Data::FormValidator::Results object as its first argument, and the value to be validated as the second. To validate a field based on more inputs than just the field itself, see <a href="#VALIDATING-INPUT-BASED-ON-MULTIPLE-FIELDS">Validating Input Based On Multiple Fields</a>.</p>
 <p><b>Examples</b>:</p>
 <pre>
 # Notice the use of &#39;pop&#39;--
@@ -374,19 +369,21 @@ my_zipcode_field =&gt; \&amp;my_validation_routine,
 # An example of setting the constraint name.
 my_zipcode_field =&gt; sub {
     my ($dfv, $val) = @_;
-    $dfv-&gt;set_current_constraint_name(&#39;my_constraint_name&#39;);
+    $dfv-&gt;set_current_constraint_name(
+        &#39;my_constraint_name&#39;
+    );
+    
     return $val =~ &#39;/^\d{5}$/&#39;
 },
 </pre>
-</dd>
+</li>
 
-<dt id="o5">o</dt>
-<dd>
+<li>
 <p>an array reference</p>
-<p>An array reference is used to apply multiple constraints to a single field. Any of the above options are valid entries the array. See <a href="#MULTIPLE-CONSTRAINTS">&quot;Multiple Constraints&quot;</a> below.</p>
-<p>For more details see <a href="#VALIDATING-INPUT-BASED-ON-MULTIPLE-FIELDS">&quot;Validating Input Based on Multiple Fields&quot;</a>.</p>
-</dd>
-</dl>
+<p>An array reference is used to apply multiple constraints to a single field. Any of the above options are valid entries the array. See <a href="#MULTIPLE-CONSTRAINTS">Multiple Constraints</a> below.</p>
+<p>For more details see <a href="#VALIDATING-INPUT-BASED-ON-MULTIPLE-FIELDS">Validating Input Based on Multiple Fields</a>.</p>
+</li>
+</ul>
 
 <h3 id="constraint_method_regexp_map"><code>constraint_method_regexp_map</code></h3>
 <pre>
@@ -439,7 +436,7 @@ missing_optional_valid =&gt; 1
 <p>This key is used to define other packages which contain constraint routines or filters. Set this key to a single package name, or an arrayref of several. All of its constraint and filter routines beginning with &#39;match_&#39;, &#39;valid_&#39; and &#39;filter_&#39; will be imported into Data::FormValidator. This lets you reference them in a constraint with just their name, just like built-in routines. You can even override the provided validators.</p>
 <p>See Writing your own constraint routines documentation for more information.</p>
 
-<h2 id="msgs"><code>msgs</code></h2>
+<h3 id="msgs"><code>msgs</code></h3>
 <p>This key is used to define parameters related to formatting error messages returned to the user.</p>
 <p>By default, invalid fields have the message &quot;Invalid&quot; associated with them while missing fields have the message &quot;Missing&quot; associated with them.</p>
 <p>In the simplest case, nothing needs to be defined here, and the default values will be used.</p>
@@ -484,22 +481,28 @@ msgs =&gt; {
 </pre>
 <p>The hash that&#39;s prepared can be retrieved through the <code>msgs</code> method described in the Data::FormValidator::Results documentation.</p>
 
-<h3 id="msgs---callback">msgs &ndash; callback</h3>
+<h3 id="msgs---callback"><code>msgs_callback</code></h3>
 <p><i>This is a new feature. While it expected to be forward-compatible, it hasn&#39;t yet received the testing the rest of the API has.</i></p>
 <p>If the built-in message generation doesn&#39;t suit you, it is also possible to provide your own by specifying a code reference:</p>
-<pre>msgs  =&gt;  \&amp;my_msgs_callback</pre>
+<pre>
+msgs  =&gt;  \&amp;my_msgs_callback
+</pre>
 <p>This will be called as a Data::FormValidator::Results method. It may receive as arguments an additional hash reference of control parameters, corresponding to the key names usually used in the <code>msgs</code> area of the profile. You can ignore this information if you&#39;d like.</p>
 <p>If you have an alternative error message handler you&#39;d like to share, stick in the <code>Data::FormValidator::ErrMsgs</code> name space and upload it to CPAN.</p>
 
 <h3 id="debug"><code>debug</code></h3>
 <p>This method is used to print details about what is going on to STDERR.</p>
-<p>Currently only level &#39;1&#39; is used. It provides information about which fields matched constraint_regexp_map.</p>
+<p>Currently only level &#39;1&#39; is used. It provides information about which fields matched <code>constraint_regexp_map</code>.</p>
 
 <h3 id="A-shortcut-for-array-refs">A shortcut for array refs</h3>
 <p>A number of parts of the input profile specification include array references as their values. In any of these places, you can simply use a string if you only need to specify one value. For example, instead of</p>
-<pre>filters =&gt; [ &#39;trim&#39; ]</pre>
+<pre>
+filters =&gt; [ &#39;trim&#39; ]
+</pre>
 <p>you can simply say</p>
-<pre>filters =&gt; &#39;trim&#39;</pre>
+<pre>
+filters =&gt; &#39;trim&#39;
+</pre>
 
 <h3 id="A-note-on-regular-expression-formats">A note on regular expression formats</h3>
 <p>In addition to using the preferred method of defining regular expressions using <code>qr</code>, a deprecated style of defining them as strings is also supported.</p>
@@ -513,7 +516,7 @@ qr/this is great/
 </pre>
 
 <h2 id="VALIDATING-INPUT-BASED-ON-MULTIPLE-FIELDS">Validating Input Based On Multiple Fields</h2>
-<p>You can pass more than one value into a constraint routine. For that, the value of the constraint should be a hash reference. If you are creating your own routines, be sure to read the section labeled <a href="#WRITING-YOUR-OWN-CONSTRAINT-ROUTINES">&quot;Writing Your Own Constraint Routines&quot;</a>, in the Data::FormValidator::Constraints documentation. It describes a newer and more flexible syntax.</p>
+<p>You can pass more than one value into a constraint routine. For that, the value of the constraint should be a hash reference. If you are creating your own routines, be sure to read the section labeled <a href="#WRITING-YOUR-OWN-CONSTRAINT-ROUTINES">Writing Your Own Constraint Routines</a>, in the Data::FormValidator::Constraints documentation. It describes a newer and more flexible syntax.</p>
 <p>Using the original syntax, one key should be named <code>constraint</code> and should have a value set to the reference of the subroutine or the name of a built-in validator. Another required key is <code>params</code>. The value of the <code>params</code> key is a reference to an array of the other elements to use in the validation. If the element is a scalar, it is assumed to be a field name. The field is known to Data::FormValidator, the value will be filtered through any defined filters before it is passed in. If the value is a reference, the reference is passed directly to the routine. Don&#39;t forget to include the name of the field to check in that list, if you are using this syntax.</p>
 <p><b>Example</b>:</p>
 <pre>
@@ -531,7 +534,7 @@ cc_no  =&gt; {
      &#39;zip&#39;,
      {
        constraint =&gt;  &#39;/^406/&#39;,
-       name        =&gt;  &#39;starts_with_406&#39;,
+       name       =&gt;  &#39;starts_with_406&#39;,
      }
 ],
 </pre>
@@ -541,7 +544,7 @@ cc_no  =&gt; {
 <h2 id="ADVANCED-VALIDATION">Advanced Validation</h2>
 <p>For even more advanced validation, you will likely want to read the documentation for other modules in this distribution, linked below. Also keep in mind that the Data::FormValidator profile structure is just another data structure. There is no reason why it needs to be defined statically. The profile could also be built on the fly with custom Perl code.</p>
 
-<h2 id="BACKWARDS-COMPATIBILITY">BACKWARDS COMPATIBILITY</h2>
+<h2 id="BACKWARDS-COMPATIBILITY">Backwards Compatibility</h2>
 
 <h3 id="validate1"><code>validate()</code></h3>
 <pre>
@@ -589,15 +592,10 @@ constraints =&gt; {
 </pre>
 <p>A hash ref which contains the constraints that will be used to check whether or not the field contains valid data.</p>
 <p>The keys in this hash are field names. The values can be any of the following:</p>
-<dl>
-<dt id="o6">o</dt>
-<dd>
-<p>A named constraint.</p>
+<h3>A named Constraint</h3>
 <p><b>Example</b>:</p>
 <pre>my_zipcode_field     =&gt; &#39;zip&#39;,</pre>
 <p>See Data::FormValidator::Constraints for the details of which built-in constraints that are available.</p>
-</dd>
-</dl>
 
 <h3 id="hashref-style-of-specifying-constraints">Hashref Style of Specifying Constraints</h3>
 <p>Using a hash reference to specify a constraint is an older technique used to name a constraint or supply multiple parameters.</p>

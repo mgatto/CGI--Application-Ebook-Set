@@ -126,9 +126,7 @@ else {
 
 <h3><a name="process_fields"></a><code>process_fields</code></h3>
 <p>This is a hashref, with keys being field names. Values can be:</p>
-<dl>
-<dt>Name of a built-in</dt>
-<dd>
+<h4>Name of a built-in</h4>
 <table>
     <tr>
         <th>basic</th><th>shortcut</th><th></th>
@@ -175,23 +173,16 @@ else {
     
 <p><code>OPTIONS_FROM_DB</code> currently only supports MySQL ENUM or SET columns. You probably won't need to use this explicitly, as it's already used internally.</p>
 <p>The <code>+ADD_FIELD</code> processor is only necessary if you need to add a new field to a form, but don't want to use any of the other processors on it.</p>
+
+<h4>Reference to a Subroutine, or Anonymous Coderef</h4>
+<p>The coderef will be passed the Class::DBI::FormBuilder class or subclass, the CDBI class or object, the CGI::FormBuilder form object, and the field name as arguments, and should build the named field.</p>
 </dd>
 
-<dt>Reference to a subroutine, or anonymous coderef</dt>
-<dd>
-<p>The coderef will be passed the <a href="/Class/DBI/FormBuilder.html">the Class::DBI::FormBuilder manpage</a> class or subclass, the CDBI class or object, the <a href="/CGI/FormBuilder.html">the CGI::FormBuilder manpage</a> form object, and the field name as arguments, and should build the named field.</p>
-</dd>
-
-<dt>Package name</dt>
-<dd>
+<h4>Package name</h4>
 <p>Name of a package with a suitable <code>field</code> subroutine. Gets called with the same arguments as the coderef.</p>
-</dd>
 
-<dt>Arrayref of the above</dt>
-<dd>
+<h4>Arrayref of the above</h4>
 <p>Applies each processor in order.</p>
-</dd>
-</dl>
 
 <p>The key <code>__FINAL__</code> is reserved for <code>form_final</code>, so don't name any form fields <code>__FINAL__</code>. If a field processor is set in <code>__FINAL__</code>, then it will be applied to all fields, after all other processors have run.</p>
 
@@ -416,8 +407,7 @@ $field_name =&gt; sub ($$) { $_[0]-&gt;[1] cmp $_[1]-&gt;[1] }
 $field_name =&gt; sub ($$) { $_[0]-&gt;[0] &lt;=&gt; $_[1]-&gt;[0] }
 </pre>
 <p>Note that parameter merging is likely to become more sophisticated in future releases 
-(probably copying the argument merging code from <a href="/CGI/FormBuilder.html">CGI::FormBuilder</a> 
-itself).</p>
+(probably copying the argument merging code from CGI::FormBuilder itself).</p>
 </dd>
 </dl>
 
@@ -481,7 +471,7 @@ etc.
 <p>You may specify the number of duplicates in the <code>how_many</code> required argument.</p>
 <p>Use <code>create_from_multiform</code> to process a form submission.</p>
 
-<h3>as_form_with_related</h3>
+<h3><code>as_form_with_related</code></h3>
 <p><b>DEPRECATED</b>.</p>
 <p><b>This method is NOT WORKING, and will be removed from a future version</b>. The plan is to replace <code>as_form</code> with this code, when it&#39;s working properly.</p>
 <p>Builds a form with fields from the target CDBI class/object, plus fields from the related objects.</p>
@@ -511,7 +501,7 @@ etc.
 <h3><code>form_pks()</code></h3>
 <p>Ensures primary column fields are included in the form (even if they were not included in the <code>fields</code> list), and hides them. Only forms representing objects will have primary column fields added.</p>
 
-<h3>form_options()</code></h3>
+<h3><code>form_options()</code></h3>
 <p>Identifies column types that should be represented as select, radiobutton or checkbox widgets. Currently only works for MySQL <code>ENUM</code> and <code>SET</code> columns.</p>
 <p>Patches are welcome for similar column types in other RDBMS&#39;s.</p>
 <p>Note that you can easily emulate a MySQL <code>ENUM</code> column at the application level by setting the validation for the column to an arrayref of values. Emulate a <code>SET</code> column by additionally setting the <code>multiple</code> option to <code>1</code>.</p>
@@ -566,7 +556,7 @@ sub form_file {
 <h2 id="Form-handling-methods">Form Handling Methods</h2>
 <p>All these methods check the form like this</p>
 
-<pre>    
+<pre>
 return unless $fb-&gt;submitted &amp;&amp; $fb-&gt;validate;
 </pre>
 <p>which allows you to say things like</p>
@@ -607,7 +597,7 @@ print Film-&gt;update_from_form( $form ) ? $form-&gt;confirm : $form-&gt;render;
 <p>Note that the submitted form should be built using <code>search_form</code>, not <code>as_form</code>.</p>
 
 <h3><code>search_where_from_form()</code></h3>
-<p><a href="https://metacpan.org/module/Class::DBI::AbstractSearch">Class::DBI::AbstractSearch</a> must be loaded in your CDBI class for this to work.</p>
+<p>Class::DBI::AbstractSearch must be loaded in your CDBI class for this to work.</p>
 <p>If no search terms are specified, then the search</p>
 <pre>
 WHERE 1 = 1
@@ -622,7 +612,7 @@ WHERE 1 = 1
 <p>This is similar to <code>update_or_create_from_form</code>, except that this method will not update pre-existing objects.</p>
 
 <h1 id="AUTHOR">Author</h1>
-<p>David Baird, <code>&lt;cpan@riverside-cms.co.uk&gt;</code></p>
+<p>David Baird, &lt;cpan@riverside-cms.co.uk&gt;</p>
 
 <h1 id="BUGS">Bugs</h1>
 <p>If no fields are explicitly required, then *all* fields will become required automatically, because CGI::FormBuilder by default makes any field with validation become required, unless there is at least 1 field specified as required.</p>
