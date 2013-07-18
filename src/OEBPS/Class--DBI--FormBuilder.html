@@ -1,0 +1,639 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head> 
+        <title>Class::DBI::FormBuilder - Class::DBI/CGI::FormBuilder integration</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="css/modernperl.css" type="text/css" />
+	</head>
+	<body>
+        <div class="center">
+            <h1>Class::DBI::FormBuilder &mdash; 0.483</h1>
+            <hr />
+            <h3>Class::DBI/CGI::FormBuilder Integration</h3>
+		</div>
+		<!--
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#synopsis">SYNOPSIS</a></li>
+	<ul>
+
+		<li><a href="#process_fields">process_fields</a></li>
+	</ul>
+
+	<li><a href="#customising_render_output">Customising <code>render</code> output</a></li>
+	<li><a href="#automatic_validation_setup">Automatic validation setup</a></li>
+	<ul>
+
+		<li><a href="#basic_auto_validation">Basic auto-validation</a></li>
+		<li><a href="#advanced_auto_validation">Advanced auto-validation</a></li>
+	</ul>
+
+	<li><a href="#other_features">Other features</a></li>
+	<li><a href="#methods">METHODS</a></li>
+	<ul>
+
+		<li><a href="#form_generating_methods">Form generating methods</a></li>
+		<li><a href="#form_modifiers">Form modifiers</a></li>
+		<li><a href="#form_handling_methods">Form handling methods</a></li>
+		<li><a href="#search_methods">Search methods</a></li>
+	</ul>
+
+	<li><a href="#todo">TODO</a></li>
+	<li><a href="#author">AUTHOR</a></li>
+	<li><a href="#bugs">BUGS</a></li>
+	<li><a href="#acknowledgements">ACKNOWLEDGEMENTS</a></li>
+	<li><a href="#copyright___license">COPYRIGHT &amp; LICENSE</a></li>
+</ul> -->
+
+<h1><a name="synopsis"></a>Synopsis</h1>
+<pre>
+package Film;
+use strict;
+use warnings;
+
+use base 'Class::DBI';
+use Class::DBI::FormBuilder;
+
+# for indented output:
+# use Class::DBI::FormBuilder PrettyPrint =&gt; 'ALL';
+
+# POST all forms to server
+Film-&gt;form_builder_defaults-&gt;{method} = 'post';
+
+# customise how some fields are built:
+# 'actor' is a has_a field, and the 
+# related table has 1000's of rows, so we don't want the default popup widget,
+# we just want to show the current value
+Film-&gt;form_builder_defaults-&gt;{process_fields}-&gt;{actor} = 'VALUE';
+
+# 'trailer' stores an mpeg file, but CDBI::FB cannot automatically detect 
+# file upload fields, so need to tell it:
+Film-&gt;form_builder_defaults-&gt;{process_fields}-&gt;{trailer} = 'FILE';
+
+# has_a fields will be automatically set to 'required'. Additional fields can 
+# be specified:
+Film-&gt;form_builder_defaults-&gt;{required} = qw( foo bar );
+</pre>
+<p>In a nearby piece of code&hellip;</p>
+<pre>
+my $film = Film-&gt;retrieve( $id ); 
+print $film-&gt;as_form( params =&gt; $q )-&gt;render;   # or $r if mod_perl
+
+# For a search app:    
+my $search_form = Film-&gt;search_form;            # as_form plus a few tweaks
+</pre>
+<p>A fairly complete mini-app:</p>
+<pre>
+my $form = Film-&gt;as_form( params =&gt; $q );       # or $r if mod_perl
+
+if ( $form-&gt;submitted and $form-&gt;validate ) {
+    # whatever you need:
+    
+    my $obj = Film-&gt;create_from_form( $form );
+    my $obj = Film-&gt;update_from_form( $form );              
+    my $obj = Film-&gt;update_or_create_from_form( $form );    
+    my $obj = Film-&gt;retrieve_from_form( $form );
+    
+    my $iter = Film-&gt;search_from_form( $form );
+    my $iter = Film-&gt;search_like_from_form( $form );
+    my $iter = Film-&gt;search_where_from_form( $form );
+    
+    my $obj = Film-&gt;find_or_create_from_form( $form );
+    my $obj = Film-&gt;retrieve_or_create_from_form( $form );
+    
+    print $form-&gt;confirm;
+}
+else {
+    print $form-&gt;render;
+}
+</pre>
+
+<h2><a name="description"></a>Description</h2>
+<div class="note">
+    <h4>Note</h4>
+    <p>Use of column name/accessor/mutator is currently broken if your column  accessors/mutators are different from the column name</strong>. The documentation is also broken w.r.t. this.</p>
+</div>
+<p>This module creates a <a href="/CGI/FormBuilder.html">CGI::FormBuilder</a> form from a CDBI class or object. If  from an object, it populates the form fields with the object's values.</p>
+<p>Column metadata and CDBI relationships are analyzed and the fields of the form are modified accordingly. For instance, MySQL <code>enum</code> and <code>set</code> columns are configured as <code>select</code>, <code>radiobutton</code> or <code>checkbox</code> widgets as appropriate, and appropriate widgets are built for <code>has_a</code>, <code>has_many</code> and <code>might_have</code> relationships. Further relationships can be added by subclassing. <code>has_a</code> columns are set as 'required' fields in create/update forms.</p>
+
+<h2><a href="customizing_field_construction"></a>Customising Field Construction</h2>
+<p>Often, the default behaviour will be unsuitable. For instance, a <code>has_a</code> relationship might point to a related table with thousands of records. A popup widget with all these records is probably not useful.  Also, it will take a long time to build, so post-processing the form to re-design the field is a poor solution.</p>
+<p>Instead, you can pass an extra <code>process_fields</code> argument in the call to <code>as_form</code> (or you can set it in <code>form_builder_defaults</code>).</p>
+<p>Many of the internal routines use this mechanism for configuring fields. A manually set '+' (basic) processor will be <strong>added</strong> to any other automatic processing, whereas a manually set shortcut processor (no '+') will <strong>replace</strong> all automatic processing.</p>
+<p>You can add your own processors to the internal table of processors - see <code>new_field_processor</code>.</p>
+
+<h3><a name="process_fields"></a><code>process_fields</code></h3>
+<p>This is a hashref, with keys being field names. Values can be:</p>
+<dl>
+<dt>Name of a built-in</dt>
+<dd>
+<table>
+    <tr>
+        <th>basic</th><th>shortcut</th><th></th>
+    </tr>
+    <tr>
+        <td>+HIDDEN</td><td>HIDDEN</td><td>make the field hidden</td>
+    </tr>
+    <tr>
+        <td>+VALUE</td><td>VALUE</td><td>display the current value</td>
+    </tr>    
+    <tr>
+        <td>+READONLY</td><td>READONLY</td><td>display the current value - not editable</td>
+    </tr>    
+    <tr>
+        <td>+DISABLED</td><td>DISABLED</td><td>display the current value - not editable, not selectable, (not submitted?)</td>
+    </tr>    
+    <tr>
+        <td>+FILE</td><td>FIL</td><td>build a file upload widget</td>
+    </tr>    
+    <tr>
+        <td>+OPTIONS_FROM_DB</td><td>OPTIONS_FROM_DB</td><td>check if the column is constrained to a few values</td>
+    </tr>    
+    <tr>
+        <td>+REQUIRED</td><td></td><td>make the field required</td>
+    </tr>    
+    <tr>
+        <td>+NULL</td><td></td><td>no-op - useful for debugging</td>
+    </tr>    
+    <tr>
+        <td>+ADD_FIELD</td><td></td><td>add a new field to the form (only necessary if the field is empty)</td>
+    </tr>    
+    <tr>
+        <td></td><td>TIMESTAMP</td><td>used to process TIMESTAMP fields, defaults to DISABLED, but you can easily replace it with a different behaviour</td>
+    </tr>    
+    <tr>
+        <td>+SET_VALUE($value)</td><td></td><td>set the value of the field to $value - DEPRECATED - use +SET_value</td>
+    </tr>    
+    <tr>
+        <td>+SET_$foo($value)</td><td>SET_$foo($value)</td><td>set the $foo attribute of the field to $value 
+</table>
+
+<p>The 'basic' versions apply only their own modification. The 'shortcut' version also applies the <code>+VALUE</code> processor.</p>
+    
+<p><code>OPTIONS_FROM_DB</code> currently only supports MySQL ENUM or SET columns. You probably won't need to use this explicitly, as it's already used internally.</p>
+<p>The <code>+ADD_FIELD</code> processor is only necessary if you need to add a new field to a form, but don't want to use any of the other processors on it.</p>
+</dd>
+
+<dt>Reference to a subroutine, or anonymous coderef</dt>
+<dd>
+<p>The coderef will be passed the <a href="/Class/DBI/FormBuilder.html">the Class::DBI::FormBuilder manpage</a> class or subclass, the CDBI class or object, the <a href="/CGI/FormBuilder.html">the CGI::FormBuilder manpage</a> form object, and the field name as arguments, and should build the named field.</p>
+</dd>
+
+<dt>Package name</dt>
+<dd>
+<p>Name of a package with a suitable <code>field</code> subroutine. Gets called with the same arguments as the coderef.</p>
+</dd>
+
+<dt>Arrayref of the above</dt>
+<dd>
+<p>Applies each processor in order.</p>
+</dd>
+</dl>
+
+<p>The key <code>__FINAL__</code> is reserved for <code>form_final</code>, so don't name any form fields <code>__FINAL__</code>. If a field processor is set in <code>__FINAL__</code>, then it will be applied to all fields, after all other processors have run.</p>
+
+<h2><a name="customising_render_output"></a>Customising <code>render()</code> Output</h2>
+<p><code>Class::DBI::FormBuilder</code> replaces <code>CGI::FormBuilder::render()</code> with a hookable version of <code>render()</code>.
+The hook is a coderef, or the name of a built-in, supplied in the <code>post_process</code> argument (which can 
+be set in the call to <a href="#as_form"><code>as_form</code></a>, <a href="#search_form"><code>search_form</code></a>, <code>render</code>, or in <a href="#form_builder_defaults"><code>form_builder_defaults</code></a>). The coderef 
+is passed the following arguments:</p>
+<table>
+    <tr>
+        <td><code>$class</code></td><td>the CDBI::FormBuilder class or subclass</td>
+    </tr>
+    <tr>
+        <td><code>$form</code></td><td>the CGI::FormBuilder form object</td>
+    </tr>
+    <tr>
+        <td><code>$render</code></td><td>reference to &amp;CGI::FormBuilder::render</td>
+    </tr>
+    <tr>
+        <td><code>$pp_args</code></td><td>value of the post_process_args argument, or undef</td>
+    </tr>
+    <tr>
+        <td><code>%args</code></td><td>the arguments used in the CGI::FormBuilder-&gt;new call</td>
+    </tr>
+</table>
+    
+<p>The coderef should return HTML markup for the form, probably by calling <code>$render-&gt;( $form, %args )</code>.</p>
+<dl>
+<dt>PrettyPrint</dt>
+<dd>
+<p>A pretty-printer coderef is available in the hashref of built-in post-processors:</p>
+<pre>
+my $pretty = Class::DBI::FormBuilder-&gt;post_processors-&gt;{PrettyPrint};
+</pre>
+<p>So you can turn on pretty printing for a class by setting:</p>
+<pre>
+My::Class-&gt;form_builder_defaults-&gt;{post_process} = Class::DBI::FormBuilder-&gt;post_processors-&gt;{PrettyPrint};
+</pre>
+
+<p>This post-processor ensures that any fields configured as <code>textarea</code>s are converted to a plain <code>text</code> field before rendering.</p>
+</dd>
+</dl>
+
+<h2><a href="plugins"></a>Plugins</h2>
+<p><code>has_a</code> relationships can refer to non-CDBI classes. In this case, <code>form_has_a</code> will attempt to load (via <code>require</code>) an appropriate plugin. For instance, for a <code>Time::Piece</code> column, it will attempt to load <em>Class::DBI::FormBuilder::Plugin::Time::Piece</em>. Then it will call the <code>field</code> method in the plugin, passing the CDBI class for whom the form has been constructed, the form, and a <em>Class::DBI::Column</em> object representing the field being processed. The plugin can use this information to modify the form, perhaps adding extra fields, or controlling stringification, or setting up custom validation. Note that the name of the form field should be retrieved from the field object as <code>$field-&gt;name</code>, rather than relying on <code> $field </code> to stringify itself, because it will stringify to <code>$field-&gt;name_lc</code>.</p> 
+<p>If no plugin is found, a fatal exception is thrown. If you have a situation where it would be useful to simply stringify the object instead, let me know and I'll make this configurable.</p> <p>
+
+<h2><a name="automatic_validation_setup"></a>Automatic Validation Setup</h2>
+<p>If you place a normal CGI::FormBuilder validation spec in the <code>validate</code> argument, that spec will be used to configure validation.</p>
+<p>If there is no spec in the method call or in <code>$class-&gt;form_builder_defaults-&gt;{validate}</code>, then validation will be configured automatically. The default configuration is pretty basic, but you can modify it by placing settings in the <code>auto_validate</code> argument, or in <code>$class-&gt;form_builder_defaults-&gt;{auto_validate}</code>.</p>
+
+<h2><a name="basic_auto_validation"></a>Basic Auto-validation</h2>
+<p>Given no validation options for a column in the <code>auto_validate</code> slot, the settings for most columns will be taken from <code>%Class::DBI::FormBuilder::ValidMap</code>. This maps SQL column types to the  CGI::FormBuilder validation settings <code>VALUE</code>, <code>INT</code>, or <code>NUM</code>.</p>
+<p>MySQL <code>ENUM</code> or <code>SET</code> columns will be set up to validate that the submitted value(s) match the allowed 
+values.</p>
+<p>Any column listed in <code>$class-&gt;form_builder_defaults-&gt;{options}</code> will be set to validate those values.</p>
+
+<h2><a name="advanced_auto_validation"></a>Advanced Auto-validation</h2>
+<p>The following settings can be placed in the <code>auto_validate</code> argument (or in <code>$class-&gt;form_builder_defaults-&gt;{auto_validate}</code>).</p>
+<dl>
+<dt>validate</dt>
+<dd>
+<p>Specify validate types for specific columns:</p>
+<pre>
+validate =&gt; { 
+    username   =&gt; [qw(nate jim bob)],
+    first_name =&gt; '/^\w+$/',    # note the 
+    last_name  =&gt; '/^\w+$/',    # single quotes!
+    email      =&gt; 'EMAIL',
+    password   =&gt; \&amp;check_password,
+    confirm_password =&gt; {
+        javascript =&gt; '== form.password.value',
+        perl       =&gt; 'eq $form-&gt;field(&quot;password&quot;)'
+    }
+}
+</pre>
+<p>This option takes the same settings as the <code>validate</code> option to <code>CGI::FormBuilder::new()</code> (i.e. the same as would otherwise go in the <code>validate</code> argument or in <code>&lt; $class-&gt;form_builder_defaults-&gt;{validate} &gt;</code>). Settings here override any others.</p>
+</dd>
+
+<dt>columns</dt>
+<dd>
+<p>Alias for <code>validate</code>. Don't use both, they're not intended to be merged. Use whichever feels more comfortable. If you're used to using CGI::FormBuilder, it may feel more natural to use <code>validate</code>. If not, it may make more sense to use <code>columns</code>.</p>
+</dd>
+
+<dt>skip_columns</dt>
+<dd>
+<p>List of columns that will not be validated:</p>
+<pre>
+skip_columns =&gt; [ qw( secret_stuff internal_data ) ]
+</pre>
+</dd>
+
+<dt>match_columns</dt>
+<dd>
+<p>Use regular expressions matching groups of columns to specify validation:</p>
+<pre>
+match_columns =&gt; { 
+    qr/(^(widget|burger)_size$/ =&gt; [ qw( small medium large ) ],
+    qr/^count_.+$/              =&gt; 'INT',
+}
+</pre>
+</dd>
+
+<dt>validate_types</dt>
+<dd>
+<p>Validate according to SQL data types:</p>
+<pre>
+validate_types =&gt; { date =&gt; \&amp;my_date_checker }
+</pre>
+<p>Defaults are taken from the package global <code>%TypesMap</code>.</p>
+</dd>
+
+<dt>match_types</dt>
+<dd>
+<p>Use a regular expression to map SQL data types to validation types:</p>
+<pre>
+match_types =&gt; { qr(date) =&gt; \&amp;my_date_checker }
+</pre>
+</dd>
+
+<dt>debug</dt>
+<dd>    
+<p>Control how much detail to report (via <code>warn</code>) during setup. Set to 1 for brief info, and 2 for a list of each column's validation setting.</p>
+</dd>
+
+<dt>strict</dt>
+<dd>
+<p>If set to 1, will die if a validation setting cannot be determined for any column. 
+Default is to issue warnings and not validate these column(s).</p>
+</dd>
+</dl>
+<h2><a name=""></a>Validating relationships</h2>
+<p>Although it would be possible to retrieve the IDs of all objects for a related column and use these to 
+set up validation, this would rapidly become unwieldy for larger tables. Default validation will probably be 
+acceptable in most cases, as the column type will usually be some kind of integer.</p>
+<dl>
+<dt>timestamp</dt>
+<dd>
+<p>The default behaviour is to skip validating <code>timestamp</code> columns. A warning will be issued if the <code>debug</code> parameter is set to 2.</p>
+<p>Note that <code>timestamp</code></a> columns are rendered as <code>readonly</code> (see <code>form_timestamp</code>).</p>
+</dd>
+
+<dt>Failures</dt>
+<dd>
+<p>The default mapping of column types to validation types is set in <code>%Class::DBI::FormBulder::ValidMap</code>, and is probably incomplete. If you come across any failures, you can add suitable entries to the hash before calling <a href="#as_form"><code>as_form</code></a>. However, <strong>please</strong> email me with any failures so the hash can be updated for everyone.</p>
+</dd>
+</dl>
+
+<h2><a name="other_features"></a>Other Features</h2>
+<h4>Class::DBI::FromForm</h4>
+<p>If you want to use this module alongside Class::DBI::FromForm, load the module like so:</p>
+<pre>
+use Class::DBI::FormBuilder BePoliteToFromForm =&gt; 1;
+</pre>  
+<p>&hellip;and <code>create_from_form</code> and <code>update_from_form</code> will instead be imported as <code>create_from_fb</code> and <code>update_from_fb</code>.</pre>
+<p>You might want to do this if you have more complex validation requirements than CGI::FormBuilder provides.</p>
+
+<h2><a name="methods"></a>Methods</h2>
+<p>Most of the methods described here are exported into the caller's namespace, except for the form modifiers  (see below), and a few others as documented.</p>
+
+<h3><code>new_field_processor( $processor_name, $coderef or package name )</code></h3>
+<p>This method is called on <em>Class::DBI::FormBuilder</em> or a subclass, rather than on a Class::DBI object or subclass.</p>
+<p>It installs a new field processor, which can then be referred to by name in <code>process_fields</code>, rather than by passing a coderef. This method could also be used to replace the supplied built-in field processors, for example to alter the default <code>TIMESTAMP</code> behaviour (see <code>form_timestamp</code>). The new processor must either be a coderef, or the name of a package with a suitable <code>field</code> method, or the name of another processor, or an arrayref of any of these.</p>
+<p>The code ref will be passed these arguments:</p>
+<table>
+    <tr>
+        <th>position</th><th>argument</th>
+    </tr>
+    <tr>
+        <td>0</td><td>name of the calling class (i.e. Class::DBI::FormBuilder or a subclass)</td>
+    </tr>   
+    <tr>
+        <td>1</td><td>Class::DBI object or class name</td>
+    </tr>
+       
+    <tr>
+        <td>2</td><td>CGI::FormBuilder form object</td>
+    </tr>
+       
+    <tr>
+        <td>3</td><td>name of the current field</td>
+    </tr>
+       
+    <tr>
+        <td>4</td><td>Class::DBI::Column object for the current field</td>
+    </tr>
+</table>
+<p>The name of the current field is the name used on the form object, and is also the mutator accessor for the column on the CDBI object (which defaults to the name in the database, but can be different).</p>
+<p>The column object is useful if the processor needs access to the value in the CDBI object, but the mutator name is different from the column accessor e.g. see the <code>+VALUE</code> processor.</p>
+
+<h3><code>table_meta($them)</code></h3>
+<p>Class::DBI::FormBuilder class method. Returns a <em>Class::DBI::FormBuilder::Meta::Table</em> object.</p>
+
+<h2><a name="form_generating_methods"></a>Form Generating Methods</h2>
+
+<h3><code>form_builder_defaults( %args )</code></h3>
+<p>Stores default arguments.</p>
+
+<h3><code>as_form( %args )</code></h3>
+<p>Builds a CGI::FormBuilder form representing the class or object.</p>
+<p>Takes default arguments from <code>form_builder_defaults</code>.</p>
+<p>The optional hash of arguments is the same as for <code>CGI::FormBuilder::new()</code>, with a few extras, 
+and will override any keys in <code>form_builder_defaults</code>.</p>
+<p>The extra keys are documented in various places in this file - I'll gather them together here 
+over time. Extra keys include:</p>
+
+<dl>
+<dt>options_sorters</dt>
+<dd>
+<p>A hashref, keyed by field name, with values being coderefs that will be used to sort the list 
+of options generated for a <code>has_a</code>, <code>has_many</code>, or <code>might_have</code> field.</p>
+<p>The coderef will be passed pairs of options arrayrefs, and should return the standard Perl sort 
+codes (i.e. -1, 0, or 1). The first item in each arrayref is the value of the option, the second 
+is the label.</p>
+<p>Note that the coderef should be prototyped ($$):</p>
+<pre>
+# sort by label, alphabetically
+$field_name =&gt; sub ($$) { $_[0]-&gt;[1] cmp $_[1]-&gt;[1] }
+</pre>
+<pre>
+# sort by value, numerically
+$field_name =&gt; sub ($$) { $_[0]-&gt;[0] &lt;=&gt; $_[1]-&gt;[0] }
+</pre>
+<p>Note that parameter merging is likely to become more sophisticated in future releases 
+(probably copying the argument merging code from <a href="/CGI/FormBuilder.html">CGI::FormBuilder</a> 
+itself).</p>
+</dd>
+</dl>
+
+<h3><code>search_form( %args )</code></h3>
+<p>Build a form with inputs that can be fed to search methods (e.g. <code>search_where_from_form</code>). For instance, all selects are multiple, fields that normally would be required are not, and TEXT columns are represented as text fields rather than as <code>textarea</code>s by default.</p>
+<p><strong>Automatic configuration of validation settings is not carried out on search forms.</strong> You can still configure validation settings using the standard CGI::FormBuilder settings.</p>
+<p>In many cases, you will want to design your own search form, perhaps only searching on a subset of the available columns. Note that you can acheive that by specifying</p>
+<pre>
+fields =&gt; [ qw( only these fields ) ]
+</pre>
+<p>in the args.</p>
+<p>The following search options are available. They are only relevant if processing via <code>search_where_from_form</code>:</p>
+<dl>
+<dt>search_opt_cmp</dt>
+<dd>
+<p>Allow the user to select a comparison operator by passing an arrayref:</p>
+<pre>
+search_opt_cmp =&gt; [ 
+    ( '=', '!=', '&lt;', '&lt;=', '&gt;', '&gt;=', 
+    'LIKE', 'NOT LIKE', 'REGEXP', 'NOT REGEXP',
+    'REGEXP BINARY', 'NOT REGEXP BINARY',) 
+]
+</pre>
+<p>Or, transparently set the search operator in a hidden field:</p>
+<pre>
+search_opt_cmp =&gt; 'LIKE'
+</pre>
+</dd>
+    
+<dt><code>search_opt_order_by</code></dt>
+<dd>
+<p>If true, will generate a widget to select (possibly multiple) columns to order the results by, with an <code>ASC</code> and <code>DESC</code> option for each column.</p>
+<p>If set to an arrayref, will use that to build the widget.</p>
+<pre>
+# order by any columns
+search_opt_order_by =&gt; 1
+
+# or just offer a few
+search_opt_order_by =&gt; [ 'foo', 'foo DESC', 'bar' ]
+</pre>
+</dd>
+</dl>
+
+<h3><code>as_multiform</code></h3>
+<p>This method supports adding multiple related items to an object in a related class. Call this method on the class at the &#39;many&#39; end of a <code>has_many</code> relationship. Instead of building a form with fields</p>
+<pre>
+foo 
+bar
+baz
+</pre>
+<p>it builds a form with fields</p>
+<pre>    
+R1__foo
+R1__bar
+R1__baz
+R2__foo
+R2__bar
+R2__baz
+etc.
+</pre>
+<p>You may specify the number of duplicates in the <code>how_many</code> required argument.</p>
+<p>Use <code>create_from_multiform</code> to process a form submission.</p>
+
+<h3>as_form_with_related</h3>
+<p><b>DEPRECATED</b>.</p>
+<p><b>This method is NOT WORKING, and will be removed from a future version</b>. The plan is to replace <code>as_form</code> with this code, when it&#39;s working properly.</p>
+<p>Builds a form with fields from the target CDBI class/object, plus fields from the related objects.</p>
+<p>Accepts the same arguments as <code>as_form</code>, with these additions:</p>
+
+<dl>
+<dt id="related">related</dt>
+<dd>
+<p>A hashref of <code>$field_name =&gt; $as_form_args_hashref</code> settings. Each <code>$as_form_args_hashref</code> can take all the same settings as <code>as_form</code>. These are used for generating the fields of the class or object(s) referred to by that field. For instance, you could use this to only display a subset of the fields of the related class.</p>
+</dd>
+
+<dt id="show_related">show_related</dt>
+<dd>
+<p>By default, all related fields are shown in the form. To only expand selected related fields, list them in <code>show_related</code>.</p>
+</dd>
+</dl>
+
+<h2 id="Form-modifiers">Form modifiers</h2>
+<p>These methods use CDBI&#39;s knowledge about its columns and table relationships to tweak the form to better represent a CDBI object or class. They can be overridden if you have better knowledge than CDBI does. For instance, <code>form_options</code> only knows how to figure out select-type columns for MySQL databases.</p>
+
+<p>You can handle new relationship types by subclassing, and writing suitable <code>form_*</code> methods (e.g. <code>form_many_many)</code>. Your custom methods will be automatically called on the relevant fields.</p>
+<p><code>has_a</code> relationships to non-CDBI classes are handled via a plugin mechanism (see above).</p>
+
+<h3><code>form_hidden()</code></h3>
+<p>Deprecated. Renamed <code>form_pks</code>.</p>
+
+<h3><code>form_pks()</code></h3>
+<p>Ensures primary column fields are included in the form (even if they were not included in the <code>fields</code> list), and hides them. Only forms representing objects will have primary column fields added.</p>
+
+<h3>form_options()</code></h3>
+<p>Identifies column types that should be represented as select, radiobutton or checkbox widgets. Currently only works for MySQL <code>ENUM</code> and <code>SET</code> columns.</p>
+<p>Patches are welcome for similar column types in other RDBMS&#39;s.</p>
+<p>Note that you can easily emulate a MySQL <code>ENUM</code> column at the application level by setting the validation for the column to an arrayref of values. Emulate a <code>SET</code> column by additionally setting the <code>multiple</code> option to <code>1</code>.</p>
+
+<h3><code>form_has_a()</code></h3>
+<p>Populates a select-type widget with entries representing related objects. Makes the field required.</p>
+<p>Note that this list will be very long if there are lots of rows in the related table. You may need to override this behaviour by setting up a pre-processor for your <code>has_a</code> fields. See &#39;Customising field construction&#39;.</p>
+<p>This method assumes the primary key is a single column - patches welcome.</p>
+<p>Retrieves every row and creates an object for it - not good for large tables.</p>
+<p>If the relationship is to a non-CDBI class, loads a plugin to handle the field (see &#39;Plugins&#39;).</p>
+
+<h3><code>form_has_many()</code></h3>
+<p>Also assumes a single primary column.</p>
+
+<h3><code>form_might_have()</code></h3>
+<p>Also assumes a single primary column.</p>
+
+<h3><code>form_timestamp()</code></h3>
+<p>Makes timestamp columns read only, since they will be set by the database.</p>
+<p>The default is to use the <code>TIMESTAMP</code> processor, which in turn points to the <code>READONLY</code> processor, which sets the HTML <code>readonly</code> attribute.</p>
+<p>If you prefer, you can replace the <code>TIMESTAMP</code> processor with one that points to <code>DISABLED</code> instead.</p>
+
+<h3><code>form_text()</code></h3>
+<p>Makes <code>TEXT</code> columns into <code>textarea</code> form fields.</p>
+
+<h3><code>form_file()</code></h3>
+<p><b>Unimplemented</b> &ndash; at the moment, you need to set the field type to <code>file</code> manually, or in the <code>process_fields</code> argument, set the field processor to <code>FILE</code>.</p>
+<p>Figures out if a column contains file data.</p>
+<p>If somebody can show me how to automatically detect that a column stores binary data, then this method could actually do something useful.</p>
+<p>If you are in the habit of using a naming convention that allows you to identify <code>file</code> columns, then you could subclass Class::DBI::FormBuilder and override this method:</p>
+<pre>   
+# use a naming convention to configure file columns
+sub form_file {
+    my ( $me, $them, $form, $pre_process ) = @_;
+
+    foreach my $field ( $them-&gt;columns(&#39;All&#39;) ) {
+        next unless $field-&gt;name =~ /^file_\w+$/;
+        my $process = $me-&gt;_add_processors( $field, $pre_process, &#39;FILE&#39; ); 
+        $me-&gt;_process_field( $them, $form, $field, $process );
+    }
+}
+</pre>
+
+<h3><code>form_process_extras()</code></h3>
+<p>This processor adds any fields in the <code>process_fields</code> setup that do not yet exist on the form. This is a useful method for adding custom fields (i.e. fields that do not represent anything about the CDBI object) to a form.</p>
+<p>You can skip this stage by setting <code>process_fields-&gt;{__SKIP_PROCESS_EXTRAS__}</code> to a true value. For instance, in <code>Maypole::FormBuilder::Model::setup_form_mode()</code>, this prevents any fields already present in <code>process_fields</code> (e.g. because they were specified in <code>form_builder_defaults</code>) from being added to the button form.</p>
+
+<h3><code>form_final()</code></h3>
+<p>After running all previous field processors (including <code>form_process_extras</code>), this gives the chance to run code to modify all fields in the completed form. Use this by setting a field processor in the special <code>__FINAL__</code> slot of <code>process_fields</code>.</p>
+<p>And avoid naming any of your normal columns or fields <code>__FINAL__</code>.</p>
+
+<h2 id="Form-handling-methods">Form Handling Methods</h2>
+<p>All these methods check the form like this</p>
+
+<pre>    
+return unless $fb-&gt;submitted &amp;&amp; $fb-&gt;validate;
+</pre>
+<p>which allows you to say things like</p>
+
+<pre>
+print Film-&gt;update_from_form( $form ) ? $form-&gt;confirm : $form-&gt;render;
+</pre>
+<p>That&#39;s pretty concise!</p>
+
+<h3><code>create_from_form( $form )</code></h3>
+<p>Creates and returns a new object.</p>
+
+<h3><code>create_from_multiform()</code></h3>
+<p>Creates multiple new objects from a <code>as_multiform</code> form submission.</p>
+
+<h3><code>update_from_form( $form )</code></h3>
+<p>Updates an existing CDBI object.</p>
+<p>If called on an object, will update that object.</p>
+<p>If called on a class, will first retrieve the relevant object (via <code>retrieve_from_form</code>).</p>
+
+<h3><code>update_or_create_from_form()</code></h3>
+<p>Class method.</p>
+<p>Attempts to look up an object (using primary key data submitted in the form) and update it.</p>
+<p>If none exists (or if no values for primary keys are supplied), a new object is created.</p>
+
+<h2 id="Search-methods">Search methods</h2>
+<p>Note that search methods (except for <code>retrieve_from_form</code>) will return a CDBI iterator in scalar context, and a (possibly empty) list of objects in list context.</p>
+<p>All the search methods except <code>retrieve_from_form</code> require that the submitted form should be built using <code>search_form</code> (not <code>as_form</code>). Otherwise the form may fail validation checks because of missing required fields specified by <code>as_form</code> (<code>search_form</code> does not automatically configure any fields as required).</p>
+
+<h3><code>retrieve_from_form()</code></h3>
+<p>Use primary key data in a form to retrieve a single object.</p>
+
+<h3><code>search_from_form()</code></h3>
+<p>Lookup by column values.</p>
+
+<h3><code>search_like_from_form()</code></h3>
+<p>Allows wildcard searches (% or _).</p>
+<p>Note that the submitted form should be built using <code>search_form</code>, not <code>as_form</code>.</p>
+
+<h3><code>search_where_from_form()</code></h3>
+<p><a href="https://metacpan.org/module/Class::DBI::AbstractSearch">Class::DBI::AbstractSearch</a> must be loaded in your CDBI class for this to work.</p>
+<p>If no search terms are specified, then the search</p>
+<pre>
+WHERE 1 = 1
+</pre>
+<p>is executed (returns all rows), no matter what search operator may have been selected.</p>
+
+<h3><code>find_or_create_from_form()</code></h3>
+<p>Does a <code>find_or_create</code> using submitted form data.</p>
+
+<h3><code>retrieve_or_create_from_form()</code></h3>
+<p>Attempts to look up an object. If none exists, a new object is created.</p>
+<p>This is similar to <code>update_or_create_from_form</code>, except that this method will not update pre-existing objects.</p>
+
+<h1 id="AUTHOR">Author</h1>
+<p>David Baird, <code>&lt;cpan@riverside-cms.co.uk&gt;</code></p>
+
+<h1 id="BUGS">Bugs</h1>
+<p>If no fields are explicitly required, then *all* fields will become required automatically, because CGI::FormBuilder by default makes any field with validation become required, unless there is at least 1 field specified as required.</p>
+<p>Please report any bugs or feature requests to <code>bug-class-dbi-plugin-formbuilder@rt.cpan.org</code>, or through the web interface at <a href="http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Class-DBI-FormBuilder">http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Class-DBI-FormBuilder</a>. I will be notified, and then you&#39;ll automatically be notified of progress on your bug as I make changes.</p>
+<p>Looking at the code (0.32), I suspect updates to has_many accessors are not implemented, since the update methods only fetch data for columns( &#39;All&#39; ), which doesn&#39;t include has_many accessors/mutators.</p>
+
+<h1 id="ACKNOWLEDGEMENTS">Acknowledgements</h1>
+<p>The following people have provided useful discussions, bug reports, and patches:</p>
+<p>Dave Howorth, James Tolley, Ron McClain, David Kamholz.</p>
+
+<h1 id="COPYRIGHT-LICENSE">Copyright &amp; License</h1>
+<p>Copyright 2005 David Baird, All Rights Reserved.</p>
+<p>This program is free software; you can redistribute it and/or modify it under the same terms as Perl itself.</p>
+    </body>
+</html>

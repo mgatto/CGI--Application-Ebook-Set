@@ -52,8 +52,12 @@
 		<item id="text15" media-type="application/xhtml+xml" href="Forms.html"></item>
 		<item id="text16" media-type="application/xhtml+xml" href="CGI--FormBuilder--Template--HTML.html"></item>
 		<item id="text17" media-type="application/xhtml+xml" href="CGI--FormBuilder.html"></item>
+		<item id="text21" media-type="application/xhtml+xml" href="Data--FormValidator.html"></item>
         <item id="text14" media-type="application/xhtml+xml" href="Sessions.html"></item>
         <item id="text13" media-type="application/xhtml+xml" href="CGI--Application--Plugin--Session.html"></item>
+        <item id="text22" media-type="application/xhtml+xml" href="Databases.html"></item>
+        <item id="text23" media-type="application/xhtml+xml" href="Class--DBI.html"></item>
+        <item id="text24" media-type="application/xhtml+xml" href="Class--DBI--FormBuilder.html"></item>        
         <item id="text6" media-type="application/xhtml+xml" href="CGI--Session.html"></item>
         <item id="text11" media-type="application/xhtml+xml" href="Deploying.html"></item>
         <item id="text3" media-type="application/xhtml+xml" href="CGI--Application--PSGI.html"></item>
@@ -82,8 +86,12 @@
         <itemref idref="text15"/>
         <itemref idref="text16"/>
         <itemref idref="text17"/>
+        <itemref idref="text21"/>
         <itemref idref="text14"/>
 		<itemref idref="text13"/>
+		<itemref idref="text22"/>
+		<itemref idref="text23"/>
+		<itemref idref="text24"/>
         <itemref idref="text6"/>
         <itemref idref="text11"/>
         <itemref idref="text3"/>

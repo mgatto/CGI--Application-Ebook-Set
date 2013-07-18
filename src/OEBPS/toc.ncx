@@ -89,60 +89,84 @@
                 </navLabel>
                 <content src="CGI--FormBuilder.html" />
             </navPoint>
+            <navPoint id="validator" playOrder="13">
+                <navLabel>
+                    <text>Data::FormValidator</text>
+                </navLabel>
+                <content src="Data--FormValidator.html" />
+            </navPoint>
         </navPoint>
-        <navPoint id="cgi-app-sess" playOrder="13">
+        <navPoint id="cgi-app-sess" playOrder="14">
             <navLabel>
                 <text>Sessions</text>
             </navLabel>
             <content src="Sessions.html" />
-            <navPoint id="cgi-app-plugin-sess" playOrder="14">
+            <navPoint id="cgi-app-plugin-sess" playOrder="15">
                 <navLabel>
                     <text>CGI::Application::Plugin::Session</text>
                 </navLabel>
                 <content src="CGI--Application--Plugin--Session.html" />
             </navPoint>
-            <navPoint id="cgi-sesssion" playOrder="15">
+            <navPoint id="cgi-sesssion" playOrder="16">
                 <navLabel>
                     <text>CGI::Session</text>
                 </navLabel>
                 <content src="CGI--Session.html" />
             </navPoint>
         </navPoint>
-        <navPoint id="cgi-app-psgi" playOrder="16">
+        <navPoint id="databases" playOrder="17">
+            <navLabel>
+                <text>Databases</text>
+            </navLabel>
+            <content src="Databases.html" />     
+            <navPoint id="class-dbi" playOrder="18">
+                <navLabel>
+                    <text>Class::DBI</text>
+                </navLabel>
+                <content src="Class--DBI.html" />
+            </navPoint>
+            <navPoint id="class-dbi-formbuilder" playOrder="19">
+                <navLabel>
+                    <text>Class::DBI::FormBuilder</text>
+                </navLabel>
+                <content src="Class--DBI--FormBuilder.html" />
+            </navPoint>
+        </navPoint>
+        <navPoint id="cgi-app-psgi" playOrder="20">
             <navLabel>
                 <text>Deploying CGI::Application</text>
             </navLabel>
             <content src="Deploying.html" />
-            <navPoint id="cgi-app-plugin-psgi" playOrder="17">
+            <navPoint id="cgi-app-plugin-psgi" playOrder="21">
                 <navLabel>
                     <text>Deploying with PSGI</text>
                 </navLabel>
                 <content src="CGI--Application--PSGI.html" />
-                <navPoint id="cgi-psgi" playOrder="18">
+                <navPoint id="cgi-psgi" playOrder="22">
                     <navLabel>
                         <text>CGI::PSGI</text>
                     </navLabel>
                     <content src="CGI--PSGI.html" />
                 </navPoint>
-                <navPoint id="cgi-psgi-emul" playOrder="19">
+                <navPoint id="cgi-psgi-emul" playOrder="23">
                     <navLabel>
                         <text>CGI::Application::Emulate::PSGI</text>
                     </navLabel>
                     <content src="CGI--Application--Emulate--PSGI.html" />
                 </navPoint>
             </navPoint>
-            <navPoint id="cgi-fastsgi" playOrder="20">
+            <navPoint id="cgi-fastsgi" playOrder="24">
                 <navLabel>
                     <text>Deploying with FastCGI</text>
                 </navLabel>
                 <content src="CGI--Application--FastCGI.html" />
             </navPoint>
-            <navPoint id="cgi-apache" playOrder="21">
+            <navPoint id="cgi-apache" playOrder="25">
                 <navLabel>
                     <text>Deploying with Mod_Perl</text>
                 </navLabel>
                 <content src="CGI--Application--Plugin--Apache.html" />
-                <navPoint id="cgi-apache-req" playOrder="22">
+                <navPoint id="cgi-apache-req" playOrder="26">
                     <navLabel>
                         <text>Wrapping Apache2::Request</text>
                     </navLabel>
@@ -150,7 +174,7 @@
                 </navPoint>
             </navPoint>
         </navPoint>
-        <navPoint id="app-a" playOrder="23">
+        <navPoint id="app-a" playOrder="27">
             <navLabel>
                 <text>Appendix A: Production of this Ebook</text>
             </navLabel>
