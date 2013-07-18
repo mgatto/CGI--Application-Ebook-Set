@@ -284,7 +284,7 @@ $session-&gt;expire(&quot;~logged-in&quot;, &quot;10m&quot;);
 <p>Returns true only for a brand new session.</p>
 
 <h3><code>is_expired()</code></h3>
-<p>Tests whether session initialized using <code>load()</code> is to be expired. This method works only on sessions initialized with load():</p>
+<p>Tests whether session initialized using <code>load()</code> is to be expired. This method works only on sessions initialized with <code>load()</code>:</p>
 <pre>
 $s = CGI::Session-&gt;load() or die CGI::Session-&gt;errstr;
 if ( $s-&gt;is_expired ) {
@@ -310,7 +310,7 @@ if ( $s-&gt;is_empty ) {
 <p><code>is_empty()</code> is useful only if you wanted to catch requests for expired sessions, and create new session afterwards. See <code>is_expired()</code> for an example.</p>
 
 <h3><code>ip_match()</code></h3>
-<p>Returns true if $ENV{REMOTE_ADDR} matches the remote address stored in the session.</p>
+<p>Returns true if <code>$ENV{REMOTE_ADDR}</code> matches the remote address stored in the session.</p>
 <p>If you have an application where you are sure your users' IPs are constant during a session, you can consider enabling an option to make this check:</p>
 <pre>
 use CGI::Session '-ip_match';
@@ -347,15 +347,14 @@ sub purge {
 <p><strong>Note</strong>: find will not change the modification or access times on the sessions it returns.</p>
 <p>Explanation of the 3 parameters to <code>find()</code>:</p>
 <dl>
-                                          <dt>$dsn</dt>
+                                          <dt><code>$dsn</code></dt>
                                           <dd>
-                                                                                    <p>This is the DSN (Data Source Name) used by CGI::Session to control what type of
-                                                                                                                              sessions you previously created and what type of sessions you now wish method <code>find()</code> to pass to your callback.</p>
+                                                                                    <p>This is the DSN (Data Source Name) used by CGI::Session to control what type of                                                                                     sessions you previously created and what type of sessions you now wish method <code>find()</code> to pass to your callback.</p>
                                                                                     <p>The default value is defined above, in the docs for method <code>new()</code>, and is
                                                                                                                               'driver:file;serializer:default;id:md5'.</p>
                                                                                     <p>Do not confuse this DSN with the DSN arguments mentioned just below, under \%dsn_args.</p>
                                           </dd>
-                                          <dt>\&amp;code</dt>
+                                          <dt><code>\&amp;code</code></dt>
                                           <dd>
                                                                                     <p>This is the callback provided by you (i.e. the caller of method <code>find()</code>)
                                                                                                                               which is called by CGI::Session once for each session found by method <code>find()</code> which matches the given $dsn.</p>
@@ -365,7 +364,7 @@ sub purge {
                                                                                                                               achieve this by creating an anonymous subroutine that calls your subroutine
                                                                                                                               with the parameters you want. For example:</p>
 <pre>
- CGI::Session-&gt;find($dsn, sub { my_subroutine( @_, 'param 1', 'param 2' ) } );
+CGI::Session-&gt;find($dsn, sub { my_subroutine( @_, 'param 1', 'param 2' ) } );
 CGI::Session-&gt;find($dsn, sub { $coderef-&gt;( @_, $extra_arg ) } );
 </pre>
 <p>Or if you wish, you can define a sub generator as such:</p>
@@ -379,7 +378,7 @@ CGI::Session-&gt;find($dsn, coderef_with_args( $coderef, 'param 1', 'param 2' ) 
 </pre>
                                           </dd>
 
-                                          <dt>\%dsn_args</dt>
+                                          <dt><code>\%dsn_args</code></dt>
                                           <dd>
                                                                                     <p>If your $dsn uses file-based storage, then this hashref might contain keys such as:</p>
 <pre>
@@ -423,7 +422,7 @@ CGI::Session-&gt;find($dsn, coderef_with_args( $coderef, 'param 1', 'param 2' ) 
 <p>Returns a dump of the session object. Useful for debugging purposes only.</p>
 
 <h3><code>header()</code></h3>
-<p>A wrapper for <code>CGI</code>'s <code>header()</code> method. Calling this method is equivalent to something like this:</p>
+<p>A wrapper for CGI.pm's <code>header()</code> method. Calling this method is equivalent to something like this:</p>
 <pre>
 $cookie = CGI::Cookie-&gt;new(-name=&gt;$session-&gt;name, -value=&gt;$session-&gt;id);
 print $cgi-&gt;header(-cookie=&gt;$cookie, @_);
@@ -437,12 +436,12 @@ print $session-&gt;header();
 CGI::Session-&gt;name(&quot;MY_SID&quot;);
 $session = CGI::Session-&gt;new(undef, $cgi, \%attrs);
 </pre>
-<p>Now, $session-&gt;<code>header()</code> uses &quot;MY_SID&quot; as the name for the session cookie. For all additional options that can be passed, see the <code>header()</code> docs in <code>CGI</code>.</p>
+<p>Now, $session-&gt;<code>header()</code> uses &quot;MY_SID&quot; as the name for the session cookie. For all additional options that can be passed, see the <code>header()</code> docs in CGI.</p>
 
 <h3><code>query()</code></h3>
-<p>Returns query object associated with current session object. Default query object class is <code>CGI</code>.</p>
+<p>Returns query object associated with current session object. Default query object class is CGI.</p>
 
-<h3><a name="deprecated_methods">Deprecated Methods</a></h3>
+<h3><a name="deprecated_methods"></a>Deprecated Methods</h3>
 <p>These methods exist solely for for compatibility with CGI::Session 3.x.</p>
 
 <h4><code>close()</code></h4>
@@ -480,14 +479,14 @@ $session = CGI::Session-&gt;new(undef, $cgi, \%attrs);
 <h2><a name="a_warning_about_auto_flushing"></a>A Warning about Auto-flushing</h2>
 <p>Auto-flushing can be unreliable for the following reasons. Explicit flushing after key session updates is recommended.</p>
 <dl>
-                                          <dt>If the <code>DBI</code> handle goes out of scope before the session variable</dt>
+                                          <dt>If the DBI handle goes out of scope before the session variable</dt>
                                           <dd>
-                                                                                    <p>For database-stored sessions, if the <code>DBI</code> handle has gone out of scope before
+                                                                                    <p>For database-stored sessions, if the DBI handle has gone out of scope before
                                                                                                                               the auto-flushing happens, auto-flushing will fail.</p>
                                           </dd>
                                           <dt>Circular references</dt>
                                           <dd>
-                                                                                    <p>If the calling code contains a circular reference, it's possible that your <code>CGI::Session</code> object will not be destroyed until it is too late for
+                                                                                    <p>If the calling code contains a circular reference, it's possible that your CGI::Session object will not be destroyed until it is too late for
                                                                                                                               auto-flushing to work. You can find circular references with a tool like <em>Devel::Cycle</em>.</p>
                                                                                     <p>In particular, these modules are known to contain circular references which
                                                                                                                               lead to this problem:</p>
@@ -531,11 +530,11 @@ binmode STDIN, &quot;:encoding(utf8)&quot;;.
 <pre>
 binmode STDOUT, &quot;:encoding(utf8)&quot;;
 </pre>
-                                                                                    <p>When using CGI.pm, you can use $q-&gt;charset('UTF-8'). This is the same as passing 'UTF-8' to CGI's C&lt;header()&gt; method.
+                                                                                    <p>When using CGI.pm, you can use <code>$q-&gt;charset('UTF-8')</code>. This is the same as passing 'UTF-8' to CGI's <code>header()</code> method.
 </p>
-                                                                                    <p>Alternately, when using CGI::Session, you can use $session-&gt;header(charset =&gt; 'utf-8'), which will be passed to the query object's C&lt;header()&gt; method. Clearly this is preferable when the query object might not be of type CGI.
+                                                                                    <p>Alternately, when using CGI::Session, you can use <code>$session-&gt;header(charset =&gt; 'utf-8')</code>, which will be passed to the query object's <code>header()</code> method. Clearly this is preferable when the query object might not be of type CGI.
 </p>
-                                                                                    <p>See L&lt;/header()&gt; for a fuller discussion of the use of the C&lt;header()&gt; method in conjunction with cookies.
+                                                                                    <p>See <code>header()</code> for a fuller discussion of the use of the C&lt;header()&gt; method in conjunction with cookies.
 </p>
                                           </dd>
 </dl>
