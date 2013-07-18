@@ -167,7 +167,8 @@ else {
         <td>+SET_VALUE($value)</td><td></td><td>set the value of the field to $value - DEPRECATED - use +SET_value</td>
     </tr>    
     <tr>
-        <td>+SET_$foo($value)</td><td>SET_$foo($value)</td><td>set the $foo attribute of the field to $value 
+        <td>+SET_$foo($value)</td><td>SET_$foo($value)</td><td>set the $foo attribute of the field to $value</td>
+    </tr>
 </table>
 
 <p>The 'basic' versions apply only their own modification. The 'shortcut' version also applies the <code>+VALUE</code> processor.</p>
@@ -236,7 +237,7 @@ My::Class-&gt;form_builder_defaults-&gt;{post_process} = Class::DBI::FormBuilder
 
 <h2><a href="plugins"></a>Plugins</h2>
 <p><code>has_a</code> relationships can refer to non-CDBI classes. In this case, <code>form_has_a</code> will attempt to load (via <code>require</code>) an appropriate plugin. For instance, for a <code>Time::Piece</code> column, it will attempt to load <em>Class::DBI::FormBuilder::Plugin::Time::Piece</em>. Then it will call the <code>field</code> method in the plugin, passing the CDBI class for whom the form has been constructed, the form, and a <em>Class::DBI::Column</em> object representing the field being processed. The plugin can use this information to modify the form, perhaps adding extra fields, or controlling stringification, or setting up custom validation. Note that the name of the form field should be retrieved from the field object as <code>$field-&gt;name</code>, rather than relying on <code> $field </code> to stringify itself, because it will stringify to <code>$field-&gt;name_lc</code>.</p> 
-<p>If no plugin is found, a fatal exception is thrown. If you have a situation where it would be useful to simply stringify the object instead, let me know and I'll make this configurable.</p> <p>
+<p>If no plugin is found, a fatal exception is thrown. If you have a situation where it would be useful to simply stringify the object instead, let me know and I'll make this configurable.</p>
 
 <h2><a name="automatic_validation_setup"></a>Automatic Validation Setup</h2>
 <p>If you place a normal CGI::FormBuilder validation spec in the <code>validate</code> argument, that spec will be used to configure validation.</p>
@@ -345,7 +346,7 @@ acceptable in most cases, as the column type will usually be some kind of intege
 <pre>
 use Class::DBI::FormBuilder BePoliteToFromForm =&gt; 1;
 </pre>  
-<p>&hellip;and <code>create_from_form</code> and <code>update_from_form</code> will instead be imported as <code>create_from_fb</code> and <code>update_from_fb</code>.</pre>
+<p>&hellip;and <code>create_from_form</code> and <code>update_from_form</code> will instead be imported as <code>create_from_fb</code> and <code>update_from_fb</code>.</p>
 <p>You might want to do this if you have more complex validation requirements than CGI::FormBuilder provides.</p>
 
 <h2><a name="methods"></a>Methods</h2>
