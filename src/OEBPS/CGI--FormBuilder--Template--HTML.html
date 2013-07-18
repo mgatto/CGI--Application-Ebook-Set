@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>CGI::FormBuilder::Template::HTML - FormBuilder interface to HTML::Template</title>
+        <title>CGI::FormBuilder::Template::HTML - FormBuilder Interface to HTML::Template</title>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="css/modernperl.css" type="text/css" />
     </head>
@@ -10,7 +10,7 @@
         <div class="center">
         	<h1>CGI::FormBuilder::Template::HTML &mdash; 3.08</h1>
             <hr />
-            <h3>CGI::FormBuilder interface to HTML::Template</h3>
+            <h3>CGI::FormBuilder Interface to HTML::Template</h3>
         </div>
         
 		<h2><a name="synopsis"></a>Synopsis</h2>
@@ -23,7 +23,7 @@ my $form = CGI::FormBuilder-&gt;new(
 
 
 		<h2><a name="description"></a>Description</h2>
-		<p>This engine adapts <em>FormBuilder</em> to use <em>HTML::Template</em>. <em>HTML::Template</em> is the default template option and is activated one of two ways. Either:</p>
+		<p>This engine adapts FormBuilder to use HTML::Template. HTML::Template is the default template option and is activated one of two ways. Either:</p>
 
 <pre>
 my $form = CGI::FormBuilder-&gt;new(
@@ -49,13 +49,13 @@ my $form = CGI::FormBuilder-&gt;new(
 		<h2><a name="methods"></a>Methods</h2>
 		<p>The following methods are provided (usually only used internally):</p>
 
-		<h3>engine()</h3>
-		<p>Returns a reference to the <code>HTML::Template</code> object</p>
+		<h3><code>engine()</code></h3>
+		<p>Returns a reference to the HTML::Template object</p>
 		
-		<h3>prepare()</h3>
+		<h3><code>prepare()</code></h3>
 		<p>Returns a hash of all the fields ready to be rendered.</p>
 		
-		<h3>render()</h3>
+		<h3><code>render()</code></h3>
 		<p>Uses the prepared hash and expands the template, returning a string of HTML.</p>
 
 		<h2><a name="templates"></a>Templates</h2>
@@ -88,7 +88,7 @@ my $form = CGI::FormBuilder-&gt;new(
 			</tr>
 		</table>
 
-		<p>Let's look at an example <code>form.tmpl</code> template we could use:</p>
+		<p>Let's look at an example <em>form.tmpl</em> template we could use:</p>
 <pre>
 &lt;html&gt;
     &lt;head&gt;
@@ -116,23 +116,23 @@ my $form = CGI::FormBuilder-&gt;new(
 		
 		<table>
 			<tr>
-				<td>&lt;tmpl_var value-[field]&gt;</td>
+				<td><code>&lt;tmpl_var value-[field]&gt;</code></td>
 				<td>The value of a given field</td>
 			</tr>
 			<tr>
-				<td>&lt;tmpl_var label-[field]&gt;</td>
+				<td><code>&lt;tmpl_var label-[field]&gt;</code></td>
 				<td>The human-readable label</td>
 			</tr>
 			<tr>
-				<td>&lt;tmpl_var comment-[field]&gt;</td>
+				<td><code>&lt;tmpl_var comment-[field]&gt;</code></td>
 				<td>Any optional comment</td>
 			</tr>
 			<tr>
-				<td>&lt;tmpl_var error-[field]&gt;</td>
+				<td><code>&lt;tmpl_var error-[field]&gt;</code></td>
 				<td>Error text if validation fails</td>
 			</tr>
 			<tr>
-				<td>&lt;tmpl_var required-[field]&gt;</td>
+				<td><code>&lt;tmpl_var required-[field]&gt;</code></td>
 				<td>See if the field is required</td>
 			</tr>
 		</table>
@@ -143,13 +143,13 @@ my $form = CGI::FormBuilder-&gt;new(
 &lt;input type=&quot;text&quot; name=&quot;email&quot; value=&quot;&lt;tmpl_var value-email&gt;&quot;&gt;
 &lt;font size=&quot;-1&quot;&gt;&lt;i&gt;&lt;tmpl_var error-email&gt;&lt;/i&gt;&lt;/font&gt;
 </pre>
-		<p>And <em>FormBuilder</em> would take care of the value stickiness for you,while you have control over the specifics of the <code>&lt;input&gt;</code> tag.A sample expansion may create HTML like the following:</p>
+		<p>And FormBuilder would take care of the value stickiness for you,while you have control over the specifics of the <code>&lt;input&gt;</code> tag.A sample expansion may create HTML like the following:</p>
 <pre>
 Email:
 &lt;input type=&quot;text&quot; name=&quot;email&quot; value=&quot;nate@wiger.org&quot;&gt;
 &lt;font size=&quot;-1&quot;&gt;&lt;i&gt;You must enter a valid value&lt;/i&gt;&lt;/font&gt;
 </pre>
-		<p>Note, though, that this will only get the <em>first</em> value in the case
+		<p>Note, though, that this will only get the <strong>first</strong> value in the case
 of a multi-value parameter (for example, a multi-select list). To
 remedy this, if there are multiple values you will also get a
 <code>&lt;tmpl_var&gt;</code> prefixed with &quot;loop-&quot;. So, if you had:</p>
@@ -157,7 +157,7 @@ remedy this, if there are multiple values you will also get a
 <pre>
 myapp.cgi?color=gray&amp;color=red&amp;color=blue
 </pre>
-		<p>This would give the <code>color</code> field three values. To create a select list, you would do this in your template:</p>
+		<p>This would give the color field three values. To create a select list, you would do this in your template:</p>
 <pre>
 &lt;select name=&quot;color&quot; multiple&gt;
 &lt;tmpl_loop loop-color&gt;
@@ -169,25 +169,25 @@ myapp.cgi?color=gray&amp;color=red&amp;color=blue
 
 		<table>
 			<tr>
-				<td>&lt;tmpl_var value&gt;</td>
+				<td><code>&lt;tmpl_var value&gt;</code></td>
 				<td>value of that option</td>
 			</tr>
 			<tr>
-				<td>&lt;tmpl_var label&gt;</td>
+				<td><code>&lt;tmpl_var label&gt;</code></td>
 				<td>label for that option</td>
 			</tr>
 			<tr>
-				<td>&lt;tmpl_var checked&gt;</td>
+				<td><code>&lt;tmpl_var checked&gt;</code></td>
 				<td>if selected, the word &quot;checked&quot;</td>
 			</tr>
 			<tr>
-				<td>&lt;tmpl_var selected&gt;</td>
+				<td><code>&lt;tmpl_var selected&gt;</code></td>
 				<td>if selected, the word &quot;selected&quot;</td>
 			</tr>
 		</table>              
 		
-        <p>Please note that <code>&lt;tmpl_var value&gt;</code> gives you one of the <em>options</em>, not the values. Why? Well, if you think about it you'll realize that select lists and radio groups are fundamentally different from inputboxes in a number of ways. Whereas in input tags you can just have an empty value, with lists you need to iterate through each optionand then decide if it's selected or not.</p>
-		<p>When you need precise control in a template this is all exposed to you; normally <em>FormBuilder</em> does all this magic for you. If you don't need exact control over your lists, simply use the <code>&lt;tmpl_var field-[name]&gt;</code>tag and this will all be done automatically, which I strongly recommend.</p>
+        <p>Please note that <code>&lt;tmpl_var value&gt;</code> gives you one of the options, not the values. Why? Well, if you think about it you'll realize that select lists and radio groups are fundamentally different from inputboxes in a number of ways. Whereas in input tags you can just have an empty value, with lists you need to iterate through each optionand then decide if it's selected or not.</p>
+		<p>When you need precise control in a template this is all exposed to you; normally FormBuilder  does all this magic for you. If you don't need exact control over your lists, simply use the <code>&lt;tmpl_var field-[name]&gt;</code>tag and this will all be done automatically, which I strongly recommend.</p>
 		<p>But, let's assume you need exact control over your lists. Here's an example select list template:</p>
 <pre>
 &lt;select name=&quot;color&quot; multiple&gt;

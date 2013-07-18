@@ -257,11 +257,11 @@ use base 'CGI::Application';
 				<td>The Instance Script which implements your Application Module.</td>
 			</tr>
 			<tr>
-				<th>$webapp</th>
+				<th><code>$webapp</code></th>
 				<td>An instance (object) of your Application Module class.</td>
 			</tr>
 			<tr>
-				<th>$c</th>
+				<th><code>$c</code></th>
 				<td>Same as $webapp, used in instance methods to pass around the current object. (Sometimes referred as &quot;$self&quot; in other code)</td>
 			</tr>
 		</table>   
@@ -271,7 +271,7 @@ use base 'CGI::Application';
 			number of built-in methods.  The following are those which
 			are expected to be called from your Instance Script.</p>
 		
-		<h3><a name="_new"></a>new()</h3>
+		<h3><a name="_new"></a><code>new()</code></h3>
 		<p>The <code>new()</code> method is the constructor for a CGI::Application.  It returns
 			a blessed reference to your Application Module package (class).  Optionally, <code>new()</code> may take a set of parameters as key =&gt; value pairs:</p>
 <pre>
@@ -467,7 +467,7 @@ sub teardown { ... }
 			characteristics.  This has the potential for much cleaner code
 			built on object-oriented inheritance.</p>
 		
-		<h3>cgiapp_prerun()</h3>
+		<h3><code>cgiapp_prerun()</code></h3>
 		<p>If implemented, this method is called automatically right before the
 			selected run mode method is called.  This method provides an optional
 			pre-runmode hook, which permits functionality to be added at the point
@@ -608,7 +608,7 @@ my $tmpl_obj = $webapp-&gt;load_tmpl(
 		<p><em>CGI::Application::Plugin::TT</em> focuses just on Template Toolkit integration, and features pre-and-post features, singleton support and more.</p>
 		<p><em>CGI::Application::Plugin::Stream</em> can help if you want to return a stream and not a file. It features a simple syntax and MIME-type detection.</p>
 
-		<h4>Specifying the template class with html_tmpl_class()</h4>
+		<h4>Specifying the template class with <code>html_tmpl_class()</code></h4>
 		<p>You may specify an API-compatible alternative to <a href="HTML--Template.html">HTML::Template</a> by setting a new <code>html_tmpl_class()</code>:</p>
 <pre>
 $self-&gt;html_tmpl_class('HTML::Template::Dumper');</pre>
@@ -642,7 +642,7 @@ is ($tmpl_href-&gt;{pet_name}, 'Daisy', &quot;Daisy is sent template&quot;);
 			in the template, the above test would fail. So, you are testing both your code
 			and your templates in a much more precise way than using simple regular
 			expressions to see if the string &quot;Daisy&quot; appeared somewhere on the page.</p>
-		<h3>The load_tmpl() callback</h3>
+		<h3>The <code>load_tmpl()</code> callback</h3>
 		<p>Plugin authors will be interested to know that you can register a callback that
 			will be executed just before <code>load_tmpl()</code> returns:</p>
 <pre>
@@ -842,7 +842,7 @@ $webapp-&gt;start_mode('mode1');
 			whenever the value of the CGI form parameter specified by <code>mode_param()</code> is
 			not defined.  Generally, this is the first time your application is executed.</p>
 		
-		<h3>tmpl_path()</h3>
+		<h3><code>tmpl_path()</code></h3>
 <pre>
 $webapp-&gt;tmpl_path('/path/to/some/templates/');
 </pre>
@@ -1034,10 +1034,10 @@ $webapp-&gt;mode_param(
     param =&gt;'rm'
 );
 </pre>
-		<p>This syntax allows you to easily set the run mode from <code>1ENV{PATH_INFO}</code>.  It
-			will try to set the run mode from the first part of <code>1ENV{PATH_INFO}</code> (before the
+		<p>This syntax allows you to easily set the run mode from <code>$ENV{PATH_INFO}</code>.  It
+			will try to set the run mode from the first part of <code>$ENV{PATH_INFO}</code> (before the
 			first &quot;/&quot;). To specify that you would rather get the run mode name from the 2nd
-			part of <code>1ENV{PATH_INFO}</code>:</p>
+			part of <code>$ENV{PATH_INFO}</code>:</p>
 <pre>
 $webapp-&gt;mode_param( path_info=&gt; 2 );
 </pre>
@@ -1045,14 +1045,14 @@ $webapp-&gt;mode_param( path_info=&gt; 2 );
 			still default to <code>rm</code>.</p>
 		<p>You can also set <code>path_info</code> to a negative value. This works just like a negative
 			list index: if it is -1 the run mode name will be taken from the last part of 
-			<code>1ENV{PATH_INFO}</code>, if it is -2, the one before that, and so on.</p>
-		<p>If no run mode is found in <code>1ENV{PATH_INFO}</code>, it will fall back to looking in the
+			<code>$ENV{PATH_INFO}</code>, if it is -2, the one before that, and so on.</p>
+		<p>If no run mode is found in <code>$ENV{PATH_INFO}</code>, it will fall back to looking in the
 			value of a the CGI form field defined with 'param', as described above.  This
-			allows you to use the convenient <code>1ENV{PATH_INFO}</code> trick most of the time, but
+			allows you to use the convenient <code>$ENV{PATH_INFO}</code> trick most of the time, but
 			also supports the edge cases, such as when you don't know what the run mode
 			will be ahead of time and want to define it with JavaScript.</p>
-		<h5>More about <code>1ENV{PATH_INFO}</code></h5>
-		<p>Using <code>1ENV{PATH_INFO}</code> to name your run mode creates a clean separation between
+		<h5>More about <code>$ENV{PATH_INFO}</code></h5>
+		<p>Using <code>$ENV{PATH_INFO}</code> to name your run mode creates a clean separation between
 			the form variables you submit and how you determine the processing run mode. It
 			also creates URLs that are more search engine friendly. Let's look at an
 			example form submission using this syntax:</p>
@@ -1065,8 +1065,8 @@ $webapp-&gt;mode_param( path_info=&gt; 2 );
 <pre>
 /cgi-bin/instance.cgi/edit_form?breed_id=2
 </pre>
-		<p>This demonstrates that you can use <code>1ENV{PATH_INFO}</code> and a query string together
-			without problems. <code>1ENV{PATH_INFO}</code> is defined as part of the CGI specification
+		<p>This demonstrates that you can use <code>$ENV{PATH_INFO}</code> and a query string together
+			without problems. <code>$ENV{PATH_INFO}</code> is defined as part of the CGI specification
 			should be supported by any web server that supports CGI scripts.</p>
 		
 		<h3><code>prerun_mode()</code></h3>

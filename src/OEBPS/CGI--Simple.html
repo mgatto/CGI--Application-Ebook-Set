@@ -10,10 +10,10 @@
         <div class="center">
         	<h1>CGI::Simple &mdash; 1.113</h1>
             <hr />
-            <p> A Simple totally OO CGI interface that is CGI.pm compliant</p>
+            <h3>A Simple Totally OO CGI Interface that is CGI.pm Compliant</h3>
         </div>
         
-        <p>To replace <em>CGI.pm</em> with CGI::Simple, you must add the following code to your CGI::Application package:</p>
+        <p>To replace CGI.pm with CGI::Simple, you must add the following code to your CGI::Application package:</p>
 <pre>
 package YourApp;
 use strict;
@@ -21,17 +21,17 @@ use base 'CGI::Application';
 &hellip;
 use CGI::Simple;
 &hellip;
-sub CGIapp_get_query {
-  my($self) = @_;
-  return CGI::Simple -> new();
+sub cgiapp_get_query {
+    my($self) = @_;
+    return CGI::Simple -> new();
 }  
 </pre>
 <p>or, </p>        
 <pre>
-# overrides CGI::Applications built-in method <code>CGIapp_get_query()</code>
-sub CGIapp_get_query {   
-   require CGI::Simple;  # note, uploads are disabled by default in CGI::Simple
-   CGI::Simple->new()
+# overrides CGI::Applications built-in method cgiapp_get_query()
+sub cgiapp_get_query {   
+    require CGI::Simple;  # note, uploads are disabled by default in CGI::Simple
+    CGI::Simple->new()
 }
 </pre>    
 <div class="note">
@@ -633,7 +633,7 @@ restore_parameters(\*FH);
 <p>File uploads are easy with CGI::Simple. You use the <code>upload()</code> method. Assuming you have the following in your HTML:</p>
 <pre>
 &lt;form method=&quot;POST&quot;
- action=&quot;<a href="http://somewhere.com/CGI-bin/script.CGI&quot">http://somewhere.com/CGI-bin/script.CGI&quot</a>;
+ action=&quot;http://somewhere.com/CGI-bin/script.CGI&quot;
  enctype=&quot;multipart/form-data&quot;&gt;
     &lt;input type=&quot;file&quot; name=&quot;upload_file1&quot; size=&quot;42&quot;&gt;
     &lt;input type=&quot;file&quot; name=&quot;upload_file2&quot; size=&quot;42&quot;&gt;
@@ -734,7 +734,7 @@ use CGI::Simple qw( -default ..... );</pre>
 
 <h2><a name="miscelaneous_methods"></a>Miscelaneous Methods</h2>
 
-<h3><a name="escapehtml___escaping_html_special_characters"></a><code>escapeHTML()</code> Escaping HTML Special Characters</h3>
+<h3><a name="escapehtml___escaping_html_special_characters"></a><code>escapeHTML()</code>: Escaping HTML Special Characters</h3>
 <p>In HTML the &lt; &gt; &quot; and &amp; chars have special meaning and need to be escaped to &amp;lt; &amp;gt; &amp;quot; and &amp;amp; respectively.</p>
 <pre>
 $escaped = $q-&gt;escapeHTML( $string );
@@ -744,7 +744,7 @@ $escaped = $q-&gt;escapeHTML( $string, 'new_lines_too' );
 </pre>
 <p>If the optional second argument is supplied then newlines will be escaped to.</p>
 
-<h3><a name="unescapehtml___unescape_html_special_characters"></a><code>unescapeHTML()</code> Unescape HTML Special Characters</h3>
+<h3><a name="unescapehtml___unescape_html_special_characters"></a><code>unescapeHTML()</code>: Unescape HTML Special Characters</h3>
 <p>This performs the reverse of <code>escapeHTML()</code>.</p>
 <pre>
 $unescaped = $q-&gt;unescapeHTML( $HTML_escaped_string );

@@ -15,19 +15,19 @@
         
         <h2>Synopsis</h2>
 <pre>
-# In &quot;WebApp.pm&quot;...
+# In &quot;WebApp.pm&quot;&hellip;
 package WebApp;
 
 use base qw(CGI::Application::FastCGI);
 sub setup {
-    ...
+    &hellip;
 }
 
 1;
 </pre>
 
 <pre>
-# In &quot;webapp.fcgi&quot;...
+# In &quot;webapp.fcgi&quot;&hellip;
 use WebApp;
 
 my $webapp = WebApp-&gt;new;
@@ -35,10 +35,13 @@ $webapp-&gt;run;
 </pre>
 
         <h3>Notes</h3>
-        <p>Note that <code>cgiapp_init()</code> will be called only once under lifecycle of FastCGI. <code>setup()</code> will also only be called once. (you should not be doing magical things in 'setup'.) So if you want to do something for every REQUEST, you should write the logic in <code>cgiapp_prerun()</code>.</p>
+        <p>Note that <code>cgiapp_init()</code> will be called only once under lifecycle of FastCGI. <code>setup()</code> will also only be called once. (you should not be doing magical things in 'setup'.) So if you want to do something for every request, you should write the logic in <code>cgiapp_prerun()</code>.</p>
 
         <h3>See Also</h3>
-        <p><a href="CGI--Application.html">CGI::Application</a>, <em>FCGI</em></p>
+        <ul>
+            <li><a href="CGI--Application.html">CGI::Application</a></li>
+            <li>FCGI</li>
+        </ul>
 
         <h3>Author</h3>
         <p>Naoya Ito &lt;<a href="mailto:naoya@naoya.dyndns.org">naoya@naoya.dyndns.org</a>&gt;</p>

@@ -10,10 +10,10 @@
 		<div class="center">
 		    <h1>CGI::Application::Plugin::Session &ndash; 1.03</h1>
 		    <hr />
-		    <h3>Add CGI::Session support to CGI::Application</h3>
+		    <h3>Add CGI::Session Support to CGI::Application</h3>
 		</div>
         
-		<h2><a name="synopsis"></a>SYNOPSIS</h2>
+		<h2><a name="synopsis"></a>Synopsis</h2>
 <pre>
 use CGI::Application::Plugin::Session;
  
@@ -21,7 +21,7 @@ my $language = $self-&gt;session-&gt;param('language');
 </pre>
 		
         <h2><a name="description"></a>Description</h2>
-		<p><em>CGI::Application::Plugin::Session</em> seamlessly adds session support to your <a href="CGI--Application.html">CGI::Application</a> modules by providing a <a href="CGI--Session.html">CGI::Session</a> object that is accessible from anywhere in the application.</p>
+		<p>CGI::Application::Plugin::Session seamlessly adds session support to your <a href="CGI--Application.html">CGI::Application</a> modules by providing a <a href="CGI--Session.html">CGI::Session</a> object that is accessible from anywhere in the application.</p>
 
 		<p>Lazy loading is used to prevent expensive file system or database calls from being made if the session is not needed during this request.  In other words, the Session object is not created until it is actually needed.  Also, the Session object will act as a singleton by always returning the same Session object for the duration of the request.</p>
 
@@ -29,7 +29,7 @@ my $language = $self-&gt;session-&gt;param('language');
 
 		<h2><a name="methods"></a>Methods</h2>
 		
-        <h3>session()</h3>
+        <h3><code>session()</code></h3>
 		<p>This method will return the current <a href="CGI--Session.html">CGI::Session</a> object.  The <a href="CGI--Session.html">CGI::Session</a> object is created on the first call to this method, and any subsequent calls will return the same object.  This effectively creates a singleton session object for the duration of the request. <a href="CGI--Session.html">CGI::Session </a> will look for a cookie or param containing the session ID, and create a new session if none is found.  If <code>session_config</code> has not been called before the first call to <code>session</code>, then it will choose some sane defaults to create the session object.</p>
 
 <pre>
@@ -42,8 +42,8 @@ my $session = $self-&gt;session;
 my $language = $self-&gt;session-&gt;param('language');
 </pre>
 
-		<h3>session_config()</h3>
-		<p>This method can be used to customize the functionality of the CGI::Application::Plugin::Session module. Calling this method does not mean that a new session object will be immediately created. The session object will not be created until the first call to $self-&gt;session.  This 'lazy loading' can prevent expensive file system or database calls from being made if the session is not needed during this request.</p>
+		<h3><code>session_config()</code></h3>
+		<p>This method can be used to customize the functionality of the CGI::Application::Plugin::Session module. Calling this method does not mean that a new session object will be immediately created. The session object will not be created until the first call to <code>$self-&gt;session</code>.  This 'lazy loading' can prevent expensive file system or database calls from being made if the session is not needed during this request.</p>
 
 		<p>The recommended place to call <code>session_config</code> is in the <code>cgiapp_init</code> stage of <a href="CGI--Application.html">CGI::Application</a>.  If this method is called after the session object has already been accessed, then it will die with an error message.</p>
 
@@ -52,31 +52,31 @@ my $language = $self-&gt;session-&gt;param('language');
 		<p>The following parameters are accepted:</p>
 
 		<dl>
-		    <dt>CGI_SESSION_OPTIONS</dt>
+		    <dt><code>CGI_SESSION_OPTIONS</code></dt>
 		    <dd>
 		        <p>This allows you to customize how the <a href="CGI--Session.html">CGI::Session</a> object is created by providing a list of options that will be passed to the <a href="CGI--Session.html">CGI::Session</a> constructor.  Please see the documentation for <a href="CGI--Session.html">CGI::Session</a> for the exact syntax of the parameters.</p>
 		    </dd>
             
-		    <dt>DEFAULT_EXPIRY</dt>
+		    <dt><code>DEFAULT_EXPIRY</code></dt>
 		    <dd>
-		        <p><a href="CGI--Session.html">CGI::Session</a> Allows you to set an expiry time for the session.  You can set the DEFAULT_EXPIRY option to have a default expiry time set for all newly created sessions. It takes the same format as the $session-&gt;expiry method of <a href="CGI--Session.html">CGI::Session</a> takes. Note that it is only set for new session, not when a session is reloaded from the store.</p>
+		        <p><a href="CGI--Session.html">CGI::Session</a> Allows you to set an expiry time for the session.  You can set the <code>DEFAULT_EXPIRY</code> option to have a default expiry time set for all newly created sessions. It takes the same format as the <code>$session-&gt;expiry</code> method of <a href="CGI--Session.html">CGI::Session</a> takes. Note that it is only set for new session, not when a session is reloaded from the store.</p>
 		    </dd>
 		    
-            <dt>COOKIE_PARAMS</dt>
+            <dt><code>COOKIE_PARAMS</code></dt>
 		    <dd>
-		        <p>This allows you to customize the options that are used when creating the session cookie. For example you could provide an expiry time for the cookie by passing -expiry =&gt; '+24h'. The -name and -value parameters for the cookie will be added automatically unless you specifically override them by providing -name and/or -value parameters. See the <a href="CGI--Cookie.html">CGI::Cookie</a> docs for the exact syntax of the parameters.</p>
+		        <p>This allows you to customize the options that are used when creating the session cookie. For example you could provide an expiry time for the cookie by passing <code>-expiry =&gt; '+24h'</code>. The -name and -value parameters for the cookie will be added automatically unless you specifically override them by providing -name and/or -value parameters. See the <a href="CGI--Cookie.html">CGI::Cookie</a> docs for the exact syntax of the parameters.</p>
                 
                 <h4>Note:</h4>
-		        <p>If you change the name of the cookie by passing a -name parameter, remember to notify CGI::Session of the change by calling CGI::Session-&gt;name('new_cookie_name').</p>
+		        <p>If you change the name of the cookie by passing a -name parameter, remember to notify CGI::Session of the change by calling <code>CGI::Session-&gt;name('new_cookie_name')</code>.</p>
 		    </dd>
 
-		    <dt>SEND_COOKIE</dt>
+		    <dt><code>SEND_COOKIE</code></dt>
 		    <dd>
-            	<p>If set to a true value, the module will automatically add a cookie header tothe outgoing headers if a new session is created (Since the session module islazy loaded, this will only happen if you make a call to $self-&gt;session at somepoint to create the session object). This option defaults to true.  If it isset to false, then no session cookies will be sent, which may be useful if youprefer URL based sessions (it is up to you to pass the session ID in thiscase).</p>
+            	<p>If set to a true value, the module will automatically add a cookie header to the outgoing headers if a new session is created (Since the session module islazy loaded, this will only happen if you make a call to <code>$self-&gt;session</code> at somepoint to create the session object). This option defaults to true.  If it isset to false, then no session cookies will be sent, which may be useful if you prefer URL based sessions (it is up to you to pass the session ID in thiscase).</p>
             </dd>
 		</dl>
 		
-        <p>The following example shows what options are set by default (ie this is what you would get if you do not call session_config).</p>
+        <p>The following example shows what options are set by default (i.e. this is what you would get if you do not call session_config).</p>
         
 <pre>
 $self-&gt;session_config(
@@ -105,14 +105,17 @@ $self-&gt;session_config(
 );
 </pre>
 
-		<h3>session_cookie()</h3>
-		<p>This method will add a cookie to the outgoing headers containing the session ID that was assigned by the CGI::Session module.</p>
+		<h3><code>session_cookie()</code></h3>
+		<p>This method will add a cookie to the outgoing headers containing the session ID that was assigned by the CGI::Session module.</p> 
 
-		<p>This method is called automatically the first time $self-&gt;session is accessed if SEND_COOKIE was set true, which is the default, so it will most likely never need to be called manually.</p>
-
-		<p>NOTE that if you do choose to call it manually that a session object willautomatically be created if it doesn't already exist. This removes the lazyloading benefits of the plugin where a session is only created/loaded whenit is required.</p>
+		<p>This method is called automatically the first time <code>$self-&gt;session</code> is accessed if <code>SEND_COOKIE</code> was set true, which is the default, so it will most likely never need to be called manually.</p>
+        
+        <div class="note">
+            <h4>Note</h4>
+            <p>If you do choose to call it manually that a session object will automatically be created if it doesn't already exist. This removes the lazyloading benefits of the plugin where a session is only created/loaded whenit is required.</p>
+		</div>
 		
-        <p>It could be useful if you want to force the cookie header to besent out even if the session is not used on this request, or ifyou want to manage the headers yourself by turning SEND_COOKIE tofalse.</p>
+        <p>It could be useful if you want to force the cookie header to be sent out even if the session is not used on this request, or ifyou want to manage the headers yourself by turning <code>SEND_COOKIE</code> to false.</p>
 
 <pre>
 # Force the cookie header to be sent including some
@@ -120,8 +123,8 @@ $self-&gt;session_config(
 $self-&gt;session_cookie(-secure =&gt; 1, -expires =&gt; '+1w');
 </pre>
 
-		<h3>session_loaded()</h3>
-		<p>This method will let you know if the session object has been loaded yet. In other words, it lets you know if $self-&gt;session has been called.</p>
+		<h3><code>session_loaded()</code></h3>
+		<p>This method will let you know if the session object has been loaded yet. In other words, it lets you know if <code>$self-&gt;session</code> has been called.</p>
 
 <pre>
 sub cgiapp_postrun {
@@ -130,9 +133,9 @@ sub cgiapp_postrun {
 }
 </pre>
 		
-        <h3>session_recreate()</h3>
+        <h3><code>session_recreate()</code></h3>
 		<p>This method will delete the existing session, and create a brand new one for you with a new session ID.  It copies over all existing parameters into the new session.</p>
-		<p>This can be useful to protect against some login attacks when storing authentication tokens in the session. Very briefly, an attacker loads a pageon your site and creates a session, then tries to trick a victim into loadingthis page with the same session ID (possibly by embedding it in a URL).  Thenif the victim follows the link and subsequently logs into their account, theattacker will have a valid session ID where the session is now logged in, andhence the attacker has access to the victims account.</p>
+		<p>This can be useful to protect against some login attacks when storing authentication tokens in the session. Very briefly, an attacker loads a page on your site and creates a session, then tries to trick a victim into loading this page with the same session ID (possibly by embedding it in a URL).  Then if the victim follows the link and subsequently logs into their account, the attacker will have a valid session ID where the session is now logged in, and hence the attacker has access to the victims account.</p>
 
 <pre>
 sub mylogin {
@@ -144,8 +147,8 @@ sub mylogin {
 }
 </pre>
 
-		<h3>session_delete()</h3>
-		<p>This method will perform a more comprehensive clean-up of the session, calling boththe CGI::Session <code>delete()</code> method, but also deleting the cookie from the client, ifyou are using cookies.</p>
+		<h3><code>session_delete()</code></h3>
+		<p>This method will perform a more comprehensive clean-up of the session, calling both the CGI::Session <code>delete()</code> method, but also deleting the cookie from the client, ifyou are using cookies.</p>
 
 <pre>
 sub logout {

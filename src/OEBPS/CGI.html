@@ -68,6 +68,7 @@
 <h2><a name="synopsis"></a>Synopsis</h2>
 <pre>
 use CGI;
+
 my $q = CGI-&gt;new;
 # Process an HTTP request
 @values  = $q-&gt;param('form_field');
@@ -126,6 +127,7 @@ a simple &quot;Hello World&quot; HTML page:</p>
 <pre>
 #!/usr/local/bin/perl -w
 use CGI;                              # load CGI routines
+
 $q = CGI-&gt;new;                     # create new CGI object
 print $q-&gt;header,                  # create the HTTP header
     $q-&gt;start_html('hello world'), # start the HTML
@@ -143,8 +145,9 @@ into our name space (usually the &quot;standard&quot; functions), and we don't
 need to create the CGI object.</p>
 <pre>
 #!/usr/local/bin/perl
-use CGI qw/:standard/;           # load standard CGI routines
-print header,                    # create the HTTP header
+use CGI qw/:standard/;         # load standard CGI routines
+
+print header,                  # create the HTTP header
     start_html('hello world'), # start the HTML
     h1('hello world'),         # level 1 header
     end_html;                  # end the HTML
@@ -182,25 +185,6 @@ single or a multi-valued value.  The two cases are shown below:</p>
 $q-&gt;param(-name=&gt;'veggie',-value=&gt;'tomato');
 $q-&gt;param(-name=&gt;'veggie',-value=&gt;['tomato','tomahto','potato','potahto']);
 </pre>
-<p>A large number of routines in CGI.pm actually aren't specifically
-defined in the module, but are generated automatically as needed.
-These are the &quot;HTML shortcuts,&quot; routines that generate HTML tags for
-use in dynamically-generated pages.  HTML tags have both attributes
-(the attribute=&quot;value&quot; pairs within the tag itself) and contents (the
-part between the opening and closing pairs.)  To distinguish between
-attributes and contents, CGI.pm uses the convention of passing HTML
-attributes as a hash reference as the first argument, and the
-contents, if any, as any subsequent arguments.  It works out like
-this:</p>
-<pre>
-Code                              Generated HTML
-----                              --------------
-h1();                             &lt;h1&gt;
-h1('some','contents');            &lt;h1&gt;some contents&lt;/h1&gt;
-h1({-align=&gt;left});            &lt;h1 align=&quot;LEFT&quot;&gt;
-h1({-align=&gt;left},'contents'); &lt;h1 align=&quot;LEFT&quot;&gt;contents&lt;/h1&gt;
-</pre>
-<p>HTML tags are described in more detail later.</p>
 <p>Many newcomers to CGI.pm are puzzled by the difference between the
 calling conventions for the HTML shortcuts, which require curly braces
 around the HTML tag attributes, and the calling conventions for other

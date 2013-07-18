@@ -12,7 +12,7 @@
 		<div class="center">
 	        <h1>CGI::Application::Plugin::Apache &mdash; 1.02</h1>
 	        <hr />
-	        <h3>Allow CGI::Application to use Apache::* modules without interference.</h3>
+	        <h3>Allow CGI::Application to Use Apache::* modules Without Interference</h3>
 		</div>
 
         <a name="synopsis"></a><h2>Synopsis</h2>
@@ -50,38 +50,27 @@ sub mode1 {
 </pre>
 
         <h2><a name="description"></a>Description</h2>
-        <p>
-            This plugin helps to try and fix some of the annoyances of using <a href="CGI--Application.html"> CGI::Application</a> in a pure mod_perl (1.0 or 2.0) environment (see <em>INSTALLATION</em> for specific issues regarding installation under mod_perl 2.x). <a href="CGI--Application.html">CGI::Application</a> assumes that you use <em>CGI.pm</em>, but I wanted to avoid it's bloat and have access to the performance of the Apache::* modules so along came this plugin. At the current moment it only does two things:
-        </p>
+        <p>This plugin helps to try and fix some of the annoyances of using <a href="CGI--Application.html">CGI::Application</a> in a pure mod_perl (1.0 or 2.0) environment (see Installation for specific issues regarding installation under mod_perl 2.x). <a href="CGI--Application.html">CGI::Application</a> assumes that you use CGI.pm, but I wanted to avoid it's bloat and have access to the performance of the Apache::* modules so along came this plugin. At the current moment it only does two things:</p>
 
         <ul>
             <li>
                 Use Apache::Request as the <code>$self-&gt;query</code> object thus avoiding the creation of the CGI.pm object.
             </li>
             <li>
-                Override the way <a href="CGI--Application.html">the CGI::Application manpage</a> creates and prints it's HTTP headers. Since it was using <em>CGI.pm</em>'s <code>header()</code> and <code>redirect()</code> method's we needed an alternative. So now we use the <code>Apache-&gt;send_http_header()</code> method. This has a few additional benefits other than just not using <em>CGI.pm</em>. It means that we can use other Apache::* modules that might also create outgoing headers (e.g. Apache::Cookie manpage) without <a href="CGI--Application.html">CGI::Application</a> clobbering them.
+                Override the way <a href="CGI--Application.html">CGI::Application</a> creates and prints it's HTTP headers. Since it was using CGI.pm's <code>header()</code> and <code>redirect()</code> method's we needed an alternative. So now we use the <code>Apache-&gt;send_http_header()</code> method. This has a few additional benefits other than just not using CGI.pm. It means that we can use other Apache::* modules that might also create outgoing headers (e.g. Apache::Cookie) without <a href="CGI--Application.html">CGI::Application</a> clobbering them.
             </li>
         </ul>
 
         <h2><a name="exported_methods"></a>Exported Methods</h2>
-        <p>
-            This module uses <em>Exporter</em> to provide methods to your application module. Most of the time you will never actually use these methods since they are used by <a href="CGI--Application.html">CGI::Application</a> itself, but I figured you'd like to know what's going on.
-        </p>
-        <p>
-            No methods are exported by default. It is up to you to pick and choose, but please choose wisely. You can import all of the methods by using:
-        </p>
+        <p>This module uses <em>Exporter</em> to provide methods to your application module. Most of the time you will never actually use these methods since they are used by <a href="CGI--Application.html">CGI::Application</a> itself, but I figured you'd like to know what's going on.</p>
+        <p>No methods are exported by default. It is up to you to pick and choose, but please choose wisely. You can import all of the methods by using:</p>
 <pre>
 use CGI::Application::Plugin::Apache qw(:all);
 </pre>
-        <p>
-            It is recommended that you import all of them since some methods will require others. but the choice is yours. For instance, if you want to override any method then you may not want to import it from here.
-        </p>
+        <p>It is recommended that you import all of them since some methods will require others. but the choice is yours. For instance, if you want to override any method then you may not want to import it from here.</p>
 
         <h3><code>handler()</code></h3>
-        <p>
-            This method gives your application the ability to run as a straight mod_perl handler. It simply creates an instance of you application and then runs it (using <code>$app-&gt;new()</code> and <code>$app-&gt;run()</code>).
-            It does not pass any arguments into either method. It then returns an <code>Apache::Constants::OK</code> value. If you need anything more than this, please feel free to not import this method and write your own. You could do it like this:
-        </p>
+        <p>This method gives your application the ability to run as a straight mod_perl handler. It simply creates an instance of you application and then runs it (using <code>$app-&gt;new()</code> and <code>$app-&gt;run()</code>). It does not pass any arguments into either method. It then returns an <code>Apache::Constants::OK</code> value. If you need anything more than this, please feel free to not import this method and write your own. You could do it like this:</p>
 <pre>
 package MyApp;
 use base 'CGI::Application';
@@ -94,26 +83,18 @@ sub handler {
 
         <h3><code>cgiapp_get_query()</code></h3>
         <p>
-            This overrides CGI:App's method for retrieving the query object. This is the standard way of using something other than CGI.pm so it's no surprise that we use it here. It simply creates and returns a new Apache::Request object from <code>Apache-&gt;request</code>.
+            This overrides CGI::Application's method for retrieving the query object. This is the standard way of using something other than CGI.pm so it's no surprise that we use it here. It simply creates and returns a new Apache::Request object from <code>Apache-&gt;request</code>.
         </p>
 
         <h3><code>_send_headers()</code></h3>
-        <p>
-            I didn't like the idea of exporting this private method (I'd rather think it was a 'protected' not 'private) but right now it's the only way to have any say in how the HTTP headers are created. Please see <a href="#http_headers">HTTP Headers</a> for more details.
-        </p>
+        <p>I didn't like the idea of exporting this private method (I'd rather think it was a 'protected' not 'private) but right now it's the only way to have any say in how the HTTP headers are created. Please see <a href="#http_headers">HTTP Headers</a> for more details.</p>
 
         <h2><a name="http_headers"></a>HTTP Headers</h2>
-        <p>
-            We encourage you to learn the mod_perl way of manipulating headers and cookies. It's really not that hard we promise. But incase you're easing your way into it, we try and provide as much backward compatibility as possible.
-        </p>
+        <p>We encourage you to learn the mod_perl way of manipulating headers and cookies. It's really not that hard we promise. But incase you're easing your way into it, we try and provide as much backward compatibility as possible.</p>
 
         <h3>Cookies</h3>
-        <p>
-            HTTP cookies should now be created using <em>Apache::Cookie</em> and it's <code>bake()</code> method not with <code>header_add()</code> or <code>header_props()</code>.
-        </p>
-        <p>
-            You can still do the following to create a cookie:
-        </p>
+        <p>HTTP cookies should now be created using Apache::Cookie and it's <code>bake()</code> method not with <code>header_add()</code> or <code>header_props()</code>.</p>
+        <p>You can still do the following to create a cookie:</p>
 <pre>
 my $cookie = CGI::Cookie-&gt;new(
     -name  =&gt; 'foo',
@@ -160,10 +141,10 @@ return '';
 
         <h2><a name="compatibility"></a>Compatibility</h2>
         <p>
-            Upon using this module you completely leave behind the world of <em>CGI.pm</em>. Don't look back or you might turn into a pillar of salt. You will have to look at and read the docs of the Apache::* modules. But don't worry, they are really easy to use and were designed to mimic the interface of <em>CGI.pm</em> and family.
+            Upon using this module you completely leave behind the world of CGI.pm. Don't look back or you might turn into a pillar of salt. You will have to look at and read the docs of the Apache::* modules. But don't worry, they are really easy to use and were designed to mimic the interface of CGI.pm and family.
         </p>
         <p>
-            If you are trying to use this module but don't want to have to change your previous code that uses <code>header_props()</code> or <code>header_add()</code> then we try to help you out by being as CGI compatible as we can, but it is always better to use the mod_perl api. If you still want to use <code>header_props()</code> or <code>header_add()</code> remember that it will cause a performance hit because it will use helper routines that try and emulate <em>CGI.pm</em>.
+            If you are trying to use this module but don't want to have to change your previous code that uses <code>header_props()</code> or <code>header_add()</code> then we try to help you out by being as CGI compatible as we can, but it is always better to use the mod_perl api. If you still want to use <code>header_props()</code> or <code>header_add()</code> remember that it will cause a performance hit because it will use helper routines that try and emulate CGI.pm.
         </p>
         <p>
             If you wish to write code that performs well in both environments, you can check the <code>$ENV{MOD_PERL}</code> environment setting and branch accordingly. For example, to set a cookie:
@@ -196,10 +177,10 @@ else {
 
         <h3>CGI::Application::Plugin::Apache::Request</h3>
         <p>
-            Sometimes the default compatability is not enough. For instance, if you are using plugins that use the cookies or upload features of <em>CGI.pm</em> then you might need some extra help.
+            Sometimes the default compatability is not enough. For instance, if you are using plugins that use the cookies or upload features of CGI.pm then you might need some extra help.
         </p>
         <p>
-            This is what <a href="CGI--Application--Plugin--Apache--Request.html">CGI::Application::Plugin::Apache::Request</a> is for. You can make this your <a href="#query"><code>query</code></a> object by setting the <code>CAPA_CGI_Compat</code> var to <code>On</code> in your Apache config file:
+            This is what <a href="CGI--Application--Plugin--Apache--Request.html">CGI::Application::Plugin::Apache::Request</a> is for. You can make this your <code>query</code> object by setting the <code>CAPA_CGI_Compat</code> var to <code>On</code> in your Apache config file:
         </p>
 <pre>
 PerlSetVar CAPA_CGI_Compat On

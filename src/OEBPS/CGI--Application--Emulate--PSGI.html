@@ -10,7 +10,7 @@
     	<div class="center">
 			<h1>CGI::Application::Emulate::PSGI &mdash; 0.02</h1>
 			<hr />
-	        <h3>A legacy-code-friendly PSGI adapter for CGI::Application</h3>
+	        <h3>A Legacy-Code-Friendly PSGI Adapter for CGI::Application</h3>
         </div>
         
 		<h2>Synopsis</h2>
@@ -33,9 +33,9 @@ my $psgi_app = CGI::Application::Emulate::PSGI-&gt;handler(sub {
     	<h2>Description</h2>
 		<p>CGI::Application::Emulate::PSGI allows a project based on <a href="CGI--Application.html"> CGI::Application</a> to run as a PSGI application.  Differences from <a href="CGI--Application--PSGI.html">CGI::Application::PSGI</a> are:</p>
 		<dl>
-		    <dt>Uses <code>CGI.pm</code> directly instead of <a href="CGI--PSGI.html">CGI::PSGI</a>.</dt>
+		    <dt>Uses <em>CGI.pm</em> directly instead of <a href="CGI--PSGI.html">CGI::PSGI</a>.</dt>
 		    <dd>
-		        <p><a href="CGI--Application--PSGI.html">CGI::Application::PSGI</a> (that uses <a href="CGI--PSGI.html">CGI::PSGI</a>) does not support programs calling <code>CGI.pm</code> in func-style (like CGI::virtual_host()). CGI::Application::Emulate::PSGI sets up environment variables so that code using <code>CGI.pm</code> will work. Both approaches explictly use CGI.pm as the query object.</p>
+		        <p><a href="CGI--Application--PSGI.html">CGI::Application::PSGI</a> (that uses <a href="CGI--PSGI.html">CGI::PSGI</a>) does not support programs calling <em>CGI.pm</em> in func-style (like CGI::virtual_host()). CGI::Application::Emulate::PSGI sets up environment variables so that code using <em>CGI.pm</em> will work. Both approaches explictly use CGI.pm as the query object.</p>
 		    </dd>
 		    <dt>Compatible with <em>CGI::Application::Dispatch</em>.</dt>
 		    <dd>

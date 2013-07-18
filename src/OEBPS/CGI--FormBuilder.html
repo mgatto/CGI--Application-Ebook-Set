@@ -10,7 +10,7 @@
         <div class="center">
         	<h1>CGI::FormBuilder &mdash; 3.08</h1>
             <hr />
-            <h3>Easily generate and process stateful forms</h3>
+            <h3>Easily Generate and Process Stateful Forms</h3>
         </div>
 
 		<h2><a name="synopsis"></a>Synopsis</h2>
@@ -78,7 +78,7 @@ if ($form-&gt;submitted &amp;&amp; $form-&gt;validate) {
 </pre>
 
 		<h2><a name="description"></a>Description</h2>
-		<p>If this is your first time using <strong>FormBuilder</strong>, you should check out the website for tutorials and examples at <a href="http://formbuilder.org">http://formbuilder.org</a>.</p>
+		<p>If this is your first time using FormBuilder, you should check out the website for tutorials and examples at <a href="http://formbuilder.org">http://formbuilder.org</a>.</p>
 <p>You should also consider joining the google group at <a href="http://groups.google.com/group/perl-formbuilder">http://groups.google.com/group/perl-formbuilder</a>. There are some pretty smart people on the list that can help you out.</p>
 
 		<h2>Overview</h2>
@@ -92,27 +92,21 @@ print qq(&lt;input name=&quot;email&quot; type=&quot;text&quot; size=&quot;20&qu
 print input(-name =&gt; 'email', -type =&gt; 'text', -size =&gt; '20');
 </pre>
 
-		<p>The problem is, that doesn't really gain you anything - you still have just as much code. Modules like <code>CGI.pm</code> are great for decoding parameters, but not for generating and processing whole forms.</p>
-		<p>The goal of CGI::FormBuilder (<strong>FormBuilder</strong>) is to provide an easy way
-for you to generate and process entire CGI form-based applications.
-Its main features are:</p>
+		<p>The problem is, that doesn't really gain you anything - you still have just as much code. Modules like CGI.pm are great for decoding parameters, but not for generating and processing whole forms.</p>
+		<p>The goal of CGI::FormBuilder (FormBuilder) is to provide an easy way for you to generate and process entire CGI form-based applications. Its main features are:</p>
 
 <dl>
 <dt>Field Abstraction</dt>
 <dd>
-<p>Viewing fields as entities (instead of just params), where the
-HTML representation, CGI values, validation, and so on are properties
-of each field.</p>
+<p>Viewing fields as entities (instead of just params), where the HTML representation, CGI values, validation, and so on are properties of each field.</p>
 </dd>
+
 <dt>DWIMmery</dt>
-
 <dd>
-<p>Lots of built-in &quot;intelligence&quot; (such as automatic field typing),
-giving you about a 4:1 ratio of the code it generates versus what you
-have to write.</p>
+<p>Lots of built-in &quot;intelligence&quot; (such as automatic field typing), giving you about a 4:1 ratio of the code it generates versus what you have to write.</p>
 </dd>
-<dt>Built-in Validation</dt>
 
+<dt>Built-in Validation</dt>
 <dd>
 <p>Full-blown regex validation for fields, even including JavaScript
 code generation.</p>
@@ -120,8 +114,7 @@ code generation.</p>
 <dt>Template Support</dt>
 
 <dd>
-<p>Pluggable support for external template engines, such as <code>HTML::Template</code>,
-<code>Text::Template</code>, <code>Template Toolkit</code>, and <code>CGI::FastTemplate</code>.</p>
+<p>Pluggable support for external template engines, such as HTML::Template, Text::Template, Template Toolkit, and CGI::FastTemplate.</p>
 </dd>
 </dl>
 <p>Plus, the native HTML generated is valid XHTML 1.0 Transitional.</p>
@@ -236,7 +229,7 @@ print $form-&gt;render(any_opt_from_new =&gt; $some_value);
 		<p>That's it. Keep reading.</p>
 
 <h3><a name="walkthrough"></a>Walkthrough</h3>
-<p>Let's walk through a whole example to see how <strong>FormBuilder</strong> works.
+<p>Let's walk through a whole example to see how FormBuilder works.
 We'll start with this, which is actually a complete (albeit simple)
 form application:</p>
 <pre>
@@ -312,7 +305,7 @@ if ($form-&gt;submitted &amp;&amp; $form-&gt;validate) {
     print $form-&gt;confirm;
 }
 </pre>
-        <p>Finally, let's say we decide that we like our form fields, but we need the HTML to be laid out very precisely. No problem! We simply create an <code>HTML::Template</code> compatible template and tell <strong>FormBuilder</strong> to use it. Then, in our template, we include a couple special tags which <strong>FormBuilder</strong> will automatically expand:</p> 
+        <p>Finally, let's say we decide that we like our form fields, but we need the HTML to be laid out very precisely. No problem! We simply create an HTML::Template compatible template and tell FormBuilder to use it. Then, in our template, we include a couple special tags which FormBuilder will automatically expand:</p> 
 <pre>
 &lt;html&gt;
     &lt;head&gt;
@@ -378,7 +371,7 @@ if ($form-&gt;submitted &amp;&amp; $form-&gt;validate) {
         <p><strong>Note:</strong> If you are confused at all by the backslashes you see in front of some data pieces above, such as <code>\@fields</code>, skip down to the brief section entitled <a href="#references">REFERENCES</a> at the bottom of this document (it's short).</p> 
 
         <h2><a name="methods"></a>Methods</h2>
-        <p>This documentation is very extensive, but can be a bit dizzying due to the enormous number of options that let you tweak just about anything. As such, I recommend that you stop and visit: <a href="http://www.formbuilder.org">www.formbuilder.org</a>.</p>
+        <p>This documentation is very extensive, but can be a bit dizzying due to the enormous number of options that let you tweak just about anything. As such, I recommend that you stop and visit: http://www.formbuilder.org.</p>
         <p>And click on &quot;Tutorials&quot; and &quot;Examples&quot;. Then, use the following section as a reference later on.</p>
 
         <h3><code>new()</code></h3>
@@ -394,7 +387,7 @@ my $form = CGI::FormBuilder-&gt;new(
     source =&gt; 'myform.conf'   # form and field options
 );
 </pre>
-        <p>For details on the external file format, see <a href="CGI--FormBuilder--Source/File.html">CGI::FormBuilder::Source::File</a>.</p>
+        <p>For details on the external file format, see <em>CGI::FormBuilder::Source::File</em>.</p>
         <p>Any of the options below, in addition to being specified to <code>new()</code>, can also be manipulated directly with a method of the same name. For example, to change the <code>header</code> and <code>stylesheet</code> options, either of these works:</p>
 <pre>
 # Way 1
@@ -443,7 +436,7 @@ See the <code>fieldattr</code> tag for more details, and also the
 <dd>
 <p>This forcibly overrides the charset. Better handled by loading
 an appropriate <code>messages</code> module, which will set this for you.
-See <a href="CGI--FormBuilder--Messages.html">CGI::FormBuilder::Messages</a> for more details.</p>
+See <em>CGI::FormBuilder::Messages</em> for more details.</p>
 </dd>
 <dt><code>debug =&gt; 0 | 1 | 2 | 3</code></dt>
 
@@ -667,12 +660,12 @@ my $mode = $form-&gt;cgi_param('mode');
 
 $form-&gt;cgi_param(name =&gt; 'mode', value =&gt; 'relogin');
 </pre>
-        <p>See <code>CGI.pm</code> for details on <code>param()</code> usage.</p>
+        <p>See CGI.pm for details on <code>param()</code> usage.</p>
 </dd>
 <dt><code>labels =&gt; \%hash</code></dt>
 
 <dd>
-        <p>Like <code>values</code>, this is a list of key/value pairs where the keys are the names of <code>fields</code> specified above. By default, <strong>FormBuilder</strong> does some snazzy case and character conversion to create pretty labels for you. However, if you want to explicitly name your fields, use this option.</p>
+        <p>Like <code>values</code>, this is a list of key/value pairs where the keys are the names of <code>fields</code> specified above. By default, FormBuilder does some snazzy case and character conversion to create pretty labels for you. However, if you want to explicitly name your fields, use this option.</p>
         <p>For example:</p>
 <pre>
 my $form = CGI::FormBuilder-&gt;new(
@@ -699,7 +692,7 @@ th =&gt; { align =&gt; 'left' }
 <dd>
 <p>This forcibly overrides the lang. Better handled by loading
 an appropriate <code>messages</code> module, which will set this for you.
-See <a href="CGI--FormBuilder--Messages.html">CGI::FormBuilder::Messages</a> for more details.</p>
+See <em>CGI::FormBuilder::Messages</em> for more details.</p>
 </dd>
 <dt><code>method =&gt; 'post' | 'get'</code></dt>
 
@@ -712,9 +705,9 @@ the <code>post</code> method.</p>
 <dt><code>messages =&gt; 'auto' | $file | \%hash | $locale</code></dt>
 
 <dd>
-<p>This option overrides the default <strong>FormBuilder</strong> messages in order to
+<p>This option overrides the default FormBuilder messages in order to
 provide multilingual locale support (or just different text for the picky ones).
-For details on this option, please refer to <a href="CGI--FormBuilder--Messages.html">CGI::FormBuilder::Messages</a>.</p>
+For details on this option, please refer to <em>CGI::FormBuilder::Messages</em>.</p>
 </dd>
 <dt><code>name =&gt; $string</code></dt>
 
@@ -764,7 +757,7 @@ sub handler {
     print $form-&gt;render;
 }
 </pre>
-<p>Or, if you need to initialize a <code>CGI.pm</code> object separately and are using a <code>post</code> form method:</p>
+<p>Or, if you need to initialize a CGI.pm object separately and are using a <code>post</code> form method:</p>
 <pre>
 use CGI;
 use CGI::FormBuilder;
@@ -772,7 +765,7 @@ use CGI::FormBuilder;
 my $q = new CGI;
 my $form = CGI::FormBuilder-&gt;new(... params =&gt; $q);
 </pre>
-<p>Usually you don't need to do this, unless you need to access other parameters outside of <strong>FormBuilder</strong>'s control.</p>
+<p>Usually you don't need to do this, unless you need to access other parameters outside of FormBuilder's control.</p>
 </dd>
 <dt><code>required =&gt; \@array | 'ALL' | 'NONE'</code></dt>
 
@@ -808,7 +801,7 @@ to printing out a button that says &quot;Reset&quot;.</p>
 <dt><code>selectnum =&gt; $threshold</code></dt>
 
 <dd>
-<p>This detects how <strong>FormBuilder</strong>'s auto-type generation works. If a
+<p>This detects how FormBuilder's auto-type generation works. If a
 given field has options, then it will be a radio group by default.
 However, if more than <code>selectnum</code> options are present, then it will
 become a select list. The default is 5 or more options. For example:</p>
@@ -848,7 +841,7 @@ option to <code>field()</code>, only it applies to all fields.</p>
 <dt><code>source =&gt; $filename</code></dt>
 
 <dd>
-<p>You can use this option to initialize <strong>FormBuilder</strong> from an external
+<p>You can use this option to initialize FormBuilder from an external
 configuration file. This allows you to separate your field code from
 your form layout, which is pretty cool. See <a href="CGI--FormBuilder--Source--File.html">CGI::FormBuilder::Source::File</a>
 for details on the format of the external file.</p>
@@ -904,7 +897,7 @@ if ($form-&gt;submitted eq 'Add A Gift') {
 <dt><code>stylesheet =&gt; 0 | 1 | $path</code></dt>
 
 <dd>
-<p>This option turns on stylesheets in the HTML output by <strong>FormBuilder</strong>. Each element is printed with the <code>class</code> of <code>styleclass</code> (&quot;fb&quot; by default). It is up to you to provide the actual style definitions. If you provide a <code>$path</code> rather than just a 1/0 toggle, then that <code>$path</code> will be included in a <code>&lt;link&gt;</code> tag as well.</p>
+<p>This option turns on stylesheets in the HTML output by FormBuilder. Each element is printed with the <code>class</code> of <code>styleclass</code> (&quot;fb&quot; by default). It is up to you to provide the actual style definitions. If you provide a <code>$path</code> rather than just a 1/0 toggle, then that <code>$path</code> will be included in a <code>&lt;link&gt;</code> tag as well.</p>
 <p>The following tags are created by this option:</p>
 <pre>
 ${styleclass}           top-level table/form class
@@ -917,7 +910,7 @@ ${styleclass}_invalid   any fields that failed validate()
 <dt><code>table =&gt; 0 | 1 | \%tabletags</code></dt>
 
 <dd>
-<p>By default <strong>FormBuilder</strong> decides how to layout the form based on the number of fields, values, etc. You can force it into a table by specifying <code>1</code>, or force it out of one with <code>0</code>.</p>
+<p>By default FormBuilder decides how to layout the form based on the number of fields, values, etc. You can force it into a table by specifying <code>1</code>, or force it out of one with <code>0</code>.</p>
 <p>If you specify a hashref instead, then these will be used to create the <code>&lt;table&gt;</code> tag. For example, to create a table with no cellpadding or cellspacing, use:</p>
 <pre>
 table =&gt; {cellpadding =&gt; 0, cellspacing =&gt; 0}
@@ -927,7 +920,7 @@ table =&gt; {cellpadding =&gt; 0, cellspacing =&gt; 0}
 <dt><code>template =&gt; $filename | \%hash | \&amp;sub | $object</code></dt>
 
 <dd>
-<p>This points to a filename that contains an <code>HTML::Template</code> compatible template to use to layout the HTML. You can also specify the <code>template</code> option as a reference to a hash, allowing you to further customize the template processing options, or use other template engines.</p>
+<p>This points to a filename that contains an HTML::Template compatible template to use to layout the HTML. You can also specify the <code>template</code> option as a reference to a hash, allowing you to further customize the template processing options, or use other template engines.</p>
 <p>If <code>template</code> points to a sub reference, that routine is called and its return value directly returned. If it is an object, then that object's <code>render()</code> routine is called and its value returned.</p>
 <p>For lots more information, please see <em>CGI::FormBuilder::Template</em>.</p>
 </dd>
@@ -967,7 +960,7 @@ my $form = CGI::FormBuilder-&gt;new(
 <dt><code>validate =&gt; \%hash | $object</code></dt>
 
 <dd>
-<p>This option takes either a hashref of key/value pairs or a <a href="Data--FormValidator.html">Data::FormValidator</a> object.</p>
+<p>This option takes either a hashref of key/value pairs or a <em>Data::FormValidator</em> object.</p>
 <p>In the case of the hashref, each key is the name of a field from the <code>fields</code> option, or the string <code>ALL</code> in which case it applies to all fields. Each value is one of the following:</p>
 <ul>
     <li>a regular expression in 'quotes' to match against</li>
@@ -1281,7 +1274,7 @@ work if you turn on <code>header</code>.</p>
 <dd>
 <p>This is used in conjunction with the <code>value</code> option to forcibly
 override a field's value. See below under the <code>value</code> option for
-more details. For compatibility with <code>CGI.pm</code>, you can also call
+more details. For compatibility with CGI.pm, you can also call
 this option <code>override</code> instead, but don't tell anyone.</p>
 </dd>
 <dt><code>growable =&gt; 0 | 1 | $limit</code></dt>
@@ -1543,7 +1536,7 @@ my %optgroups = (
 );
 $form-&gt;field(..., optgroups =&gt; \%optgroups);
 </pre>
-<p>Note: No attempt is made by <strong>FormBuilder</strong> to properly sort your option optgroups - it is up to you to provide them in a sensible order.</p>
+<p>Note: No attempt is made by FormBuilder to properly sort your option optgroups - it is up to you to provide them in a sensible order.</p>
 </dd>
 <dt><code>required =&gt; 0 | 1</code></dt>
 
@@ -1608,7 +1601,7 @@ $form-&gt;field(
 <p>The type of input box to create. Default is &quot;text&quot;, and valid values
 include anything allowed by the HTML specs, including &quot;select&quot;,
 &quot;radio&quot;, &quot;checkbox&quot;, &quot;textarea&quot;, &quot;password&quot;, &quot;hidden&quot;, and so on.</p>
-<p>By default, the type is automatically determined by <strong>FormBuilder</strong>
+<p>By default, the type is automatically determined by FormBuilder
 based on the following algorithm:</p>
 <pre>
 Field options?
@@ -1624,7 +1617,7 @@ Field options?
                         Yes = checkbox (done)
                         No = radio (done)
 </pre>
-<p>I recommend you let <strong>FormBuilder</strong> do this for you in most cases,
+<p>I recommend you let FormBuilder do this for you in most cases,
 and only tweak those you really need to.</p>
 </dd>
 <dt><code>value =&gt; $value | \@values</code></dt>
@@ -1690,7 +1683,7 @@ $form-&gt;field(
 <a href="http://hr-outsourcing.com/newuser.cgi?company=mr_propane">http://hr-outsourcing.com/newuser.cgi?company=mr_propane</a>
 </pre>
 <p>This could change your page's HTML so that it displayed the appropriate company name and logo, without polluting your form parameters.</p>
-<p>This call simply redispatches to <code>CGI.pm</code>'s <code>param()</code> method, so consult those docs for more information.</p>
+<p>This call simply redispatches to CGI.pm's <code>param()</code> method, so consult those docs for more information.</p>
 
 <h3><code>tmpl_param()</code></h3>
 <p>This allows you to manipulate template parameters directly. Extending the above example:</p>
@@ -1709,7 +1702,7 @@ Please fill out this form:
 &lt;tmpl_var form-start&gt;
 &lt;!-- etc... --&gt;
 </pre>
-<p>For really precise template control, you can actually create your own template object and then pass it directly to <strong>FormBuilder</strong>. See <em>CGI::FormBuilder::Template</em> for more details.</p>
+<p>For really precise template control, you can actually create your own template object and then pass it directly to FormBuilder. See <em>CGI::FormBuilder::Template</em> for more details.</p>
 
 <h3><code>sessionid()</code></h3>
 <p>This gets and sets the sessionid, which is stored in the special form field <code>_sessionid</code>. By default no session ids are generated or used. Rather, this is intended to provide a hook for you to easily integrate this with a session id module like <code>CGI::Session</code>.</p>
@@ -1725,7 +1718,7 @@ my $id = $form-&gt;sessionid;
 <pre>
 $form-&gt;sessionid($id);
 </pre>
-<p>If the sessionid is set, and <code>header</code> is set, then <strong>FormBuilder</strong> will also automatically generate a cookie for you.</p>
+<p>If the sessionid is set, and <code>header</code> is set, then FormBuilder will also automatically generate a cookie for you.</p>
 <p>See <a href="#examples">EXAMPLES</a> for <code>CGI::Session</code> example.</p>
 
 <h3><code>submitted()</code></h3>
@@ -1766,7 +1759,7 @@ if ($location eq 'US') {
     $form-&gt;validate(state =&gt; '/^\w{2,3}$/');
 }
 </pre>
-<p>You can also provide a <a href="/Data/FormValidator.html">Data::FormValidator</a> object as the first argument. In that case, the second argument (if present) will be interpreted as the name of the validation profile to use. A single string argument will also be interpreted as a validation profile name.</p>
+<p>You can also provide a <em>Data::FormValidator</em> object as the first argument. In that case, the second argument (if present) will be interpreted as the name of the validation profile to use. A single string argument will also be interpreted as a validation profile name.</p>
 <p>Note that if you pass args to your <code>validate()</code> function like this, you will not get JavaScript generated or required fields placed in bold. So, this is good for conditional validation like the above example, but for most applications you want to pass your validation requirements in via the <code>validate</code> option to the <code>new()</code> function, and just call the <code>validate()</code> function with no arguments.</p> 
 
 <h3><code>confirm()</code></h3>
@@ -1815,8 +1808,8 @@ $form-&gt;mailresults(
     format          =&gt; 'plain',
 );
 </pre>
-<p>will send your mail formatted nicely in text using <code>Text::FormatTable</code>. (And if you used format =&gt; 'html' it would use <code>HTML::QuickTable</code>.)</p>
-<p>This particular plugin uses <code>MIME::Lite</code> and <code>Net::SMTP</code> to communicate directly with the SMTP server, and does not rely on a shell escape. See <em>CGI::FormBuilder::Mail::FormatMultiPart</em> for more information.</p>
+<p>will send your mail formatted nicely in text using <code>Text::FormatTable</code>. (And if you used format =&gt; 'html' it would use HTML::QuickTable.)</p>
+<p>This particular plugin uses MIME::Lite and Net::SMTP to communicate directly with the SMTP server, and does not rely on a shell escape. See <em>CGI::FormBuilder::Mail::FormatMultiPart</em> for more information.</p>
 <p>This establishes a simple mail plugin implementation standard  for your own <code>mailresults()</code> plugins.  The plugin should reside under the <code>CGI::FormBuilder::Mail::*</code> namespace. It should have a constructor <code>new()</code> which accepts a hash-as-array of named arg parameters, including form =&gt; $form.  It should have a <code>mailresults()</code> object method that does the right thing.  It should use <code>CGI::FormBuilder::Util</code> and <code>puke()</code> if something goes wrong.</p>
 <p>Calling $form-&gt;mailresults( plugin =&gt; 'Foo', ... ) will load <code>CGI::FormBuilder::Mail::Foo</code> and will pass the FormBuilder object as a named param 'form' with all other parameters passed intact.</p>
 <p>If it should croak, confess, die or otherwise break if something goes wrong, FormBuilder.pm will warn any errors and the built-in <code>mailresults()</code> method will still try.</p>
@@ -1825,10 +1818,10 @@ $form-&gt;mailresults(
 <p>This is a more generic version of the above; it sends whatever is given as the <code>text</code> argument via email verbatim to the <code>to</code> address. In addition, if you're not running <code>sendmail</code> you can specify the <code>mailer</code> parameter to give the path of your mailer. This option is accepted by the above functions as well.</p>
 
 <h2><a name="compatibility"></a>Compatibility</h2>
-<p>The following methods are provided to make <strong>FormBuilder</strong> behave more like other modules, when desired.</p>
+<p>The following methods are provided to make FormBuilder behave more like other modules, when desired.</p>
 
 <h3><code>header()</code></h3>
-<p>Returns a <code>CGI.pm</code> header, but only if <code>header =&gt; 1</code> is set.</p>
+<p>Returns a CGI.pm header, but only if <code>header =&gt; 1</code> is set.</p>
 
 <h3><code>param()</code></h3>
 <p>This is an alias for <code>field()</code>, provided for compatibility. However, while <code>field()</code> <em>does</em> act &quot;compliantly&quot; for easy use in <code>CGI::Session</code>, <code>Apache::Request</code>, etc, it is <em>not</em> 100% the same. As such, I recommend you use <code>field()</code> in your code, and let receiving objects figure the
@@ -1839,16 +1832,16 @@ $sess-&gt;save_param($form);   # will see param()
 </pre>
 
 <h3><code>query_string()</code></h3>
-<p>This returns a query string similar to <code>CGI.pm</code>, but <strong>ONLY</strong> containing form fields and any <code>keepextras</code>, if specified. Other params are ignored.</p>
+<p>This returns a query string similar to CGI.pm, but <strong>ONLY</strong> containing form fields and any <code>keepextras</code>, if specified. Other params are ignored.</p>
 
 <h3><code>self_url()</code></h3>
-<p>This returns a self url, similar to <code>CGI.pm</code>, but again <strong>ONLY</strong> with form fields.</p>
+<p>This returns a self url, similar to CGI.pm, but again <strong>ONLY</strong> with form fields.</p>
 
 <h3><code>script_name()</code></h3>
 <p>An alias for <code>$form-&gt;action</code>.</p>
 
 <h2><a name="stylesheets__css_"></a>STYLESHEETS (CSS)</h2>
-<p>If the <code>stylesheet</code> option is enabled (by setting it to 1 or the path of a CSS file), then <strong>FormBuilder</strong> will automatically output style classes for every single form element:</p>
+<p>If the <code>stylesheet</code> option is enabled (by setting it to 1 or the path of a CSS file), then FormBuilder will automatically output style classes for every single form element:</p>
 <table>
     <tr><td>fb</td><td>main form table</td></tr>
     <tr><td>fb_label</td><td>td containing field label</td></tr>
@@ -2161,7 +2154,7 @@ print $form-&gt;render;
 <p>With the exception of the database code, that's the whole application.</p>
 
 <h3>Ex. 6: Session Management</h3>
-<p>This creates a session via <code>CGI::Session</code>, and ties it in with <strong>FormBuilder</strong>:</p>
+<p>This creates a session via <code>CGI::Session</code>, and ties it in with FormBuilder:</p>
 <pre>
 #!/usr/bin/perl
 
@@ -2194,8 +2187,8 @@ print $form-&gt;render;
 <p>There are a couple questions and subtle traps that seem to poke people on a regular basis. Here are some hints.</p>
 
 <h3>I'm confused. Why doesn't this work like CGI.pm?</h3>
-<p>If you're used to <code>CGI.pm</code>, you have to do a little bit of a brain shift when working with this module.</p>
-<p><strong>FormBuilder</strong> is designed to address fields as <em>abstract entities</em>. That is, you don't create a &quot;checkbox&quot; or &quot;radio group&quot; per se. Instead, you create a field for the data you want to collect. The HTML representation is just one property of this field.</p>
+<p>If you're used to CGI.pm, you have to do a little bit of a brain shift when working with this module.</p>
+<p>FormBuilder is designed to address fields as <em>abstract entities</em>. That is, you don't create a &quot;checkbox&quot; or &quot;radio group&quot; per se. Instead, you create a field for the data you want to collect. The HTML representation is just one property of this field.</p>
 <p>So, if you want a single-option checkbox, simply say something like this:</p>
 <pre>
 $form-&gt;field(
@@ -2211,7 +2204,7 @@ $form-&gt;field(
     value   =&gt; 'Yes'
 );
 </pre>
-<p>You see, you're creating a field that has one possible option: &quot;Yes&quot;. Then, you're saying its current value is, in fact, &quot;Yes&quot;. This will result in <strong>FormBuilder</strong> creating a single-option field (which is a checkbox by default) and selecting the requested value (meaning that the box will be checked).</p>
+<p>You see, you're creating a field that has one possible option: &quot;Yes&quot;. Then, you're saying its current value is, in fact, &quot;Yes&quot;. This will result in FormBuilder creating a single-option field (which is a checkbox by default) and selecting the requested value (meaning that the box will be checked).</p>
 <p>If you want multiple values, then all you have to do is specify
 multiple options:</p>
 <pre>
@@ -2236,7 +2229,7 @@ my @colors = $form-&gt;field('favorite_colors');
 <p>And the rest is taken care of for you.</p>
 
 <h3>How do I make a multi-screen/multi-mode form?</h3>
-<p>This is easily doable, but you have to remember a couple things. Most importantly, that <strong>FormBuilder</strong> only knows about those fields you've told it about. So, let's assume that you're going to use a special parameter called <code>mode</code> to control the mode of your application so that you can call it like this:</p>
+<p>This is easily doable, but you have to remember a couple things. Most importantly, that FormBuilder only knows about those fields you've told it about. So, let's assume that you're going to use a special parameter called <code>mode</code> to control the mode of your application so that you can call it like this:</p>
 <pre>
 myapp.cgi?mode=list&amp;...
 myapp.cgi?mode=edit&amp;...
@@ -2275,8 +2268,8 @@ if ($mode eq 'view') {
    );
 }
 </pre>
-<p>The problem is this: Once you read a <code>post</code> request, it's gone forever. In the above code, what you're doing is having <code>CGI.pm</code> read the <code>post</code> request (on the first call of <code>param()</code>).</p>
-<p>Luckily, there is an easy solution. First, you need to modify your code to use the OO form of <code>CGI.pm</code>. Then, simply specify the <code>CGI</code> object you create to the <code>params</code> option of <strong>FormBuilder</strong>:</p>
+<p>The problem is this: Once you read a <code>post</code> request, it's gone forever. In the above code, what you're doing is having CGI.pm read the <code>post</code> request (on the first call of <code>param()</code>).</p>
+<p>Luckily, there is an easy solution. First, you need to modify your code to use the OO form of CGI.pm. Then, simply specify the <code>CGI</code> object you create to the <code>params</code> option of FormBuilder:</p>
 <pre>
 use CGI;
 use CGI::FormBuilder;
@@ -2302,7 +2295,7 @@ if ($mode eq 'view') {
     );
 }
 </pre>
-<p>Or, since <strong>FormBuilder</strong> gives you a <code>cgi_param()</code> function, you could also modify your code so you use <strong>FormBuilder</strong> exclusively, as in the previous question.</p>
+<p>Or, since FormBuilder gives you a <code>cgi_param()</code> function, you could also modify your code so you use FormBuilder exclusively, as in the previous question.</p>
 
 <h3>How can I change option XXX based on a conditional?</h3>
 <p>To change an option, simply use its accessor at any time:</p>
@@ -2367,7 +2360,7 @@ my $form = CGI::FormBuilder-&gt;new(... sticky =&gt; 0);
 <pre>
 $form-&gt;field(name =&gt; 'filename', type =&gt; 'file');
 </pre>
-<p>And then get to your file the same way as <code>CGI.pm</code>:</p>
+<p>And then get to your file the same way as CGI.pm:</p>
 <pre>
 if ($form-&gt;submitted) {
     my $file = $form-&gt;field('filename');

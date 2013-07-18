@@ -30,7 +30,7 @@ h3{font-size:1.2em;margin-bottom:0.75em;margin-top:1.2em;}
 h4{font-size:1em;margin-bottom:0.5em;}
 h5 {font-size:1em;}
 h6{font-size:0.8em;}
-ul,ol{padding:0;margin:0 0 2% 2%;}
+ul,ol{padding:0;margin:0 0 2% 3%;}
 ul ul,ul ol,ol ol,ol ul{margin-bottom:0;}
 ul li{list-style:square;}
 ol li{list-style:decimal;}
@@ -59,8 +59,8 @@ code {
     border-width: 1px;
 }
 h2 code {font-weight: bold;font-size:1.2em;}
-h3 code {font-weight: bold;font-size:1.2em;} 
-h4 code {font-weight: bold;font-size:1.1em;}
+h3 code {font-weight: bold;font-size:1em;} 
+h4 code {font-weight: bold;font-size:1em;}
 pre{display:block;padding:2px;margin:0 0 9px;font: normal normal normal 0.9em/1.2em 'Bitstream Vera Sans Mono Bold', monospace;background-color:#fdfdfd;border:1px solid rgba(0, 0, 0, 0.25);border-radius:3px;white-space:pre-wrap;}/*word-break:break-all;word-wrap:break-word;*/
 table { font-size: inherit;margin-bottom:1em;}
 td,th {vertical-align:top;padding: 0.2em;}
@@ -83,7 +83,7 @@ img{}
 ul.toc li {
 	margin-left:2em;
 	list-style-type:none;
-	list-style-position:inside;
+	/*list-style-position:inside;*/
 	font-size:1em;
 	line-height:1em;
 }
