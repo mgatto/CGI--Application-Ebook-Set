@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
     <meta name="viewport" content="width=640" />
 
     <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
     <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
     <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+    <style>
+    	li {font-weight:bold;}
+    </style>
 
     <script type="text/javascript" src="javascripts/modernizr.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -27,7 +30,7 @@
         <span class="ribbon-outer">
           <span class="ribbon-inner">
             <h1>CGI::Application Booklet</h1>
-            <h2>A set of beautifully formatted documentation for CGI::Application and associated distributions: CGI.pm, CGI::PSGI, HTML::Template, CGI::FormBuilder and others.</h2>
+            <h2>A set of documentation for CGI::Application and associated modules beautifully formatted for your eReader.</h2>
           </span>
           <span class="left-tail"></span>
           <span class="right-tail"></span>
@@ -61,29 +64,30 @@
         <p>Some vendors require a non-zero minimum price. I also would like to keep publishing eBooks of enhanced Perl and CPAN module documentation sustainably. However, you can always roll your own eBook using the source code hosted on <a href="<a href="https://github.com/mgatto/CGI--Application-Ebook-Set">GitHub</a>.</p>
         
         <h3>Table of Contents</h3>
-        <ul>
+        <ul class="toc">
             <li>Introduction</li>
-            <li>
-                <a href="CGI--Application.html">CGI::Application</a>
+            <li>CGI::Application</li>
+            <li>CGI.pm</li>
+            <li>CGI::Simple</li>
+            <li>HTML::Template</li>
+            <li>Sessions
                 <ul>
-                    <li>Synopsis</li>
-                    <li>Introduction</li>
-                    <li>Usage Example</li>
-                    <li>Abstract</li>
-                    <li>Description</li>
-                    <li>Instance Script Methods</li>
-                    <li>PSGI support</li>
-                    <li>Methods to possibly override</li>
-                    <li>Essential Application Methods</li>
-                    <li>More Application Methods</li>
-                    <li>Dispatching Clean URIs to Run Modes</li>
-                    <li>Offline website development</li>
-                    <li>Automated Testing</li>
-                    <li>Plug-ins</li>
-                    <li>Change History</li>
-                    <li>Community</li>
-                    <li>See Also</li>
-                    <li>Author &amp; Credits</li>
+                   <li>CGI::Session</li>  
+                    <li>CGI::Application::Plugin::Session</li>
+	            </ul>
+            </li>
+            <li>
+            	<strong>Forms
+                <ul>
+                    <li>CGI::FormBuilder</li>
+                    <li>Data::FormValidator</li>
+                    <li>CGI::FormBuilder::Template::HTML</li>
+                </ul>
+            </li>
+            <li>Databases
+                <ul>
+                    <li>Class::DBI</</li>
+                    <li>Class::DBI::FormBuilder</li>
                 </ul>
             </li>
             <li>Deploying CGI::Application
@@ -96,91 +100,13 @@
                     <li>Deploying with FastCGI</li>
                     <li>Deploying with Mod_Perl
                         <ul>
-                            <li>Wrapping Apache2::Request
-                            </li>
+                            <li>Wrapping Apache2::Request</li>
                         </ul>
                     </li>
                 </ul>
             </li>
-            <!--<a href="CGI--Simple.html">CGI::Simple (CGI.pm Replacement)</a><br />-->
-            <li>CGI::Session
-                <!--
-                <ul>
-                	<li><a href="#name">Name</li>
-                    <li><a href="#synopsis">Synopsis</li>
-                    <li><a href="#description">Description</li>
-                    <li><a href="#methods">Methods</li>
-                    <li><a href="#miscellaneous_methods">Miscellaneous Methods</li>
-                    <li><a href="#distribution">Distribution</li>
-                    <li><a href="#credits">Credits</li>
-                    <li><a href="#copyright">Copyright</li>
-                	<li><a href="#public_code_repository">Public Code Repository</li>
-	                <li><a href="#support">Support</li>
-    	            <li><a href="#author">Author</li>
-        	        <li><a href="#see_also">See Also</li>
-				</ul>-->
-            </li>
-            <li>HTML::Template
-                <ul>
-					<li>Synopsis</li>
-					<li>Description</li>
-					<li>Tags</li>
-					<li>Methods</li>
-					<li>Configuration Summary</li>
-					<li>Directive Summary</li>
-					<li>Source Code Repository</li>
-					<li>Change History</li>
-					<li>Author &amp; Copyright</li>
-				</ul>                
-            </li>
-            <li>HTML::Template::Compiled (Extras)
-                <!--
-				<ul>
-					<li><a href="#name">Name</li>
-					<li><a href="#version">Version</li>
-					<li><a href="#synopsis">Synopsis</li>
-					<li><a href="#description">Description</li>
-					<ul>
-						<li><a href="#features_from_html__template">Features from HTML::TEMPLATE</li>
-						<li><a href="#additional_features">Additional Features</li>
-						<li><a href="#missing_features">Missing Features</li>
-						<li><a href="#different_features">Different Features</li>
-						<li><a href="#deprecated">Deprecated Features</li>
-						<li><a href="#escaping">Escaping</li>
-						<li><a href="#include">Include</li>
-						<li><a href="#rendering_objects">Rendering Objects</li>
-						<li><a href="#running_perl_with_tmpl_perl">Running Perl Code with TMPL_PERL</li>
-						<li><a href="#inheritance">Methods to Inherit</li>
-						<li><a href="#debugging">Debugging</li>
-						<li>New Template Tags</li>
-						<li><a href="#options">Options</li>
-						<li><a href="#methods">Methods</li>
-					</ul>
-					<li><a href="#export">Export</li>
-					<li><a href="#caching">Caching</li>
-					<li><a href="#plugins">Plugins</li>
-					<li><a href="#lazy_loading">Lazy Loading</li>
-					<li><a href="#todo">Todo</li>
-					<li><a href="#implementation">Implementation</li>
-					<li><a href="#security">Security</li>
-					<li><a href="#precompile">Precompile</li>
-					<li><a href="#benchmarks">Benchmarks</li>
-					<li><a href="#examples">Examples</li>
-					<li><a href="#versions">Change History</li>			
-					<li><a href="#bugs">Bugs</li>
-					<li><a href="#why_another_template_system">Why another Template System?</li>
-					<li><a href="#resources">Resources</li>
-					<li><a href="#see_also">See Also</li>
-					<li><a href="#author">Author</li>
-					<li><a href="#credits">Credits</li>
-					<li><a href="#copyright_and_license">Copyright and License</li>
-				</ul>-->
-            </li>
-            <!-- HTML--Template--Compiled--Reference.html -->
-            <!--<a href="CGI--FormBuilder.html">CGI::FormBuilder</a><br />-->
-            <!--<a href="Class--DBI.html">Class::DBI</a><br />-->
-            <!-- Class::DBI::FormBuilder -->
         </ul>
+        </section>
       <footer>
         <span class="ribbon-outer">
           <span class="ribbon-inner">
