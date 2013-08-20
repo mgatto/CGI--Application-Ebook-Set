@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title>CGI::PSGI - Adapt CGI.pm to the PSGI protocol</title>
@@ -27,7 +27,7 @@ my $app = sub {
 		<h2>Description</h2>
 		<p>This module is for web application framework developers who currently uses CGI to handle query parameters, and would like for the frameworks to comply with the PSGI protocol.</p>
 		<p>Only slight modifications should be required if the framework is already collecting the body content to print to STDOUT at one place (rather using the print-as-you-go approach).</p>
-		<p>On the other hand, if you are an &quot;end user&quot; of CGI.pm and have a CGI script that you want to run under PSGI web servers, this module might not be what you want.  Take a look at <a href="CGI--Emulate--PSGI.html">CGI::Emulate::PSGI</a> instead.</p> 
+		<p>On the other hand, if you are an &quot;end user&quot; of CGI.pm and have a CGI script that you want to run under PSGI web servers, this module might not be what you want.  Take a look at <em>CGI::Emulate::PSGI</em> instead.</p> 
 		<p>Your application, typically the web application framework adapter should update the code to do <code>CGI::PSGI-&gt;new($env)</code> instead of <code>CGI-&gt;new</code> to create a new CGI object. (This is similar to how CGI::Fast object is initialized in a FastCGI environment.)</p>
 
 		<h2>Interfaces Supported</h2>
@@ -180,7 +180,7 @@ my ($status_code, $headers_aref) = $cgi-&gt;psgi_redirect(%args);
 		<h3>See Also</h3>
 		<ul>
         	<li><a href="CGI.html">CGI</a></li>
-            <li><a href="CGI--Emulate--PSGI.html">CGI::Emulate::PSGI</a></li>
+            <li><em>CGI::Emulate::PSGI</em></li>
         </ul>
 	</body>
 </html>

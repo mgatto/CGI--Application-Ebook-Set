@@ -53,120 +53,637 @@
                 </navLabel>
                 <content src="CGI--Application.html#introduction" />
             </navPoint>
-        </navPoint>
-		<navPoint id="cgi" playOrder="7">
+            <navPoint id="cgi-app-usage" playOrder="7">
+                <navLabel>
+                    <text>Usage Example</text>
+                </navLabel>
+                <content src="CGI--Application.html#usage_example" />
+            </navPoint>	
+            <navPoint id="cgi-app-abst" playOrder="8">
+                <navLabel>
+                    <text>Abstract</text>
+                </navLabel>
+                <content src="CGI--Application.html#abstract" />
+            </navPoint>	
+            <navPoint id="cgi-app-desc" playOrder="9">
+                <navLabel>
+                    <text>Description</text>
+                </navLabel>
+                <content src="CGI--Application.html#description" />
+            </navPoint>	
+            <navPoint id="cgi-app-script" playOrder="10">
+                <navLabel>
+                    <text>Instance Script Methods</text>
+                </navLabel>
+                <content src="CGI--Application.html#instance_script_methods" />
+            </navPoint>
+            <navPoint id="cgi-app-psgi" playOrder="11">
+                <navLabel>
+                    <text>PSGI Support</text>
+                </navLabel>
+                <content src="CGI--Application.html#psgi_support" />
+            </navPoint>	
+            <navPoint id="cgi-app-over" playOrder="12">
+                <navLabel>
+                    <text>Overridable Methods</text>
+                </navLabel>
+                <content src="CGI--Application.html#methods_to_possibly_override" />
+            </navPoint>
+            <navPoint id="cgi-app-rmodes" playOrder="13">
+                <navLabel>
+                    <text>Dispatching Clean URIs to Run Modes</text>
+                </navLabel>
+                <content src="CGI--Application.html#dispatching_clean_uris_to_run_modes" />
+            </navPoint>
+            <navPoint id="cgi-app-test" playOrder="14">
+                <navLabel>
+                    <text>Automated Testing</text>
+                </navLabel>
+                <content src="CGI--Application.html#automated_testing" />
+            </navPoint>
+            <navPoint id="cgi-app-plugins" playOrder="15">
+                <navLabel>
+                    <text>Plug-ins</text>
+                </navLabel>
+                <content src="CGI--Application.html#plug_ins" />
+            </navPoint>
+		</navPoint>
+		<navPoint id="cgi" playOrder="16">
             <navLabel>
                 <text>CGI.pm</text>
             </navLabel>
             <content src="CGI.html" />
+            <navPoint id="cgi-pm-syn" playOrder="17">
+                <navLabel>
+                    <text>Synopsis</text>
+                </navLabel>
+                <content src="CGI.html#synopsis" />
+            </navPoint>  
+            <navPoint id="cgi-pm-desc" playOrder="18">
+                <navLabel>
+                    <text>Description</text>
+                </navLabel>
+                <content src="CGI.html#description" />
+            </navPoint>    
+            <navPoint id="cgi-pm-calling" playOrder="19">
+                <navLabel>
+                    <text>Calling CGI Routines</text>
+                </navLabel>
+                <content src="CGI.html#calling_cgi_pm_routines" />
+            </navPoint>  
+            <navPoint id="cgi-pm-oo" playOrder="20">
+                <navLabel>
+                    <text>Creating a New Query Object</text>
+                </navLabel>
+                <content src="CGI.html#creating_a_new_query_object__object_oriented_style__" />
+            </navPoint>
+            <navPoint id="cgi-pm-debug" playOrder="21">
+                <navLabel>
+                    <text>Debugging</text>
+                </navLabel>
+                <content src="CGI.html#debugging" />
+            </navPoint>
+            <navPoint id="cgi-pm-cookies" playOrder="22">
+                <navLabel>
+                    <text>HTTP Cookies</text>
+                </navLabel>
+                <content src="CGI.html#http_cookies" />
+            </navPoint>
         </navPoint>
-		<navPoint id="cgi-simp" playOrder="8">
+		<navPoint id="cgi-simp" playOrder="23">
             <navLabel>
                 <text>CGI::Simple</text>
             </navLabel>
-            <content src="CGI--Simple.html" />
+            <content src="CGI--Simple.html" />   
+            <navPoint id="cgi-simp-syn" playOrder="24">
+                <navLabel>
+                    <text>Synopsis</text>
+                </navLabel>
+                <content src="CGI--Simple.html#synopsis" />
+            </navPoint>
+            <navPoint id="cgi-simp-desc" playOrder="25">
+                <navLabel>
+                    <text>Description</text>
+                </navLabel>
+                <content src="CGI--Simple.html#description" />
+            </navPoint>    
+            <navPoint id="cgi-simp-oo" playOrder="26">
+                <navLabel>
+                    <text>Using the Object Interface</text>
+                </navLabel>
+                <content src="CGI--Simple.html#calling_CGI__simple_routines_using_the_object_interface" />
+            </navPoint>
+            <navPoint id="cgi-simp-func" playOrder="27">
+                <navLabel>
+                    <text>Using the Function Interface</text>
+                </navLabel>
+                <content src="CGI--Simple.html#calling_CGI__simple_routines_using_the_function_interface" />
+            </navPoint>
+            <navPoint id="cgi-simp-meth" playOrder="28">
+                <navLabel>
+                    <text>Methods</text>
+                </navLabel>
+                <content src="CGI--Simple.html#the_core_methods" />
+            </navPoint>
+            <navPoint id="cgi-simp-files" playOrder="29">
+                <navLabel>
+                    <text>File Uploads</text>
+                </navLabel>
+                <content src="CGI--Simple.html#file_uploads" />
+            </navPoint>
+            <navPoint id="cgi-simp-cookies" playOrder="30">
+                <navLabel>
+                    <text>HTTP Cookies</text>
+                </navLabel>
+                <content src="CGI--Simple.html#http_cookies" />
+            </navPoint>
+            <navPoint id="cgi-simp-headers" playOrder="31">
+                <navLabel>
+                    <text>Creating HTTP Headers</text>
+                </navLabel>
+                <content src="CGI--Simple.html#creating_http_headers" />
+            </navPoint>
+            <navPoint id="cgi-simp-prag" playOrder="32">
+                <navLabel>
+                    <text>Pragmas</text>
+                </navLabel>
+                <content src="CGI--Simple.html#pragmas" />
+            </navPoint>
+            <navPoint id="cgi-simp-debug" playOrder="33">
+                <navLabel>
+                    <text>Debugging</text>
+                </navLabel>
+                <content src="CGI--Simple.html#debugging" />
+            </navPoint>
+            <navPoint id="cgi-simp-compat" playOrder="34">
+                <navLabel>
+                    <text>Compatibility with CGI.pm</text>
+                </navLabel>
+                <content src="CGI--Simple.html#compatibility_with_CGI_pm" />
+            </navPoint>
+            <navPoint id="cgi-simp-diff" playOrder="35">
+                <navLabel>
+                    <text>Differences from CGI.pm</text>
+                </navLabel>
+                <content src="CGI--Simple.html#differences_from_CGI_pm" />
+            </navPoint>
         </navPoint>
-        <navPoint id="html-temp" playOrder="9">
+        <navPoint id="html-temp" playOrder="36">
             <navLabel>
                 <text>HTML::Template</text>
             </navLabel>
             <content src="HTML--Template.html" />
+            <navPoint id="html-temp-syn" playOrder="37">
+                <navLabel>
+                    <text>Synopsis</text>
+                </navLabel>
+                <content src="HTML--Template.html#synopsis" />
+            </navPoint>
+            <navPoint id="html-temp-desc" playOrder="38">
+                <navLabel>
+                    <text>Description</text>
+                </navLabel>
+                <content src="HTML--Template.html#description" />
+            </navPoint>
+            <navPoint id="html-temp-tags" playOrder="39">
+                <navLabel>
+                    <text>Tags</text>
+                </navLabel>
+                <content src="HTML--Template.html#tags" />
+            </navPoint>
+            <navPoint id="html-temp-meth" playOrder="40">
+                <navLabel>
+                    <text>Methods</text>
+                </navLabel>
+                <content src="HTML--Template.html#methods" />
+            </navPoint>
+            <!--<navPoint id="html-temp-conf" playOrder="41">
+                <navLabel>
+                    <text>Configuration</text>
+                </navLabel>
+                <content src="HTML--Template.html#configuration_summary" />
+            </navPoint>
+            <navPoint id="html-temp-dir" playOrder="42">
+                <navLabel>
+                    <text>Directives</text>
+                </navLabel>
+                <content src="HTML--Template.html#directive_summary" />
+            </navPoint>-->
         </navPoint>
-        <navPoint id="cgi-app-forms" playOrder="10">
+        <navPoint id="cgi-app-forms" playOrder="43">
             <navLabel>
                 <text>Forms</text>
             </navLabel>
             <content src="Forms.html" />
-            <navPoint id="cgi-app-plugin-forms" playOrder="11">
+            <navPoint id="cgi-app-plugin-forms" playOrder="44">
                 <navLabel>
                     <text>CGI::FormBuilder::Template::HTML</text>
                 </navLabel>
                 <content src="CGI--FormBuilder--Template--HTML.html" />
+                
+                <navPoint id="cgi-app-plugin-forms-syn" playOrder="45">
+                    <navLabel>
+                        <text>Synopsis</text>
+                    </navLabel>
+                    <content src="CGI--FormBuilder--Template--HTML.html#synopsis" />
+                </navLabel>
+                <navPoint id="cgi-app-plugin-forms-desc" playOrder="46">
+                    <navLabel>
+                        <text>Description</text>
+                    </navLabel>
+                    <content src="CGI--FormBuilder--Template--HTML.html#description" />
+                </navLabel>                
+                <navPoint id="cgi-app-plugin-forms-temp" playOrder="47">
+                    <navLabel>
+                        <text>Templates</text>
+                    </navLabel>
+                    <content src="CGI--FormBuilder--Template--HTML.html#templates" />
+                </navLabel>
             </navPoint>
-            <navPoint id="cgi-formbuilder" playOrder="12">
+            <navPoint id="cgi-formbuilder" playOrder="48">
                 <navLabel>
                     <text>CGI::FormBuilder</text>
                 </navLabel>
                 <content src="CGI--FormBuilder.html" />
+                <navPoint id="cgi-formbuilder-syn" playOrder="49">
+                    <navLabel>
+                        <text>Synopsis</text>
+                    </navLabel>
+                    <content src="CGI--FormBuilder.html#synopsis" />
+                </navPoint>
+                <navPoint id="cgi-formbuilder-desc" playOrder="50">
+                    <navLabel>
+                        <text>Description</text>
+                    </navLabel>
+                    <content src="CGI--FormBuilder.html#description" />
+                </navPoint>
+                <navPoint id="cgi-formbuilder-meth" playOrder="51">
+                    <navLabel>
+                        <text>Methods</text>
+                    </navLabel>
+                    <content src="CGI--FormBuilder.html#methods" />
+                </navPoint>
+                <navPoint id="cgi-formbuilder-comp" playOrder="52">
+                    <navLabel>
+                        <text>Compatibility with CGI</text>
+                    </navLabel>
+                    <content src="CGI--FormBuilder.html#compatibility" />
+                </navPoint>
+                <navPoint id="cgi-formbuilder-css" playOrder="53">
+                    <navLabel>
+                        <text>Stylesheets (CSS)</text>
+                    </navLabel>
+                    <content src="CGI--FormBuilder.html#stylesheets__css_" />
+                </navPoint>
+                <navPoint id="cgi-formbuilder-exmp" playOrder="54">
+                    <navLabel>
+                        <text>Examples</text>
+                    </navLabel>
+                    <content src="CGI--FormBuilder.html#examples" />
+                </navPoint>
+                <navPoint id="cgi-formbuilder-faq" playOrder="55">
+                    <navLabel>
+                        <text>Frequently Asked Questions (FAQ)</text>
+                    </navLabel>
+                    <content src="CGI--FormBuilder.html#frequently_asked_questions__faq_" />
+                </navPoint>
+                <navPoint id="cgi-formbuilder-ref" playOrder="56">
+                    <navLabel>
+                        <text>References</text>
+                    </navLabel>
+                    <content src="CGI--FormBuilder.html#references" />
+                </navPoint>
+                <navPoint id="cgi-formbuilder-env" playOrder="57">
+                    <navLabel>
+                        <text>Environment Variables</text>
+                    </navLabel>
+                    <content src="CGI--FormBuilder.html#environment_variables" />
+                </navPoint>
             </navPoint>
-            <navPoint id="validator" playOrder="13">
+            <navPoint id="validator" playOrder="58">
                 <navLabel>
                     <text>Data::FormValidator</text>
                 </navLabel>
                 <content src="Data--FormValidator.html" />
+                <navPoint id="validator-syn" playOrder="59">
+                    <navLabel>
+                        <text>Synopsis</text>
+                    </navLabel>
+                    <content src="Data--FormValidator.html#SYNOPSIS" />
+                </navPoint>
+                <navPoint id="validator-desc" playOrder="60">
+                    <navLabel>
+                        <text>Description</text>
+                    </navLabel>
+                    <content src="Data--FormValidator.html#DESCRIPTION" />
+                </navPoint>
+                <navPoint id="validator-input" playOrder="61">
+                    <navLabel>
+                        <text>Validating Input</text>
+                    </navLabel>
+                    <content src="Data--FormValidator.html#VALIDATING-INPUT" />
+                </navPoint>
+                <navPoint id="validator-spec" playOrder="62">
+                    <navLabel>
+                        <text>Input Profile Specification</text>
+                    </navLabel>
+                    <content src="Data--FormValidator.html#INPUT-PROFILE-SPECIFICATION" />
+                </navPoint>
+                <navPoint id="validator-multi-dep" playOrder="63">
+                    <navLabel>
+                        <text>Validating Input Based on Multiple Fields</text>
+                    </navLabel>
+                    <content src="Data--FormValidator.html#VALIDATING-INPUT-BASED-ON-MULTIPLE-FIELDS" />
+                </navPoint>
+                <navPoint id="validator-multi-con" playOrder="64">
+                    <navLabel>
+                        <text>Multiple Constraints</text>
+                    </navLabel>
+                    <content src="Data--FormValidator.html#MULTIPLE-CONSTRAINTS" />
+                </navPoint>
             </navPoint>
         </navPoint>
-        <navPoint id="cgi-app-sess" playOrder="14">
+        <navPoint id="cgi-app-sess" playOrder="65">
             <navLabel>
                 <text>Sessions</text>
             </navLabel>
             <content src="Sessions.html" />
-            <navPoint id="cgi-app-plugin-sess" playOrder="15">
+            <navPoint id="cgi-app-plugin-sess" playOrder="66">
                 <navLabel>
                     <text>CGI::Application::Plugin::Session</text>
                 </navLabel>
                 <content src="CGI--Application--Plugin--Session.html" />
+                <navPoint id="cgi-app-plugin-sess-syn" playOrder="67">
+                    <navLabel>
+                        <text>Synopsis</text>
+                    </navLabel>
+                    <content src="CGI--Application--Plugin--Session.html#synopsis" />
+                </navPoint>
+                <navPoint id="cgi-app-plugin-sess-desc" playOrder="68">
+                    <navLabel>
+                        <text>Description</text>
+                    </navLabel>
+                    <content src="CGI--Application--Plugin--Session.html#description" />
+                </navPoint>
+                <navPoint id="cgi-app-plugin-sess-meth" playOrder="69">
+                    <navLabel>
+                        <text>Methods</text>
+                    </navLabel>
+                    <content src="CGI--Application--Plugin--Session.html#methods" />
+                </navPoint>
+                <navPoint id="class-dbi-formbuilder-" playOrder="70">
+                    <navLabel>
+                        <text>Example</text>
+                    </navLabel>
+                    <content src="CGI--Application--Plugin--Session.html#example" />
+                </navPoint>
             </navPoint>
-            <navPoint id="cgi-sesssion" playOrder="16">
+            <navPoint id="cgi-sesssion" playOrder="71">
                 <navLabel>
                     <text>CGI::Session</text>
                 </navLabel>
                 <content src="CGI--Session.html" />
+                <navPoint id="cgi-session-syn" playOrder="72">
+                    <navLabel>
+                        <text>Synopsis</text>
+                    </navLabel>
+                    <content src="CGI--Session.html#synopsis" />
+                </navPoint>
+                <navPoint id="cgi-session-desc" playOrder="73">
+                    <navLabel>
+                        <text>Description</text>
+                    </navLabel>
+                    <content src="CGI--Session.html#description" />
+                </navPoint>
+                <navPoint id="cgi-session-meth" playOrder="74">
+                    <navLabel>
+                        <text>Methods</text>
+                    </navLabel>
+                    <content src="CGI--Session.html#methods" />
+                </navPoint>
             </navPoint>
         </navPoint>
-        <navPoint id="databases" playOrder="17">
+        <navPoint id="databases" playOrder="75">
             <navLabel>
                 <text>Databases</text>
             </navLabel>
             <content src="Databases.html" />     
-            <navPoint id="class-dbi" playOrder="18">
+            <navPoint id="class-dbi" playOrder="76">
                 <navLabel>
                     <text>Class::DBI</text>
                 </navLabel>
                 <content src="Class--DBI.html" />
+                <navPoint id="class-dbi-syn" playOrder="77">
+                    <navLabel>
+                        <text>Synopsis</text>
+                    </navLabel>
+                    <content src="Class--DBI.html#synopsis" />
+                </navPoint>
+                <navPoint id="class-dbi-intro" playOrder="78">
+                    <navLabel>
+                        <text>Introduction</text>
+                    </navLabel>
+                    <content src="Class--DBI.html#introduction" />
+                </navPoint>   
+                <navPoint id="class-dbi-metho" playOrder="79">
+                    <navLabel>
+                        <text>Class Methods</text>
+                    </navLabel>
+                    <content src="Class--DBI.html#class_methods" />
+                </navPoint>
+                <navPoint id="class-dbi-con-des" playOrder="80">
+                    <navLabel>
+                        <text>Constructors and Destructors</text>
+                    </navLabel>
+                    <content src="Class--DBI.html#constructors_and_destructors" />
+                </navPoint>
+                <navPoint id="class-dbi-retrieve" playOrder="81">
+                    <navLabel>
+                        <text>Retrieving Objects</text>
+                    </navLabel>
+                    <content src="Class--DBI.html#retrieving_objects" />
+                </navPoint>
+                <navPoint id="class-dbi-iter" playOrder="82">
+                    <navLabel>
+                        <text>Iterators</text>
+                    </navLabel>
+                    <content src="Class--DBI.html#iterators" />
+                </navPoint>
+                <navPoint id="class-dbi-cp-mv" playOrder="83">
+                    <navLabel>
+                        <text>Copy and Move</text>
+                    </navLabel>
+                    <content src="Class--DBI.html#copy_and_move" />
+                </navPoint>
+                <navPoint id="class-dbi-triggers" playOrder="84">
+                    <navLabel>
+                        <text>Triggers</text>
+                    </navLabel>
+                    <content src="Class--DBI.html#triggers" />
+                </navPoint>
+                <navPoint id="class-dbi-constraints" playOrder="85">
+                    <navLabel>
+                        <text>Constraints</text>
+                    </navLabel>
+                    <content src="Class--DBI.html#constraints" />
+                </navPoint>
+                <navPoint id="class-dbi-normalize" playOrder="86">
+                    <navLabel>
+                        <text>Data Normalization</text>
+                    </navLabel>
+                    <content src="Class--DBI.html#data_normalization" />
+                </navPoint>
+                <navPoint id="class-dbi-valid" playOrder="87">
+                    <navLabel>
+                        <text>Data Validation</text>
+                    </navLabel>
+                    <content src="Class--DBI.html#data_validation" />
+                </navPoint>
+                <navPoint id="class-dbi-except" playOrder="88">
+                    <navLabel>
+                        <text>Exceptions</text>
+                    </navLabel>
+                    <content src="Class--DBI.html#exceptions" />
+                </navPoint>
+                <navPoint id="class-dbi-warn" playOrder="89">
+                    <navLabel>
+                        <text>Warnings</text>
+                    </navLabel>
+                    <content src="Class--DBI.html#warnings" />
+                </navPoint>
+                <navPoint id="class-dbi-inst" playOrder="90">
+                    <navLabel>
+                        <text>Instance Methods</text>
+                    </navLabel>
+                    <content src="Class--DBI.html#instance_methods" />
+                </navPoint>
+                <navPoint id="class-dbi-rel" playOrder="91">
+                    <navLabel>
+                        <text>Table Relationships</text>
+                    </navLabel>
+                    <content src="Class--DBI.html#table_relationships" />
+                </navPoint>
+                <navPoint id="class-dbi-many-many" playOrder="92">
+                    <navLabel>
+                        <text>Many to Many Relationships</text>
+                    </navLabel>
+                    <content src="Class--DBI.html#many_to_many_relationships" />
+                </navPoint>
+                <navPoint id="class-dbi-add" playOrder="93">
+                    <navLabel>
+                        <text>Adding New Relationship Types</text>
+                    </navLabel>
+                    <content src="Class--DBI.html#adding_new_relationship_types" />
+                </navPoint>
+                <navPoint id="class-dbi-sql" playOrder="94">
+                    <navLabel>
+                        <text>Defining SQL Statements</text>
+                    </navLabel>
+                    <content src="Class--DBI.html#defining_sql_statements" />
+                </navPoint>
+                <navPoint id="class-dbi-lazy" playOrder="95">
+                    <navLabel>
+                        <text>Lazy Population</text>
+                    </navLabel>
+                    <content src="Class--DBI.html#lazy_population" />
+                </navPoint>
+                <navPoint id="class-dbi-trans" playOrder="96">
+                    <navLabel>
+                        <text>Transactions</text>
+                    </navLabel>
+                    <content src="Class--DBI.html#transactions" />
+                </navPoint>
+                <navPoint id="class-dbi-uniq" playOrder="97">
+                    <navLabel>
+                        <text>Uniqueness of Objects in Memory</text>
+                    </navLabel>
+                    <content src="Class--DBI.html#uniqueness_of_objects_in_memory" />
+                </navPoint>
+                <navPoint id="class-dbi-sub" playOrder="98">
+                    <navLabel>
+                        <text>Subclassing</text>
+                    </navLabel>
+                    <content src="Class--DBI.html#subclassing" />
+                </navPoint>
+                <navPoint id="class-dbi-dbs" playOrder="99">
+                    <navLabel>
+                        <text>Supported Databases</text>
+                    </navLabel>
+                    <content src="Class--DBI.html#supported_databases" />
+                </navPoint>
             </navPoint>
-            <navPoint id="class-dbi-formbuilder" playOrder="19">
+            <navPoint id="class-dbi-formbuilder" playOrder="100">
                 <navLabel>
                     <text>Class::DBI::FormBuilder</text>
                 </navLabel>
                 <content src="Class--DBI--FormBuilder.html" />
+                <navPoint id="class-dbi-formbuilder-syn" playOrder="101">
+                    <navLabel>
+                        <text>Synopsis</text>
+                    </navLabel>
+                    <content src="Class--DBI--FormBuilder.html#synopsis" />
+                </navPoint>
+                <navPoint id="class-dbi-formbuilder-cust" playOrder="102">
+                    <navLabel>
+                        <text>Customising render() Output</text>
+                    </navLabel>
+                    <content src="Class--DBI--FormBuilder.html#customising_render_output" />
+                </navPoint>
+                <navPoint id="class-dbi-formbuilder-auto" playOrder="103">
+                    <navLabel>
+                        <text>Automatic Validation Setup</text>
+                    </navLabel>
+                    <content src="Class--DBI--FormBuilder.html#automatic_validation_setup" />
+                </navPoint>		
+                <navPoint id="class-dbi-formbuilder-other" playOrder="104">
+                    <navLabel>
+                        <text>Other Features</text>
+                    </navLabel>
+                    <content src="Class--DBI--FormBuilder.html#other_features" />
+                </navPoint>    
+                <navPoint id="class-dbi-formbuilder-meth" playOrder="105">
+                    <navLabel>
+                        <text>Methods</text>
+                    </navLabel>
+                    <content src="Class--DBI--FormBuilder.html#methods" />
+                </navPoint>
             </navPoint>
         </navPoint>
-        <navPoint id="cgi-app-psgi" playOrder="20">
+        <navPoint id="cgi-app-psgi" playOrder="106">
             <navLabel>
                 <text>Deploying CGI::Application</text>
             </navLabel>
             <content src="Deploying.html" />
-            <navPoint id="cgi-app-plugin-psgi" playOrder="21">
+            <navPoint id="cgi-app-plugin-psgi" playOrder="107">
                 <navLabel>
                     <text>Deploying with PSGI</text>
                 </navLabel>
                 <content src="CGI--Application--PSGI.html" />
-                <navPoint id="cgi-psgi" playOrder="22">
+                <navPoint id="cgi-psgi" playOrder="108">
                     <navLabel>
                         <text>CGI::PSGI</text>
                     </navLabel>
                     <content src="CGI--PSGI.html" />
                 </navPoint>
-                <navPoint id="cgi-psgi-emul" playOrder="23">
+                <navPoint id="cgi-psgi-emul" playOrder="109">
                     <navLabel>
                         <text>CGI::Application::Emulate::PSGI</text>
                     </navLabel>
                     <content src="CGI--Application--Emulate--PSGI.html" />
                 </navPoint>
             </navPoint>
-            <navPoint id="cgi-fastsgi" playOrder="24">
+            <navPoint id="cgi-fastsgi" playOrder="110">
                 <navLabel>
                     <text>Deploying with FastCGI</text>
                 </navLabel>
                 <content src="CGI--Application--FastCGI.html" />
             </navPoint>
-            <navPoint id="cgi-apache" playOrder="25">
+            <navPoint id="cgi-apache" playOrder="111">
                 <navLabel>
                     <text>Deploying with Mod_Perl</text>
                 </navLabel>
                 <content src="CGI--Application--Plugin--Apache.html" />
-                <navPoint id="cgi-apache-req" playOrder="26">
+                <navPoint id="cgi-apache-req" playOrder="112">
                     <navLabel>
                         <text>Wrapping Apache2::Request</text>
                     </navLabel>
@@ -174,7 +691,7 @@
                 </navPoint>
             </navPoint>
         </navPoint>
-        <navPoint id="app-a" playOrder="27">
+        <navPoint id="app-a" playOrder="113">
             <navLabel>
                 <text>Appendix A: Production of this Ebook</text>
             </navLabel>

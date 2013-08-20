@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title>CGI.pm - Handle Common Gateway Interface requests and responses</title>	
@@ -65,7 +65,7 @@
 	</ul>
 </ul>-->
 
-<h2><a name="synopsis"></a>Synopsis</h2>
+<h2><a id="synopsis"></a>Synopsis</h2>
 <pre>
 use CGI;
 
@@ -98,7 +98,7 @@ print $q-&gt;header(
 print $q-&gt;redirect('http://somewhere.else/in/movie/land');
 </pre>
 
-<h2><a name="description"></a>Description</h2>
+<h2><a id="description"></a>Description</h2>
 <p>CGI.pm is a stable, complete and mature solution for processing and preparing
 HTTP requests and responses.  Major features including processing form
 submissions, file uploads, reading and writing cookies, query string generation
@@ -111,7 +111,7 @@ from dozens of contributors and being deployed on thousands of websites.
 CGI.pm has been included in the Perl distribution since Perl 5.4, and has
 become a de-facto standard.</p>
 
-<h2><a name="programming_style"></a>Programming Style</h2>
+<h2><a id="programming_style"></a>Programming Style</h2>
 <p>There are two styles of programming with CGI.pm, an object-oriented
 style and a function-oriented style.  In the object-oriented style you
 create one or more CGI objects and then use object methods to create
@@ -156,7 +156,7 @@ print header,                  # create the HTTP header
 See HOW TO IMPORT FUNCTIONS for important information on
 function-oriented programming in CGI.pm</p>
 
-<h2><a name="calling_CGI_pm_routines"></a>Calling CGI.PM Routines</h2>
+<h2><a id="calling_cgi_pm_routines"></a>Calling CGI.PM Routines</h2>
 <p>Most CGI.pm routines accept several arguments, sometimes as many as 20
 optional ones!  To simplify this interface, all routines use a named
 argument calling style that looks like this:</p>
@@ -239,7 +239,7 @@ translation.</p>
 HTML &quot;standards&quot;.</p>
 
 
-<h2><a name="creating_a_new_query_object__object_oriented_style__"></a>Creating a New Query Object (Object-Oriented Style):</h2>
+<h2><a id="creating_a_new_query_object__object_oriented_style__"></a>Creating a New Query Object (Object-Oriented Style):</h2>
 <pre>
 $query = CGI-&gt;new;
 </pre>
@@ -248,7 +248,7 @@ it into a perl5 object called $query.</p>
 <p>Any filehandles from file uploads will have their position reset to 
 the beginning of the file.</p>
 
-<h2><a name="creating_a_new_query_object_from_an_input_file"></a>Creating a New Query Object from an Input File</h2>
+<h2><a id="creating_a_new_query_object_from_an_input_file"></a>Creating a New Query Object from an Input File</h2>
 <pre>
 $query = CGI-&gt;new(INPUTFILE);
 </pre>
@@ -302,14 +302,14 @@ $empty_query = CGI-&gt;new(&quot;&quot;);</pre>
 $empty_query = CGI-&gt;new({});
 </pre>
 
-<h2><a name="fetching_a_list_of_keywords_from_the_query_"></a>Fetching a List of Keywords from the Query</h2>
+<h2><a id="fetching_a_list_of_keywords_from_the_query_"></a>Fetching a List of Keywords from the Query</h2>
 <pre>
 @keywords = $query-&gt;keywords
 </pre>
 <p>If the script was invoked as the result of an &lt;ISINDEX&gt; search, the
 parsed keywords can be obtained as an array using the <code>keywords()</code> method.</p>
 
-<h2><a name="fetching_the_names_of_all_the_parameters_passed_to_your_script_"></a>Fetching the Names of all the Parameters Passed to your Script</h2>
+<h2><a id="fetching_the_names_of_all_the_parameters_passed_to_your_script_"></a>Fetching the Names of all the Parameters Passed to your Script</h2>
 <pre>
 @names = $query-&gt;param
 </pre>
@@ -325,7 +325,7 @@ Usually this order is the same as the order in which the
 parameters are defined in the form (however, this isn't part
 of the spec, and so isn't guaranteed).</p>
 
-<h2><a name="fetching_the_value_or_values_of_a_single_named_parameter_"></a>Fetching The Value Or Values Of A Single Named Parameter</h2>
+<h2><a id="fetching_the_value_or_values_of_a_single_named_parameter_"></a>Fetching The Value Or Values Of A Single Named Parameter</h2>
 <pre>
 @values = $query-&gt;param('foo');
 </pre>
@@ -342,7 +342,7 @@ the method will return a single value.</p>
 <p>If the parameter does not exist at all, then <code>param()</code> will return undef
 in a scalar context, and the empty list in a list context.</p>
 
-<h2><a name="setting_the_value_s__of_a_named_parameter_"></a>Setting The Value(s) Of A Named Parameter</h2>
+<h2><a id="setting_the_value_s__of_a_named_parameter_"></a>Setting The Value(s) Of A Named Parameter</h2>
 <pre>
 $query-&gt;param('foo','an','array','of','values');
 </pre>
@@ -361,7 +361,7 @@ $query-&gt;param(-name=&gt;'foo',-values=&gt;['an','array','of','values']);
 $query-&gt;param(-name=&gt;'foo',-value=&gt;'the value');
 </pre>
 
-<h2><a name="appending_additional_values_to_a_named_parameter_"></a>Appending Additional Values To A Named Parameter</h2>
+<h2><a id="appending_additional_values_to_a_named_parameter_"></a>Appending Additional Values To A Named Parameter</h2>
 <pre>
 $query-&gt;append(-name=&gt;'foo',-values=&gt;['yet','more','values']);
 </pre>
@@ -370,7 +370,7 @@ values are appended to the end of the parameter if it already exists.
 Otherwise the parameter is created.  Note that this method only
 recognizes the named argument calling syntax.</p>
 
-<h2><a name="importing_all_parameters_into_a_namespace_"></a>Importing All Parameters Into A Namespace</h2>
+<h2><a id="importing_all_parameters_into_a_namespace_"></a>Importing All Parameters Into A Namespace</h2>
 <pre>
 $query-&gt;import_names('R');
 </pre>
@@ -381,20 +381,20 @@ $query-&gt;import_names('R');
 <h4>Note</h4>
 <p>In older versions, this method was called <strong>import()</strong>.  As of version 2.20, this name has been removed completely to avoid conflict with the built-in Perl module <strong>import</strong> operator.</p>
 
-<h2><a name="deleting_a_parameter_completely_"></a>Deleting A Parameter Completely</h2>
+<h2><a id="deleting_a_parameter_completely_"></a>Deleting A Parameter Completely</h2>
 <pre>
 $query-&gt;delete('foo','bar','baz');
 </pre>
 <p>This completely clears a list of parameters.  It sometimes useful for resetting parameters that you don't want passed down between script invocations.</p>
 <p>If you are using the function call interface, use &quot;Delete()&quot; instead to avoid conflicts with Perl's built-in delete operator.</p>
 
-<h2><a name="deleting_all_parameters_"></a>Deleting All Parameters</h2>
+<h2><a id="deleting_all_parameters_"></a>Deleting All Parameters</h2>
 <pre>
 $query-&gt;delete_all();
 </pre>
 <p>This clears the CGI object completely.  It might be useful to ensure that all the defaults are taken when you create a fill-out form.</p> <p>Use <code>Delete_all()</code> instead if you are using the function call interface.</p>
 
-<h2><a name="handling_non_urlencoded_arguments"></a>Handling Non-Urlencoded Arguments</h2>
+<h2><a id="handling_non_urlencoded_arguments"></a>Handling Non-Urlencoded Arguments</h2>
 <p>If POSTed data is not of type application/x-www-form-urlencoded or multipart/form-data, then the POSTed data will not be processed, but instead be returned as-is in a parameter named POSTDATA.  To retrieve it, use code like this:</p>
 <pre>
 my $data = $query-&gt;param('POSTDATA');
@@ -405,7 +405,7 @@ my $data = $query-&gt;param('PUTDATA');
 </pre>
 <p>(If you don't know what the preceding means, don't worry about it.  It only affects people trying to use CGI for XML processing and other specialized tasks.)</p>
 
-<h2><a name="direct_access_to_the_parameter_list_"></a>Direct Access To The Parameter List</h2>
+<h2><a id="direct_access_to_the_parameter_list_"></a>Direct Access To The Parameter List</h2>
 <pre>
 $q-&gt;param_fetch('address')-&gt;[1] = '1313 Mockingbird Lane';
 unshift @{$q-&gt;param_fetch(-name=&gt;'address')},'George Munster';
@@ -413,7 +413,7 @@ unshift @{$q-&gt;param_fetch(-name=&gt;'address')},'George Munster';
 <p>If you need access to the parameter list in a way that isn't covered by the methods given in the previous sections, you can obtain a direct reference to it by calling the <strong>param_fetch()</strong> method with the name of the parameter.  This will return an array reference to the named parameter, which you then can manipulate in any way you like.</p>
 <p>You can also use a named argument style using the <strong>-name</strong> argument.</p>
 
-<h2><a name="fetching_the_parameter_list_as_a_hash_"></a>Fetching The Parameter List As A Hash</h2>
+<h2><a id="fetching_the_parameter_list_as_a_hash_"></a>Fetching The Parameter List As A Hash</h2>
 <pre>
 $params = $q-&gt;Vars;
 print $params-&gt;{'address'};
@@ -428,7 +428,7 @@ $params = Vars;
 <p>When using this, the thing you must watch out for are multivalued CGI parameters.  Because a hash cannot distinguish between scalar and list context, multivalued parameters will be returned as a packed string, separated by the &quot;\0&quot; (null) character.  You must split this packed string in order to get at the individual values.  This is the convention introduced long ago by Steve Brenner in his CGI-lib.pl module for Perl version 4.</p>
 <p>If you wish to use <code>Vars()</code> as a function, import the <em>:CGI-lib</em> set of function calls (also see the section on CGI-LIB compatibility).</p>
 
-<h2><a name="saving_the_state_of_the_script_to_a_file_"></a>Saving The State Of The Script To A File</h2>
+<h2><a id="saving_the_state_of_the_script_to_a_file_"></a>Saving The State Of The Script To A File</h2>
 <pre>
 $query-&gt;save(\*FILEHANDLE)
 </pre>
@@ -464,7 +464,7 @@ while (!eof(IN)) {
 <p>The file format used for save/restore is identical to that used by the Whitehead Genome Center's data exchange format &quot;Boulderio&quot;, and can be manipulated and even databased using Boulderio utilities.</p>
 <p>If you wish to use this method from the function-oriented (non-OO) interface, the exported name for this method is <strong>save_parameters()</strong>.</p>
 
-<h2><a name="retrieving_CGI_errors"></a>Retrieving CGI Errors</h2>
+<h2><a id="retrieving_CGI_errors"></a>Retrieving CGI Errors</h2>
 <p>Errors can occur while processing user input, particularly when processing uploaded files.  When these errors occur, CGI will stop processing and return an empty parameter list.  You can test for the existence and nature of errors using the <em>CGI_error()</em> function. The error messages are formatted as HTTP status codes. You can either incorporate the error text into an HTML page, or use it as the value of the HTTP status:</p>
 <pre>
 my $error = $q-&gt;CGI_error;
@@ -478,7 +478,7 @@ if ($error) {
 </pre>
 <p>When using the function-oriented interface (see the next section), errors may only occur the first time you call <em>param()</em>. Be ready for this!</p>
 
-<h2><a name="using_the_function_oriented_interface"></a>Using The Function-Oriented Interface</h2>
+<h2><a id="using_the_function_oriented_interface"></a>Using The Function-Oriented Interface</h2>
 <p>To use the function-oriented interface, you must specify which CGI.pm
 routines or sets of routines to import into your script's namespace.
 There is a small overhead associated with this importation, but it
@@ -549,7 +549,7 @@ print gradient({-start=&gt;'red',-end=&gt;'blue'});
 </pre>
 <p>Note that in the interests of execution speed CGI.pm does <strong>not</strong> use the standard <em>Exporter</em> syntax for specifying load symbols. This may change in the future.</p>
 
-<h2><a name="pragmas"></a>Pragmas</h2>
+<h2><a id="pragmas"></a>Pragmas</h2>
 <p>In addition to the function sets, there are a number of pragmas that
 you can import.  Pragmas, which are always preceded by a hyphen,
 change the way that CGI.pm functions in various ways.  Pragmas,
@@ -740,11 +740,11 @@ writable.  If not, the algorithm tries the next choice.</p>
 </dd>
 </dl>
 
-<h2><a name="generating_dynamic_documents"></a>Generating Dynamic Documents</h2>
+<h2><a id="generating_dynamic_documents"></a>Generating Dynamic Documents</h2>
 <p>Most of CGI.pm's functions deal with creating documents on the fly. Generally you will produce the HTTP header first, followed by the document itself.  CGI.pm provides functions for generating HTTP headers of various types as well as for generating HTML.  For creating GIF images, see the GD.pm module.</p>
 <p>Each of these functions produces a fragment of HTML or HTTP which you can print out directly so that it displays in the browser window, append to a string, or save to a file for later use.</p>
 
-<h2><a name="creating_a_standard_http_header_"></a>Creating A Standard Http Header</h2>
+<h2><a id="creating_a_standard_http_header_"></a>Creating A Standard Http Header</h2>
 <p>Normally the first thing you will do in any CGI script is print out an HTTP header.  This tells the browser what type of document to expect, and gives other optional information, such as the language, expiration date, and whether to cache the document.  The header can also be manipulated for special purposes, such as server push and pay per view pages.</p>
 <pre>
 print header;
@@ -808,7 +808,7 @@ print header( -ingredients =&gt; &quot;ham\r\n\seggs\r\n\sbacon&quot; );
 </pre>
 <p>Invalid multi-line header input will trigger in an exception. When multi-line headers are received, CGI.pm will always output them back as a single line, according to the folding rules of RFC 2616: the newlines will be removed, while the white space remains.</p>
 
-<h2><a name="generating_a_redirection_header"></a>Generating A Redirection Header</h2>
+<h2><a id="generating_a_redirection_header"></a>Generating A Redirection Header</h2>
 <pre>
 print $q-&gt;redirect('<a href="http://somewhere.else/in/movie/land">http://somewhere.else/in/movie/land</a>');
 </pre>
@@ -833,7 +833,7 @@ print $q-&gt;redirect(
 </pre>
 <p>The default if not specified is 302, which means &quot;moved temporarily.&quot; You may change the status to another status code if you wish.  Be advised that changing the status to anything other than 301, 302 or 303 will probably break redirection.</p>
 
-<h2><a name="creating_a_self_referencing_url_that_preserves_state_information_"></a>Creating A Self-Referencing Url That Preserves State Information</h2>
+<h2><a id="creating_a_self_referencing_url_that_preserves_state_information_"></a>Creating A Self-Referencing Url That Preserves State Information</h2>
 <pre>
 $myself = $q-&gt;self_url;
 print q(&lt;a href=&quot;$myself&quot;&gt;I'm talking to myself.&lt;/a&gt;);
@@ -852,7 +852,7 @@ $the_string = $q-&gt;query_string();
 </pre>
 <p>The behavior of calling query_string is currently undefined when the HTTP method is something other than GET.</p>
 
-<h2><a name="obtaining_the_script_s_url"></a>Obtaining The Script's Url</h2>
+<h2><a id="obtaining_the_script_s_url"></a>Obtaining The Script's Url</h2>
 <pre>
 $full_url      = url();
 $full_url      = url(-full=&gt;1);  #alternative syntax
@@ -907,7 +907,7 @@ script.CGI
 </dd>
 </dl>
 
-<h2><a name="mixing_post_and_url_parameters"></a>Mixing Post And Url Parameters</h2>
+<h2><a id="mixing_post_and_url_parameters"></a>Mixing Post And Url Parameters</h2>
 <pre>
 $color = url_param('color');
 </pre>
@@ -915,7 +915,7 @@ $color = url_param('color');
 <p>Under no circumstances will the contents of the URL query string interfere with similarly-named CGI parameters in POSTed forms.  If you try to mix a URL query string with a form submitted with the GET method, the results will not be what you expect.</p>
 
 
-<h2><a name="http_cookies"></a>HTTP Cookies</h2>
+<h2><a id="http_cookies"></a>HTTP Cookies</h2>
 <p>Browsers support a so-called &quot;cookie&quot; designed to help maintain state within a browser session.  CGI.pm has several methods that support cookies.</p>
 <p>A cookie is a name=value pair much like the named parameters in a CGI query string.  CGI scripts create one or more cookies and send them to the browser in the HTTP header.  The browser maintains a list of cookies that belong to a particular Web server, and returns them to the CGI script during subsequent interactions.</p>
 <p>In addition to the required name=value pair, each cookie has several optional attributes:</p>
@@ -1056,7 +1056,7 @@ param(-name=&gt;'answers',-value=&gt;[cookie('answers')]);
 <p>See the <strong>cookie.CGI</strong> example script for some ideas on how to use cookies effectively.</p>
 
 
-<h2><a name="debugging"></a>Debugging</h2>
+<h2><a id="debugging"></a>Debugging</h2>
 <p>If you are running the script from the command line or in the perl debugger, you can pass the script a list of keywords or parameter=value pairs on the command line or from standard input (you don't have to worry about tricking your script into reading from environment variables).  You can pass keywords like this:</p>
 <pre>
 your_script.pl keyword1 keyword2 keyword3
@@ -1085,7 +1085,7 @@ name/value parameter with the path followed by a question mark (?):</p>
 your_script.pl /your/path/here?name1=value1&amp;name2=value2
 </pre>
 
-<h2><a name="dumping_out_all_the_name_value_pairs"></a>Dumping Out All The Name/Value Pairs</h2>
+<h2><a id="dumping_out_all_the_name_value_pairs"></a>Dumping Out All The Name/Value Pairs</h2>
 <p>The <code>Dump()</code> method produces a string consisting of all the query's name/value pairs formatted nicely as a nested list.  This is useful for debugging purposes:</p>
 <pre>
 print Dump
@@ -1110,7 +1110,7 @@ $query=CGI-&gt;new;
 print &quot;&lt;h2&gt;Current Values&lt;/h2&gt; $query\n&quot;;
 </pre>
 
-<h2><a name="fetching_environment_variables"></a>Fetching Environment Variables</h2>
+<h2><a id="fetching_environment_variables"></a>Fetching Environment Variables</h2>
 <p>Some of the more useful environment variables can be fetched through this interface.  The methods are as follows:</p>
 <dl>
 <dt><code>Accept()</code></dt>
@@ -1184,7 +1184,7 @@ print &quot;&lt;h2&gt;Current Values&lt;/h2&gt; $query\n&quot;;
 
 <dt><code>virtual_port ()</code></dt>
 <dd>
-<p><code>server_port()</code></a> except that it takes virtual hosts into account.
+<p><code>server_port()</code> except that it takes virtual hosts into account.
 Use this when running with virtual hosts.</p>
 </dd>
 
@@ -1242,7 +1242,7 @@ whether SSL is turned on.</p>
 </dd>
 </dl>
 
-<h2><a name="avoiding_denial_of_service_attacks">Avoiding Denial of Service Attacks</a></h2>
+<h2><a id="avoiding_denial_of_service_attacks">Avoiding Denial of Service Attacks</a></h2>
 <p>A potential problem with CGI.pm is that, by default, it attempts to process form POSTings no matter how large they are.  A wily hacker could attack your site by sending a CGI script a huge POST of many megabytes.  CGI.pm will attempt to read the entire POST into a variable, growing hugely in size until it runs out of memory.  While the script attempts to allocate the memory the system may slow down dramatically.  This is a form of denial of service attack.</p>
 <p>Another possible attack is for the remote user to force CGI.pm to accept a huge file upload.  CGI.pm will accept the upload and store it in a temporary directory even if your script doesn't expect to receive an uploaded file.  CGI.pm will delete the file automatically when it terminates, but in the meantime the remote user may have filled up the server's disk space, causing problems for other programs.</p>
 <p>The best way to avoid denial of service attacks is to limit the amount of memory, CPU time and disk space that CGI scripts can use.  Some Web servers come with built-in facilities to accomplish this. In other cases, you can use the shell <em>limit</em> or <em>ulimit</em> commands to put ceilings on CGI resource usage.</p>
@@ -1286,12 +1286,12 @@ if ( !$uploaded_file &amp;&amp; CGI_error() ) {
 </pre>
 <p>However it isn't clear that any browser currently knows what to do with this status code.  It might be better just to create an HTML page that warns the user of the problem.</p>
 
-<h2><a name="author_information"></a>Author</h2>
+<h2><a id="author_information"></a>Author</h2>
 <p>The CGI.pm distribution is copyright 1995-2007, Lincoln D. Stein. It is
 distributed under GPL and the Artistic License 2.0. It is currently
 maintained by Mark Stosberg with help from many contributors.</p>
 
-<h2><a name="credits"></a>Credits</h2>
+<h2><a id="credits"></a>Credits</h2>
 <p>Thanks very much for suggestions and bug fixes to:</p>
 <ul>
 	<li>Matt Heffron</li>
@@ -1317,10 +1317,10 @@ maintained by Mark Stosberg with help from many contributors.</p>
 	<li>&hellip; many many more</li>
 </ul>
 
-    <h2><a name="bugs"></a>Bugs</h2>
+    <h2><a id="bugs"></a>Bugs</h2>
     <p>Address bug reports and comments to: <em>https://rt.cpan.org/Public/Dist/Display.html?Queue=CGI.pm</em> When sending bug reports, please provide the version of CGI.pm, the version of Perl, the name and version of your Web server, and the name and version of the operating system you are using.  If the problem is even remotely browser dependent, please provide information about the affected browsers as well.</p>
 
-    <h2><a name="see_also"></a>See Also</h2>
+    <h2><a id="see_also"></a>See Also</h2>
 	<ul>
 		<li><em>CGI::Carp</em> - provides a <em>Carp</em> implementation tailored to the CGI environment.</li>
 		<li><em>CGI::Fast</em> - supports running CGI applications under FastCGI</li>

@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title>CGI::Application::Plugin::Session &ndash; Add CGI::Session support to CGI::Application</title>
@@ -13,21 +13,21 @@
 		    <h3>Add CGI::Session Support to CGI::Application</h3>
 		</div>
         
-		<h2><a name="synopsis"></a>Synopsis</h2>
+		<h2><a id="synopsis"></a>Synopsis</h2>
 <pre>
 use CGI::Application::Plugin::Session;
  
 my $language = $self-&gt;session-&gt;param('language');
 </pre>
 		
-        <h2><a name="description"></a>Description</h2>
+        <h2><a id="description"></a>Description</h2>
 		<p>CGI::Application::Plugin::Session seamlessly adds session support to your <a href="CGI--Application.html">CGI::Application</a> modules by providing a <a href="CGI--Session.html">CGI::Session</a> object that is accessible from anywhere in the application.</p>
 
 		<p>Lazy loading is used to prevent expensive file system or database calls from being made if the session is not needed during this request.  In other words, the Session object is not created until it is actually needed.  Also, the Session object will act as a singleton by always returning the same Session object for the duration of the request.</p>
 
 		<p>This module aims to be as simple and non obtrusive as possible.  By not requiring any changes to the inheritance tree of your modules, it can be easily added to existing applications.  Think of it as a plugin module that adds a couple of new methods directly into the CGI::Application namespace simply by loading the module.</p>
 
-		<h2><a name="methods"></a>Methods</h2>
+		<h2><a id="methods"></a>Methods</h2>
 		
         <h3><code>session()</code></h3>
 		<p>This method will return the current <a href="CGI--Session.html">CGI::Session</a> object.  The <a href="CGI--Session.html">CGI::Session</a> object is created on the first call to this method, and any subsequent calls will return the same object.  This effectively creates a singleton session object for the duration of the request. <a href="CGI--Session.html">CGI::Session </a> will look for a cookie or param containing the session ID, and create a new session if none is found.  If <code>session_config</code> has not been called before the first call to <code>session</code>, then it will choose some sane defaults to create the session object.</p>
@@ -64,7 +64,7 @@ my $language = $self-&gt;session-&gt;param('language');
 		    
             <dt><code>COOKIE_PARAMS</code></dt>
 		    <dd>
-		        <p>This allows you to customize the options that are used when creating the session cookie. For example you could provide an expiry time for the cookie by passing <code>-expiry =&gt; '+24h'</code>. The -name and -value parameters for the cookie will be added automatically unless you specifically override them by providing -name and/or -value parameters. See the <a href="CGI--Cookie.html">CGI::Cookie</a> docs for the exact syntax of the parameters.</p>
+		        <p>This allows you to customize the options that are used when creating the session cookie. For example you could provide an expiry time for the cookie by passing <code>-expiry =&gt; '+24h'</code>. The -name and -value parameters for the cookie will be added automatically unless you specifically override them by providing -name and/or -value parameters. See the <em>CGI::Cookie</em> docs for the exact syntax of the parameters.</p>
                 
                 <h4>Note:</h4>
 		        <p>If you change the name of the cookie by passing a -name parameter, remember to notify CGI::Session of the change by calling <code>CGI::Session-&gt;name('new_cookie_name')</code>.</p>
@@ -158,7 +158,7 @@ sub logout {
 }
 </pre>
 
-		<h2><a name="example"></a>Example</h2>
+		<h2><a id="example"></a>Example</h2>
 		<p>In a CGI::Application module:</p>
 <pre>
 # configure the session once during the init stage
@@ -201,11 +201,11 @@ sub my_runmode {
     return $template-&gt;output;
 }
 </pre>
-		<h2><a name="todo"></a>To Do</h2>
+		<h2><a id="todo"></a>To Do</h2>
 		<ul>
 		    <li>
 		        <p>I am considering adding support for other session modules in the future,
-		            like <a href="Apache--Session.html">Apache::Session</a> and possibly others if there is a demand.</p>
+		            like <em>Apache::Session</em> and possibly others if there is a demand.</p>
 		    </li>
 		    <li>
 		        <p>Possibly add some tests to make sure cookies are accepted by the client.</p>
@@ -215,17 +215,17 @@ sub my_runmode {
 		    </li>
 		</ul>
         
-        <h2><a name="see_also"></a>See Also</h2>
+        <h2><a id="see_also"></a>See Also</h2>
 		<ul>
 		    <li> <a href="CGI--Application.html">CGI::Application</a> </li>
 		    <li> <a href="CGI--Session.html">CGI::Session</a> </li>
 		    <li> <code>perl(1)</code> </li>
 		</ul>
         
-		<h2><a name="author"></a>Author</h2>
+		<h2><a id="author"></a>Author</h2>
 		<p>Cees Hek &lt;<a href="mailto:ceeshek@gmail.com">ceeshek@gmail.com</a>&gt;</p>
 		
-        <h3><a name="license"></a>License</h3>
+        <h3><a id="license"></a>License</h3>
 		<p>Copyright (C) 2004, 2005 Cees Hek &lt;<a href="mailto:ceeshek@gmail.com">ceeshek@gmail.com</a>&gt;</p>
 		<p>This library is free software. You can modify and or distribute it under the same terms as Perl itself.</p>
 	</body>

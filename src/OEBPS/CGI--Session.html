@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title>CGI::Session - persistent session data in CGI applications</title>
@@ -13,7 +13,7 @@
             <h3>Persistent Session Data in CGI Applications</h3>
         </div>
 
-	<h2><a name="synopsis"></a>Synopsis</h2>
+	<h2><a id="synopsis"></a>Synopsis</h2>
 <pre>
 # Object initialization:
 use CGI::Session;
@@ -61,10 +61,10 @@ $session-&gt;delete();
 $session-&gt;flush(); # Recommended practice says use flush() after delete().
 </pre>
 
-<h2><a name="description"></a>Description</h2>
+<h2><a id="description"></a>Description</h2>
 <p>CGI::Session provides an easy, reliable and modular session management system across HTTP requests.</p>
 
-<h2><a name="methods"></a>Methods</h2>
+<h2><a id="methods"></a>Methods</h2>
 <p>Following is the overview of all the available methods accessible via CGI::Session object.</p>
 
 <h3><code>new()</code></h3>
@@ -410,7 +410,7 @@ CGI::Session-&gt;find($dsn, coderef_with_args( $coderef, 'param 1', 'param 2' ) 
                                           deprecated (as are all global variables) and will be removed in a future version of this module.</p>
 <p>Return value: The current query or cookie parameter name.</p>
 
-<h2><a name="miscellaneous_methods"></a>Miscellaneous Methods</h2>
+<h2><a id="miscellaneous_methods"></a>Miscellaneous Methods</h2>
 
 <h3><code>remote_addr()</code></h3>
 <p>Returns the remote address of the user who created the session for the first time. Returns undef if variable REMOTE_ADDR wasn't present in the environment when the session was created.</p>
@@ -441,16 +441,16 @@ $session = CGI::Session-&gt;new(undef, $cgi, \%attrs);
 <h3><code>query()</code></h3>
 <p>Returns query object associated with current session object. Default query object class is CGI.</p>
 
-<h3><a name="deprecated_methods"></a>Deprecated Methods</h3>
+<h3><a id="deprecated_methods"></a>Deprecated Methods</h3>
 <p>These methods exist solely for for compatibility with CGI::Session 3.x.</p>
 
 <h4><code>close()</code></h4>
 <p>Closes the session. Using <code>flush()</code> is recommended instead, since that's exactly what a call to <code>close()</code> does now.</p>
 
-<h2><a name="distribution"></a>Distribution</h2>
+<h2><a id="distribution"></a>Distribution</h2>
 <p>CGI::Session consists of several components such as <a href="#drivers">drivers</a>, <a href="#serializers">serializers</a> and <a href="#id_generators">id generators</a>. This section lists what is available.</p>
 
-<h3><a name="drivers"></a>Drivers</h3>
+<h3><a id="drivers"></a>Drivers</h3>
 <p>The following drivers are included in the standard distribution:</p>
 <ul>
     <li><em>file</em> - default driver for storing session data in plain files. Full name: <em>CGI::Session::Driver::file</em></li>
@@ -460,7 +460,7 @@ $session = CGI::Session-&gt;new(undef, $cgi, \%attrs);
 </ul>
 <p>Other drivers are available from CPAN.</p>
 
-<h3><a name="serializers"></a>Serializers</h3>
+<h3><a id="serializers"></a>Serializers</h3>
 <ul>
     <li><em>default</em> - default data serializer. Uses standard <em>Data::Dumper</em>. Full name: <em>CGI::Session::Serialize::default</em>.</li>
     <li><em>storable</em> - serializes data using <em>Storable</em>. Requires <em>Storable</em>. Full name: <em>CGI::Session::Serialize::storable</em>.</li>
@@ -468,7 +468,7 @@ $session = CGI::Session-&gt;new(undef, $cgi, \%attrs);
     <li><em>yaml</em> - serializes data using YAML. Requires <em>YAML</em> or <em>YAML::Syck</em>. Full name: <em>CGI::Session::Serialize::yaml</em></li>
 </ul>
 
-<h3><a name="id_generators"></a>ID Generators</h3>
+<h3><a id="id_generators"></a>ID Generators</h3>
 <p>The following ID generators are included in the standard distribution.</p>
 <ul>
     <li><em>md5</em> &ndash; generates 32 character long hexadecimal string. Requires <em>Digest::MD5</em>. Full name: <em>CGI::Session::ID::md5</em>.</li>
@@ -476,7 +476,7 @@ $session = CGI::Session-&gt;new(undef, $cgi, \%attrs);
     <li><em>static</em> &ndash; generates static session ids. Full name: <em>CGI::Session::ID::static</em></li>
 </ul>
 
-<h2><a name="a_warning_about_auto_flushing"></a>A Warning about Auto-flushing</h2>
+<h2><a id="a_warning_about_auto_flushing"></a>A Warning about Auto-flushing</h2>
 <p>Auto-flushing can be unreliable for the following reasons. Explicit flushing after key session updates is recommended.</p>
 <dl>
                                           <dt>If the DBI handle goes out of scope before the session variable</dt>
@@ -503,7 +503,7 @@ $session = CGI::Session-&gt;new(undef, $cgi, \%attrs);
                                           </dd>
 </dl>
 
-<h2><a name="a_warning_about_utf8"></a>A Warning about UTF8</h2>
+<h2><a id="a_warning_about_utf8"></a>A Warning about UTF8</h2>
 <p>You are strongly encouraged to refer to, at least, the first of these articles, for help with UTF8.</p>
 <p><a href="http://en.wikibooks.org/wiki/Perl_Programming/Unicode_UTF-8">http://en.wikibooks.org/wiki/Perl_Programming/Unicode_UTF-8</a></p>
 <p><a href="http://perl.bristolbath.org/blog/lyle/2008/12/giving-cgiapplication-internationalization-i18n.html">http://perl.bristolbath.org/blog/lyle/2008/12/giving-cgiapplication-internationalization-i18n.html</a></p>
@@ -539,7 +539,7 @@ binmode STDOUT, &quot;:encoding(utf8)&quot;;
                                           </dd>
 </dl>
 
-<h2><a name="credits"></a>Credits</h2>
+<h2><a id="credits"></a>Credits</h2>
 <p>CGI::Session evolved to what it is today with the help of following developers. The list doesn't follow any strict order, but somewhat chronological. Specifics can be found in <em class="file">Changes</em> file</p>
 <dl>
                                           <dt>Andy Lester</dt>
@@ -560,12 +560,12 @@ binmode STDOUT, &quot;:encoding(utf8)&quot;;
                                           suggestions, and battled publicly with bugs, all of which has helped.</p>
 
 
-<h2><a name="copyright"></a>Copyright</h2>
+<h2><a id="copyright"></a>Copyright</h2>
 <p>Copyright &copy; 2001-2005 Sherzod Ruzmetov &lt;<a href="mailto:sherzodr@cpan.org">sherzodr@cpan.org</a>&gt;. All rights reserved.
                                           This library is free software. You can modify and or distribute it under the same terms as Perl itself.</p>
 
 
-<h2><a name="public_code_repository">PUBLIC CODE REPOSITORY</a></h2>
+<h2><a id="public_code_repository">PUBLIC CODE REPOSITORY</a></h2>
 <p>You can see what the developers have been up to since the last release by
                                           checking out the code repository. You can browse the git repository from here:</p>
 <pre>
@@ -577,14 +577,14 @@ binmode STDOUT, &quot;:encoding(utf8)&quot;;
 </pre>
 
 
-<h2><a name="support"></a>Support</h2>
+<h2><a id="support"></a>Support</h2>
 <p>If you need help using CGI::Session, ask on the mailing list. You can ask the
                                           list by sending your questions to <a href="mailto:cgi-session-user@lists.sourceforge.net">cgi-session-user@lists.sourceforge.net</a> .</p>
 <p>You can subscribe to the mailing list at <a href="https://lists.sourceforge.net/lists/listinfo/cgi-session-user">https://lists.sourceforge.net/lists/listinfo/cgi-session-user</a> .</p>
 <p>Bug reports can be submitted at <a href="http://rt.cpan.org/NoAuth/ReportBug.html?Queue=CGI-Session">http://rt.cpan.org/NoAuth/ReportBug.html?Queue=CGI-Session</a></p>
 
 
-<h2><a name="author"></a>Author</h2>
+<h2><a id="author"></a>Author</h2>
 <p>Sherzod Ruzmetov <code>sherzodr@cpan.org</code></p>
 <p>Mark Stosberg became a co-maintainer during the development of 4.0. <code>markstos@cpan.org</code>.</p>
 <p>Ron Savage became a co-maintainer during the development of 4.30. <code>rsavage@cpan.org</code>.</p>
@@ -592,7 +592,7 @@ binmode STDOUT, &quot;:encoding(utf8)&quot;;
                                           maintainers and other users are subscribed to it.</p>
 
 
-<h2><a name="see_also"></a>See Also</h2>
+<h2><a id="see_also"></a>See Also</h2>
 <p>To learn more both about the philosophy and CGI::Session programming style,
                                           consider the following:</p>
 <ul>

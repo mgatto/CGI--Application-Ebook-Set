@@ -1,29 +1,18 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<package unique-identifier="uid" xmlns:opf="http://www.idpf.org/2007/opf" version="2.0"><!-- xmlns:asd="http://www.idpf.org/asdfaf"  -->
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!--<package unique-identifier="uid" xmlns:opf="http://www.idpf.org/2007/opf" version="2.0">-->
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="BookId" version="2.0">
     <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
-        <title>CGI::Application Documentation Booklet</title>
-		<language>en-us</language>
+        <dc:identifier id="BookId" opf:scheme="UUID">urn:uuid:d46feb49-fc4e-4f49-92eb-072b1f209478</dc:identifier>
+        <dc:title>CGI::Application Construction Kit</dc:title>
+        <!--<dc:title>CGI::Application Documentation Booklet</dc:title>-->
+        <dc:language>en</dc:language>
+        <dc:date opf:event="modification">2013-08-19</dc:date>
 		<x-metadata>
             <EmbeddedCover>images/cover.jpg</EmbeddedCover>
         </x-metadata>
         <!--Required for KindleGen, Barnes and Noble, and iBookstore-->
         <meta name="cover" content="cimage" />
-		<dc:title>CGI::Application Documentation Booklet</dc:title>
-		<dc:language>en-us</dc:language>
-		<dc:identifier id="BookId" opf:scheme="uuid">urn:uuid:0223a860-4a28-4f37-9582-38c6b44afa27</dc:identifier>
-		<dc:creator opf:role="aut" file-as="Last, First">Stosberg, Mark</dc:creator>
-		<dc:creator opf:role="aut" file-as="Last, First">Tregar, Sam</dc:creator>
-		
-		<dc:creator opf:role="aut" file-as="Last, First"></dc:creator>
-		<dc:creator opf:role="aut" file-as="Last, First"></dc:creator>
-		<dc:creator opf:role="aut" file-as="Last, First"></dc:creator>
-		<dc:creator opf:role="aut" file-as="Last, First"></dc:creator>
-		<dc:creator opf:role="aut" file-as="Last, First"></dc:creator>
-		
-		<dc:contributor opf:file-as="Last, First" opf:role="edt">Michael Gatto</dc:contributor>
-		<dc:copyrights></dc:copyrights>
 		<dc:publisher>Lisantra Technologies, LLC</dc:publisher>
-		<dc:date>2013-07-10</dc:date>
 		<!--Extra metadata here (recommended)-->
 		<!--Backjacket description goes here-->
 		<dc:description>This ebook is a collection of documentation for CGI::Application and commonly associated modules for Templating, Sessions, Forms and Databases. This ebook is specially formatted for modern eReaders: Highly readable CSS formats the entire text consistently, chapters are clearly delineated and custom fonts are embedded. The default stylesheet is derived from chromatic's "Modern Perl" website, Metacpan's web stylesheet and the CSS used in perldoc.perl.org.</dc:description>
@@ -41,7 +30,7 @@
 		<dc:coverage>Worldwide</dc:coverage>
     </metadata>
     <manifest>
-        <item id="content" media-type="text/x-oeb1-document" href="toc.html"></item>
+        <item id="content" media-type="application/xhtml+xml" href="toc.html"></item>
         <item id="ncx" media-type="application/x-dtbncx+xml" href="toc.ncx"/>
         <item id="text0" media-type="application/xhtml+xml" href="Title.html"></item>
         <item id="text1" media-type="application/xhtml+xml" href="Introduction.html"></item><!-- text/x-oeb1-document -->
@@ -68,12 +57,12 @@
         <item id="text10" media-type="application/xhtml+xml" href="CGI--Application--Apache2--Request.html"></item>
         <item id="text12" media-type="application/xhtml+xml" href="Appendix_A.html"></item>
         <item id="styles1" media-type="text/css" href="css/modernperl.css" />
-        <!--<item id="fonts1" media-type="font/truetype" href="fonts/VeraMono.ttf" />-->
-        <item id="fonts2" media-type="font/truetype" href="fonts/VeraMono-Bold.ttf" />
-		<!--<item id="fonts3" media-type="font/truetype" href="fonts/VeraMono-Bold-Italic.ttf" />-->
-    	<!--<item id="fonts4" media-type="font/truetype" href="fonts/VeraMono-Italic.ttf" />-->
+        <item id="fonts1" media-type="application/x-font-ttf" href="fonts/VeraMono.ttf" />
+        <item id="fonts2" media-type="application/x-font-ttf" href="fonts/VeraMono-Bold.ttf" />
+		<item id="fonts3" media-type="application/x-font-ttf" href="fonts/VeraMono-Bold-Italic.ttf" />
+    	<item id="fonts4" media-type="application/x-font-ttf" href="fonts/VeraMono-Italic.ttf" />
         <item id="cimage" media-type="image/jpeg" href="images/cover.jpg" />
-        <item id="images1" media-type="font/truetype" href="images/cc.jpg" />
+        <item id="images1" media-type="image/jpeg" href="images/cc.jpg" />
     </manifest>
     <spine toc="ncx">
         <itemref idref="text0"/>

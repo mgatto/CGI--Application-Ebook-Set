@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>CGI::FormBuilder::Template::HTML - FormBuilder Interface to HTML::Template</title>
@@ -13,7 +13,7 @@
             <h3>CGI::FormBuilder Interface to HTML::Template</h3>
         </div>
         
-		<h2><a name="synopsis"></a>Synopsis</h2>
+		<h2><a id="synopsis"></a>Synopsis</h2>
 <pre>
 my $form = CGI::FormBuilder-&gt;new(
     fields   =&gt; \@fields,
@@ -22,7 +22,7 @@ my $form = CGI::FormBuilder-&gt;new(
 </pre>
 
 
-		<h2><a name="description"></a>Description</h2>
+		<h2><a id="description"></a>Description</h2>
 		<p>This engine adapts FormBuilder to use HTML::Template. HTML::Template is the default template option and is activated one of two ways. Either:</p>
 
 <pre>
@@ -46,7 +46,7 @@ my $form = CGI::FormBuilder-&gt;new(
 );
 </pre>
 	
-		<h2><a name="methods"></a>Methods</h2>
+		<h2><a id="methods"></a>Methods</h2>
 		<p>The following methods are provided (usually only used internally):</p>
 
 		<h3><code>engine()</code></h3>
@@ -58,7 +58,7 @@ my $form = CGI::FormBuilder-&gt;new(
 		<h3><code>render()</code></h3>
 		<p>Uses the prepared hash and expands the template, returning a string of HTML.</p>
 
-		<h2><a name="templates"></a>Templates</h2>
+		<h2><a id="templates"></a>Templates</h2>
 		<p>In your template, each of the form fields will correspond directly toa <code>&lt;tmpl_var&gt;</code> of the same name prefixed with &quot;field-&quot; in thetemplate. So, if you defined a field called &quot;email&quot;, then you wouldsetup a variable called <code>&lt;tmpl_var field-email&gt;</code> in your template.</p>
         <p>In addition, there are a couple special fields:</p>
 		<table>
@@ -280,7 +280,7 @@ if ($form-&gt;field('mailopt')) {
 		<p>Each loop will have a <code>label</code>, <code>field</code>, <code>value</code>, etc, just like above.</p>
 		<p>For more information on templates, see <a href="HTML--Template.html">HTML::Template</a>.</p>
 
-		<h2><a name="see_also"></a>See Also</h2>
+		<h2><a id="see_also"></a>See Also</h2>
 		<ul>
         	<li>
         		<a href="CGI--FormBuilder.html">CGI::FormBuilder</a>
@@ -290,7 +290,7 @@ if ($form-&gt;field('mailopt')) {
         	</li>
         </ul>
 
-		<h2><a name="author"></a>Author</h2>
+		<h2><a id="author"></a>Author</h2>
 		<p>Copyright (c) <em>Nate Wiger</em>. All Rights Reserved.</p>
 		<p>This module is free software; you may copy this under the terms of the GNU General Public License, or the Artistic License, copies of which should have accompanied your Perl kit.</p>
 	</body>

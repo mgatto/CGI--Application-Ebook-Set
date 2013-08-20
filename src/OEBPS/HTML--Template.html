@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title>HTML::Template &ndash; Perl module to use HTML Templates from CGI scripts</title>
@@ -268,7 +268,7 @@ $template-&gt;param(LOOP =&gt; [{
 	<p>In order to realize a dramatic savings in bandwidth, the standard (non-comment) tags will be used throughout this documentation.</p>
 </div>
 
-<h2><a name="methods"></a>Methods</h2>
+<h2><a id="methods"></a>Methods</h2>
 <h3><code>new()</code></h3>
 <p>Call <code>new()</code> to create a new Template object:</p>
 <pre>
@@ -932,7 +932,7 @@ violates the fundamental concept behind HTML::Template - that design
 and code should be seperate.</p>
 <p>But, inevitably some people still want to do it.  If that describes
 you then you should take a look at
-<a href="/HTML/Template/Expr.html">HTML::Template::Expr</a>.  Using
+<em>HTML::Template::Expr</em>.  Using
 HTML::Template::Expr it should be easy to write a <code>run_program()</code>
 function.  Then you can do awful stuff like:</p>
 <pre>
@@ -975,8 +975,7 @@ reported success using to solve this problem.</p>
 <p>If you're feeling really adventurous, HTML::Template has a publically available Subversion server.  
 See below for more information in the PUBLIC SUBVERSION SERVER section.</p>
 
-
-<a name="author"></a><h2>Credits</h2>
+<h2><a id="author"></a>Credits</h2>
 <p>This module was the brain child of my boss, Jesse Erlbaum &lt;mailto:jesse@vm.com"&gt;jesse@vm.com&gt; at  <a href="http://vm.com">Vanguard Media</a>.  The most original idea in this module &ndash; the &lt;TMPL_LOOP&gt; - was entirely his.</p>
 <p>Fixes, Bug Reports, Optimizations and Ideas have been generously provided by:</p>
 <ul>
@@ -1035,7 +1034,7 @@ See below for more information in the PUBLIC SUBVERSION SERVER section.</p>
 </ul>
 <p>Thanks!</p>
 
-<h2><a name="versions"></a>Change History</h2>
+<h2><a id="versions"></a>Change History</h2>
 
 <h4>2.91 Fri Mar 30 2012</h4>
 <ul>
@@ -1049,8 +1048,8 @@ See below for more information in the PUBLIC SUBVERSION SERVER section.</p>
    	<li>Feature: Added __even__, __outer__ and __index__ loop context vars. [Michael Peters]</li>
    	<li>Bug Fix: RT #26456 - force_untaint can't work in Perl &lt; 5.8.0 [admin@photoresearchers.com]</li>
    	<li>Bug Fix: RT #67663 - remove warning under Perl &gt; 5.14.0 about using tied with a file handle without "*" [RENEEB, TODDR and Michael Peters]</li>
-   	<li>Bug Fix: RT #35534 - Using the same loop multiple times with different vars will no longer cause an error if die_on_bad_params is set. [Ron Savage & Michael Peters]</li>
-   	<li>Bug Fix: RT #38325 - Give a better error message if param() is set with a reference to a reference. [Mark Stosberg & Michael Peters]</li>
+   	<li>Bug Fix: RT #35534 - Using the same loop multiple times with different vars will no longer cause an error if die_on_bad_params is set. [Ron Savage and Michael Peters]</li>
+   	<li>Bug Fix: RT #38325 - Give a better error message if param() is set with a reference to a reference. [Mark Stosberg and Michael Peters]</li>
    	<li>Test Fix: RT #26103 - t/05-blind-cache.t no longer modifies the distribution during the tests but instead uses temp files [Jan Dubois and Michael Peters]</li>
    	<li>Test Fix: Tests that create and modify files now use temp files and file_cache_dir is always a temp directory [Michael Peters]</li>
    	<li>Doc Fix: Using more POD formatting [Michael Peters]</li>
@@ -1334,7 +1333,7 @@ See below for more information in the PUBLIC SUBVERSION SERVER section.</p>
 <h2>License</h2>
 <p>HTML::Template : A module for using HTML Templates with Perl   Copyright (&copy;) 2000-2002 Sam Tregar &lt;sam@tregar.com"&gt; </p>
 <p>This module is free software; you can redistribute it and/or modify it   under the terms of either: </p>
-<ol type="a">
+<ol>
     <li>the GNU General Public License as published by the Free Software   Foundation; either version 1, or (at your option) any later version, or</li>
     <li>the &quot;Artistic License&quot; which comes with this module.</li>
    </ol>

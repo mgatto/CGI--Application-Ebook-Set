@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>CGI::FormBuilder &ndash; Easily generate and process stateful forms</title>
@@ -13,7 +13,7 @@
             <h3>Easily Generate and Process Stateful Forms</h3>
         </div>
 
-		<h2><a name="synopsis"></a>Synopsis</h2>
+		<h2><a id="synopsis"></a>Synopsis</h2>
 <pre>
 use CGI::FormBuilder;
 
@@ -77,7 +77,7 @@ if ($form-&gt;submitted &amp;&amp; $form-&gt;validate) {
 }
 </pre>
 
-		<h2><a name="description"></a>Description</h2>
+		<h2><a id="description"></a>Description</h2>
 		<p>If this is your first time using FormBuilder, you should check out the website for tutorials and examples at <a href="http://formbuilder.org">http://formbuilder.org</a>.</p>
 <p>You should also consider joining the google group at <a href="http://groups.google.com/group/perl-formbuilder">http://groups.google.com/group/perl-formbuilder</a>. There are some pretty smart people on the list that can help you out.</p>
 
@@ -228,7 +228,7 @@ print $form-&gt;render(any_opt_from_new =&gt; $some_value);
 
 		<p>That's it. Keep reading.</p>
 
-<h3><a name="walkthrough"></a>Walkthrough</h3>
+<h3><a id="walkthrough"></a>Walkthrough</h3>
 <p>Let's walk through a whole example to see how FormBuilder works.
 We'll start with this, which is actually a complete (albeit simple)
 form application:</p>
@@ -370,7 +370,7 @@ if ($form-&gt;submitted &amp;&amp; $form-&gt;validate) {
         <p>You may be surprised to learn that for many applications, the above is probably all you'll need. Just fill in the parts that affect what you want to do (like the database code), and you're on your way.</p>
         <p><strong>Note:</strong> If you are confused at all by the backslashes you see in front of some data pieces above, such as <code>\@fields</code>, skip down to the brief section entitled <a href="#references">REFERENCES</a> at the bottom of this document (it's short).</p> 
 
-        <h2><a name="methods"></a>Methods</h2>
+        <h2><a id="methods"></a>Methods</h2>
         <p>This documentation is very extensive, but can be a bit dizzying due to the enormous number of options that let you tweak just about anything. As such, I recommend that you stop and visit: http://www.formbuilder.org.</p>
         <p>And click on &quot;Tutorials&quot; and &quot;Examples&quot;. Then, use the following section as a reference later on.</p>
 
@@ -843,7 +843,7 @@ option to <code>field()</code>, only it applies to all fields.</p>
 <dd>
 <p>You can use this option to initialize FormBuilder from an external
 configuration file. This allows you to separate your field code from
-your form layout, which is pretty cool. See <a href="CGI--FormBuilder--Source--File.html">CGI::FormBuilder::Source::File</a>
+your form layout, which is pretty cool. See <em>CGI::FormBuilder::Source::File</em>
 for details on the format of the external file.</p>
 </dd>
 <dt><code>static =&gt; 0 | 1 | 2</code></dt>
@@ -1817,7 +1817,7 @@ $form-&gt;mailresults(
 <h3><code>mail()</code></h3>
 <p>This is a more generic version of the above; it sends whatever is given as the <code>text</code> argument via email verbatim to the <code>to</code> address. In addition, if you're not running <code>sendmail</code> you can specify the <code>mailer</code> parameter to give the path of your mailer. This option is accepted by the above functions as well.</p>
 
-<h2><a name="compatibility"></a>Compatibility</h2>
+<h2><a id="compatibility"></a>Compatibility</h2>
 <p>The following methods are provided to make FormBuilder behave more like other modules, when desired.</p>
 
 <h3><code>header()</code></h3>
@@ -1840,7 +1840,7 @@ $sess-&gt;save_param($form);   # will see param()
 <h3><code>script_name()</code></h3>
 <p>An alias for <code>$form-&gt;action</code>.</p>
 
-<h2><a name="stylesheets__css_"></a>STYLESHEETS (CSS)</h2>
+<h2><a id="stylesheets__css_"></a>STYLESHEETS (CSS)</h2>
 <p>If the <code>stylesheet</code> option is enabled (by setting it to 1 or the path of a CSS file), then FormBuilder will automatically output style classes for every single form element:</p>
 <table>
     <tr><td>fb</td><td>main form table</td></tr>
@@ -1900,7 +1900,7 @@ up a couple basic form features:</p>
 </pre>
 <p>Of course, if you're familiar with CSS, you know alot more is possible. Also, you can mess with all the id's (if you name your forms) to manipulate fields more exactly.</p>
 
-<h2><a name="examples"></a>Examples</h2>
+<h2><a id="examples"></a>Examples</h2>
 <p>I find this module incredibly useful, so here are even more examples, pasted from sample code that I've written:</p>
 
 <h3>Ex. 1: order.cgi</h3>
@@ -2183,7 +2183,7 @@ print $form-&gt;render;
 
 <p>Yes, it's pretty much that easy. See <em>CGI::FormBuilder::Multi</em> for how to tie this into a multi-page form.</p>
 
-<h2><a name="frequently_asked_questions__faq_"></a>Frequently Asked Questions (FAQ)</h2>
+<h2><a id="frequently_asked_questions__faq_"></a>Frequently Asked Questions (FAQ)</h2>
 <p>There are a couple questions and subtle traps that seem to poke people on a regular basis. Here are some hints.</p>
 
 <h3>I'm confused. Why doesn't this work like CGI.pm?</h3>
@@ -2379,7 +2379,7 @@ if ($form-&gt;submitted) {
 </pre>
 <p>In fact, that's a whole file upload program right there.</p>
 
-<h2><a name="references"></a>References</h2>
+<h2><a id="references"></a>References</h2>
 <p>This really doesn't belong here, but unfortunately many people are confused by references in Perl. Don't be - they're not that tricky. When you take a reference, you're basically turning something into a scalar value. Sort of. You have to do this if you want to pass arrays intact into functions in Perl 5.</p>
 <p>A reference is taken by preceding the variable with a backslash (\). In our examples above, you saw something similar to this:</p>
 <pre>
@@ -2418,12 +2418,12 @@ my $form = CGI::FormBuilder-&gt;new(
 </pre>
 <p>Except that the latter doesn't require that we first create  <code>@fields</code> and <code>%validate</code> variables.</p>
 
-<h2><a name="environment_variables"></a>Environment Variables</h2>
+<h2><a id="environment_variables"></a>Environment Variables</h2>
 
 <h3>FORMBUILDER_DEBUG</h3>
 <p>This toggles the debug flag, so that you can control FormBuilder debugging globally. Helpful in mod_perl.</p>
 <!--
-<h2><a name="versions"></a>Change Log</h2>
+<h2><a id="versions"></a>Change Log</h2>
 
 NAME
     Changes - Changes in FormBuilder 3.0, please also see the README
@@ -2883,16 +2883,16 @@ VERSION 3.00
     Documentation has been updated and somewhat reorganized, which was long
     overdue.
 -->
-<h2><a name="notes"></a>Notes</h2>
+<h2><a id="notes"></a>Notes</h2>
 <p>Parameters beginning with a leading underscore are reserved for future use by this module. Use at your own peril.</p>
 <p>The <code>field()</code> method has the alias <code>param()</code> for compatibility with other modules, allowing you to pass a <code>$form</code> around just like a <code>$cgi</code> object.</p>
 <p>The output of the HTML generated natively may change slightly from release to release. If you need precise control, use a template.</p>
 <p>Every attempt has been made to make this module taint-safe (-T). However, due to the way tainting works, you may run into the message &quot;Insecure dependency&quot; or &quot;Insecure $ENV{PATH}&quot;. If so, make sure you are setting <code>$ENV{PATH}</code> at the top of your script.</p>
 
-		<h2><a name="author"></a>Author</h2>
+		<h2><a id="author"></a>Author</h2>
 		<p>Copyright (c) <em>Nate Wiger</em>. All Rights Reserved.</p>
         
-<h2><a name="acknowledgements"></a>Acknowledgements</h2>
+<h2><a id="acknowledgements"></a>Acknowledgements</h2>
 <p>This module has really taken off, thanks to very useful input, bug reports, and encouraging feedback from a number of people, including:</p>
 <ul>
     <li>Norton Allen</li>
@@ -2935,7 +2935,7 @@ VERSION 3.00
     </ul>
 		<p>Thanks!</p>
         
-        <h2><a href="" name="license">License</a></h2>
+        <h2><a id="license">License</a></h2>
 		<p>This module is free software; you may copy this under the terms ofthe GNU General Public License, or the Artistic License, copies ofwhich should have accompanied your Perl kit.</p>	
 	</body>
 </html>

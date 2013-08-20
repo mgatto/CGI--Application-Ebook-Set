@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>CGI::Application::Plugin::Apache - Allow CGI::Application to use Apache::* modules without interference</title>
@@ -15,7 +15,7 @@
 	        <h3>Allow CGI::Application to Use Apache::* modules Without Interference</h3>
 		</div>
 
-        <a name="synopsis"></a><h2>Synopsis</h2>
+        <h2><a id="synopsis"></a>Synopsis</h2>
 <pre>
 use base 'CGI::Application';
 use CGI::Application::Plugin::Apache qw(:all);
@@ -49,7 +49,7 @@ sub mode1 {
 1;
 </pre>
 
-        <h2><a name="description"></a>Description</h2>
+        <h2><a id="description"></a>Description</h2>
         <p>This plugin helps to try and fix some of the annoyances of using <a href="CGI--Application.html">CGI::Application</a> in a pure mod_perl (1.0 or 2.0) environment (see Installation for specific issues regarding installation under mod_perl 2.x). <a href="CGI--Application.html">CGI::Application</a> assumes that you use CGI.pm, but I wanted to avoid it's bloat and have access to the performance of the Apache::* modules so along came this plugin. At the current moment it only does two things:</p>
 
         <ul>
@@ -61,7 +61,7 @@ sub mode1 {
             </li>
         </ul>
 
-        <h2><a name="exported_methods"></a>Exported Methods</h2>
+        <h2><a id="exported_methods"></a>Exported Methods</h2>
         <p>This module uses <em>Exporter</em> to provide methods to your application module. Most of the time you will never actually use these methods since they are used by <a href="CGI--Application.html">CGI::Application</a> itself, but I figured you'd like to know what's going on.</p>
         <p>No methods are exported by default. It is up to you to pick and choose, but please choose wisely. You can import all of the methods by using:</p>
 <pre>
@@ -89,7 +89,7 @@ sub handler {
         <h3><code>_send_headers()</code></h3>
         <p>I didn't like the idea of exporting this private method (I'd rather think it was a 'protected' not 'private) but right now it's the only way to have any say in how the HTTP headers are created. Please see <a href="#http_headers">HTTP Headers</a> for more details.</p>
 
-        <h2><a name="http_headers"></a>HTTP Headers</h2>
+        <h2><a id="http_headers"></a>HTTP Headers</h2>
         <p>We encourage you to learn the mod_perl way of manipulating headers and cookies. It's really not that hard we promise. But incase you're easing your way into it, we try and provide as much backward compatibility as possible.</p>
 
         <h3>Cookies</h3>
@@ -139,7 +139,7 @@ return '';
             But it's really up to you.
         </p>
 
-        <h2><a name="compatibility"></a>Compatibility</h2>
+        <h2><a id="compatibility"></a>Compatibility</h2>
         <p>
             Upon using this module you completely leave behind the world of CGI.pm. Don't look back or you might turn into a pillar of salt. You will have to look at and read the docs of the Apache::* modules. But don't worry, they are really easy to use and were designed to mimic the interface of CGI.pm and family.
         </p>
@@ -180,13 +180,13 @@ else {
             Sometimes the default compatability is not enough. For instance, if you are using plugins that use the cookies or upload features of CGI.pm then you might need some extra help.
         </p>
         <p>
-            This is what <a href="CGI--Application--Plugin--Apache--Request.html">CGI::Application::Plugin::Apache::Request</a> is for. You can make this your <code>query</code> object by setting the <code>CAPA_CGI_Compat</code> var to <code>On</code> in your Apache config file:
+            This is what <em>CGI::Application::Plugin::Apache::Request</em> is for. You can make this your <code>query</code> object by setting the <code>CAPA_CGI_Compat</code> var to <code>On</code> in your Apache config file:
         </p>
 <pre>
 PerlSetVar CAPA_CGI_Compat On
 </pre>
 
-        <h2><a name="installation"></a>Installation</h2>
+        <h2><a id="installation"></a>Installation</h2>
         <p>
             This module is designed to function equally under mod_perl 1.x and mod_perl 2.x. The only real issue comes during the installation and testing phase. In order to track dependencies, etc we need to know which version you are trying to install this for. By default we assume mod_perl 1.x unless we find mod_perl 2 installed on your system.
         </p>
@@ -200,7 +200,7 @@ perl ./Build.PL MP2=1
             That's pretty easy, right?
         </p>
 
-        <h2><a name="author"></a>Author</h2>
+        <h2><a id="author"></a>Author</h2>
         <p>
             Michael Peters &lt;mpeters@plusthree.com&gt;
         </p>
@@ -208,7 +208,7 @@ perl ./Build.PL MP2=1
             Thanks to Plus Three, LP (http://www.plusthree.com) for sponsoring my work on this module.
         </p>
 
-        <h3><a name="contributors"></a>Contributors</h3>
+        <h3><a id="contributors"></a>Contributors</h3>
         <p>
             The following people have contributed to this module either through docs, code, or ideas:
         </p>
@@ -227,7 +227,7 @@ perl ./Build.PL MP2=1
             </li>
         </ul>
 
-        <h2><a name="see_also"></a>See Also</h2>
+        <h2><a id="see_also"></a>See Also</h2>
         <ul>
             <li>Apache::Request</li>
             <li>Apache2::Request</li>
@@ -235,7 +235,7 @@ perl ./Build.PL MP2=1
             <li>Apache2::Cookie</li>
         </ul>
 
-        <h3><a name="license"></a>License</h3>
+        <h3><a id="license"></a>License</h3>
         <p>
             This library is free software; you can redistribute it and/or modify
             it under the same terms as Perl itself.

@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head> 
         <title>Class::DBI::FormBuilder - Class::DBI/CGI::FormBuilder integration</title>
@@ -47,7 +47,7 @@
 	<li><a href="#copyright___license">COPYRIGHT &amp; LICENSE</a></li>
 </ul> -->
 
-<h1><a name="synopsis"></a>Synopsis</h1>
+<h1><a id="synopsis"></a>Synopsis</h1>
 <pre>
 package Film;
 use strict;
@@ -110,21 +110,21 @@ else {
 }
 </pre>
 
-<h2><a name="description"></a>Description</h2>
+<h2><a id="description"></a>Description</h2>
 <div class="note">
     <h4>Note</h4>
-    <p>Use of column name/accessor/mutator is currently broken if your column  accessors/mutators are different from the column name</strong>. The documentation is also broken w.r.t. this.</p>
+    <p>Use of column name/accessor/mutator is currently broken if your column  accessors/mutators are different from the column name. The documentation is also broken w.r.t. this.</p>
 </div>
-<p>This module creates a <a href="/CGI/FormBuilder.html">CGI::FormBuilder</a> form from a CDBI class or object. If  from an object, it populates the form fields with the object's values.</p>
+<p>This module creates a <a href="CGI--FormBuilder.html">CGI::FormBuilder</a> form from a CDBI class or object. If  from an object, it populates the form fields with the object's values.</p>
 <p>Column metadata and CDBI relationships are analyzed and the fields of the form are modified accordingly. For instance, MySQL <code>enum</code> and <code>set</code> columns are configured as <code>select</code>, <code>radiobutton</code> or <code>checkbox</code> widgets as appropriate, and appropriate widgets are built for <code>has_a</code>, <code>has_many</code> and <code>might_have</code> relationships. Further relationships can be added by subclassing. <code>has_a</code> columns are set as 'required' fields in create/update forms.</p>
 
-<h2><a href="customizing_field_construction"></a>Customising Field Construction</h2>
+<h2><a id="customizing_field_construction"></a>Customising Field Construction</h2>
 <p>Often, the default behaviour will be unsuitable. For instance, a <code>has_a</code> relationship might point to a related table with thousands of records. A popup widget with all these records is probably not useful.  Also, it will take a long time to build, so post-processing the form to re-design the field is a poor solution.</p>
 <p>Instead, you can pass an extra <code>process_fields</code> argument in the call to <code>as_form</code> (or you can set it in <code>form_builder_defaults</code>).</p>
 <p>Many of the internal routines use this mechanism for configuring fields. A manually set '+' (basic) processor will be <strong>added</strong> to any other automatic processing, whereas a manually set shortcut processor (no '+') will <strong>replace</strong> all automatic processing.</p>
 <p>You can add your own processors to the internal table of processors - see <code>new_field_processor</code>.</p>
 
-<h3><a name="process_fields"></a><code>process_fields</code></h3>
+<h3><a id="process_fields"></a><code>process_fields</code></h3>
 <p>This is a hashref, with keys being field names. Values can be:</p>
 <h4>Name of a built-in</h4>
 <table>
@@ -176,7 +176,7 @@ else {
 
 <h4>Reference to a Subroutine, or Anonymous Coderef</h4>
 <p>The coderef will be passed the Class::DBI::FormBuilder class or subclass, the CDBI class or object, the CGI::FormBuilder form object, and the field name as arguments, and should build the named field.</p>
-</dd>
+
 
 <h4>Package name</h4>
 <p>Name of a package with a suitable <code>field</code> subroutine. Gets called with the same arguments as the coderef.</p>
@@ -186,7 +186,7 @@ else {
 
 <p>The key <code>__FINAL__</code> is reserved for <code>form_final</code>, so don't name any form fields <code>__FINAL__</code>. If a field processor is set in <code>__FINAL__</code>, then it will be applied to all fields, after all other processors have run.</p>
 
-<h2><a name="customising_render_output"></a>Customising <code>render()</code> Output</h2>
+<h2><a id="customising_render_output"></a>Customising <code>render()</code> Output</h2>
 <p><code>Class::DBI::FormBuilder</code> replaces <code>CGI::FormBuilder::render()</code> with a hookable version of <code>render()</code>.
 The hook is a coderef, or the name of a built-in, supplied in the <code>post_process</code> argument (which can 
 be set in the call to <a href="#as_form"><code>as_form</code></a>, <a href="#search_form"><code>search_form</code></a>, <code>render</code>, or in <a href="#form_builder_defaults"><code>form_builder_defaults</code></a>). The coderef 
@@ -226,21 +226,21 @@ My::Class-&gt;form_builder_defaults-&gt;{post_process} = Class::DBI::FormBuilder
 </dd>
 </dl>
 
-<h2><a href="plugins"></a>Plugins</h2>
+<h2><a id="plugins"></a>Plugins</h2>
 <p><code>has_a</code> relationships can refer to non-CDBI classes. In this case, <code>form_has_a</code> will attempt to load (via <code>require</code>) an appropriate plugin. For instance, for a <code>Time::Piece</code> column, it will attempt to load <em>Class::DBI::FormBuilder::Plugin::Time::Piece</em>. Then it will call the <code>field</code> method in the plugin, passing the CDBI class for whom the form has been constructed, the form, and a <em>Class::DBI::Column</em> object representing the field being processed. The plugin can use this information to modify the form, perhaps adding extra fields, or controlling stringification, or setting up custom validation. Note that the name of the form field should be retrieved from the field object as <code>$field-&gt;name</code>, rather than relying on <code> $field </code> to stringify itself, because it will stringify to <code>$field-&gt;name_lc</code>.</p> 
 <p>If no plugin is found, a fatal exception is thrown. If you have a situation where it would be useful to simply stringify the object instead, let me know and I'll make this configurable.</p>
 
-<h2><a name="automatic_validation_setup"></a>Automatic Validation Setup</h2>
+<h2><a id="automatic_validation_setup"></a>Automatic Validation Setup</h2>
 <p>If you place a normal CGI::FormBuilder validation spec in the <code>validate</code> argument, that spec will be used to configure validation.</p>
 <p>If there is no spec in the method call or in <code>$class-&gt;form_builder_defaults-&gt;{validate}</code>, then validation will be configured automatically. The default configuration is pretty basic, but you can modify it by placing settings in the <code>auto_validate</code> argument, or in <code>$class-&gt;form_builder_defaults-&gt;{auto_validate}</code>.</p>
 
-<h2><a name="basic_auto_validation"></a>Basic Auto-validation</h2>
+<h2><a id="basic_auto_validation"></a>Basic Auto-validation</h2>
 <p>Given no validation options for a column in the <code>auto_validate</code> slot, the settings for most columns will be taken from <code>%Class::DBI::FormBuilder::ValidMap</code>. This maps SQL column types to the  CGI::FormBuilder validation settings <code>VALUE</code>, <code>INT</code>, or <code>NUM</code>.</p>
 <p>MySQL <code>ENUM</code> or <code>SET</code> columns will be set up to validate that the submitted value(s) match the allowed 
 values.</p>
 <p>Any column listed in <code>$class-&gt;form_builder_defaults-&gt;{options}</code> will be set to validate those values.</p>
 
-<h2><a name="advanced_auto_validation"></a>Advanced Auto-validation</h2>
+<h2><a id="advanced_auto_validation"></a>Advanced Auto-validation</h2>
 <p>The following settings can be placed in the <code>auto_validate</code> argument (or in <code>$class-&gt;form_builder_defaults-&gt;{auto_validate}</code>).</p>
 <dl>
 <dt>validate</dt>
@@ -314,7 +314,7 @@ match_types =&gt; { qr(date) =&gt; \&amp;my_date_checker }
 Default is to issue warnings and not validate these column(s).</p>
 </dd>
 </dl>
-<h2><a name=""></a>Validating relationships</h2>
+<h2><a id="validating_relationships"></a>Validating relationships</h2>
 <p>Although it would be possible to retrieve the IDs of all objects for a related column and use these to 
 set up validation, this would rapidly become unwieldy for larger tables. Default validation will probably be 
 acceptable in most cases, as the column type will usually be some kind of integer.</p>
@@ -322,7 +322,7 @@ acceptable in most cases, as the column type will usually be some kind of intege
 <dt>timestamp</dt>
 <dd>
 <p>The default behaviour is to skip validating <code>timestamp</code> columns. A warning will be issued if the <code>debug</code> parameter is set to 2.</p>
-<p>Note that <code>timestamp</code></a> columns are rendered as <code>readonly</code> (see <code>form_timestamp</code>).</p>
+<p>Note that <code>timestamp</code> columns are rendered as <code>readonly</code> (see <code>form_timestamp</code>).</p>
 </dd>
 
 <dt>Failures</dt>
@@ -331,7 +331,7 @@ acceptable in most cases, as the column type will usually be some kind of intege
 </dd>
 </dl>
 
-<h2><a name="other_features"></a>Other Features</h2>
+<h2><a id="other_features"></a>Other Features</h2>
 <h4>Class::DBI::FromForm</h4>
 <p>If you want to use this module alongside Class::DBI::FromForm, load the module like so:</p>
 <pre>
@@ -340,7 +340,7 @@ use Class::DBI::FormBuilder BePoliteToFromForm =&gt; 1;
 <p>&hellip;and <code>create_from_form</code> and <code>update_from_form</code> will instead be imported as <code>create_from_fb</code> and <code>update_from_fb</code>.</p>
 <p>You might want to do this if you have more complex validation requirements than CGI::FormBuilder provides.</p>
 
-<h2><a name="methods"></a>Methods</h2>
+<h2><a id="methods"></a>Methods</h2>
 <p>Most of the methods described here are exported into the caller's namespace, except for the form modifiers  (see below), and a few others as documented.</p>
 
 <h3><code>new_field_processor( $processor_name, $coderef or package name )</code></h3>
@@ -376,7 +376,7 @@ use Class::DBI::FormBuilder BePoliteToFromForm =&gt; 1;
 <h3><code>table_meta($them)</code></h3>
 <p>Class::DBI::FormBuilder class method. Returns a <em>Class::DBI::FormBuilder::Meta::Table</em> object.</p>
 
-<h2><a name="form_generating_methods"></a>Form Generating Methods</h2>
+<h2><a id="form_generating_methods"></a>Form Generating Methods</h2>
 
 <h3><code>form_builder_defaults( %args )</code></h3>
 <p>Stores default arguments.</p>

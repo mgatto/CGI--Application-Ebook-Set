@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>CGI::Simple - A Simple totally OO CGI interface that is CGI.pm compliant</title>
@@ -38,28 +38,7 @@ sub cgiapp_get_query {
    	<h4>Note</h4>
    	<p>While a lighter weight and more modern CGI module can be good for a recent-modern CGI::Application project, some CGI::Application::Plugins may have issues with the different implementation of CGI.</p>
 </div>
-<!--
-<ul>
-	<li><a href="#name">NAME</a></li>
-	<li><a href="#version">VERSION</a></li>
-	<li><a href="#synopsis">SYNOPSIS</a></li>
-	<li><a href="#description">DESCRIPTION</a></li>
-	<li><a href="#calling_CGI__simple_routines_using_the_object_interface">CALLING CGI::Simple ROUTINES USING THE OBJECT INTERFACE</a></li>
-	<ul>
-
-		<li><a href="#first_you_need_to_initialize_an_object">First you need to initialize an object</a></li>
-		<li><a href="#next_you_call_methods_on_that_object">Next you call methods on that object</a></li>
-	</ul>
-
-	<li><a href="#calling_CGI__simple_routines_using_the_function_interface">CALLING CGI::Simple ROUTINES USING THE FUNCTION INTERFACE</a></li>
-	<ul>
-
-		<li><a href="#selecting_which_methods_to_load">Selecting which methods to load</a></li>
-		<li><a href="#to_autoload_or_not_to_autoload__that_is_the_question_">To Autoload or not to Autoload, that is the question.</a></li>
-		<li><a href="#setting_globals_using_the_functional_interface">Setting globals using the functional interface</a></li>
-	</ul>
-
-	<li><a href="#the_core_methods">THE CORE METHODS</a></li>
+<!--	
 	<ul>
 
 		<li><a href="#new___creating_a_new_query_object"><code>new()</code> Creating a new query object</a></li>
@@ -80,7 +59,7 @@ sub cgiapp_get_query {
 		<li><a href="#save___saving_the_state_of_an_object_to_file"><code>save()</code> Saving the state of an object to file</a></li>
 	</ul>
 
-	<li><a href="#file_uploads">FILE UPLOADS</a></li>
+	
 	<ul>
 
 		<li><a href="#upload___the_key_file_upload_method"><code>upload()</code> The key file upload method</a></li>
@@ -101,14 +80,14 @@ sub cgiapp_get_query {
 		<li><a href="#print___send_output_to_browser"><code>print()</code> Send output to browser</a></li>
 	</ul>
 
-	<li><a href="#http_cookies">HTTP COOKIES</a></li>
+	
 	<ul>
 
 		<li><a href="#cookie___a_simple_access_method_to_cookies"><code>cookie()</code> A simple access method to cookies</a></li>
 		<li><a href="#raw_cookie__"><code>raw_cookie()</code></a></li>
 	</ul>
 
-	<li><a href="#creating_http_headers">CREATING HTTP HEADERS</a></li>
+	
 	<ul>
 
 		<li><a href="#header___create_simple_or_complex_http_headers"><code>header()</code> Create simple or complex HTTP headers</a></li>
@@ -117,7 +96,7 @@ sub cgiapp_get_query {
 		<li><a href="#redirect___generating_a_redirection_header"><code>redirect()</code> Generating a redirection header</a></li>
 	</ul>
 
-	<li><a href="#pragmas">PRAGMAS</a></li>
+	
 	<li><a href="#using_nph_scripts">USING NPH SCRIPTS</a></li>
 	<li><a href="#server_push">SERVER PUSH</a></li>
 	<ul>
@@ -128,8 +107,7 @@ sub cgiapp_get_query {
 		<li><a href="#multipart_final__"><code>multipart_final()</code></a></li>
 		<li><a href="#CGI__push">CGI::Push</a></li>
 	</ul>
-
-	<li><a href="#debugging">DEBUGGING</a></li>
+	
 	<ul>
 
 		<li><a href="#dump___dumping_the_current_object_details"><code>Dump()</code> Dumping the current object details</a></li>
@@ -178,8 +156,7 @@ sub cgiapp_get_query {
 	</ul>
 
 	<li><a href="#compatibility_with_CGI_lib_pl_2_18">COMPATIBILITY WITH CGI-lib.pl 2.18</a></li>
-	<li><a href="#compatibility_with_CGI_pm">COMPATIBILITY WITH CGI.pm</a></li>
-	<li><a href="#differences_from_CGI_pm">DIFFERENCES FROM CGI.pm</a></li>
+
 	<ul>
 
 		<li><a href="#globals_variables">Globals Variables</a></li>
@@ -222,16 +199,10 @@ sub cgiapp_get_query {
 		<li><a href="#really_private_subs__marked_as_so_">Really Private Subs (marked as so)</a></li>
 		<li><a href="#internal_multipart_parsing_routines">Internal Multipart Parsing Routines</a></li>
 	</ul>
-
-	<li><a href="#export">EXPORT</a></li>
-	<li><a href="#author_information">AUTHOR INFORMATION</a></li>
-	<li><a href="#credits">CREDITS</a></li>
-	<li><a href="#licence_and_copyright">LICENCE AND COPYRIGHT</a></li>
-	<li><a href="#see_also">SEE ALSO</a></li>
 </ul>
 -->
 
-<h2><a name="synopsis"></a>Synopsis</h2>
+<h2><a id="synopsis"></a>Synopsis</h2>
 <pre>
 use CGI::Simple;
 
@@ -343,15 +314,15 @@ print $q-&gt;redirect('<a href="http://go.away.now">http://go.away.now</a>');   
 dienice( $q-&gt;CGI_error ) if $q-&gt;CGI_error;
 </pre>
 
-<h2><a name="description"></a>Description</h2>
+<h2><a id="description"></a>Description</h2>
 <p>CGI::Simple provides a relatively lightweight drop in replacement for CGI.pm. It shares an identical OO interface to CGI.pm for parameter parsing, file upload, cookie handling and header generation. This module is entirely object oriented, however a complete functional interface is available by using the CGI::Simple::Standard module.</p>
 <p>Essentially everything in CGI.pm that relates to the CGI (not HTML) side of things is available. There are even a few new methods and additions to old ones! If you are interested in what has gone on under the hood see the Compatibility with CGI.pm section at the end.</p>
 <p>In practical testing this module loads and runs about twice as fast as CGI.pm depending on the precise task.</p>
 
-<h2><a name="calling_CGI__simple_routines_using_the_object_interface"></a>Calling CGI::Simple Routines Using The Object Interface</h2>
+<h2><a id="calling_CGI__simple_routines_using_the_object_interface"></a>Calling CGI::Simple Routines Using The Object Interface</h2>
 <p>Here is a very brief rundown on how you use the interface. Full details follow.</p>
 
-<h3><a name="first_you_need_to_initialize_an_object"></a>First You Need To Initialize An Object</h3>
+<h3><a id="first_you_need_to_initialize_an_object"></a>First You Need To Initialize An Object</h3>
 <p>Before you can call a CGI::Simple method you must create a CGI::Simple object.
 You do that by using the module and then calling the <code>new()</code> constructor:</p>
 <pre>
@@ -360,7 +331,7 @@ my $q = new CGI::Simple;
 </pre>
 <p>It is traditional to call your object $q for query or perhaps $CGI.</p>
 
-<h3><a name="next_you_call_methods_on_that_object"></a>Next You Call Methods On That Object</h3>
+<h3><a id="next_you_call_methods_on_that_object"></a>Next You Call Methods On That Object</h3>
 <p>Once you have your object you can call methods on it using the -&gt; arrow syntax For example to get the names of all the parameters passed to your script you would just write:</p>
 <pre>
 @names = $q-&gt;param();
@@ -390,7 +361,7 @@ $q-&gt;param(-name=&gt;'veggie',-value=&gt;'tomato');
 $q-&gt;param(-name=&gt;'veggie',-value=&gt;['tomato','tomahto','potato','potahto']);
 </pre>
 
-<h2><a name="calling_CGI__simple_routines_using_the_function_interface"></a>Calling CGI::Simple Routines Using The Function Interface</h2>
+<h2><a id="calling_CGI__simple_routines_using_the_function_interface"></a>Calling CGI::Simple Routines Using The Function Interface</h2>
 <p>For convenience a functional interface is provided by the CGI::Simple::Standard module. This hides the OO details from you and allows you to simply call methods. You may either use AUTOLOADING of methods or import specific method sets into you namespace. Here are the first few examples again using the function interface.</p>
 <pre>
 use CGI::Simple::Standard qw(-autoload);
@@ -405,7 +376,7 @@ print header('text/html');
 <p>Yes that's it. Not a $q-&gt; in sight. You just use the module and select how/which methods to load. You then just call the methods you want exactly as before but without the $q-&gt; notation.</p>
 <p>When (if) you read the following docs and are using the functional interface just pretend the $q-&gt; is not there.</p>
 
-<h3><a name="selecting_which_methods_to_load"></a>Selecting Which Methods To Load</h3>
+<h3><a id="selecting_which_methods_to_load"></a>Selecting Which Methods To Load</h3>
 <p>When you use the functional interface Perl needs to be able to find the functions you call. The simplest way of doing this is to use autoloading as shown above. When you use CGI::Simple::Standard with the '-autoload' pragma it exports a single AUTOLOAD sub into you namespace. Every time you call a non existent function AUTOLOAD is called and will load the required function and install it in your namespace. Thus only the AUTOLOAD sub and those functions you specifically call will be imported.</p>
 <p>Alternatively CGI::Simple::Standard provides a range of function sets you can import or you can just select exactly what you want. You do this using the familiar</p>
 <pre>
@@ -413,7 +384,7 @@ use CGI::Simple::Standard qw( :func_set  some_func);
 </pre>
 <p>notation. This will import the ':func_set' function set and the specific function 'some_func'.</p>
 
-<h3><a name="to_autoload_or_not_to_autoload__that_is_the_question_"></a>To Autoload Or Not To Autoload, That Is The Question</h3>
+<h3><a id="to_autoload_or_not_to_autoload__that_is_the_question_"></a>To Autoload Or Not To Autoload, That Is The Question</h3>
 <p>If you do not have a AUTOLOAD sub in you script it is generally best to use the '-autoload' option. Under autoload you can use any method you want but only import and compile those functions you actually use.</p>
 <p>If you do not use autoload you must specify what functions to import. You can only use functions that you have imported. For comvenience functions are grouped into related sets. If you choose to import one or more ':func_set' you may have potential namespace collisions so check out the docs to see what gets imported. Using the ':all' tag is pretty slack but it is there if you want. Full details of the function sets are provided in the CGI::Simple::Standard docs</p>
 <p>If you just want say the param and header methods just load these two.</p>
@@ -421,7 +392,7 @@ use CGI::Simple::Standard qw( :func_set  some_func);
 use CGI::Simple::Standard qw(param header);
 </pre>
 
-<h3><a name="setting_globals_using_the_functional_interface"></a>Setting Globals Using The Functional Interface</h3>
+<h3><a id="setting_globals_using_the_functional_interface"></a>Setting Globals Using The Functional Interface</h3>
 <p>Where you see global variables being set using the syntax:</p>
 <pre>
 $CGI::Simple::DEBUG = 1;
@@ -429,9 +400,9 @@ $CGI::Simple::DEBUG = 1;
 <p>You use exactly the same syntax when using CGI::Simple::Standard.</p>
 
 
-<h2><a name="the_core_methods"></a>The Core Methods</h2>
+<h2><a id="the_core_methods"></a>The Core Methods</h2>
 
-<h3><a name="new___creating_a_new_query_object"></a><code>new()</code>: Creating A New Query Object</h3>
+<h3><a id="new___creating_a_new_query_object"></a><code>new()</code>: Creating A New Query Object</h3>
 <p>The first step in using CGI::Simple is to create a new query object using the <code>new()</code> constructor:</p>
 <pre>
 $q = new CGI::Simple;
@@ -479,13 +450,13 @@ $empty_query = new CGI::Simple(&quot;&quot;);
 $empty_query = new CGI::Simple({});
 </pre>
 
-<h3><a name="keywords___fetching_a_list_of_keywords_from_a_query"></a><code>keywords()</code>: Fetching A List Of Keywords From A Query</h3>
+<h3><a id="keywords___fetching_a_list_of_keywords_from_a_query"></a><code>keywords()</code>: Fetching A List Of Keywords From A Query</h3>
 <pre>
 @keywords = $q-&gt;keywords;
 </pre>
 <p>If the script was invoked as the result of an &lt;ISINDEX&gt; search, the parsed keywords can be obtained as an array using the <code>keywords()</code> method.</p>
 
-<h3><a name="param___fetching_the_names_of_all_parameters_passed_to_your_script"></a><code>param()</code>: Fetching The Names Of All Parameters Passed To Your Script</h3>
+<h3><a id="param___fetching_the_names_of_all_parameters_passed_to_your_script"></a><code>param()</code>: Fetching The Names Of All Parameters Passed To Your Script</h3>
 <pre>
 @names = $q-&gt;param;
 </pre>
@@ -495,7 +466,7 @@ $empty_query = new CGI::Simple({});
     <p>The array of parameter names returned will be in the same order as they were submitted by the browser. Usually this order is the same as the order in which the parameters are defined in the form (however, this isn't part of the spec, and so isn't guaranteed).</p>
 </div>
 
-<h3><a name="param___fetching_the_value_or_values_of_a_simple_named_parameter"></a><code>param()</code>: Fetching The Value Or Values Of A Simple Named Parameter</h3>
+<h3><a id="param___fetching_the_value_or_values_of_a_simple_named_parameter"></a><code>param()</code>: Fetching The Value Or Values Of A Simple Named Parameter</h3>
 <pre>
 @values = $q-&gt;param('foo');
 </pre>
@@ -510,7 +481,7 @@ $CGI::Simple::NO_UNDEF_PARAMS = 1;
 </pre>
 <p>Then value-less parameters will be ignored, and will not exist in the query object. If you try to access them via param you will get an undef return value.</p>
 
-<h3><a name="param___setting_the_values_of_a_named_parameter"></a><code>param()</code>: Setting The Values Of A Named 
+<h3><a id="param___setting_the_values_of_a_named_parameter"></a><code>param()</code>: Setting The Values Of A Named 
 Parameter</h3>
 <pre>
 $q-&gt;param('foo','an','array','of','values');
@@ -525,7 +496,7 @@ $q-&gt;param(-name=&gt;'foo',-values=&gt;['an','array','of','values']);
 $q-&gt;param(-name=&gt;'foo',-value=&gt;'the value');
 </pre>
 
-<h3><a name="param___retrieving_non_application_x_www_form_urlencoded_data"></a><code>param()</code>: Retrieving non-application/x-www-form-urlencoded Data</h3>
+<h3><a id="param___retrieving_non_application_x_www_form_urlencoded_data"></a><code>param()</code>: Retrieving non-application/x-www-form-urlencoded Data</h3>
 <p>If POSTed or PUTed data is not of type application/x-www-form-urlencoded or multipart/form-data, then the data will not be processed, but instead be returned as-is in a parameter named POSTDATA or PUTDATA.  To retrieve it, use code like this:</p>
 <pre>
 my $data = $q-&gt;param( 'POSTDATA' );
@@ -536,7 +507,7 @@ my $data = $q-&gt;param( 'PUTDATA' );
 </pre>
 <p>(If you don't know what the preceding means, don't worry about it.  It only affects people trying to use CGI::Simple for REST webservices)</p>
 
-<h3><a name="add_param___setting_the_values_of_a_named_parameter"></a><code>add_param()</code>: Setting The Values Of A Named Parameter</h3>
+<h3><a id="add_param___setting_the_values_of_a_named_parameter"></a><code>add_param()</code>: Setting The Values Of A Named Parameter</h3>
 <p>You nay also use the new method <code>add_param</code> to add parameters. This is an alias to the <code>_add_param()</code> internal method that actually does all the work. You can call it like this:</p>
 <pre>
 $q-&gt;add_param('foo', 'new');
@@ -545,33 +516,33 @@ $q-&gt;add_param( 'foo', 'bar', 'overwrite' );
 </pre>
 <p>The first argument is the parameter, the second the value or an array ref of values and the optional third argument sets overwrite mode. If the third argument is absent of false the values will be appended. If true the values will overwrite any existing ones</p> 
 
-<h3><a name="append___appending_values_to_a_named_parameter"></a><code>append()</code>: Appending Values To A Named Parameter</h3>
+<h3><a id="append___appending_values_to_a_named_parameter"></a><code>append()</code>: Appending Values To A Named Parameter</h3>
 <pre>
 $q-&gt;append(-name=&gt;'foo',-values=&gt;['yet','more','values']);
 </pre>
 <p>This adds a value or list of values to the named parameter.  The values are appended to the end of the parameter if it already exists. Otherwise the parameter is created.  Note that this method only recognizes the named argument calling syntax.</p>
 
-<h3><a name="import_names___importing_all_parameters_into_a_namespace_"></a><code>import_names()</code>: Importing All Parameters Into A Namespace</h3>
+<h3><a id="import_names___importing_all_parameters_into_a_namespace_"></a><code>import_names()</code>: Importing All Parameters Into A Namespace</h3>
 <p>This method was silly, non OO and has been deleted. You can get all the params as a hash using <code>Vars</code> or via all the other accessors.</p>
 
-<h3><a name="delete___deleting_a_parameter_completely"></a><code>delete()</code>: Deleting A Parameter Completely</h3>
+<h3><a id="delete___deleting_a_parameter_completely"></a><code>delete()</code>: Deleting A Parameter Completely</h3>
 <pre>
 $q-&gt;delete('foo');
 </pre>
 <p>This completely clears a parameter. If you are using the function call interface, use <code>Delete()</code> instead to avoid conflicts with Perl's built-in delete operator.</p>
 <p>If you are using the function call interface, use <code>Delete()</code> instead to avoid conflicts with Perl's built-in delete operator.</p>
 
-<h3><a name="delete_all___deleting_all_parameters"></a><code>delete_all()</code>: Deleting All Parameters</h3>
+<h3><a id="delete_all___deleting_all_parameters"></a><code>delete_all()</code>: Deleting All Parameters</h3>
 <pre>
 $q-&gt;delete_all();
 </pre>
 <p>This clears the CGI::Simple object completely. For CGI.pm compatibility <code>Delete_all()</code> is provided however there is no reason to use this in the function call interface other than symmetry.</p>
 <p>For CGI.pm compatibility <code>Delete_all()</code> is provided as an alias for <code>delete_all</code>. However, there is no reason to use this, even in the function call interface.</p>
 
-<h3><a name="param_fetch___direct_access_to_the_parameter_list"></a><code>param_fetch()</code>: Direct Access To The Parameter List</h3>
+<h3><a id="param_fetch___direct_access_to_the_parameter_list"></a><code>param_fetch()</code>: Direct Access To The Parameter List</h3>
 <p>This method is provided for CGI.pm compatibility only. It returns an array ref to the values associated with a named param. It is deprecated.</p>
 
-<h3><a name="vars___fetching_the_entire_parameter_list_as_a_hash"></a><code>Vars()</code>: Fetching The Entire Parameter List As A Hash</h3>
+<h3><a id="vars___fetching_the_entire_parameter_list_as_a_hash"></a><code>Vars()</code>: Fetching The Entire Parameter List As A Hash</h3>
 <pre>
 $params = $q-&gt;Vars;  # as a tied hash ref
 print $params-&gt;{'address'};
@@ -592,11 +563,11 @@ print $params{'address'};
 <p>When using <code>Vars()</code>, the thing you must watch out for are multi-valued CGI parameters.  Because a hash cannot distinguish between scalar and list context, multi-valued parameters will be returned as a packed string, separated by the &quot;\0&quot; (null) character.  You must split this packed string in order to get at the individual values.  This is the convention introduced long ago by Steve Brenner in his CGI-lib.pl module for Perl version 4.</p>
 <p>You can change the character used to do the multiple value packing by passing it to <code>Vars()</code> as an argument as shown.</p>
 
-<h3><a name="url_param___access_the_query_string_regardless_of__get__or__post_"></a><code>url_param()</code>: Access the QUERY_STRING Regardless of 'GET' or 'POST'</h3>
+<h3><a id="url_param___access_the_query_string_regardless_of__get__or__post_"></a><code>url_param()</code>: Access the QUERY_STRING Regardless of 'GET' or 'POST'</h3>
 <p>The <code>url_param()</code> method makes the QUERY_STRING data available regardless of whether the REQUEST_METHOD was 'GET' or 'POST'. You can do anything with <code>url_param</code> that you can do with <code>param()</code>, however the data set is completely independent.</p>
 <p>Technically what happens if you use this method is that the QUERY_STRING data is parsed into a new CGI::Simple object which is stored within the current object. <code>url_param()</code> then just calls <code>param()</code> on this new object.</p>
 
-<h3><a name="parse_query_string___add_query_string_data_to__post__requests"></a><code>parse_query_string()</code>: Add QUERY_STRING Data to 'POST' Requests</h3>
+<h3><a id="parse_query_string___add_query_string_data_to__post__requests"></a><code>parse_query_string()</code>: Add QUERY_STRING Data to 'POST' Requests</h3>
 <p>When the REQUEST_METHOD is 'POST' the default behavior is to ignore name/value pairs or keywords in the $ENV{'QUERY_STRING'}. You can override this by calling <code>parse_query_string()</code> which will add the QUERY_STRING data to the data already in our CGI::Simple object if the REQUEST_METHOD was 'POST'</p>
 <pre>
 $q = new CGI::Simple;
@@ -605,7 +576,7 @@ $q-&gt;parse_query_string;  # add $ENV{'QUERY_STRING'} data to our $q object
 <p>If the REQUEST_METHOD was 'GET' then the QUERY_STRING will already be stored in our object so <code>parse_query_string</code> will be ignored.</p>
 <p>This is a new method in CGI::Simple that is not available in CGI.pm</p>
 
-<h3><a name="save___saving_the_state_of_an_object_to_file"></a><code>save()</code>: Saving The State Of An Object To File</h3>
+<h3><a id="save___saving_the_state_of_an_object_to_file"></a><code>save()</code>: Saving The State Of An Object To File</h3>
 <pre>
 $q-&gt;save(\*FILEHANDLE)
 </pre>
@@ -629,7 +600,7 @@ $q2 = new CGI::Simple(\*FH);  # get the next record
 restore_parameters(\*FH);
 </pre>
 
-<h2><a name="file_uploads"></a>File Uploads</h2>
+<h2><a id="file_uploads"></a>File Uploads</h2>
 <p>File uploads are easy with CGI::Simple. You use the <code>upload()</code> method. Assuming you have the following in your HTML:</p>
 <pre>
 &lt;form method=&quot;POST&quot;
@@ -642,7 +613,7 @@ restore_parameters(\*FH);
 <p>Note that the ENCTYPE is &quot;multipart/form-data&quot;. You must specify this or the browser will default to &quot;application/x-www-form-urlencoded&quot; which will result in no files being uploaded although on the surface things will appear OK.</p>
 <p>When the user submits this form any supplied files will be spooled onto disk and saved in temporary files. These files will be deleted when your script.CGI exits so if you want to keep them you will need to proceed as follows.</p>
 
-<h3><a name="upload___the_key_file_upload_method"></a><code>upload()</code>: The Key File Upload Method</h3>
+<h3><a id="upload___the_key_file_upload_method"></a><code>upload()</code>: The Key File Upload Method</h3>
 <p>The <code>upload()</code> method is quite versatile. If you call <code>upload()</code> without any arguments it will return a list of uploaded files in list context and the number of uploaded files in scalar context.</p>
 <pre>
 $number_of_files = $q-&gt;upload;
@@ -683,7 +654,7 @@ $ok = $q-&gt;upload( 'upload_field_name', '/path/to/write/file.name' );
 </pre>
 <p>BUT there is a catch. If you have multiple upload fields, all called 'upload_field_name' then you will only get the last uploaded file from these fields.</p>
 
-<h3><a name="upload_info___get_the_details_about_uploaded_files"></a><code>upload_info()</code>: Get The Details About Uploaded Files</h3>
+<h3><a id="upload_info___get_the_details_about_uploaded_files"></a><code>upload_info()</code>: Get The Details About Uploaded Files</h3>
 <p>The <code>upload_info()</code> method is a new method. Called without arguments it returns the number of uploaded files in scalar context and the names of those files in list context.</p>
 <pre>
 $number_of_upload_files   = $q-&gt;upload_info();
@@ -700,7 +671,7 @@ $file_size = $q-&gt;upload_info( $filename1, 'size' );
 <p>The size attribute is optional as this is the default value returned.</p>
 <p>Note: The old CGI.pm <code>uploadInfo()</code> method has been deleted.</p>
 
-<h3><a name="_post_max_and__disable_uploads"></a><code>$POST_MAX</code> and <code>$DISABLE_UPLOADS</code></h3>
+<h3><a id="_post_max_and__disable_uploads"></a><code>$POST_MAX</code> and <code>$DISABLE_UPLOADS</code></h3>
 <p>CGI.pm has a default setting that allows infinite size file uploads by default. In contrast file uploads are disabled by default in CGI::Simple to discourage Denial of Service attacks. You must enable them before you expect file uploads to work.</p>
 <p>When file uploads are disabled the file name and file size details will still be available from <code>param()</code> and <code>upload_info</code> respectively but the upload filehandle returned by <code>upload()</code> will be undefined - not surprising as the underlying temp file will not exist either.</p>
 <p>You can enable uploads using the '-upload' pragma. You do this by specifying this in you use statement:</p>
@@ -729,12 +700,12 @@ $CGI::Simple::POST_MAX = -1;            # infinite size upload
 <pre>
 use CGI::Simple qw( -default ..... );</pre>
 
-<h3><a name="binmode___and_win32"></a><code>binmode()</code> and Win32</h3>
+<h3><a id="binmode___and_win32"></a><code>binmode()</code> and Win32</h3>
 <p>If you are using CGI::Simple be sure to call <code>binmode()</code> on any handle that you create to write the uploaded file to disk. Calling <code>binmode()</code> will do no harm on other systems anyway.</p>
 
-<h2><a name="miscelaneous_methods"></a>Miscelaneous Methods</h2>
+<h2><a id="miscelaneous_methods"></a>Miscelaneous Methods</h2>
 
-<h3><a name="escapehtml___escaping_html_special_characters"></a><code>escapeHTML()</code>: Escaping HTML Special Characters</h3>
+<h3><a id="escapehtml___escaping_html_special_characters"></a><code>escapeHTML()</code>: Escaping HTML Special Characters</h3>
 <p>In HTML the &lt; &gt; &quot; and &amp; chars have special meaning and need to be escaped to &amp;lt; &amp;gt; &amp;quot; and &amp;amp; respectively.</p>
 <pre>
 $escaped = $q-&gt;escapeHTML( $string );
@@ -744,37 +715,37 @@ $escaped = $q-&gt;escapeHTML( $string, 'new_lines_too' );
 </pre>
 <p>If the optional second argument is supplied then newlines will be escaped to.</p>
 
-<h3><a name="unescapehtml___unescape_html_special_characters"></a><code>unescapeHTML()</code>: Unescape HTML Special Characters</h3>
+<h3><a id="unescapehtml___unescape_html_special_characters"></a><code>unescapeHTML()</code>: Unescape HTML Special Characters</h3>
 <p>This performs the reverse of <code>escapeHTML()</code>.</p>
 <pre>
 $unescaped = $q-&gt;unescapeHTML( $HTML_escaped_string );
 </pre>
 
-<h3><a name="url_decode___decode_a_url_encoded_string"></a><code>url_decode()</code>: Decode a URL Encoded String</h3>
+<h3><a id="url_decode___decode_a_url_encoded_string"></a><code>url_decode()</code>: Decode a URL Encoded String</h3>
 <p>This method will correctly decode a url encoded string.</p>
 <pre>
 $decoded = $q-&gt;url_decode( $encoded );
 </pre>
 
-<h3><a name="url_encode___url_encode_a_string"></a><code>url_encode()</code>: URL Encode A String</h3>
+<h3><a id="url_encode___url_encode_a_string"></a><code>url_encode()</code>: URL Encode A String</h3>
 <p>This method will correctly URL encode a string.</p>
 <pre>
 $encoded = $q-&gt;url_encode( $string );
 </pre>
 
-<h3><a name="parse_keywordlist___parse_a_supplied_keyword_list"></a><code>parse_keywordlist()</code>: Parse a Supplied Keyword List</h3>
+<h3><a id="parse_keywordlist___parse_a_supplied_keyword_list"></a><code>parse_keywordlist()</code>: Parse a Supplied Keyword List</h3>
 <pre>
 @keywords = $q-&gt;parse_keywordlist( $keyword_list );
 </pre>
 <p>This method returns a list of keywords, correctly URL escaped and split out of the supplied string</p>
 
-<h3><a name="put___send_output_to_browser"></a><code>put()</code>: Send Output To Browser</h3>
+<h3><a id="put___send_output_to_browser"></a><code>put()</code>: Send Output To Browser</h3>
 <p>CGI.pm alias for print. $q-&gt;put('Hello World!') will print the usual</p>
 
-<h3><a name="print___send_output_to_browser"></a><code>print()</code>: Send Output To Browser</h3>
+<h3><a id="print___send_output_to_browser"></a><code>print()</code>: Send Output To Browser</h3>
 <p>CGI.pm alias for print. $q-&gt;print('Hello World!') will print the usual</p>
 
-<h2><a name="http_cookies"></a>HTTP Cookies</h2>
+<h2><a id="http_cookies"></a>HTTP Cookies</h2>
 <p>CGI.pm has several methods that support cookies.</p>
 <p>A cookie is a name=value pair much like the named parameters in a CGI query string.  CGI scripts create one or more cookies and send them to the browser in the HTTP header.  The browser maintains a list of cookies that belong to a particular Web server, and returns them to the CGI script during subsequent interactions.</p>
 <p>In addition to the required name=value pair, each cookie has several optional attributes:</p>
@@ -800,7 +771,7 @@ will remain active until the user quits the browser.</p>
 </li>
 </ol>
 
-<h3><a name="cookie___a_simple_access_method_to_cookies"></a><code>cookie()</code> A Simple Access Method To Cookies</h3>
+<h3><a id="cookie___a_simple_access_method_to_cookies"></a><code>cookie()</code> A Simple Access Method To Cookies</h3>
 <p>The interface to HTTP cookies is the <code>cookie()</code> method:</p>
 <pre>
 $cookie = $q-&gt;cookie( 
@@ -893,14 +864,14 @@ $c = $q-&gt;cookie( -name=&gt;'answers', -value=&gt;[$q-&gt;param('answers')] );
 $q-&gt;param( -name=&gt;'answers', -value=&gt;[$q-&gt;cookie('answers')] );
 </pre>
 
-<h3><a name="raw_cookie__"></a><code>raw_cookie()</code></h3>
+<h3><a id="raw_cookie__"></a><code>raw_cookie()</code></h3>
 <p>Returns the HTTP_COOKIE variable. Cookies have a special format, and this method call just returns the raw form (?cookie dough). See <code>cookie()</code> for ways of setting and retrieving cooked cookies.</p>
 <p>Called with no parameters, <code>raw_cookie()</code> returns the packed cookie structure.  You can separate it into individual cookies by splitting on the character sequence &quot;; &quot;.  Called with the name of a cookie, retrieves the <code>unescaped</code> form of the cookie.  You can use the regular <code>cookie()</code> method to get the names, or use the <code>raw_fetch()</code> method from the CGI::Simmple::Cookie module.</p>
 
-<h2><a name="creating_http_headers"></a>Creating HTTP Headers</h2>
+<h2><a id="creating_http_headers"></a>Creating HTTP Headers</h2>
 <p>Normally the first thing you will do in any CGI script is print out an HTTP header.  This tells the browser what type of document to expect, and gives other optional information, such as the language, expiration date, and whether to cache the document.  The header can also be manipulated for special purposes, such as server push and pay per view pages.</p>
 
-<h3><a name="header___create_simple_or_complex_http_headers"></a><code>header()</code>: Create Simple Or Complex HTTP Headers</h3>
+<h3><a id="header___create_simple_or_complex_http_headers"></a><code>header()</code>: Create Simple Or Complex HTTP Headers</h3>
 <pre>
 print $q-&gt;header;
 </pre>
@@ -990,7 +961,7 @@ Thursday, 25-Apr-1999 00:40:33 GMT  at the indicated time &amp; date
 <p>The <code>-charset</code> parameter can be used to control the character set sent to the browser.  If not provided, defaults to ISO-8859-1.  As a side effect, this sets the <code>charset()</code> method as well.</p>
 <p>The <code>-attachment</code> parameter can be used to turn the page into an attachment.  Instead of displaying the page, some browsers will prompt the user to save it to disk.  The value of the argument is the suggested name for the saved file.  In order for this to work, you may have to set the <code>-type</code> to 'application/octet-stream'.</p>
 
-<h3><a name="no_cache___preventing_browser_caching_of_scripts"></a><code>no_cache()</code>: Preventing Browser Caching Of Scripts</h3>
+<h3><a id="no_cache___preventing_browser_caching_of_scripts"></a><code>no_cache()</code>: Preventing Browser Caching Of Scripts</h3>
 <p>Most browsers will not cache the output from CGI scripts. Every time the browser reloads the page, the script is invoked anew. However some browsers do cache pages. You can discourage this behavior using the <code>no_cache()</code> function.</p>
 <pre>
 $q-&gt;no_cache(1); # turn caching off by sending appropriate headers
@@ -1011,10 +982,10 @@ Content-Type: image/gif
 </pre>
 <p>Both the Pragma: no-cache header field and an Expires header that corresponds to the current time (ie now) will be sent.</p>
 
-<h3><a name="cache___preventing_browser_caching_of_scripts"></a><code>cache()</code>: Preventing Browser Caching Of Scripts</h3>
+<h3><a id="cache___preventing_browser_caching_of_scripts"></a><code>cache()</code>: Preventing Browser Caching Of Scripts</h3>
 <p>The somewhat ill named <code>cache()</code> method is a legacy from CGI.pm. It operates the same as the new <code>no_cache()</code> method. The difference is/was that when set it results only in the Pragma: no-cache line being printed. Expires time data is not sent.</p>
 
-<h3><a name="redirect___generating_a_redirection_header"></a><code>redirect()</code>: Generating A Redirection Header</h3>
+<h3><a id="redirect___generating_a_redirection_header"></a><code>redirect()</code>: Generating A Redirection Header</h3>
 <pre>
 print $q-&gt;redirect('<a href="http://somewhere.else/in/movie/land">http://somewhere.else/in/movie/land</a>');
 </pre>
@@ -1030,7 +1001,7 @@ print $q-&gt; redirect(
 </pre>
 <p>The <code>-nph</code> parameter, if set to a true value, will issue the correct headers to work with a NPH (no-parse-header) script.  This is important to use with certain servers, such as Microsoft ones, which expect all their scripts to be NPH.</p> 
 
-<h2><a name="pragmas"></a>Pragmas</h2>
+<h2><a id="pragmas"></a>Pragmas</h2>
 <p>There are a number of pragmas that you can specify in your use CGI::Simple statement. Pragmas, which are always preceded by a hyphen, change the way that CGI::Simple functions in various ways. You can generally achieve exactly the same results by setting the underlying $GLOBAL_VARIABLES.</p> <p>For example the '-upload' pargma will enable file uploads:</p>
 <pre>
 use CGI::Simple qw(-upload);
@@ -1117,7 +1088,7 @@ use CGI::Simple::Standard qw(:standard -debug);
 </dd>
 </dl>
 
-<h2><a name="using_nph_scripts"></a>Using NPH Scripts</h2>
+<h2><a id="using_nph_scripts"></a>Using NPH Scripts</h2>
 <p>NPH, or &quot;no-parsed-header&quot;, scripts bypass the server completely by sending the complete HTTP header directly to the browser.  This has slight performance benefits, but is of most use for taking advantage of HTTP extensions that are not directly supported by your server, such as server push and PICS headers.</p>
 <p>Servers use a variety of conventions for designating CGI scripts as NPH.  Many Unix servers look at the beginning of the script's name for the prefix &quot;nph-&quot;.  The Macintosh WebSTAR server and Microsoft's Internet Information Server, in contrast, try to decide whether a program is an NPH script by examining the first line of script output.</p>
 <p>CGI.pm supports NPH scripts with a special NPH mode.  When in this mode, CGI.pm will output the necessary extra header information when the <code>header()</code> and <code>redirect()</code> methods are called. You can set NPH mode in any of the following ways:</p>
@@ -1151,7 +1122,7 @@ print $q-&gt;header(-nph=&gt;1);
 
 <p>The Microsoft Internet Information Server requires NPH mode. CGI::Simple will automatically detect when the script is running under IIS and put itself into this mode.  You do not need to do this manually, although it won't hurt anything if you do.  However, note that if you have applied Service Pack 6, much of the functionality of NPH scripts, including the ability to redirect while setting a cookie, b&lt;do not work at all&gt; on IIS without a special patch from Microsoft.  See <a href="http://support.microsoft.com/support/kb/articles/Q280/3/41.ASP:">http://support.microsoft.com/support/kb/articles/Q280/3/41.ASP:</a> Non-Parsed Headers Stripped From CGI Applications That Have nph- Prefix in Name.</p>
 
-<h2><a name="server_push"></a>Server Push</h2>
+<h2><a id="server_push"></a>Server Push</h2>
 <p>CGI.pm provides four simple functions for producing multipart documents of the type needed to implement server push.  These functions were graciously provided by Ed Jordan &lt;<a href="mailto:ed@fidalgo.net">ed@fidalgo.net</a>&gt; with additions from Andrew Benham &lt;<a href="mailto:adsb@bigfoot.com">adsb@bigfoot.com</a>&gt;</p>
 <p>You are also advised to put the script into NPH mode and to set $| to 1 to avoid buffering problems.</p> <p>Browser support for server push is variable.</p>
 <p>Here is a simple script that demonstrates server push:</p>
@@ -1179,34 +1150,34 @@ foreach (0 .. 4) {
 </pre>
 <p>This script initializes server push by calling <code>multipart_init()</code>. It then enters a loop in which it begins a new multipart section by calling <code>multipart_start()</code>, prints the current local time, and ends a multipart section with <code>multipart_end()</code>.  It then sleeps a second, and begins again. On the final iteration, it ends the multipart section with <code>multipart_final()</code> rather than with <code>multipart_end()</code>.</p>
 
-<h3><a name="multipart_init___initialize_the_multipart_system"></a><code>multipart_init()</code>: Initialize the Multipart System</h3>
+<h3><a id="multipart_init___initialize_the_multipart_system"></a><code>multipart_init()</code>: Initialize the Multipart System</h3>
 <pre>
 multipart_init(-boundary=&gt;$boundary);
 </pre>
 <p>Initialize the multipart system.  The -boundary argument specifies what MIME boundary string to use to separate parts of the document. If not provided, CGI.pm chooses a reasonable boundary for you.</p>
 
-<h3><a name="multipart_start___start_a_new_part_of_the_multipart_document"></a><code>multipart_start()</code>: Start A New Part Of The Multipart Document</h3>
+<h3><a id="multipart_start___start_a_new_part_of_the_multipart_document"></a><code>multipart_start()</code>: Start A New Part Of The Multipart Document</h3>
 <pre>
 multipart_start(-type=&gt;$type)
 </pre>
 <p>Start a new part of the multipart document using the specified MIME type.  If not specified, text/html is assumed.</p>
 
-<h3><a name="multipart_end___end_a_multipart_part"></a><code>multipart_end()</code>: End a Multipart Part</h3>
+<h3><a id="multipart_end___end_a_multipart_part"></a><code>multipart_end()</code>: End a Multipart Part</h3>
 <pre>
 multipart_end()
 </pre>
 <p>End a part.  You must remember to call <code>multipart_end()</code> once for each <code>multipart_start()</code>, except at the end of the last part of the multipart document when <code>multipart_final()</code> should be called instead of <code>multipart_end()</code>.</p>
 
-<h3><a name="multipart_final__"></a><code>multipart_final()</code></h3>
+<h3><a id="multipart_final__"></a><code>multipart_final()</code></h3>
 <pre>
 multipart_final()
 </pre>
 <p>End all parts.  You should call <code>multipart_final()</code> rather than <code>multipart_end()</code> at the end of the last part of the multipart document.</p>
 
-<h3><a name="CGI__push"></a>CGI::Push</h3>
+<h3><a id="CGI__push"></a>CGI::Push</h3>
 <p>Users interested in server push applications should also have a look at the <code>CGI::Push</code> module.</p>
 
-<h2><a name="debugging"></a>Debugging</h2>
+<h2><a id="debugging"></a>Debugging</h2>
 <p>If you are running the script from the command line or in the perl debugger, you can pass the script a list of keywords or parameter=value pairs on the command line or from standard input (you don't have to worry about tricking your script into reading from environment variables).  Before you do this you will need to change the debug level from the default level of 0 (no debug) to either 1 if you want to debug from @ARGV (the command line) of 2 if you want to debug from STDIN. You can do this using the debug pragma like this:</p>
 <pre>
 use CGI::Simple qw(-debug2);  # set debug to level 2 =&gt; from STDIN
@@ -1241,7 +1212,7 @@ your_script.pl name1=value1&amp;name2=value2
 your_script.pl &quot;name1='I am a long value'&quot; &quot;name2=two\ words&quot;
 </pre>
 
-<h3><a name="dump___dumping_the_current_object_details"></a><code>Dump()</code> Dumping The Current Object Details</h3>
+<h3><a id="dump___dumping_the_current_object_details"></a><code>Dump()</code> Dumping The Current Object Details</h3>
 <p>The <code>Dump()</code> method produces a string consisting of all the query's object attributes formatted nicely as a nested list.  This dump includes the name/value pairs and a number of other details. This is useful for debugging purposes:</p>
 <pre>
 print $q-&gt;Dump
@@ -1287,7 +1258,7 @@ $VAR1 = bless({
 print $q-&gt;Dump(\%ENV);
 </pre>
 
-<h3><a name="printenv___dumping_the_environment"></a><code>PrintEnv()</code>: Dumping the Environment</h3>
+<h3><a id="printenv___dumping_the_environment"></a><code>PrintEnv()</code>: Dumping the Environment</h3>
 <p>You can get a similar browser friendly dump of the current %ENV hash using:</p>
 <pre>
 print $q-&gt;PrintEnv;
@@ -1329,7 +1300,7 @@ $VAR1 = {
 };
 </pre>
 
-<h3><a name="CGI_error___retrieving_CGI__simple_error_messages"></a><code>CGI_error()</code> Retrieving CGI::Simple Error Messages</h3>
+<h3><a id="CGI_error___retrieving_CGI__simple_error_messages"></a><code>CGI_error()</code> Retrieving CGI::Simple Error Messages</h3>
 <p>Errors can occur while processing user input, particularly when processing uploaded files.  When these errors occur, CGI::Simple will stop processing and return an empty parameter list.  You can test for the existence and nature of errors using the <code>CGI_error()</code> function. The error messages are formatted as HTTP status codes. You can either incorporate the error text into an HTML page, or use it as the value of the HTTP status:</p>
 <pre>
 my $error = $q-&gt;CGI_error;
@@ -1341,84 +1312,84 @@ if ($error) {
 }
 </pre>
 
-<h2><a name="accessor_methods"></a>Accessor Methods</h2>
+<h2><a id="accessor_methods"></a>Accessor Methods</h2>
 
-<h3><a name="version___get_the_CGI__simple_version_info"></a><code>version()</code>: Get the CGI::Simple Version info</h3>
+<h3><a id="version___get_the_CGI__simple_version_info"></a><code>version()</code>: Get the CGI::Simple Version info</h3>
 <pre>
 $version = $q-&gt;version();
 </pre>
 <p>The <code>version()</code> method returns the value of $VERSION</p>
 
-<h3><a name="nph___enable_disable_nph__non_parsed_header__mode"></a><code>nph()</code>:Enable/disable NPH (Non Parsed Header) Mode</h3>
+<h3><a id="nph___enable_disable_nph__non_parsed_header__mode"></a><code>nph()</code>:Enable/disable NPH (Non Parsed Header) Mode</h3>
 <pre>
 $q-&gt;nph(1);  # enable NPH mode
 $q-&gt;nph(0);  # disable NPH mode
 </pre>
 <p>The <code>nph()</code> method enables and disables NPH headers. See the NPH section.</p>
 
-<h3><a name="all_parameters___get_the_names_values_of_all_parameters"></a><code>all_parameters()</code>: Get the Names/Values Of All Parameters</h3>
+<h3><a id="all_parameters___get_the_names_values_of_all_parameters"></a><code>all_parameters()</code>: Get the Names/Values Of All Parameters</h3>
 <pre>
 @all_parameters = $q-&gt;all_parameters();
 </pre>
 <p>The <code>all_parameters()</code> method is an alias for <code>param()</code></p>
 
-<h3><a name="charset___get_set_the_current_character_set_"></a><code>charset()</code>: Get/Set The Current Character Set</h3>
+<h3><a id="charset___get_set_the_current_character_set_"></a><code>charset()</code>: Get/Set The Current Character Set</h3>
 <pre>
 $charset = $q-&gt;charset(); # get current charset
 $q-&gt;charset('utf-42');    # set the charset
 </pre>
 <p>The <code>charset()</code> method gets the current charset value if no argument is supplied or sets it if an argument is supplied.</p>
 
-<h3><a name="crlf___get_the_system_specific_line_ending_sequence"></a><code>crlf()</code> Get the System Specific Line Ending Sequence</h3>
+<h3><a id="crlf___get_the_system_specific_line_ending_sequence"></a><code>crlf()</code> Get the System Specific Line Ending Sequence</h3>
 <pre>
 $crlf = $q-&gt;crlf();
 </pre>
 <p>The <code>crlf()</code> method returns the system specific line ending sequence.</p>
 
-<h3><a name="globals___get_set_the_value_of_the_remaining_global_variables"></a><code>globals()</code>: Get/set The Value of the Remaining Global Variables</h3>
+<h3><a id="globals___get_set_the_value_of_the_remaining_global_variables"></a><code>globals()</code>: Get/set The Value of the Remaining Global Variables</h3>
 <pre>
 $globals = $q-&gt;globals('FATAL');     # get the current value of $FATAL
 $globals = $q-&gt;globals('FATAL', 1 ); # set croak mode on CGI_error()
 </pre>
 <p>The <code>globals()</code> method gets/sets the values of the global variables after the script has been invoked. For globals like $POST_MAX and $DISABLE_UPLOADS this makes no difference as they must be set prior to calling the new constructor but there might be reason the change the value of others.</p> 
-<h3><a name="auth_type___get_the_current_authorization_verification_method"></a><code>auth_type()</code>: Get the Current Authorization/Verification Method</h3>
+<h3><a id="auth_type___get_the_current_authorization_verification_method"></a><code>auth_type()</code>: Get the Current Authorization/Verification Method</h3>
 <pre>
 $auth_type = $q-&gt;auth_type();
 </pre>
 <p>The <code>auth_type()</code> method returns the value of $ENV{'AUTH_TYPE'} which should contain the authorization/verification method in use for this script, if any.</p>
 
-<h3><a name="content_length___get_the_content_length_submitted_in_a_post"></a><code>content_length()</code>: Get The Content Length Submitted In a POST</h3>
+<h3><a id="content_length___get_the_content_length_submitted_in_a_post"></a><code>content_length()</code>: Get The Content Length Submitted In a POST</h3>
 <pre>
 $content_length = $q-&gt;content_length();
 </pre>
 <p>The <code>content_length()</code> method returns the value of $ENV{'AUTH_TYPE'}</p>
 
-<h3><a name="content_type___get_the_content_type_of_data_submitted_in_a_post"></a><code>content_type()</code>: Get The Content_Type Of Data Submitted In A POST</h3>
+<h3><a id="content_type___get_the_content_type_of_data_submitted_in_a_post"></a><code>content_type()</code>: Get The Content_Type Of Data Submitted In A POST</h3>
 <pre>
 $content_type = $q-&gt;content_type();
 </pre>
 <p>The <code>content_type()</code> method returns the content_type of data submitted in a POST, generally 'multipart/form-data' or 'application/x-www-form-urlencoded' as supplied in $ENV{'CONTENT_TYPE'}</p>
 
-<h3><a name="document_root___get_the_document_root"></a><code>document_root()</code>: Get The Document Root</h3>
+<h3><a id="document_root___get_the_document_root"></a><code>document_root()</code>: Get The Document Root</h3>
 <pre>
 $document_root = $q-&gt;document_root();
 </pre>
 <p>The <code>document_root()</code> method returns the value of $ENV{'DOCUMENT_ROOT'}</p>
 
-<h3><a name="gateway_interface___get_the_gateway_interface"></a><code>gateway_interface()</code>: Get The Gateway Interface</h3>
+<h3><a id="gateway_interface___get_the_gateway_interface"></a><code>gateway_interface()</code>: Get The Gateway Interface</h3>
 <pre>
 $gateway_interface = $q-&gt;gateway_interface();
 </pre>
 <p>The <code>gateway_interface()</code> method returns the value of
 <code>$ENV{'GATEWAY_INTERFACE'}</code>.</p>
 
-<h3><a name="path_translated___get_the_value_of_path_translated"></a><code>path_translated()</code>: Get The Value Of Path Translated</h3>
+<h3><a id="path_translated___get_the_value_of_path_translated"></a><code>path_translated()</code>: Get The Value Of Path Translated</h3>
 <pre>
 $path_translated = $q-&gt;path_translated();
 </pre>
 <p>The <code>path_translated()</code> method returns the value of $ENV{'PATH_TRANSLATED'}</p>
 
-<h3><a name="referer___spy_on_your_users"></a><code>referer()</code>: Spy on Your Users</h3>
+<h3><a id="referer___spy_on_your_users"></a><code>referer()</code>: Spy on Your Users</h3>
 <pre>
 $referer = $q-&gt;referer();
 </pre>
@@ -1426,14 +1397,14 @@ $referer = $q-&gt;referer();
 the URL of the page the browser was viewing prior to fetching your script.
 Not available for all browsers.</p>
 
-<h3><a name="remote_addr___get_the_remote_address"></a><code>remote_addr()</code>: Get the Remote Address</h3>
+<h3><a id="remote_addr___get_the_remote_address"></a><code>remote_addr()</code>: Get the Remote Address</h3>
 <pre>
 $remote_addr = $q-&gt;remote_addr();
 </pre>
 <p>The <code>remote_addr()</code> method returns the value of $ENV{'REMOTE_ADDR'} or
 127.0.0.1 (localhost) if this is not defined.</p>
 
-<h3><a name="remote_host___get_a_value_for_remote_host"></a><code>remote_host()</code>: Get a Value For Remote Host</h3>
+<h3><a id="remote_host___get_a_value_for_remote_host"></a><code>remote_host()</code>: Get a Value For Remote Host</h3>
 <pre>
 $remote_host = $q-&gt;remote_host();
 </pre>
@@ -1441,25 +1412,25 @@ $remote_host = $q-&gt;remote_host();
 defined. If this is not defined it returns $ENV{'REMOTE_ADDR'} If this is not
 defined it returns 'localhost'</p>
 
-<h3><a name="remote_ident___get_the_remote_identity"></a><code>remote_ident()</code>: Get the Remote Identity</h3>
+<h3><a id="remote_ident___get_the_remote_identity"></a><code>remote_ident()</code>: Get the Remote Identity</h3>
 <pre>
 $remote_ident = $q-&gt;remote_ident();
 </pre>
 <p>The <code>remote_ident()</code> method returns the value of $ENV{'REMOTE_IDENT'}</p>
 
-<h3><a name="remote_user___get_the_remote_user"></a><code>remote_user()</code>: Get the Remote User</h3>
+<h3><a id="remote_user___get_the_remote_user"></a><code>remote_user()</code>: Get the Remote User</h3>
 <pre>
 $remote_user = $q-&gt;remote_user();
 </pre>
 <p>The <code>remote_user()</code> method returns the authorization/verification name used for user verification, if this script is protected. The value comes from <code>$ENV{'REMOTE_USER'}</code>.</p>
 
-<h3><a name="request_method___get_the_request_method"></a><code>request_method()</code>: Get the Request Method</h3>
+<h3><a id="request_method___get_the_request_method"></a><code>request_method()</code>: Get the Request Method</h3>
 <pre>
 $request_method = $q-&gt;request_method();
 </pre>
 <p>The <code>request_method()</code> method returns the method used to access your script, usually one of 'POST', 'GET' or 'HEAD' as supplied by <code>$ENV{'REQUEST_METHOD'}</code>.</p>
 
-<h3><a name="script_name___get_the_script_name"></a><code>script_name()</code> Get the Script Name</h3>
+<h3><a id="script_name___get_the_script_name"></a><code>script_name()</code> Get the Script Name</h3>
 <pre>
 $script_name = $q-&gt;script_name();
 </pre>
@@ -1467,74 +1438,74 @@ $script_name = $q-&gt;script_name();
 defined. Otherwise it returns Perl's script name from $0. Failing this it
 returns a null string ''</p>
 
-<h3><a name="server_name___get_the_server_name"></a><code>server_name()</code>: Get the Server Name</h3>
+<h3><a id="server_name___get_the_server_name"></a><code>server_name()</code>: Get the Server Name</h3>
 <pre>
 $server_name = $q-&gt;server_name();
 </pre>
 <p>The <code>server_name()</code> method returns the value of <code>$ENV{'SERVER_NAME'}</code> if defined
 or 'localhost' otherwise</p>
 
-<h3><a name="server_port___get_the_port_the_server_is_listening_on"></a><code>server_port()</code>: Get The Port The Server Is Listening On</h3>
+<h3><a id="server_port___get_the_port_the_server_is_listening_on"></a><code>server_port()</code>: Get The Port The Server Is Listening On</h3>
 <pre>
 $server_port = $q-&gt;server_port();
 </pre>
 <p>The <code>server_port()</code> method returns the value $ENV{'SERVER_PORT'} if defined or 80 if not.</p>
 
-<h3><a name="server_protocol___get_the_current_server_protocol"></a><code>server_protocol()</code>: Get The Current Server Protocol</h3>
+<h3><a id="server_protocol___get_the_current_server_protocol"></a><code>server_protocol()</code>: Get The Current Server Protocol</h3>
 <pre>
 $server_protocol = $q-&gt;server_protocol();
 </pre>
 <p>The <code>server_protocol()</code> method returns the value of $ENV{'SERVER_PROTOCOL'} if defined or 'HTTP/1.0' otherwise</p>
 
-<h3><a name="server_software___get_the_server_software"></a><code>server_software()</code>: Get the Server Software</h3>
+<h3><a id="server_software___get_the_server_software"></a><code>server_software()</code>: Get the Server Software</h3>
 <pre>
 $server_software = $q-&gt;server_software();
 </pre>
 <p>The <code>server_software()</code> method returns the Value $Env{'Server_Software'} Or
 'Cmdline' If The Server Software Is Iis It Formats Your Hard Drive, Installs
 Linux, Ftps To Www.Apache.Org, Installs Apache, And Then Restores Your System
-From Tape. Well Maybe Not, But It's A Nice Thought.</P>
+From Tape. Well Maybe Not, But It's A Nice Thought.</p>
 
-<h3><a name="user_name___get_a_value_for_the_user_name_"></a><code>user_name()</code>: Get A Value For The User Name</h3>
+<h3><a id="user_name___get_a_value_for_the_user_name_"></a><code>user_name()</code>: Get A Value For The User Name</h3>
 <pre>
 $user_name = $q-&gt;user_name();
 </pre>
 <p>Attempt to obtain the remote user's name, using a variety of different techniques.  This only works with older browsers such as Mosaic. Newer browsers do not report the user name for privacy reasons!</p>
 <p>Technically the <code>user_name()</code> method returns the value of $ENV{'HTTP_FROM'} or failing that $ENV{'REMOTE_IDENT'} or as a last choice $ENV{'REMOTE_USER'}</p>
 
-<h3><a name="user_agent___get_the_users_browser_type"></a><code>user_agent()</code>: Get The Users Browser Type</h3>
+<h3><a id="user_agent___get_the_users_browser_type"></a><code>user_agent()</code>: Get The Users Browser Type</h3>
 <pre>
 $ua = $q-&gt;user_agent();          # return the user agent
 $ok = $q-&gt;user_agent('mozilla'); # return true if user agent 'mozilla'
 </pre>
 <p>The <code>user_agent()</code> method returns the value of $ENV{'HTTP_USER_AGENT'}  when called without an argument or true or false if the $ENV{'HTTP_USER_AGENT'} matches the passed argument. The matching is case insensitive and partial.</p>
 
-<h3><a name="virtual_host___get_the_virtual_host"></a><code>virtual_host()</code>: Get The Virtual Host</h3>
+<h3><a id="virtual_host___get_the_virtual_host"></a><code>virtual_host()</code>: Get The Virtual Host</h3>
 <pre>
 $virtual_host = $q-&gt;virtual_host();
 </pre>
 <p>The <code>virtual_host()</code> method returns the value of  $ENV{'HTTP_HOST'} if defined or $ENV{'SERVER_NAME'} as a default. Port numbers are removed.</p>
 
-<h3><a name="path_info___get_any_extra_path_info_set_to_the_script"></a><code>path_info()</code>: Get Any Extra Path Info Set To The Script</h3>
+<h3><a id="path_info___get_any_extra_path_info_set_to_the_script"></a><code>path_info()</code>: Get Any Extra Path Info Set To The Script</h3>
 <pre>
 $path_info = $q-&gt;path_info();
 </pre>
 <p>The <code>path_info()</code> method returns additional path information from the script URL. E.G. fetching /CGI-bin/your_script/additional/stuff will result in $q-&gt;<code>path_info()</code> returning &quot;/additional/stuff&quot;.</p>
 <p>NOTE: The Microsoft Internet Information Server is broken with respect to additional path information.  If you use the Perl DLL library, the IIS server will attempt to execute the additional path information as a Perl script. If you use the ordinary file associations mapping, the path information will be present in the environment, but incorrect.  The best thing to do is to avoid using additional path information in CGI scripts destined for use with IIS.</p>
 
-<h3><a name="accept___get_the_browser_mime_types"></a><code>Accept()</code>: Get The Browser Mime Types</h3>
+<h3><a id="accept___get_the_browser_mime_types"></a><code>Accept()</code>: Get The Browser Mime Types</h3>
 <pre>
 $Accept = $q-&gt;Accept();
 </pre>
 <p>The <code>Accept()</code> method returns a list of MIME types that the remote browser accepts. If you give this method a single argument corresponding to a MIME type, as in $q-&gt;Accept('text/html'), it will return a floating point value corresponding to the browser's preference for this type from 0.0 (don't want) to 1.0.  Glob types (e.g. text/*) in the browser's accept list are handled correctly.</p>
 
-<h3><a name="accept___alias_for_accept__"></a><code>accept()</code>: Alias for <code>Accept()</code></h3>
+<h3><a id="accept___alias_for_accept__"></a><code>accept()</code>: Alias for <code>Accept()</code></h3>
 <pre>
 $accept = $q-&gt;accept();
 </pre>
 <p>The <code>accept()</code> Method is an alias for <code>Accept()</code></p>
 
-<h3><a name="http___get_a_range_of_http_related_information"></a><code>http()</code> Get a Range of HTTP Related Information</h3>
+<h3><a id="http___get_a_range_of_http_related_information"></a><code>http()</code> Get a Range of HTTP Related Information</h3>
 <pre>
 $http = $q-&gt;http();
 </pre>
@@ -1546,19 +1517,19 @@ $requested_language = $q-&gt;http('Accept_language');
 $requested_language = $q-&gt;http('HTTP_ACCEPT_LANGUAGE');
 </pre>
 
-<h3><a name="https___get_a_range_of_https_related_information"></a><code>https()</code>: Get A Range Of Https Related Information</h3>
+<h3><a id="https___get_a_range_of_https_related_information"></a><code>https()</code>: Get A Range Of Https Related Information</h3>
 <pre>
 $https = $q-&gt;https();
 </pre>
 <p>The <code>https()</code> method is similar to the <code>http()</code> method except that when called without an argument it returns the value of $ENV{'HTTPS'} which will be true if a HTTPS connection is in use and false otherwise.</p> 
 
-<h3><a name="protocol___get_the_current_protocol"></a><code>protocol()</code>: Get The Current Protocol</h3>
+<h3><a id="protocol___get_the_current_protocol"></a><code>protocol()</code>: Get The Current Protocol</h3>
 <pre>
 $protocol = $q-&gt;protocol();
 </pre>
 <p>The <code>protocol()</code> method returns 'https' if a HTTPS connection is in use or the <code>server_protocol()</code> minus version numbers ('http') otherwise.</p>
 
-<h3><a name="url___return_the_script_s_url_in_several_formats"></a><code>url()</code>: Return the Script's URL in Several Formats</h3>
+<h3><a id="url___return_the_script_s_url_in_several_formats"></a><code>url()</code>: Return the Script's URL in Several Formats</h3>
 <pre>
 $full_url      = $q-&gt;url();
 $full_url      = $q-&gt;url(-full=&gt;1);
@@ -1611,7 +1582,7 @@ script.CGI
 </dd>
 </dl>
 
-<h3><a name="self_url___get_the_scripts_complete_url"></a><code>self_url()</code> Get the scripts complete URL</h3>
+<h3><a id="self_url___get_the_scripts_complete_url"></a><code>self_url()</code> Get the scripts complete URL</h3>
 <pre>
 $self_url = $q-&gt;self_url();
 </pre>
@@ -1620,13 +1591,13 @@ $self_url = $q-&gt;self_url();
 $self-&gt;url( '-path_info'=&gt;1, '-query'=&gt;1, '-full'=&gt;1 );
 </pre>
 
-<h3><a name="state___alias_for_self_url__"></a><code>state()</code>: Alias for <code>self_url()</code></h3>
+<h3><a id="state___alias_for_self_url__"></a><code>state()</code>: Alias for <code>self_url()</code></h3>
 <pre>
 $state = $q-&gt;state();
 </pre>
 <p>The <code>state()</code> method is an alias for <code>self_url()</code></p>
 
-<h2><a name="compatibility_with_CGI_pm"></a>Compatibility With CGI.pm</h2>
+<h2><a id="compatibility_with_CGI_pm"></a>Compatibility With CGI.pm</h2>
 <p>I has long been suggested that the CGI and HTML parts of CGI.pm should be split into separate modules (even the author suggests this!), CGI::Simple represents the realization of this and contains the complete CGI side of CGI.pm. Code-wise it weighs in at a little under 30% of the size of CGI.pm at a little under 1000 lines.</p>
 <p>A great deal of care has been taken to ensure that the interface remains unchanged although a few tweaks have been made. The test suite is extensive and includes all the CGI.pm test scripts as well as a series of new test scripts. You may like to have a look at /t/concur.t which makes 160 tests of CGI::Simple and CGI in parallel and compares the results to ensure they are identical. This is the case as of CGI.pm 2.78.</p>
 <p>You can't make an omelet without breaking eggs. A large number of methods and global variables have been deleted as detailed below. Some pragmas are also gone. In the tarball there is a script <code>/misc/check.pl</code> that will check if a script seems to be using any of these now non existent methods, globals or pragmas. You call it like this:</p>
@@ -1642,7 +1613,7 @@ from running the script on CGI.pm:</p>
 &hellip;
 </pre>
 
-<h2><a name="differences_from_CGI_pm"></a>Differences From CGI.pm</h2>
+<h2><a id="differences_from_CGI_pm"></a>Differences From CGI.pm</h2>
 <p>CGI::Simple is strict and warnings compliant.</p>
 <p>There are 4 modules in this distribution:</p>
 <table>
@@ -1667,7 +1638,7 @@ from running the script on CGI.pm:</p>
 <p>Simple.pm is the core module that provide all the essential functionality. Cookie.pm is a shortened rehash of the CGI.pm module of the same name which supplies the required cookie functionality. Util.pm has been recoded to use an internal object for data storage and supplies rarely needed non core functions and/or functions needed for the HTML side of things. Standard.pm is a wrapper module that supplies a complete functional interface to the OO back end supplied by CGI::Simple.</p>
 <p>Although a serious attempt has been made to keep the interface identical, some minor changes and tweaks have been made. They will likely be insignificant to most users but here are the gory details.</p>
 
-<h3><a name="globals_variables"></a>Globals Variables</h3>
+<h3><a id="globals_variables"></a>Globals Variables</h3>
 <p>The list of global variables has been pruned by 75%. Here is the complete list of the global variables used:</p>
 <pre>
 $VERSION = &quot;0.01&quot;;
@@ -1752,7 +1723,7 @@ $XHTML
 	<h4>Note</h4>
 	<p>CGI::Simple uses IO::File-&gt;new_tmpfile to get tempfile filehandles. These are private by default so 1PRIVATE_TEMPFILES is no longer required nor is 1TMPDIRECTORY. The value that were stored in 1OS, 1CRLF, 1QUERY_CHARSET and 1EBCDIC are now stored in the CGI::Simple::Util object where they find most of their use. The 1MOD_PERL and 1PERLEX values are now stored in our CGI::Simple object. 1IIS was only used once in <code>path_info()</code>.  1SL the system specific /  : path delimiter is not required as we let IO::File handle our tempfile requirements. The rest of the globals are HTML related, export related, hand rolled autoload related or serve obscure purposes in CGI.pm</p>
 </div>
-<h3><a name="changes_to_pragmas"></a>Changes to Pragmas</h3>
+<h3><a id="changes_to_pragmas"></a>Changes to Pragmas</h3>
 <p>There are some new pragmas available. See the pragmas section for details. The following CGI.pm pragmas are not available:</p>
 <pre>
 -any
@@ -1762,20 +1733,20 @@ $XHTML
 -private_tempfiles
 </pre>
 
-<h3><a name="filehandles"></a>Filehandles</h3>
+<h3><a id="filehandles"></a>Filehandles</h3>
 <p>Unlike CGI.pm which tries to accept all filehandle like objects only \*FH and $fh are accepted by CGI::Simple as file accessors for <code>new()</code> and <code>save()</code>. IO::File objects work fine.</p>
 
-<h3><a name="hash_interface"></a>Hash Interface</h3>
+<h3><a id="hash_interface"></a>Hash Interface</h3>
 <pre>
 %hash = $q-&gt;Vars();     # pack values with &quot;\0&quot;;
 %hash = $q-&gt;Vars(&quot;,&quot;);  # comma separate values
 </pre>
 <p>You may optionally pass <code>Vars()</code> a string that will be used to separate multiple values when they are packed into the single hash value. If no value is supplied the default &quot;\0&quot; (null byte) will be used. Null bytes are dangerous things for C based code (ie Perl).</p>
 
-<h2><a name="CGI__simple_complete_method_list"></a>CGI::Simple Complete Method List</h2>
+<h2><a id="CGI__simple_complete_method_list"></a>CGI::Simple Complete Method List</h2>
 <p>Here is a complete list of all the CGI::Simple methods.</p>
 
-<h3><a name="guts__hands_off__except_of_course_for_new_"></a>Guts (hands off, except of course for new)</h3>
+<h3><a id="guts__hands_off__except_of_course_for_new_"></a>Guts (hands off, except of course for new)</h3>
 <pre>
 _initialize_globals
 _use_CGI_pm_global_settings
@@ -1793,7 +1764,7 @@ _save_tmpfile
 _read_data
 </pre>
 
-<h3><a name="core_methods"></a>Core Methods</h3>
+<h3><a id="core_methods"></a>Core Methods</h3>
 <pre>
 param
 add_param
@@ -1813,14 +1784,14 @@ parse_query_string
 parse_keywordlist
 </pre>
 
-<h3><a name="save_and_restore_from_file_methods"></a>Save and Restore from File Methods</h3>
+<h3><a id="save_and_restore_from_file_methods"></a>Save and Restore from File Methods</h3>
 <pre>
 _init_from_file
 save
 save_parameters
 </pre>
 
-<h3><a name="miscellaneous_methods"></a>Miscellaneous Methods</h3>
+<h3><a id="miscellaneous_methods"></a>Miscellaneous Methods</h3>
 <pre>
 url_decode
 url_encode
@@ -1830,13 +1801,13 @@ put
 print
 </pre>
 
-<h3><a name="cookie_methods"></a>Cookie Methods</h3>
+<h3><a id="cookie_methods"></a>Cookie Methods</h3>
 <pre>
 cookie
 raw_cookie
 </pre>
 
-<h3><a name="header_methods"></a>Header Methods</h3>
+<h3><a id="header_methods"></a>Header Methods</h3>
 <pre>
 header
 cache
@@ -1844,7 +1815,7 @@ no_cache
 redirect
 </pre>
 
-<h3><a name="server_push_methods"></a>Server Push Methods</h3>
+<h3><a id="server_push_methods"></a>Server Push Methods</h3>
 <pre>
 multipart_init
 multipart_start
@@ -1852,7 +1823,7 @@ multipart_end
 multipart_final
 </pre>
 
-<h3><a name="debugging_methods"></a>Debugging Methods</h3>
+<h3><a id="debugging_methods"></a>Debugging Methods</h3>
 <pre>
 read_from_cmdline
 Dump
@@ -1860,7 +1831,7 @@ as_string
 CGI_error
 </pre>
 
-<h3><a name="accessor_methods"></a>Accessor Methods</h3>
+<h3>Accessor Methods</h3>
 <pre>
 version
 nph
@@ -1899,10 +1870,10 @@ self_url
 state
 </pre>
 
-<h2><a name="new_methods_in_CGI__simple"></a>New Methods In CGI::Simple</h2>
+<h2><a id="new_methods_in_CGI__simple"></a>New Methods In CGI::Simple</h2>
 <p>There are a few new methods in CGI::Simple as listed below. The highlights are the <code>parse_query_string()</code> method to add the QUERY_STRING data to your object if the method was POST. The <code>no_cache()</code> method adds an expires now directive and the Pragma: no-cache directive to the header to encourage some browsers to do the right thing. <code>PrintEnv()</code> from the CGI-lib.pl routines will dump an HTML friendly list of the %ENV and makes a handy addition to <code>Dump()</code> for use in debugging. The upload method now accepts a filepath as an optional second argument as shown in the synopsis. If this is supplied the uploaded file will be written to there automagically.</p>
 
-<h3><a name="internal_routines"></a>Internal Routines</h3>
+<h3><a id="internal_routines"></a>Internal Routines</h3>
 <pre>
 _initialize_globals()
 _use_CGI_pm_global_settings()
@@ -1918,7 +1889,7 @@ _save_tmpfile()
 _read_data()
 </pre>
 
-<h3><a name="new_public_methods"></a>New Public Methods</h3>
+<h3><a id="new_public_methods"></a>New Public Methods</h3>
 <pre>
 add_param()             # adds a param/value(s) pair +/- overwrite
 upload_info()           # uploaded files MIME type and size
@@ -1929,7 +1900,7 @@ no_cache()              # add both the Pragma: no-cache
                         # and Expires/Date =&gt; 'now' to header
 </pre>
 
-<h3><a name="new_accessors"></a>New Accessors</h3>
+<h3><a id="new_accessors"></a>New Accessors</h3>
 <pre>
 crlf()                  # returns CRLF sequence
 globals()               # global vars now stored in $q object - get/set
@@ -1938,10 +1909,10 @@ document_root()         # returns $ENV{'DOCUMENT_ROOT'}
 gateway_interface()     # returns $ENV{'GATEWAY_INTERFACE'}
 </pre>
 
-<h2><a name="methods_in_CGI_pm_not_in_CGI__simple"></a>Methods In CGI.pm Not In CGI::Simple</h2>
+<h2><a id="methods_in_CGI_pm_not_in_CGI__simple"></a>Methods In CGI.pm Not In CGI::Simple</h2>
 <p>Here is a complete list of what is not included in CGI::Simple. Basically all the HTML related stuff plus large redundant chunks of the guts. The check.pl script in the /misc dir will check to see if a script is using any of these.</p>
 
-<h3><a name="guts___rearranged__recoded__renamed_and_hacked_out_of_existence"></a>Guts - Rearranged, Recoded, Renamed And Hacked Out Of Existence</h3>
+<h3><a id="guts___rearranged__recoded__renamed_and_hacked_out_of_existence"></a>Guts - Rearranged, Recoded, Renamed And Hacked Out Of Existence</h3>
 <pre>
 initialize_globals()
 compile()
@@ -1963,7 +1934,7 @@ read_from_client()
 import_names()     # I dislike this and left it out, so shoot me.
 </pre>
 
-<h3><a name="html_related"></a>HTML Related</h3>
+<h3><a id="html_related"></a>HTML Related</h3>
 <pre>
 autoEscape()
 URL_ENCODED()
@@ -2002,7 +1973,7 @@ nosticky()
 default_dtd()
 </pre>
 
-<h3><a name="upload_related"></a>Upload Related</h3>
+<h3><a id="upload_related"></a>Upload Related</h3>
 <p>CGI::Simple uses anonymous tempfiles supplied by IO::File to spool uploaded files to.</p>
 <pre>
 private_tempfiles() # automatic in CGI::Simple
@@ -2010,7 +1981,7 @@ tmpFileName()       # all upload files are anonymous
 uploadInfo()        # relied on FH access, replaced with upload_info()
 </pre>
 
-<h3><a name="really_private_subs__marked_as_so_"></a>Really Private Subs (marked as so)</h3>
+<h3><a id="really_private_subs__marked_as_so_"></a>Really Private Subs (marked as so)</h3>
 <pre>
 previous_or_default()
 register_parameter()
@@ -2021,7 +1992,7 @@ asString()
 compare()
 </pre>
 
-<h3><a name="internal_multipart_parsing_routines"></a>Internal Multipart Parsing Routines</h3>
+<h3><a id="internal_multipart_parsing_routines"></a>Internal Multipart Parsing Routines</h3>
 <pre>
 read_multipart()
 readHeader()
@@ -2031,20 +2002,20 @@ fillBuffer()
 eof()
 </pre>
 
-<h2><a name="author_information"></a>Author Information</h2>
+<h2><a id="author_information"></a>Author Information</h2>
 <p>Originally copyright 2001 Dr James Freeman &lt;jfreeman@tassie.net.au&gt; This release by Andy Armstrong &lt;andy@hexten.net&gt;</p>
 <p>This package is free software and is provided &quot;as is&quot; without express or implied warranty. It may be used, redistributed and/or modified under the terms of the Perl Artistic License (see <em>http://www.perl.com/perl/misc/Artistic.html)</em></p>
 <p>Address bug reports and comments to: andy@hexten.net.  When sending bug reports, please provide the version of CGI::Simple, the version of Perl, the name and version of your Web server, and the name and version of the operating system you are using.  If the problem is even remotely browser dependent, please provide information about the affected browsers as well.</p>
 
-<h2><a name="credits"></a>Credits</h2>
+<h2><a id="credits"></a>Credits</h2>
 <p>Lincoln D. Stein and everyone else who worked on the original CGI.pm upon which this module is heavily based, Brandon Black for some heavy duty testing and bug fixes, John D Robinson and Jeroen Latour for helping solve some interesting test failures as well as Perlmonks: tommyw, grinder, Jaap, vek, erasei, jlongino and strider_corinth</p>
 <p>Thanks for patches to: Ewan Edwards, Joshua N Pritikin, Mike Barry, Michael Nachbaur, Chris Williams, Mark Stosberg, Krasimir Berov, Yamada Masahiro</p>
 
-<h2><a name="licence_and_copyright"></a>Licence And Copyright</h2>
+<h2><a id="licence_and_copyright"></a>Licence And Copyright</h2>
 <p>Copyright (c) 2007, Andy Armstrong <code>&lt;andy@hexten.net&gt;</code>. All rights reserved.</p>
 <p>This module is free software; you can redistribute it and/or modify it under the same terms as Perl itself.</p>
 
-<h2><a name="see_also"></a>See Also</h2>
+<h2><a id="see_also"></a>See Also</h2>
 <ul>
 	<li>CGI,</li>
 	<li>CGI::Simple::Standard,</li>

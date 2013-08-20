@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>CGI::Application Documentation Set</title>
@@ -14,7 +14,7 @@
 		</div>
         
         <h2>Newer, Better Process</h2>
-        <p>This process uses Epub as its base, then converts to Kindle. Epub is more universally supported, even by KindleGen :-). This alternate workflow seems to help articulate metadata and Tables of Contents better than the HTML->Calibre method described below.
+        <p>This process uses Epub as its base, then converts to Kindle. Epub is more universally supported, even by KindleGen :-). This alternate workflow seems to help articulate metadata and Tables of Contents better than the HTML-&gt; Calibre method described below.
         </p>
 
         <ol>
@@ -23,7 +23,7 @@
                     Convert POD to HTML
                 </p>
 <pre>
-pod2html --infile=Application.pm --outfile="CGI--Application.html" --podpath=.
+pod2html --infile=Application.pm --outfile=&quot;CGI--Application.html&quot; --podpath=.
 </pre>
             </li>
         	<li>Edit the EPub directory structure with your favorite HTML Editor.</li>
@@ -44,7 +44,7 @@ kindlegen content.opf CGI-Application-Booklet.mobi
                     Convert POD to HTML
                 </p>
 <pre>
-pod2html --infile=Application.pm --outfile="CGI--Application.html" --podpath=.
+pod2html --infile=Application.pm --outfile=&quot;CGI--Application.html&quot; --podpath=.
 </pre>
             </li>
             <li>
@@ -68,8 +68,8 @@ ebook-convert CGI--Application.html CGI--Application.mobi
   --margin-left=0
   --use-auto-toc
   --language=En
-  --authors="Mark Stosberg"&"Sam Tregar"
-  --publisher="Michael Gatto - Lisantra Technologies"
+  --authors=&quot;Mark Stosberg&quot;&amp;&quot;Sam Tregar&quot;
+  --publisher=&quot;Michael Gatto - Lisantra Technologies&quot;
 </pre>
             </li>
             <li>
@@ -83,12 +83,12 @@ ebook-convert CGI--Application.html CGI--Application.mobi
         <ul>
             <li>
                 Automate, automate, automate!
+	            <ul>
+	                <li>
+	                    Write a Perl Regex script to refine the HTML produced by pod2html, instead of using an editor and Zen coding (as cool as Zen coding is.)
+	                </li>
+	            </ul>
             </li>
-            <ul>
-                <li>
-                    Write a Perl Regex script to refine the HTML produced by pod2html, instead of using an editor and Zen coding (as cool as Zen coding is.)
-                </li>
-            </ul>
             <li>
                 Include documentation for more CGI::Application Plugins
             </li>
